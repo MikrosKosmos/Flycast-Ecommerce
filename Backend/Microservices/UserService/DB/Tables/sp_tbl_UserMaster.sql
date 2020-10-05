@@ -28,6 +28,16 @@ begin
             modified           timestamp           default null
         );
     end if;
+    if not exists(
+            select 1
+            from information_schema.COLUMNS
+            where TABLE_SCHEMA = currentSchema
+              and TABLE_NAME = 'tbl_UserMaster'
+              and COLUMN_NAME = 'user_status'
+        ) then
+        alter table tbl_UserMaster
+            add column user_status int not null after used_referral_code;
+    end if;
 end;
 call sp_tbl_UserMaster();
 drop procedure if exists sp_tbl_UserMaster;
