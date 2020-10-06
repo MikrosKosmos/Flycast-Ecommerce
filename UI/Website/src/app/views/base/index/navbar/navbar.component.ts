@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +10,10 @@ export class NavbarComponent implements OnInit {
 
   isRegistered: boolean;
   userName: string;
+
   constructor() { }
+
+  @ViewChild(LoginComponent) loginComponent: LoginComponent;
 
   ngOnInit(): void {
     this.isRegistered = true;

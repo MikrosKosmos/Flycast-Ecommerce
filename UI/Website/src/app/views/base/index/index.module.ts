@@ -9,6 +9,7 @@ import { IndexComponent } from './index.component';
 import { ProductModule } from '../../pages/product/product.module';
 import { RouterModule } from '@angular/router';
 import { IndexRoutes } from './index.routing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,6 +21,8 @@ import { IndexRoutes } from './index.routing';
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     SharedModule,
     ProductModule,
     RouterModule.forChild(IndexRoutes)

@@ -8,6 +8,8 @@ import {SharedModule} from "./shared/shared.module";
 import { IndexModule } from './views/base/index/index.module';
 import { ProductModule } from './views/pages/product/product.module';
 import { UserModule } from './views/pages/user/user.module';
+import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,9 @@ import { UserModule } from './views/pages/user/user.module';
     IndexModule,
     ProductModule,
     UserModule,
+    //AngularFontAwesomeModule,
+    CommonModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
