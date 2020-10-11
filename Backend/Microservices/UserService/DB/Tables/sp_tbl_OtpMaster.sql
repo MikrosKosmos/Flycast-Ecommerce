@@ -24,6 +24,16 @@ begin
             modified     timestamp default null
         );
     end if;
+    if not exists(
+            select 1
+            from information_schema.COLUMNS
+            where TABLE_SCHEMA = currentSchema
+              and TABLE_NAME = 'tbl_OtpMaster'
+              and COLUMN_NAME = 'extra_data'
+        ) then
+        alter table tbl_OtpMaster
+            add column extra_data text default null after validity;
+    end if;
 end;
 call sp_tbl_OtpMaster();
 drop procedure if exists sp_tbl_OtpMaster;
