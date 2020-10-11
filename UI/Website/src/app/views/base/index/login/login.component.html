@@ -1,3 +1,109 @@
-<p>
-    login works!
-  </p>
+<div></div>
+<div>
+  <div class="container-fluid pt-5 pb-5">
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col-4" *ngIf="isLogin">
+        <!-- <h5><b>Log in</b></h5>  -->
+        <div class="row">
+          <div class="col-6">
+            <ul class="radioLabel">
+              <li class="nav-link">
+                <input type='radio' value='1' name='loginRadio' id='loginRadio' />
+                <label for='loginRadio'>Log in</label>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6">
+            <ul class="radioLabel">
+              <li class="nav-link">
+                <input type='radio' value='2' name='registerRadio' id='registerRadio' (change)="isLogin=false" />
+                <label for='registerRadio'>Register</label>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!--Login Form-->
+        <div class="card bg-dark text-white">
+          <div class="card-body">
+            <form (ngSubmit)="formLogin()" [formGroup]="loginForm">
+              <div class="form-group">
+                <input type="text" formControlName="username" placeholder="Username or email address" id="uname"
+                  class="form-control" required>
+              </div>
+              <div class="form-group">
+                <input type="password" formControlName="password" placeholder="Password" id="psw" class="form-control"
+                  required>
+              </div>
+              <div class="checkbox">
+                <span class="psw"><a href="#">Forgot Password?</a></span>
+              </div>
+              <label>
+                <input type="checkbox" checked="checked" name="remember"> Remember me
+              </label>
+              <div class="form-group">
+                <button type="submit" class="btn btn-success">Login</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--Registration Form-->
+      <div class="col-4" *ngIf="!isLogin">
+        <div class="row">
+          <div class="col-6">
+            <ul class="radioLabel">
+              <li class="nav-link">
+                <input type='radio' value='1' name='loginRadio' id='loginRadio' (change)="isLogin=true" (click)="changeFormType($event)"/>
+                <label for='loginRadio'>Log in</label>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6">
+            <ul class="radioLabel">
+              <li class="nav-link">
+                <input type='radio' value='2' name='registerRadio' id='registerRadio' />
+                <label for='registerRadio'>Register</label>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card bg-dark text-white">
+          <div class="card-body">
+            <form (ngSubmit)="formLogin()" [formGroup]="loginForm">
+              <div class="form-group">
+                <input type="text" formControlName="firstname" placeholder="First Name" id="fname" class="form-control"
+                  required>
+              </div>
+              <div class="form-group">
+                <input type="text" formControlName="lastname" placeholder="Last Name" id="lname" class="form-control"
+                  required>
+              </div>
+              <div class="form-group">
+                <input type="text" formControlName="username" placeholder="Username or email address" id="uname"
+                  class="form-control" required>
+              </div>
+              <div class="form-group">
+                <input type="password" formControlName="password" placeholder="Password" id="psw" class="form-control"
+                  required>
+              </div>
+              <div class="form-group">
+                <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" id="confpsw"
+                  class="form-control" required>
+              </div>
+              <label>
+                <input type="checkbox" checked="checked" name="remember"> Accept Terms and Conditions
+              </label>
+              <div class="form-group">
+                <button type="submit" class="btn btn-success">Login</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-4"></div>
+    </div>
+  </div>
+</div>
