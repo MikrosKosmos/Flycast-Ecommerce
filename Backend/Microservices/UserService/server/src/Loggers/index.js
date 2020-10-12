@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const constants = require('./../Helpers/constants');
-const generator = require('./../Services/generator');
+const generator = require('validatorswithgenerators').generators;
 const logger = {};
 /**
  * Method to append the log data to the append files.
