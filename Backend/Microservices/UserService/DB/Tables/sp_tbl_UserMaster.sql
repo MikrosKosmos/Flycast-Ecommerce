@@ -28,7 +28,7 @@ begin
             modified           timestamp           default null
         );
     end if;
-    if not exists(
+    if exists(
             select 1
             from information_schema.COLUMNS
             where TABLE_SCHEMA = currentSchema
@@ -36,7 +36,7 @@ begin
               and COLUMN_NAME = 'user_status'
         ) then
         alter table tbl_UserMaster
-            add column user_status int not null after used_referral_code;
+            drop column user_status;
     end if;
 end;
 call sp_tbl_UserMaster();

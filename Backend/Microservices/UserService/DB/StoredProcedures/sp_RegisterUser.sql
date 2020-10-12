@@ -16,13 +16,13 @@ begin
         if @isRoleValid > 0 then
             #inserting into tbl_UserMaster;
             insert into tbl_UserMaster (first_name, last_name, gender, email, phone_number, referral_code,
-                                        used_referral_code, user_status, created_by)
+                                        used_referral_code, created_by)
                 value (parFirstName, parLastName, parGender, parEmail, parPhone, parReferralCode, parUsedReferralCode,
-                       1, 1);
+                       1);
             select LAST_INSERT_ID() into @userId;
             #inserting into tbl_roleMapping.
-            insert into tbl_UserRoleMapping (user_id, role_id, created_by)
-                value (@userId, parRoleId, @userId);
+            insert into tbl_UserRoleMapping (user_id, role_id, role_status, created_by)
+                value (@userId, parRoleId, 1, @userId);
             #Creating the login details.
             insert into tbl_LoginMaster (user_id, email, phone_number, password, last_login_time, created_by)
                 value (@userId, parEmail, parPhone, parPassword, now(), @userId);

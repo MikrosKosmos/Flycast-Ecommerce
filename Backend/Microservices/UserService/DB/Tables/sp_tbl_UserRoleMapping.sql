@@ -1,5 +1,5 @@
 drop procedure if exists sp_tbl_UserRoleMapping;
-create procedure sp_tbl_RoleMapping()
+create procedure sp_tbl_UserRoleMapping()
 begin
     #Declaring the schema.
     declare currentSchema varchar(100) default '';
@@ -23,6 +23,18 @@ begin
             modified    timestamp default null
         );
     end if;
+    if not exists(
+            select 1
+            from information_schema.COLUMNS
+            where TABLE_SCHEMA = currentSchema
+              and TABLE_NAME = 'tbl_UserRoleMapping'
+              and COLUMN_NAME = 'role_status'
+        ) then
+        alter table tbl_UserRoleMapping
+            add column role_status int default null after role_id;
+        alter table tbl_UserRoleMapping
+            add constraint FRGN_Status FOREIGN KEY (role_status) references tbl_StatusMaster (id);
+    end if;
 end;
-call sp_tbl_RoleMapping();
-drop procedure if exists sp_tbl_RoleMapping;
+call sp_tbl_UserRoleMapping();
+drop procedure if exists sp_tbl_UserRoleMapping;
