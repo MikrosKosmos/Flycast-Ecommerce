@@ -1,0 +1,6 @@
+/.idea/
+/node_modules/
+/package-lock.json
+/.env
+/Microservices/UserService/Server/src/KeyFiles/
+/src/Loggers/.Logs/

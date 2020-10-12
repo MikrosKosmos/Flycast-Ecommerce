@@ -1,0 +1,23 @@
+{
+  "name": "user_service",
+  "version": "0.0.1",
+  "description": "A Microservice for user requests.",
+  "main": "index.js",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MikrosKosmos/Photocast.git"
+  },
+  "author": "Pronoy Mukherjee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MikrosKosmos/Photocast/issues"
+  },
+  "homepage": "https://github.com/MikrosKosmos/Photocast#readme"
+}
