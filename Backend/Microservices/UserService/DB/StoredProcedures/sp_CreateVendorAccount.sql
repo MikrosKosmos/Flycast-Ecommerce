@@ -7,7 +7,7 @@ begin
         set @roleId = 0;
         select id into @roleId from tbl_RoleMaster where role_name = 'Vendor';
         insert into tbl_UserRoleMapping (user_id, role_id, role_status, created_by)
-            value (parUserId, @roleId, 2, parUserId);
+            value (parUserId, @roleId, 3, parUserId);
         select last_insert_id() as id;
     else
         select -1 as id;

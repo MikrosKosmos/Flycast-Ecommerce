@@ -25,14 +25,8 @@ begin
         end if;
     else
         #To validate the OTP.
-        set @isValid = 0,@extraData = '';
-        select id, extra_data
-        into @isValid,@extraData
-        from tbl_OtpMaster
-        where phone_number = parPhone
-          and otp = parOtp
-          and validity > now()
-          and is_active = 1;
+        set @isValid = -1,@extraData = '';
+        call sp_CheckOTP(parPhone, parOtp, @isValid, @extraData);
         if @isValid > 0 then
             #deleting the otp after checking.
             delete from tbl_OtpMaster where phone_number = parPhone and otp = parOtp;
