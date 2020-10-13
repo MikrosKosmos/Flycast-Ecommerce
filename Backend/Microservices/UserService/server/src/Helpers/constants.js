@@ -46,9 +46,13 @@ constants.CONTENT_TYPE_JSON = "application/json";
  * Constants for Role Details.
  */
 constants.ROLE_ADMIN = "Admin";
+constants.ROLE_ADMIN_ID = 1;
 constants.ROLE_EMPLOYEE = "Employee";
-constants.ROLE_CUSTOMER = "tbl_CustomerMaster";
-constants.ROLE_VENDOR = "tbl_VendorMaster";
+constants.ROLE_EMPLOYEE_ID = 2;
+constants.ROLE_VENDOR = "Vendor";
+constants.ROLE_VENDOR_ID = 3;
+constants.ROLE_CUSTOMER = "Customer";
+constants.ROLE_CUSTOMER_ID = 4;
 
 /**
  * Request Keys.
@@ -59,17 +63,14 @@ constants.REQUEST_TYPE = "type";
 /**
  * Status Values
  */
-constants.STATUS_PENDING = 1;
-constants.STATUS_CONFIRM = 2;
-constants.STATUS_CANCEL = 3;
-constants.STATUS_REJECTED = 4;
-constants.STATUS_COMPLETED = 5;
-constants.STATUS_PROCESSING = 6;
+
+constants.STATUS_CONFIRM = 1;
+constants.STATUS_VERIFIED = 2;
+constants.STATUS_PENDING = 3;
+constants.STATUS_CANCEL = 4;
+constants.STATUS_REJECTED = 5;
+constants.STATUS_SUSPENDED = 6;
 constants.STATUS_ERROR = 7;
-constants.STATUS_AUTHORIZED = 8;
-constants.STATUS_CAPTURED = 9;
-constants.STAUTS_REFUNDED = 10;
-constants.STATUS_VERIFIED = 11;
 
 /**
  * API Methods.
@@ -113,7 +114,7 @@ constants.ERROR_LEVEL_4 = "4";
  * Messages.
  */
 constants.WELCOME_MESSAGE = "Welcome to USER MICROSERVICE.";
-constants.OTP_MESSAGE = "Your Photocast OTP is :";
+constants.OTP_MESSAGE = "Your Flycast OTP is :";
 
 /**
  * General Keys
@@ -132,13 +133,14 @@ constants.ENV_KEY = "ENV";
 constants.ENCRYPTION_KEY_KEY = "ENCRYPTED_KEY";
 constants.DB_HOST_KEY = "DB_HOST";
 constants.DB_PASSWORD_KEY = "DB_PASSWORD";
-constants.REDIS_PORT = "redis_port";
-constants.REDIS_HOST = "redis_host";
 
 /**
  * SP Names.
  */
-
+constants.SP_CHECK_API_TOKEN = "sp_CheckApiToken";
+constants.SP_LOG_API_STATUS = "sp_LogApiStatus";
+constants.SP_REGISTER_USER = "sp_RegisterUser";
+constants.SP_VALIDATE_OR_CREATE_OTP = "sp_ValidateOrCreateOTP";
 /**
  * Column Names
  */
@@ -148,6 +150,13 @@ constants.COLUMN_MODIFIED_BY = "modified_by";
 constants.COLUMN_MODIFIED = "modified";
 constants.EMPLOYEE_ID = "employee_id";
 constants.ID = "id";
+constants.IS_VALID = "isValid";
+
+constants.FIRST_NAME = "first_name";
+constants.LAST_NAME = "last_name";
+constants.GENDER = "gender";
+constants.EMAIL = "email";
+constants.PHONE_NUMBER = "phone_number";
 
 /**
  * exporting the constants.

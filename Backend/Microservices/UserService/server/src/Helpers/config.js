@@ -7,8 +7,8 @@ config[constants.REDIS_PORT] = 6100;
  * @type {string}
  */
 config.databasePort = 3306;
-config.databaseUserName = "photocast";
-config.databaseName = "user";
+config.databaseUserName = "flycast";
+config.databaseName = "user_service";
 
 /**
  * Encryption constants

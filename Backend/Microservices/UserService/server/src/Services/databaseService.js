@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 const printer = require('./../Helpers/printer');
-const validators = require('./../Helpers/validators');
+const validators = require('validatorswithgenerators').validators;
 const queryGenerator = require('./queryGenerator');
 const config = require('./../Helpers/config');
 const constants = require('./../Helpers/constants');

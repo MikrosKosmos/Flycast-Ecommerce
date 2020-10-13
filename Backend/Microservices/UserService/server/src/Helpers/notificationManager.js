@@ -1,5 +1,5 @@
 const notificationManager = {};
-const validator = require('./validators');
+const validator = require('validatorswithgenerators').validators;
 const printer = require('./printer');
 const aws = require('./awsHelper');
 /**

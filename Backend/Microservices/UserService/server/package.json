@@ -4,9 +4,13 @@
   "description": "A Microservice for user requests.",
   "main": "index.js",
   "dependencies": {
+    "@jest/globals": "^26.5.3",
+    "aws-sdk": "^2.771.0",
     "dotenv": "^8.2.0",
+    "jest": "^26.5.3",
+    "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
-    "validatorswithgenerators": "^1.0.2"
+    "validatorswithgenerators": "^1.0.3"
   },
   "devDependencies": {},
   "scripts": {
