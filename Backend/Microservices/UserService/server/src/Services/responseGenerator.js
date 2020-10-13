@@ -1,5 +1,5 @@
 const constants = require('./../Helpers/constants');
-const validators = require('./../Helpers/validators');
+const validators = require('validatorswithgenerators').validators;
 const response = {};
 /**
  * * Method to generate the Error Response.

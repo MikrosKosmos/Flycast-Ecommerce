@@ -4,7 +4,9 @@
   "description": "A Microservice for user requests.",
   "main": "index.js",
   "dependencies": {
-    "mysql": "^2.18.1"
+    "dotenv": "^8.2.0",
+    "mysql": "^2.18.1",
+    "validatorswithgenerators": "^1.0.2"
   },
   "devDependencies": {},
   "scripts": {
@@ -12,12 +14,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MikrosKosmos/Photocast.git"
+    "url": "git+https://github.com/MikrosKosmos/Flycast-Ecommerce.git"
   },
   "author": "Pronoy Mukherjee",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MikrosKosmos/Photocast/issues"
+    "url": "https://github.com/MikrosKosmos/Flycast-Ecommerce.git"
   },
-  "homepage": "https://github.com/MikrosKosmos/Photocast#readme"
+  "homepage": "https://github.com/MikrosKosmos/Flycast-Ecommerce/#readme"
 }
