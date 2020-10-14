@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const path = require('path');
-const validators = require('./../Helpers/validators');
+const validators = require('validatorswithgenerators').validators;
 const printer = require('./../Helpers/printer');
 const tokenGenerator = {};
 /**
@@ -14,7 +14,7 @@ tokenGenerator.getToken = (data) => {
       if (!validators.validateJSON(data)) {
          data = JSON.parse(JSON.stringify(data));
       }
-      const keyFile = fs.readFileSync(path.resolve(__dirname + "/../KeyFiles/first.pem"), "utf8");
+      const keyFile = fs.readFileSync(path.resolve(__dirname + "/../KeyFiles/privateKey.pem"), "utf8");
       return jwt.sign(data, keyFile, {algorithm: 'RS256', expiresIn: '96h'});
    } catch (e) {
       printer.printError(e);
@@ -28,7 +28,7 @@ tokenGenerator.getToken = (data) => {
  */
 tokenGenerator.validateToken = (token) => {
    try {
-      const keyFile = fs.readFileSync(path.resolve(__dirname + "/../KeyFiles/second.crt"), "utf8");
+      const keyFile = fs.readFileSync(path.resolve(__dirname + "/../KeyFiles/publicKey.pem"), "utf8");
       return jwt.verify(token, keyFile);
    } catch (e) {
       printer.printError(e);

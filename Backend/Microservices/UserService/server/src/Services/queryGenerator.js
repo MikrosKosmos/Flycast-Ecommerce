@@ -1,5 +1,5 @@
 const printer = require('./../Helpers/printer');
-const validators = require('./../Helpers/validators');
+const validators = require('validatorswithgenerators').validators;
 const queryGenerator = {};
 /**
  * Method to generate the SP Query.
