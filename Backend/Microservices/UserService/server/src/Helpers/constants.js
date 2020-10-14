@@ -71,6 +71,8 @@ constants.STATUS_CANCEL = 4;
 constants.STATUS_REJECTED = 5;
 constants.STATUS_SUSPENDED = 6;
 constants.STATUS_ERROR = 7;
+constants.STATUS_COMPLETED = 8;
+constants.STATUS_PROCESSING = 9;
 
 /**
  * API Methods.
@@ -133,6 +135,7 @@ constants.ENV_KEY = "ENV";
 constants.ENCRYPTION_KEY_KEY = "ENCRYPTED_KEY";
 constants.DB_HOST_KEY = "DB_HOST";
 constants.DB_PASSWORD_KEY = "DB_PASSWORD";
+constants.ROLES = "roles";
 
 /**
  * SP Names.
@@ -141,6 +144,7 @@ constants.SP_CHECK_API_TOKEN = "sp_CheckApiToken";
 constants.SP_LOG_API_STATUS = "sp_LogApiStatus";
 constants.SP_REGISTER_USER = "sp_RegisterUser";
 constants.SP_VALIDATE_OR_CREATE_OTP = "sp_ValidateOrCreateOTP";
+constants.SP_UPDATE_USER_DETAILS = "sp_UpdateUserDetails";
 /**
  * Column Names
  */
@@ -157,6 +161,10 @@ constants.LAST_NAME = "last_name";
 constants.GENDER = "gender";
 constants.EMAIL = "email";
 constants.PHONE_NUMBER = "phone_number";
+constants.EXTRA_DATA = "extra_data";
+constants.USED_REFERRAL_CODE = "used_referral_code";
+constants.OTP = "otp";
+constants.PASSWORD = "password";
 
 /**
  * exporting the constants.

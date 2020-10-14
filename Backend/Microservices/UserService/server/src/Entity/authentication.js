@@ -47,6 +47,28 @@ class Authentication {
          }
       });
    }
+
+   /**
+    * Method to validate the OTP entered by the user.
+    * @param otp: The OTP entered.
+    * @returns {Promise<Array>}: The array with the response code and the result.
+    */
+   validateOTP(otp) {
+      return new Promise((resolve, reject) => {
+         database.runSp(constants.SP_VALIDATE_OR_CREATE_OTP, [this._phone, otp, false, 1, false])
+            .then(_resultSet => {
+               const result = _resultSet[0][0];
+               if (result.id > 0) {
+                  resolve([constants.RESPONSE_SUCESS_LEVEL_1, result]);
+               } else {
+                  resolve([constants.RESPONSE_SUCESS_LEVEL_1, {id: -1}]);
+               }
+            }).catch(err => {
+            printer.printError(err);
+            reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
+         });
+      });
+   }
 }
 
 /**

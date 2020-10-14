@@ -1,10 +1,8 @@
 const config = {};
 const constants = require('./constants');
-config.port = 6001;
-config[constants.REDIS_PORT] = 6100;
+config.port = 7001;
 /**
  * data base configurations.
- * @type {string}
  */
 config.databasePort = 3306;
 config.databaseUserName = "flycast";

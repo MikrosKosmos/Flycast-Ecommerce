@@ -22,11 +22,13 @@ notificationManager.sendSMS = (msg, address) => {
          MessageStructure: 'string',
          PhoneNumber: address
       };
-      aws.sns.publish(msgParams, err => {
+      aws.sns.publish(msgParams, (err, data) => {
          if (err) {
             printer.printError(err);
             reject(err);
          } else {
+            printer.printLog(data);
+            printer.printLog("SMS Send.");
             resolve(true);
          }
       });
