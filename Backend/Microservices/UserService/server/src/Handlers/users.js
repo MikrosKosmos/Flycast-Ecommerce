@@ -60,8 +60,10 @@ usersHandler.users = (dataObject) => {
             dataObject.postData[constants.EMAIL] : false;
          const password = validators.validateString(dataObject.postData[constants.PASSWORD]) ?
             dataObject.postData[constants.PASSWORD] : false;
-         if (userId && (firstName || lastName || phone || email || password)) {
-            const users = new Users(userId, firstName, lastName, false, email, phone);
+         const jwToken = validators.validateString(dataObject[constants.JW_TOKEN]) ?
+            dataObject[constants.JW_TOKEN] : false;
+         if (userId && jwToken && (firstName || lastName || phone || email || password)) {
+            const users = new Users(userId, firstName, lastName, false, email, phone, jwToken);
             users.updateDetails(password).then(response => {
                resolve(responseGenerator.generateResponse(response[1], response[0]));
             }).catch(err => {
@@ -69,6 +71,67 @@ usersHandler.users = (dataObject) => {
             });
          } else {
             reject([responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1)]);
+         }
+      } else {
+         reject(responseGenerator.generateErrorResponse(constants.INVALID_METHOD_MESSAGE, constants.ERROR_LEVEL_1));
+      }
+   });
+};
+/**
+ * Method to handle the user address requests.
+ * @param dataObject: The request object.
+ * @returns {Promise<Array>}: The response code and the response message.
+ */
+usersHandler.address = (dataObject) => {
+   return new Promise((resolve, reject) => {
+      const method = dataObject.method;
+      if (method === constants.HTTP_GET) {
+         //TODO:
+      } else if (method === constants.HTTP_PUT) {
+         const userId = validators.validateNumber(dataObject.postData[constants.USER_ID]) ?
+            dataObject.postData[constants.USER_ID] : false;
+         const addressId = validators.validateNumber(dataObject.postData[constants.ADDRESS_ID]) ?
+            dataObject.postData[constants.ADDRESS_ID] : false;
+         const address1 = validators.validateString(dataObject.postData[constants.ADDRESS_1]) ?
+            dataObject.postData[constants.ADDRESS_1] : false;
+         const address2 = validators.validateString(dataObject.postData[constants.ADDRESS_2]) ?
+            dataObject.postData[constants.ADDRESS_2] : false;
+         const cityId = validators.validateNumber(dataObject.postData[constants.CITY_ID]) ?
+            dataObject.postData[constants.CITY_ID] : false;
+         const pincode = validators.validateNumber(dataObject.postData[constants.PINCODE]) ?
+            dataObject.postData[constants.PINCODE] : false;
+         const addressType = validators.validateString(dataObject.postData[constants.ADDRESS_TYPE]) ?
+            dataObject.postData[constants.ADDRESS_TYPE] : false;
+         const contactPersonName = validators.validateString(dataObject.postData[constants.CONTACT_PERSON_NAME]) ?
+            dataObject.postData[constants.CONTACT_PERSON_NAME] : false;
+         const contactPersonNumber = validators.validatePhone(dataObject.postData[constants.CONTACT_PHONE_NUMBER]) ?
+            dataObject.postData[constants.CONTACT_PHONE_NUMBER] : false;
+         const gpsLat = validators.validateNumber(dataObject.postData[constants.GPS_LAT]) ?
+            dataObject.postData[constants.GPS_LAT] : false;
+         const gpsLong = validators.validateNumber(dataObject.postData[constants.GPS_LONG]) ?
+            dataObject.postData[constants.GPS_LONG] : false;
+         const deliveryInstructions = validators.validateString(dataObject.postData[constants.DELIVERY_INSTRUCTION]) ?
+            dataObject.postData[constants.DELIVERY_INSTRUCTION] : false;
+         const isDefault = validators.validateNumber(dataObject.postData[constants.IS_DEFAULT]) ?
+            dataObject.postData[constants.IS_DEFAULT] : 0;
+         const jwToken = validators.validateString(dataObject[constants.JW_TOKEN]) ?
+            dataObject[constants.JW_TOKEN] : false;
+         if (!userId || !jwToken) {
+            reject([responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1)]);
+         } else if (!addressId && (!address1 || !address2 || !pincode || !cityId || !addressType || !contactPersonName ||
+            !contactPersonNumber)) {
+            reject([responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1)]);
+         } else if (addressId && (address1 || address2 || pincode || cityId || addressType || contactPersonName ||
+            contactPersonNumber)) {
+            reject([responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1)]);
+         } else {
+            const users = new Users(userId, false, false, false, false, false, jwToken);
+            users.updateOrCreateAddress(addressId, address1, address2, cityId, pincode, contactPersonName, contactPersonNumber,
+               addressType, gpsLat, gpsLong, deliveryInstructions, isDefault).then(response => {
+               resolve(responseGenerator.generateResponse(response[1], response[0]));
+            }).catch(err => {
+               reject(responseGenerator.generateErrorResponse(err[1], err[0]));
+            });
          }
       } else {
          reject(responseGenerator.generateErrorResponse(constants.INVALID_METHOD_MESSAGE, constants.ERROR_LEVEL_1));

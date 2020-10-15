@@ -26,6 +26,9 @@ handlerObj.users = (dataObject) => {
          case "users":
             promise = users.users(dataObject);
             break;
+         case "address":
+            promise = users.address(dataObject);
+            break;
          default:
             reject(responseGenerator.generateErrorResponse(constants.ERROR_MESSAGE, constants.ERROR_LEVEL_2));
       }

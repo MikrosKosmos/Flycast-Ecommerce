@@ -16,14 +16,26 @@ class Users {
     * @param gender
     * @param email
     * @param phone
+    * @param jwToken
     */
-   constructor(userId, firstName, lastName, gender, email, phone) {
+   constructor(userId, firstName, lastName, gender, email, phone, jwToken) {
       this._userId = validators.validateNumber(userId) ? userId : false;
       this._firstName = validators.validateString(firstName) ? firstName : false;
       this._lastName = validators.validateString(lastName) ? lastName : false;
       this._gender = validators.validateCharacter(gender) ? gender : false;
       this._email = validators.validateEmail(email) ? email : false;
       this._phone = validators.validatePhone(phone) ? phone : false;
+      this._token = validators.validateString(jwToken) ? jwToken : false;
+   }
+
+   /**
+    * Method to validate the user token.
+    * @param jwToken: the token to be validated.
+    * @returns {object | null}
+    * @private
+    */
+   _validateUserToken(jwToken) {
+      return jwtGenerator.validateToken(jwToken);
    }
 
    /**
@@ -105,14 +117,89 @@ class Users {
     */
    updateDetails(password) {
       return new Promise((resolve, reject) => {
-         database.runSp(constants.SP_UPDATE_USER_DETAILS, [this._userId, this._firstName,
-            this._lastName, this._email,
-            validators.validateString(password) ? password : false, this._phone]).then(_resultSet => {
-            resolve([constants.RESPONSE_SUCESS_LEVEL_1, _resultSet[0][0]]);
-         }).catch(err => {
-            printer.printError(err);
-            reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
-         });
+         const userData = this._validateUserToken(this._token);
+         if (validators.validateUndefined(userData) && userData[constants.ID] === this._userId) {
+            database.runSp(constants.SP_UPDATE_USER_DETAILS, [this._userId, this._firstName,
+               this._lastName, this._email,
+               validators.validateString(password) ? password : false, this._phone]).then(_resultSet => {
+               resolve([constants.RESPONSE_SUCESS_LEVEL_1, _resultSet[0][0]]);
+            }).catch(err => {
+               printer.printError(err);
+               reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
+            });
+         } else {
+            reject([constants.ERROR_LEVEL_4, constants.FORBIDDEN_MESSAGE]);
+         }
+      });
+   }
+
+   /**
+    * Method to update or insert a new address for a user.
+    * @param addressId: the Address id for updating, else 0.
+    * @param address1: The address 1.
+    * @param address2: The address line 2.
+    * @param cityId: the city id.
+    * @param pincode: The pincode of address.
+    * @param contactPersonName: The contact person for the address.
+    * @param contactPersonNumber: The contact person number.
+    * @param addressType: The address type.
+    * @param gpsLat: The GPS lat.
+    * @param gpsLong: The GPS Long.
+    * @param deliveryInstructions: The delivery instructions.
+    * @param isDefault: 1 for default address, else 0.
+    * @returns {Promise<Array>}:
+    */
+   updateOrCreateAddress(addressId, address1, address2, cityId, pincode, contactPersonName, contactPersonNumber, addressType,
+                         gpsLat, gpsLong, deliveryInstructions, isDefault) {
+      return new Promise((resolve, reject) => {
+         const userData = jwtGenerator.validateToken(this._token);
+         if (validators.validateUndefined(userData) && userData[constants.ID] === this._userId) {
+            database.runSp(constants.SP_INSERT_UPDATE_ADDRESS, [this._userId,
+               validators.validateNumber(addressId) ? addressId : 0,
+               validators.validateString(address1) ? address1 : false,
+               validators.validateString(address2) ? address2 : false,
+               validators.validateNumber(cityId) ? cityId : false,
+               validators.validateNumber(pincode) ? pincode : false,
+               validators.validateString(contactPersonName) ? contactPersonName : false,
+               validators.validatePhone(contactPersonNumber) ? contactPersonNumber : false,
+               validators.validateString(addressType) ? addressType : false,
+               validators.validateNumber(gpsLat) ? gpsLat : false,
+               validators.validateNumber(gpsLong) ? gpsLong : false,
+               validators.validateString(deliveryInstructions) ? deliveryInstructions : false,
+               validators.validateNumber(isDefault) ? isDefault : 0]).then(_resultSet => {
+               resolve([constants.RESPONSE_SUCESS_LEVEL_1, _resultSet[0][0]]);
+            }).catch(err => {
+               printer.printError(err);
+               reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
+            });
+         } else {
+            reject([constants.ERROR_LEVEL_4, constants.FORBIDDEN_MESSAGE]);
+         }
+      });
+   }
+
+   /**
+    * Method to get the user address.
+    * @returns {Promise<Array>}: The response code and the user address.
+    */
+   getUserAddress() {
+      return new Promise((resolve, reject) => {
+         const userData = jwtGenerator.validateToken(this._token);
+         if (validators.validateUndefined(userData) && userData[constants.ID] === this._userId) {
+            database.runSp(constants.SP_GET_USER_ADDRESS, [this._userId]).then(_resultSet => {
+               const result = _resultSet[0];
+               if (validators.validateUndefined(result)) {
+                  resolve([constants.RESPONSE_SUCESS_LEVEL_1, result]);
+               } else {
+                  resolve([constants.RESPONSE_SUCESS_LEVEL_1, {id: -1}]);
+               }
+            }).catch(err => {
+               printer.printError(err);
+               reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
+            });
+         } else {
+            reject([constants.ERROR_LEVEL_4, constants.FORBIDDEN_MESSAGE]);
+         }
       });
    }
 }

@@ -145,6 +145,9 @@ constants.SP_LOG_API_STATUS = "sp_LogApiStatus";
 constants.SP_REGISTER_USER = "sp_RegisterUser";
 constants.SP_VALIDATE_OR_CREATE_OTP = "sp_ValidateOrCreateOTP";
 constants.SP_UPDATE_USER_DETAILS = "sp_UpdateUserDetails";
+constants.SP_INSERT_UPDATE_ADDRESS = "sp_InsertUpdateUserAddress";
+constants.SP_GET_USER_ADDRESS = "sp_GetUserAddress";
+constants.SP_VALIDATE_LOGIN = "sp_ValidateLogin";
 /**
  * Column Names
  */
@@ -163,8 +166,27 @@ constants.EMAIL = "email";
 constants.PHONE_NUMBER = "phone_number";
 constants.EXTRA_DATA = "extra_data";
 constants.USED_REFERRAL_CODE = "used_referral_code";
+constants.REFERRAL_CODE = "referral_code";
+constants.ROLE_ID = "role_id";
+constants.ROLE_NAME = "role_name";
+constants.ROLE_STATUS = "role_status";
+constants.STATUS_NAME = "status_name";
 constants.OTP = "otp";
 constants.PASSWORD = "password";
+
+constants.USER_ID = "user_id";
+constants.ADDRESS_ID = "address_id";
+constants.CONTACT_PERSON_NAME = "contact_person_name";
+constants.CONTACT_PHONE_NUMBER = "contact_phone_number";
+constants.ADDRESS_1 = "address_1";
+constants.ADDRESS_2 = "address_2";
+constants.CITY_ID = "city_id";
+constants.PINCODE = "pincode";
+constants.GPS_LAT = "gps_lat";
+constants.GPS_LONG = "gps_long";
+constants.ADDRESS_TYPE = "address_type";
+constants.DELIVERY_INSTRUCTION = "delivery_instructions";
+constants.IS_DEFAULT = "is_default";
 
 /**
  * exporting the constants.
