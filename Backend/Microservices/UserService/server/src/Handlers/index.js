@@ -4,6 +4,7 @@ const generator = require("validatorswithgenerators").generators;
 const constants = require("./../Helpers/constants");
 const responseGenerator = require("./../Services/responseGenerator");
 const users = require("./users");
+const auth = require("./authentication");
 /**
  * Method to handle the Error path requests.
  * @param dataObject: The request object.
@@ -12,6 +13,28 @@ const users = require("./users");
 handlerObj.notFound = (dataObject) => {
    return new Promise((reject) => {
       reject([constants.INVALID_PATH, constants.HTTP_NOT_FOUND_CODE]);
+   });
+};
+/**
+ * Method to handle the auth requests.
+ * @param dataObject: The request object.
+ * @returns {Promise<Array>}
+ */
+handlerObj.auth = (dataObject) => {
+   return new Promise((resolve, reject) => {
+      let promise;
+      switch (dataObject.path) {
+         case "auth":
+            promise = auth.auth(dataObject);
+            break;
+         default:
+            reject(responseGenerator.generateErrorResponse(constants.ERROR_MESSAGE, constants.ERROR_LEVEL_2));
+      }
+      promise.then(data => {
+         resolve(data);
+      }).catch(err => {
+         reject(err);
+      });
    });
 };
 /**

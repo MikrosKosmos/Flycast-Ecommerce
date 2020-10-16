@@ -19,7 +19,7 @@ class Users {
     * @param jwToken
     */
    constructor(userId, firstName, lastName, gender, email, phone, jwToken) {
-      this._userId = validators.validateNumber(userId) ? userId : false;
+      this._userId = validators.validateNumber(userId) ? Number(userId) : false;
       this._firstName = validators.validateString(firstName) ? firstName : false;
       this._lastName = validators.validateString(lastName) ? lastName : false;
       this._gender = validators.validateCharacter(gender) ? gender : false;

@@ -106,7 +106,8 @@ class Authentication {
                userObj[constants.PHONE_NUMBER] = result[0][constants.PHONE_NUMBER];
                userObj[constants.REFERRAL_CODE] = result[0][constants.REFERRAL_CODE];
                let roles = [];
-               for (let oneVal in result[0]) {
+               for (let i = 0; i < result.length; i++) {
+                  let oneVal = result[i];
                   let oneRole = {};
                   oneRole[constants.ROLE_ID] = oneVal[constants.ROLE_ID];
                   oneRole[constants.ROLE_NAME] = oneVal[constants.ROLE_NAME];

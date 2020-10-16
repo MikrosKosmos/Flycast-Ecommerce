@@ -14,7 +14,20 @@ usersHandler.users = (dataObject) => {
    return new Promise((resolve, reject) => {
       const method = dataObject.method;
       if (method === constants.HTTP_GET) {
-         //TODO:
+         const email = validators.validateEmail(dataObject.queryString[constants.EMAIL]) ?
+            dataObject.queryString[constants.EMAIL] : false;
+         const id = validators.validateNumber(dataObject.queryString[constants.USER_ID]) ?
+            dataObject.queryString[constants.USER_ID] : false;
+         const phone = validators.validatePhone(dataObject.queryString[constants.PHONE_NUMBER]) ?
+            dataObject.queryString[constants.PHONE_NUMBER] : false;
+         const jwToken = validators.validateString(dataObject[constants.JW_TOKEN]) ?
+            dataObject[constants.JW_TOKEN] : false;
+         if ((email || id || phone) && jwToken) {
+            const users = new Users(id, false, false, false, email, phone, jwToken);
+            //TODO:
+         } else {
+            responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1);
+         }
       } else if (method === constants.HTTP_POST) {
          const firstName = validators.validateString(dataObject.postData[constants.FIRST_NAME]) ?
             dataObject.postData[constants.FIRST_NAME] : false;
@@ -70,7 +83,7 @@ usersHandler.users = (dataObject) => {
                reject(responseGenerator.generateErrorResponse(err[1], err[0]));
             });
          } else {
-            reject([responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1)]);
+            reject(responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1));
          }
       } else {
          reject(responseGenerator.generateErrorResponse(constants.INVALID_METHOD_MESSAGE, constants.ERROR_LEVEL_1));
@@ -86,7 +99,20 @@ usersHandler.address = (dataObject) => {
    return new Promise((resolve, reject) => {
       const method = dataObject.method;
       if (method === constants.HTTP_GET) {
-         //TODO:
+         const userId = validators.validateNumber(dataObject.queryString[constants.USER_ID]) ?
+            dataObject.queryString[constants.USER_ID] : false;
+         const jwToken = validators.validateString(dataObject[constants.JW_TOKEN]) ?
+            dataObject[constants.JW_TOKEN] : false;
+         if (userId && jwToken) {
+            const users = new Users(userId, false, false, false, false, false, jwToken);
+            users.getUserAddress().then(response => {
+               resolve(responseGenerator.generateResponse(response[1], response[0]));
+            }).catch(err => {
+               reject(responseGenerator.generateErrorResponse(err[1], err[0]));
+            });
+         } else {
+            reject(responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1));
+         }
       } else if (method === constants.HTTP_PUT) {
          const userId = validators.validateNumber(dataObject.postData[constants.USER_ID]) ?
             dataObject.postData[constants.USER_ID] : false;
@@ -117,13 +143,13 @@ usersHandler.address = (dataObject) => {
          const jwToken = validators.validateString(dataObject[constants.JW_TOKEN]) ?
             dataObject[constants.JW_TOKEN] : false;
          if (!userId || !jwToken) {
-            reject([responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1)]);
+            reject(responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1));
          } else if (!addressId && (!address1 || !address2 || !pincode || !cityId || !addressType || !contactPersonName ||
             !contactPersonNumber)) {
-            reject([responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1)]);
+            reject(responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1));
          } else if (addressId && (address1 || address2 || pincode || cityId || addressType || contactPersonName ||
             contactPersonNumber)) {
-            reject([responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1)]);
+            reject(responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1));
          } else {
             const users = new Users(userId, false, false, false, false, false, jwToken);
             users.updateOrCreateAddress(addressId, address1, address2, cityId, pincode, contactPersonName, contactPersonNumber,
