@@ -136,6 +136,10 @@ constants.ENCRYPTION_KEY_KEY = "ENCRYPTED_KEY";
 constants.DB_HOST_KEY = "DB_HOST";
 constants.DB_PASSWORD_KEY = "DB_PASSWORD";
 constants.ROLES = "roles";
+constants.AWS_DOCUMENTS_BUCKET = "flycast-documents";
+constants.AWS_IMAGES_BUCKET = "flycast-images";
+constants.DOUCMENTS_BUCKET_BASE_URL = "https://flycast-documents.s3.ap-south-1.amazonaws.com/";
+constants.IMAGES_BUCKET_BASE_URL = "https://flycast-images.s3.ap-south-1.amazonaws.com/";
 
 /**
  * SP Names.
@@ -148,6 +152,7 @@ constants.SP_UPDATE_USER_DETAILS = "sp_UpdateUserDetails";
 constants.SP_INSERT_UPDATE_ADDRESS = "sp_InsertUpdateUserAddress";
 constants.SP_GET_USER_ADDRESS = "sp_GetUserAddress";
 constants.SP_VALIDATE_LOGIN = "sp_ValidateLogin";
+constants.SP_INSERT_DOCUMENT_DETAILS = "sp_InsertDocumentDetails";
 /**
  * Column Names
  */
