@@ -1,4 +1,4 @@
-#!/usr/bin/.env node
+#!/usr/bin/env node
 require('dotenv').config();
 const server = require('./src/Helpers/server');
 const os = require('os');
