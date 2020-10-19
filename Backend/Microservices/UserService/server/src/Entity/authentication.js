@@ -98,25 +98,29 @@ class Authentication {
                validators.validateString(password) ? password : false]).then(_resultSet => {
                const result = _resultSet[0];
                let userObj = {};
-               userObj[constants.ID] = result[0][constants.ID];
-               userObj[constants.FIRST_NAME] = result[0][constants.FIRST_NAME];
-               userObj[constants.LAST_NAME] = result[0][constants.LAST_NAME];
-               userObj[constants.JW_TOKEN] = getToken(userObj);
-               userObj[constants.EMAIL] = result[0][constants.EMAIL];
-               userObj[constants.PHONE_NUMBER] = result[0][constants.PHONE_NUMBER];
-               userObj[constants.REFERRAL_CODE] = result[0][constants.REFERRAL_CODE];
-               let roles = [];
-               for (let i = 0; i < result.length; i++) {
-                  let oneVal = result[i];
-                  let oneRole = {};
-                  oneRole[constants.ROLE_ID] = oneVal[constants.ROLE_ID];
-                  oneRole[constants.ROLE_NAME] = oneVal[constants.ROLE_NAME];
-                  oneRole[constants.ROLE_STATUS] = oneVal[constants.ROLE_STATUS];
-                  oneRole[constants.STATUS_NAME] = oneVal[constants.STATUS_NAME];
-                  roles.push(oneRole);
+               if (result[0][constants.ID] > 0) {
+                  userObj[constants.ID] = result[0][constants.ID];
+                  userObj[constants.FIRST_NAME] = result[0][constants.FIRST_NAME];
+                  userObj[constants.LAST_NAME] = result[0][constants.LAST_NAME];
+                  userObj[constants.JW_TOKEN] = getToken(userObj);
+                  userObj[constants.EMAIL] = result[0][constants.EMAIL];
+                  userObj[constants.PHONE_NUMBER] = result[0][constants.PHONE_NUMBER];
+                  userObj[constants.REFERRAL_CODE] = result[0][constants.REFERRAL_CODE];
+                  let roles = [];
+                  for (let i = 0; i < result.length; i++) {
+                     let oneVal = result[i];
+                     let oneRole = {};
+                     oneRole[constants.ROLE_ID] = oneVal[constants.ROLE_ID];
+                     oneRole[constants.ROLE_NAME] = oneVal[constants.ROLE_NAME];
+                     oneRole[constants.ROLE_STATUS] = oneVal[constants.ROLE_STATUS];
+                     oneRole[constants.STATUS_NAME] = oneVal[constants.STATUS_NAME];
+                     roles.push(oneRole);
+                  }
+                  userObj[constants.ROLES] = roles;
+                  resolve([constants.RESPONSE_SUCESS_LEVEL_1, userObj]);
+               } else {
+                  resolve([constants.RESPONSE_SUCESS_LEVEL_1, result[0]]);
                }
-               userObj[constants.ROLES] = roles;
-               resolve([constants.RESPONSE_SUCESS_LEVEL_1, userObj]);
             }).catch(err => {
                printer.printError(err);
                reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
