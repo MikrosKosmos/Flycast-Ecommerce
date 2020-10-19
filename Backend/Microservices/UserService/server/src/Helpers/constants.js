@@ -147,6 +147,7 @@ constants.IMAGES_BUCKET_BASE_URL = "https://flycast-images.s3.ap-south-1.amazona
 constants.SP_CHECK_API_TOKEN = "sp_CheckApiToken";
 constants.SP_LOG_API_STATUS = "sp_LogApiStatus";
 constants.SP_REGISTER_USER = "sp_RegisterUser";
+constants.SP_GET_USER_DETAILS = "sp_GetUserDetails";
 constants.SP_VALIDATE_OR_CREATE_OTP = "sp_ValidateOrCreateOTP";
 constants.SP_UPDATE_USER_DETAILS = "sp_UpdateUserDetails";
 constants.SP_INSERT_UPDATE_ADDRESS = "sp_InsertUpdateUserAddress";
