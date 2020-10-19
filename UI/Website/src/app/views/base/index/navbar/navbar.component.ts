@@ -10,7 +10,8 @@ export class NavbarComponent implements OnInit {
 
   isRegistered: boolean;
   userName: string;
-
+  isCollapsed = true;
+  isCollapsed2 = true;
   constructor() { }
 
   @ViewChild(LoginComponent) loginComponent: LoginComponent;
