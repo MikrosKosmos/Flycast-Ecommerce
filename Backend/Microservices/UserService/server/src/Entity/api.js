@@ -29,11 +29,11 @@ class Api {
             if (result[constants.IS_VALID] === 1) {
                resolve(true);
             } else {
-               reject(false);
+               reject([constants.ERROR_LEVEL_4, false]);
             }
          }).catch(err => {
             printer.printError(err);
-            reject(err);
+            reject([constants.ERROR_LEVEL_4, false]);
          });
       });
    }
