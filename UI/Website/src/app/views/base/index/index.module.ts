@@ -10,6 +10,7 @@ import { ProductModule } from '../../pages/product/product.module';
 import { RouterModule } from '@angular/router';
 import { IndexRoutes } from './index.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     SharedModule,
     ProductModule,
+    NgbModule,
     RouterModule.forChild(IndexRoutes)
   ],
   schemas: [NO_ERRORS_SCHEMA],
