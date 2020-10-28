@@ -24,9 +24,13 @@ usersHandler.users = (dataObject) => {
             dataObject[constants.JW_TOKEN] : false;
          if ((email || id || phone) && jwToken) {
             const users = new Users(id, false, false, false, email, phone, jwToken);
-            //TODO:
+            users.getUserDetails().then(response => {
+               resolve(responseGenerator.generateResponse(response[1], response[0]));
+            }).catch(err => {
+               reject(responseGenerator.generateErrorResponse(err[1], err[0]));
+            });
          } else {
-            responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1);
+            reject(responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1));
          }
       } else if (method === constants.HTTP_POST) {
          const firstName = validators.validateString(dataObject.postData[constants.FIRST_NAME]) ?

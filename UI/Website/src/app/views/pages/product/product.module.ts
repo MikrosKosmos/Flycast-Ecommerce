@@ -1,14 +1,31 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ProductRoutingModule } from './product-routing.module';
+import { ProdcutRoutes } from './product.routing';
 
+import { CheckoutModule } from './checkout/checkout.module';
+
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { CartProductComponent } from './cart-product/cart-product.component';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { ProductComponent } from './product.component';
+import { WishlistProductComponent } from './wishlist-product/wishlist-product.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ProductComponent,
+    ProductDetailsComponent,
+    ProductListComponent,
+    CartProductComponent,
+    WishlistProductComponent
+  ],
   imports: [
     CommonModule,
-    ProductRoutingModule
+    RouterModule.forChild(ProdcutRoutes),
+    SharedModule,
+    CheckoutModule
   ]
 })
 export class ProductModule { }

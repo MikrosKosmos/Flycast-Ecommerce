@@ -1,0 +1,35 @@
+.product_view .modal-dialog {
+    max-width: 800px;
+    width    : 100%;
+}
+
+.pre-cost {
+    text-decoration: line-through;
+    color          : #a5a5a5;
+}
+
+.space-ten {
+    padding: 10px 0;
+}
+
+.text-center {
+    place-items: center;
+    position   : relative;
+}
+
+.text-center .btn-ground {
+    margin      : 0;
+    position    : absolute;
+    top         : 50%;
+    left        : 50%;
+    margin-right: -50%;
+    transform   : translate(-50%, -50%)
+}
+
+.btn-ground button {
+    margin-right: 16px;
+}
+
+// .btn-ground button:last-child {
+//     margin-right: 0px;
+// }

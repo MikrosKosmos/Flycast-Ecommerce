@@ -10,7 +10,8 @@ import { ProductModule } from '../../pages/product/product.module';
 import { RouterModule } from '@angular/router';
 import { IndexRoutes } from './index.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,11 +21,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     IndexComponent,
   ],
   imports: [
+    HttpClientModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
     ProductModule,
+    NgbModule,
     RouterModule.forChild(IndexRoutes)
   ],
   schemas: [NO_ERRORS_SCHEMA],

@@ -111,6 +111,51 @@ class Users {
    }
 
    /**
+    * Method to get the user details.
+    * @returns {Promise<Array>}
+    */
+   getUserDetails() {
+      return new Promise((resolve, reject) => {
+         const userData = this._validateUserToken(this._token);
+         if (validators.validateUndefined(userData) && userData[constants.ID] > -1) {
+            database.runSp(constants.SP_GET_USER_DETAILS, [this._userId, this._email, this._phone])
+               .then(_resultSet => {
+                  const result = _resultSet[0];
+                  if (validators.validateUndefined(result)) {
+                     let userObj = {};
+                     userObj[constants.ID] = result[0][constants.ID];
+                     userObj[constants.FIRST_NAME] = result[0][constants.FIRST_NAME];
+                     userObj[constants.LAST_NAME] = result[0][constants.LAST_NAME];
+                     userObj[constants.PHONE_NUMBER] = result[0][constants.PHONE_NUMBER];
+                     userObj[constants.EMAIL] = result[0][constants.EMAIL];
+                     userObj[constants.GENDER] = result[0][constants.GENDER];
+                     userObj[constants.REFERRAL_CODE] = result[0][constants.REFERRAL_CODE];
+                     let roles = [];
+                     for (let i = 0; i < result.length; i++) {
+                        let oneVal = result[i];
+                        let oneRole = {};
+                        oneRole[constants.ROLE_ID] = oneVal[constants.ROLE_ID];
+                        oneRole[constants.ROLE_NAME] = oneVal[constants.ROLE_NAME];
+                        oneRole[constants.ROLE_STATUS] = oneVal[constants.ROLE_STATUS];
+                        oneRole[constants.STATUS_NAME] = oneVal[constants.STATUS_NAME];
+                        roles.push(oneRole);
+                     }
+                     userObj[constants.ROLES] = roles;
+                     resolve([constants.RESPONSE_SUCESS_LEVEL_1, userObj]);
+                  } else {
+                     resolve([constants.RESPONSE_SUCESS_LEVEL_1, {id: -1}]);
+                  }
+               }).catch(err => {
+               printer.printError(err);
+               reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
+            });
+         } else {
+            reject([constants.ERROR_LEVEL_4, constants.FORBIDDEN_MESSAGE]);
+         }
+      });
+   }
+
+   /**
     * Method to update the user basic details and authentication credentials.
     * @param password: The password of the user.
     * @returns {Promise<Array>};

@@ -36,7 +36,7 @@ constants.HEADERS = {
    'Access-Control-Allow-Origin': '*',
    'Access-Control-Allow-Methods': 'OPTIONS, POST, GET, PUT, DELETE',
    'Access-Control-Max-Age': 2592000,
-   'Content-Length': 4194304,
+   /*'Content-Length': 40000,*/
    'Access-Control-Allow-Headers': 'Content-Type,access-control-allow-origin,X-Requested-With,key,jw_token,Content-Length'
 };
 constants.CONTENT_TYPE_TEXT = "Content-Type";
@@ -136,6 +136,10 @@ constants.ENCRYPTION_KEY_KEY = "ENCRYPTED_KEY";
 constants.DB_HOST_KEY = "DB_HOST";
 constants.DB_PASSWORD_KEY = "DB_PASSWORD";
 constants.ROLES = "roles";
+constants.AWS_DOCUMENTS_BUCKET = "flycast-documents";
+constants.AWS_IMAGES_BUCKET = "flycast-images";
+constants.DOUCMENTS_BUCKET_BASE_URL = "https://flycast-documents.s3.ap-south-1.amazonaws.com/";
+constants.IMAGES_BUCKET_BASE_URL = "https://flycast-images.s3.ap-south-1.amazonaws.com/";
 
 /**
  * SP Names.
@@ -143,11 +147,13 @@ constants.ROLES = "roles";
 constants.SP_CHECK_API_TOKEN = "sp_CheckApiToken";
 constants.SP_LOG_API_STATUS = "sp_LogApiStatus";
 constants.SP_REGISTER_USER = "sp_RegisterUser";
+constants.SP_GET_USER_DETAILS = "sp_GetUserDetails";
 constants.SP_VALIDATE_OR_CREATE_OTP = "sp_ValidateOrCreateOTP";
 constants.SP_UPDATE_USER_DETAILS = "sp_UpdateUserDetails";
 constants.SP_INSERT_UPDATE_ADDRESS = "sp_InsertUpdateUserAddress";
 constants.SP_GET_USER_ADDRESS = "sp_GetUserAddress";
 constants.SP_VALIDATE_LOGIN = "sp_ValidateLogin";
+constants.SP_INSERT_DOCUMENT_DETAILS = "sp_InsertDocumentDetails";
 /**
  * Column Names
  */
