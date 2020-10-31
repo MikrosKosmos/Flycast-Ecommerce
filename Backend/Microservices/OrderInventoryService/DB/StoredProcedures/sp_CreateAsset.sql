@@ -45,7 +45,7 @@ begin
         from TempAssetAttributes;
         drop temporary table if exists TempAssetAttributes;
         set @isStockUpdated = 0;
-        call sp_UpdateStock(parSku, parVendorId, 1, @isStockUpdated);
+        call sp_UpdateStock(parSku, parVendorId, 1, 1, @isStockUpdated);
         select @assetId as asset_id, @isStockUpdated as is_stock_updated;
     else
         select -1 as asset_id;

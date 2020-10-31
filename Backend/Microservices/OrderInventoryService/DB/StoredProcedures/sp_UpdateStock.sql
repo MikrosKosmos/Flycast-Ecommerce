@@ -1,5 +1,6 @@
 drop procedure if exists sp_UpdateStock;
-create procedure sp_UpdateStock(parSku varchar(255), parUserId int, parIsIncrement tinyint, OUT parIsUpdated tinyint)
+create procedure sp_UpdateStock(parSku varchar(255), parUserId int, parIsIncrement tinyint, parCounter int,
+                                OUT parIsUpdated tinyint)
 begin
     set @isValid = 0;
     select id into @isValid from tbl_SkuMaster where sku = parSku and is_active = 1;
@@ -9,7 +10,7 @@ begin
         if parIsIncrement = 0 then
             if @isExists > 0 then
                 update tbl_InventoryMaster
-                set stock_quantity = stock_quantity - 1,
+                set stock_quantity = stock_quantity - parCounter,
                     modified=now(),
                     modified_by=parUserId
                 where sku = parSku
@@ -18,14 +19,14 @@ begin
         else
             if @isExists > 0 then
                 update tbl_InventoryMaster
-                set stock_quantity = stock_quantity - 1,
+                set stock_quantity = stock_quantity + parCounter,
                     modified=now(),
                     modified_by=parUserId
                 where sku = parSku
                   and is_active = 1;
             else
                 insert into tbl_InventoryMaster (sku, stock_quantity, created_by)
-                    value (parSku, 1, parUserId);
+                    value (parSku, parCounter, parUserId);
             end if;
         end if;
         set parIsUpdated = 1;
