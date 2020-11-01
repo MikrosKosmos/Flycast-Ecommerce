@@ -22,10 +22,10 @@ begin
         #inserting the asset.
         insert into tbl_AssetMaster(asset_unique_number, category, sub_category, sku, manufacturer, asset_name,
                                     product_grade, location, vendor_id, procurement_price, base_price, selling_price,
-                                    warranty_status, created_by)
+                                    asset_status, warranty_status, created_by)
             value (parUniqueNumber, parCategory, parSubCategory, parSku, parManufacturer, parAssetName,
                    parProductGrade, parLocation, parVendorId, parProcurementPrice, parBasePrice, parSellingPrice,
-                   0, parVendorId);
+                   12, 15, parVendorId);
         select last_insert_id() into @assetId;
         #parsing the asset Attributes JSON.
         drop temporary table if exists TempAssetAttributes;

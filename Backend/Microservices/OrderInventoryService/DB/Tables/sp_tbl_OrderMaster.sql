@@ -13,7 +13,7 @@ begin
             create table tbl_OrderMaster
             (
                 id                    int primary key auto_increment,
-                flycast_order_number  varchar(255)           not null,
+                flycast_order_number  varchar(255) unique    not null,
                 order_date            date                   not null,
                 delivery_date         date         default null,
                 invoice_id            int          default null,
@@ -26,7 +26,7 @@ begin
                 dispatch_before       date         default null,
                 waybill_number        varchar(255) default null,
                 order_status          int                    not null,
-                is_replacement_order  tinyint      default 0,
+                replacement_order_id  int          default 0,
                 is_active             tinyint      default 1 not null,
                 created_by            int                    not null,
                 created               timestamp    default current_timestamp,
