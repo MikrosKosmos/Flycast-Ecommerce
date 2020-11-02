@@ -29,6 +29,7 @@ import { ToastrModule } from 'ngx-toastr';
     //AngularFontAwesomeModule,
     CommonModule,
     FontAwesomeModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

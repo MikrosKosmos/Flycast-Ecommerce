@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 
 @Component({
@@ -12,13 +13,21 @@ export class NavbarComponent implements OnInit {
   userName: string;
   isCollapsed = true;
   isCollapsed2 = true;
-  constructor() { }
+  constructor(private router: Router) { }
 
   @ViewChild(LoginComponent) loginComponent: LoginComponent;
 
   ngOnInit(): void {
-    this.isRegistered = true;
-    this.userName = 'Suresh';
+    this.userName = sessionStorage.getItem('FirstName');
+    console.log('firstname', this.userName, sessionStorage.getItem('FirstName'));
+    if (this.userName != null)
+      this.isRegistered = true;
+    else
+      this.isRegistered = false;
   }
-
+  logout() {
+    //console.log('clear the session');
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
 }
