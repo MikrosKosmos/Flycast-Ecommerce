@@ -154,6 +154,8 @@ constants.SP_INSERT_UPDATE_ADDRESS = "sp_InsertUpdateUserAddress";
 constants.SP_GET_USER_ADDRESS = "sp_GetUserAddress";
 constants.SP_VALIDATE_LOGIN = "sp_ValidateLogin";
 constants.SP_INSERT_DOCUMENT_DETAILS = "sp_InsertDocumentDetails";
+constants.SP_GET_CITY = "sp_GetCities";
+constants.SP_GET_STATE = "sp_GetStates";
 /**
  * Column Names
  */
@@ -193,6 +195,9 @@ constants.GPS_LONG = "gps_long";
 constants.ADDRESS_TYPE = "address_type";
 constants.DELIVERY_INSTRUCTION = "delivery_instructions";
 constants.IS_DEFAULT = "is_default";
+
+constants.STATE_ID = "state_id";
+constants.CITY_NAME = "city_name";
 
 /**
  * exporting the constants.

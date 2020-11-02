@@ -5,6 +5,7 @@ const constants = require("./../Helpers/constants");
 const responseGenerator = require("./../Services/responseGenerator");
 const users = require("./users");
 const auth = require("./authentication");
+const city = require("./city");
 /**
  * Method to handle the Error path requests.
  * @param dataObject: The request object.
@@ -51,6 +52,31 @@ handlerObj.users = (dataObject) => {
             break;
          case "address":
             promise = users.address(dataObject);
+            break;
+         default:
+            reject(responseGenerator.generateErrorResponse(constants.ERROR_MESSAGE, constants.ERROR_LEVEL_2));
+      }
+      promise.then(data => {
+         resolve(data);
+      }).catch(err => {
+         reject(err);
+      });
+   });
+};
+/**
+ * Method to handle the requests for City and state.
+ * @param dataObject: The request object.
+ * @returns {Promise<Array>}:
+ */
+handlerObj.city = (dataObject) => {
+   return new Promise((resolve, reject) => {
+      let promise;
+      switch (dataObject.path) {
+         case "city":
+            promise = city.city(dataObject);
+            break;
+         case "state":
+            promise = city.state(dataObject);
             break;
          default:
             reject(responseGenerator.generateErrorResponse(constants.ERROR_MESSAGE, constants.ERROR_LEVEL_2));
