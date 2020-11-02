@@ -4,6 +4,7 @@ create procedure sp_UpdateUserDetails(parUserId int, parFirstName varchar(255), 
 begin
     set @isExists = 0;
     set @isAuthChanged = 0;
+    set @authSet = '';
     select id into @isExists from tbl_UserMaster where id = parUserId and is_active = 1;
     if @isExists > 0 then
         set @setClaus = '';
@@ -18,7 +19,6 @@ begin
         end if;
         #Checking Auth Change.
         if @isAuthChanged = 1 then
-            set @authSet = '';
             if length(parEmail) > 0 then
                 set @authSet = concat(@authSet, ' email = ''', parEmail, ''',');
                 set @setClaus = concat(@authSet, ' email = ''', parEmail, ''',');
@@ -49,6 +49,8 @@ begin
             prepare stmtExec from @stmtSQL;
             execute stmtExec;
             deallocate prepare stmtExec;
+            select 1 as id;
+        elseif length(@authSet) > 0 then
             select 1 as id;
         else
             select -1 as id;
