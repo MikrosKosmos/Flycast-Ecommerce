@@ -1,1 +1,102 @@
-<p>user works!</p>
+<div class="container-fluid">
+    <div class="pt-4 pb-4">
+        <div class="row">
+            <div class="col-3">
+                <div class=row style="margin-left: 15px;">
+                    <div class="card">
+                        <div class="card-header">
+                            Welcome, {{userName}}
+                        </div>
+                        <div class="card-body">
+                            <h2 class="dropdown-header">Account Details</h2>
+                            <a class="dropdown-item" href="#">Account Details</a>
+                            <a class="dropdown-item" href="#">Manage Addresses</a>
+
+                            <h2 class="dropdown-header">Order Details</h2>
+                            <a class="dropdown-item" href="#">My Orders</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="form-group pl-3">
+                            <form [formGroup]="accountDetailsForm">
+                                <label class="control-label"><b>Personal Information</b></label>
+                                <span class="edit-button" (click)=editPersonalInformation(accountDetailsForm)
+                                    *ngIf="editPI">Edit</span>
+                                <span class="edit-button" (click)=cancelPersonalInformation()
+                                    *ngIf="!editPI">Cancel</span>
+                                <div class="row pb-3">
+                                    <div class="col-4">
+                                        <input #FN type="text" class="form-control" value="{{firstName}}"
+                                            name="firstName" formControlName="firstname" [(ngModel)]="firstName"
+                                            disabled>
+                                    </div>
+                                    <div class="col-4">
+                                        <input #LN type="text" class="form-control" value="{{lastName}}" name="lastName"
+                                            formControlName="lastname" [(ngModel)]="lastName" disabled>
+                                    </div>
+                                    <div class="col-4" *ngIf="!editPI">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="form-group pl-3">
+                            <form [formGroup]="accountDetailsForm" (ngSubmit)="updateUserEmailId(accountDetailsForm)">
+                                <label class="control-label"><b>Email Address</b></label>
+                                <span class="edit-button" (click)=editEmailId() *ngIf="editEmailid">Edit</span>
+                                <span class="edit-button" (click)=cancelEmailId() *ngIf="!editEmailid">Cancel</span>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <input #Email type="text" class="form-control" value="{{email}}"
+                                            name="emailId" formControlName="email" disabled>
+                                    </div>
+                                    <div class="col-4">
+                                        <button type="submit" class="btn btn-primary"
+                                            *ngIf="!editEmailid">Submit</button>
+                                    </div>
+
+                                </div>
+                                <!-- <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="pwd" placeholder="Enter password"
+                                        name="pwd">
+                                </div> -->
+                            </form>
+                        </div>
+                        <div class="form-group pl-3 pt-3">
+                            <form [formGroup]="accountDetailsForm">
+                                <label class="control-label"><b>Change Password</b></label>
+                                <div class="row pb-3">
+                                    <div class="col-6">
+                                        <input type="password" class="form-control" id="pwd"
+                                            placeholder="Enter password" name="pwd" formControlName="password">
+                                    </div>
+                                </div>
+
+                                <div class="row pb-3">
+                                    <div class="col-6">
+                                        <input type="password" class="form-control" id="confPwd"
+                                            placeholder="Confirm password" name="confPwd"
+                                            formControlName="confirmPassword">
+                                    </div>
+                                </div>
+                                <div class=row>
+                                    <div class="col-4">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

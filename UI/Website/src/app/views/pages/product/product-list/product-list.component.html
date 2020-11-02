@@ -74,15 +74,23 @@
                 <div *ngFor="let products of productDetails">
                     <div class="img-thumbnail">
                         <div class="p-1">
-                            <div class="row" >
+                            <div class="row">
                                 <div class="col-3">
                                     <img src="{{products.imageSrc}}" alt="" class="img-responsive" style="height: 80%;">
                                 </div>
+                                <span>
+                                    <a placement="top" mdbTooltip="Add to Wishlist" container="body"
+                                        (click)="addFavourite(products)">
+                                        <i class="fa fa-heart"></i>
+                                    </a>
+                                </span>
                                 <div class="col-6">
                                     <!-- <div class="row"></div>
                                     <div class="row"></div> -->
                                     <div class="caption">
-                                        <h4><a href="#">{{products.productName}}</a></h4>
+                                        <h4><a
+                                                [routerLink]="['/products/product', products.productId]">{{products.productName}}</a>
+                                        </h4>
                                         <p>{{products.description}}
                                         </p>
                                     </div>
@@ -93,7 +101,8 @@
                                                 <i class="fa fa-shopping-cart"></i>
                                                 Add To Cart</button>
                                             <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#product_view" (click)="open(content)">
+                                                data-target="#product_view"
+                                                (click)="quickViewProductsById(content, products)">
                                                 <i class="fa fa-search"></i>
                                                 Quick View</button>
                                         </div>
@@ -129,13 +138,12 @@
         <h3 class="modal-title">HTML5 is a markup language</h3>
     </div>
     <div class="modal-body">
-        <div class="row">
+        <div class="row" *ngFor="let product of productInModal">
             <div class="col-md-6 product_img">
-                <img src="http://img.bbystatic.com/BestBuy_US/images/products/5613/5613060_sd.jpg"
-                    class="img-responsive" style="height: 500px;">
+                <img src="{{product.imageSrc}}" class="img-responsive" style="height: 500px;">
             </div>
             <div class="col-md-6 product_content">
-                <h4>Product Id: <span>51526</span></h4>
+                <h4><span>{{product.productName}}</span></h4>
                 <div class="rating">
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star"></span>
@@ -144,12 +152,11 @@
                     <span class="glyphicon glyphicon-star"></span>
                     (10 reviews)
                 </div>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                    Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                    unknown printer took a galley of type and scrambled it to make a type specimen
-                    book.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                <h3 class="cost"><span class="glyphicon glyphicon-usd"></span> 75.00 <small class="pre-cost"><span
-                            class="glyphicon glyphicon-usd"></span> 60.00</small>
+                <p>{{product.description}}</p>
+                <h3 class="cost"><span class="glyphicon glyphicon-usd"></span>{{product.price|currency:'INR'}} 
+                    <small class="pre-cost">
+                        <span class="glyphicon glyphicon-usd"></span> 60.00
+                    </small>
                 </h3>
                 <div class="row">
                     <div class="col-md-4 col-sm-6 col-xs-12">

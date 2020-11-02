@@ -69,42 +69,47 @@ export class LoginComponent implements OnInit {
       "phone_number": this.registeredUserPhoneNumber,
       "otp": formInput.value.otp
     };
+    console.log('after details', otpVerification);
     this.authService.UserOTPRegistration(otpVerification).subscribe(data => {
       console.log('after otp validation: ', data);
       if (data.res.id != -1) {
         this.tostrService.success('OTP validation successful', formInput.value.firstname + ' ' + formInput.value.lastname);
-        sessionStorage.setItem('FirstName', data.res.first_name);
-        sessionStorage.setItem('LastName', data.res.last_name);
-        sessionStorage.setItem('JwToken', data.res.jw_token);
-        sessionStorage.setItem('RoleName', data.res.roles[0].role_name);
-        sessionStorage.setItem('RequestKey', data.res.request_Key);
-
         this.isLogin = true;
         this.tostrService.success('Please Login with your phone number');
+        //this.router.navigate(['/products/all-products']);
       }
       else
         this.tostrService.error('OTP validation failed');
     });
+    //this.router.navigate(['/userDetails']);
   }
 
   formLogin(formInput) {
-    console.log("user login phone number: ", formInput.value.phoneNumber);
     this.isUserRegistered = true;
     this.registeredUserPhoneNumber = formInput.value.phoneNumber;
-  }
-
-  otpVerificationLogin(formInput) {
-    console.log("Entered OTP: ", formInput.value.otp);
+    //console.log('registered status', this.isUserRegistered, this.registeredUserPhoneNumber);
     var otpVerification = {
       "phone_number": "+91" + this.registeredUserPhoneNumber,
       "otp": formInput.value.otp
     };
     console.log("input variables: ", otpVerification);
-
-    // this.authService.UserLogin(otpVerification).subscribe(data => {
-    //   console.log('after otp validation: ', data);
-    // });
-    //this.router.navigate(['/products/']);
+    this.authService.UserLogin(otpVerification).subscribe(data => {
+      console.log('after otp validation: ', data);
+      if (data.res.id > 1) {
+        //this.tostrService.success('OTP validation successful', formInput.value.firstname + ' ' + formInput.value.lastname);
+        sessionStorage.setItem('FirstName', data.res.first_name);
+        sessionStorage.setItem('LastName', data.res.last_name);
+        sessionStorage.setItem('JwToken', data.res.jw_token);
+        sessionStorage.setItem('RoleName', data.res.roles[0].role_name);
+        sessionStorage.setItem('RequestKey', data.res.request_Key);
+        sessionStorage.setItem('UserID', data.res.id);
+        this.isLogin = true;
+        this.tostrService.success('Login Success', sessionStorage.getItem('FirstName'));
+        this.router.navigate(['/products/all-products']);
+      }
+      else if (data.res.id == -1)
+        this.tostrService.error('OTP validation failed');
+    });
   }
 
   onCheckboxChange(e) {

@@ -44,7 +44,7 @@
         <!--OTP Verification-->
         <div class="card bg-dark text-white" *ngIf="isUserRegistered">
           <div class="card-body">
-            <form (ngSubmit)="otpVerificationLogin(loginForm)" [formGroup]="loginForm">
+            <form (ngSubmit)="formLogin(loginForm)" [formGroup]="loginForm">
               <div class="form-group">
                 <input type="number" formControlName="otp" placeholder="Enter OTP" id="otp" class="form-control"
                   required>
