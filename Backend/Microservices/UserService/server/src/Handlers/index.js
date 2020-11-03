@@ -28,6 +28,9 @@ handlerObj.auth = (dataObject) => {
          case "auth":
             promise = auth.auth(dataObject);
             break;
+         case "token":
+            promise = auth.token(dataObject);
+            break;
          default:
             reject(responseGenerator.generateErrorResponse(constants.ERROR_MESSAGE, constants.ERROR_LEVEL_2));
       }
