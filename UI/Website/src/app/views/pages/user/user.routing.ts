@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/app/shared/Guards/auth.guard';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { UserComponent } from './user.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 export const UserRoutes: Routes = [
   {
@@ -15,5 +16,9 @@ export const UserRoutes: Routes = [
         component: UserAccountComponent
       }
     ]
+  },
+  {
+    path: "change-password",
+    component: ChangePasswordComponent
   }
 ];

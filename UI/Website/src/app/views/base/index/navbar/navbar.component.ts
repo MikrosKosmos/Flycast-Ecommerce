@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.userName = sessionStorage.getItem('FirstName');
-    console.log('firstname', this.userName, sessionStorage.getItem('FirstName'));
+    //console.log('firstname', this.userName, sessionStorage.getItem('FirstName'));
     if (this.userName != null)
       this.isRegistered = true;
     else
@@ -29,5 +29,6 @@ export class NavbarComponent implements OnInit {
     //console.log('clear the session');
     sessionStorage.clear();
     this.router.navigate(['/login']);
+    window.location.reload();
   }
 }

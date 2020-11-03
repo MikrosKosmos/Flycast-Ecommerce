@@ -8,12 +8,13 @@ import { UserRoutes } from './user.routing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
   declarations: [
     UserComponent, 
-    UserAccountComponent],
+    UserAccountComponent, ChangePasswordComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(UserRoutes),
