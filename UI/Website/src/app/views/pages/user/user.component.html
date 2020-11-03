@@ -137,8 +137,8 @@
                                     </div>
                                     <div class="card-footer">
                                         <a class="pointer card-link">Remove</a>
-                                        <a class="pointer card-link" data-toggle="modal"
-                                            data-target="#exampleModal">Edit</a>
+                                        <a class="pointer card-link" data-toggle="modal" data-target="#exampleModal"
+                                            (click)="getAddressOnForm(addresses.address_id)">Edit</a>
                                     </div>
                                 </div>
                             </div>
@@ -192,11 +192,13 @@
                                                             <div class="form-group">
                                                                 <select id="state" class="form-control"
                                                                     formControlName="state"
-                                                                    (change)="selectCityOnStateId($event)">
+                                                                    (change)="selectCityOnStateId($event)"
+                                                                    [(ngModel)]="stateName">
                                                                     <option [ngValue]="null" disabled>--Select
                                                                         State--</option>
                                                                     <option *ngFor='let state of stateList;let i =index'
-                                                                        value={{state.id}}>{{state.state_name}}
+                                                                        value={{state.id}}>
+                                                                        {{state.state_name}}
                                                                     </option>
                                                                 </select>
                                                             </div>
@@ -204,11 +206,12 @@
                                                         <div class="col-4">
                                                             <div class="form-group">
                                                                 <select id="city" class="form-control"
-                                                                    formControlName="city">
+                                                                    formControlName="city" [(ngModel)]="cityName">
                                                                     <option [ngValue]="null" disabled>--Select
                                                                         City--</option>
                                                                     <option *ngFor='let city of cityList;let i =index'
-                                                                        value={{city.id}}>{{city.city_name}}
+                                                                        value={{city.id}}>
+                                                                        {{city.city_name}}
                                                                     </option>
                                                                 </select>
                                                             </div>
@@ -229,7 +232,8 @@
                                                                 <div class="form-check pr-3">
                                                                     <input class="form-check-input" type="radio"
                                                                         formControlName="addressType"
-                                                                        id="exampleRadios1" value="Residential" checked>
+                                                                        [(ngModel)]="addressType" id="exampleRadios1"
+                                                                        value="Residential" checked>
                                                                     <label class="form-check-label"
                                                                         for="exampleRadios1">
                                                                         Residential
@@ -238,7 +242,8 @@
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
                                                                         formControlName="addressType"
-                                                                        id="exampleRadios2" value="Commercial">
+                                                                        [(ngModel)]="addressType" id="exampleRadios2"
+                                                                        value="Commercial">
                                                                     <label class="form-check-label"
                                                                         for="exampleRadios2">
                                                                         Work
@@ -260,7 +265,8 @@
                                                         <div class="col-12">
                                                             <input type="text" class="form-control"
                                                                 placeholder="Delivery Instructions"
-                                                                formControlName="deliveryInstructions">
+                                                                formControlName="deliveryInstructions"
+                                                                [(ngModel)]="deliveryInstructions">
                                                         </div>
                                                     </div>
                                                     <div class="row pt-3 ">
