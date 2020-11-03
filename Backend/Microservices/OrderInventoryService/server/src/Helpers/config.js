@@ -1,12 +1,12 @@
 const config = {};
 const constants = require('./constants');
-config.port = 7001;
+config.port = 7002;
 /**
  * data base configurations.
  */
 config.databasePort = 3306;
 config.databaseUserName = "flycast";
-config.databaseName = "user_service";
+config.databaseName = "order_inventory";
 
 /**
  * Encryption constants

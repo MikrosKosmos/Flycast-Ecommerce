@@ -77,6 +77,9 @@ constants.STATUS_SOLD = 10;
 constants.STATUS_IN_TRANSIT = 11;
 constants.STATUS_WARRANTY_NOT_ACTIVATED = 12;
 constants.STATUS_WARRANTY_ACTIVATED = 13;
+constants.STATUS_ERROR = 14;
+constants.STATUS_COMPLETED = 15;
+constants.STATUS_PROCESSING = 16;
 
 /**
  * API Methods.
@@ -154,6 +157,8 @@ constants.USER_SERVICE_VALIDATE_TOKEN_PATH = "/auth/token";
 /**
  * SP Names.
  */
+constants.SP_CHECK_API_TOKEN = "sp_CheckApiToken";
+constants.SP_LOG_API_STATUS = "sp_LogApiStatus";
 constants.SP_CREATE_ATTRIBUTE = "sp_CreateAttribute";
 
 /**
@@ -166,6 +171,8 @@ constants.COLUMN_MODIFIED = "modified";
 constants.EMPLOYEE_ID = "employee_id";
 constants.ID = "id";
 constants.IS_VALID = "isValid";
+
+constants.ATTRIBUTES = "attributes";
 
 
 /**
