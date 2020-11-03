@@ -9,88 +9,282 @@
                         </div>
                         <div class="card-body">
                             <h2 class="dropdown-header">Account Details</h2>
-                            <a class="dropdown-item" href="#">Account Details</a>
-                            <a class="dropdown-item" href="#">Manage Addresses</a>
+                            <a class="dropdown-item nav-link pointer" (click)="switchToAccountDetails()">Account
+                                Details</a>
+                            <a class="dropdown-item nav-link pointer" (click)="switchToAddress()">Manage Addresses</a>
 
                             <h2 class="dropdown-header">Order Details</h2>
-                            <a class="dropdown-item" href="#">My Orders</a>
+                            <a class="dropdown-item nav-link pointer" href="#">My Orders</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-9">
                 <div class="card">
-                    <div class="card-body">
-
-                        <div class="form-group pl-3">
-                            <form [formGroup]="accountDetailsForm">
-                                <label class="control-label"><b>Personal Information</b></label>
-                                <span class="edit-button" (click)=editPersonalInformation(accountDetailsForm)
-                                    *ngIf="editPI">Edit</span>
-                                <span class="edit-button" (click)=cancelPersonalInformation()
-                                    *ngIf="!editPI">Cancel</span>
-                                <div class="row pb-3">
-                                    <div class="col-4">
-                                        <input #FN type="text" class="form-control" value="{{firstName}}"
-                                            name="firstName" formControlName="firstname" [(ngModel)]="firstName"
-                                            disabled>
-                                    </div>
-                                    <div class="col-4">
-                                        <input #LN type="text" class="form-control" value="{{lastName}}" name="lastName"
-                                            formControlName="lastname" [(ngModel)]="lastName" disabled>
-                                    </div>
-                                    <div class="col-4" *ngIf="!editPI">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </div>
-                            </form>
+                    <!--Account Details-->
+                    <div *ngIf="accountDetailsPage">
+                        <div class="card-header">
+                            Personal Information
                         </div>
-
-                        <div class="form-group pl-3">
-                            <form [formGroup]="accountDetailsForm" (ngSubmit)="updateUserEmailId(accountDetailsForm)">
-                                <label class="control-label"><b>Email Address</b></label>
-                                <span class="edit-button" (click)=editEmailId() *ngIf="editEmailid">Edit</span>
-                                <span class="edit-button" (click)=cancelEmailId() *ngIf="!editEmailid">Cancel</span>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <input #Email type="text" class="form-control" value="{{email}}"
-                                            name="emailId" formControlName="email" disabled>
+                        <div class="card-body">
+                            <div class="form-group pl-3">
+                                <form [formGroup]="accountDetailsForm">
+                                    <label class="control-label"><b>Name</b></label>
+                                    <span class="edit-button" (click)=editPersonalInformation(accountDetailsForm)
+                                        *ngIf="editPI">Edit</span>
+                                    <span class="edit-button" (click)=cancelPersonalInformation()
+                                        *ngIf="!editPI">Cancel</span>
+                                    <div class="row pb-3">
+                                        <div class="col-4">
+                                            <input #FN type="text" class="form-control" value="{{firstName}}"
+                                                name="firstName" formControlName="firstname" [(ngModel)]="firstName"
+                                                disabled>
+                                        </div>
+                                        <div class="col-4">
+                                            <input #LN type="text" class="form-control" value="{{lastName}}"
+                                                name="lastName" formControlName="lastname" [(ngModel)]="lastName"
+                                                disabled>
+                                        </div>
+                                        <div class="col-4" *ngIf="!editPI">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
                                     </div>
-                                    <div class="col-4">
-                                        <button type="submit" class="btn btn-primary"
-                                            *ngIf="!editEmailid">Submit</button>
-                                    </div>
+                                </form>
+                            </div>
 
-                                </div>
-                                <!-- <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="pwd" placeholder="Enter password"
-                                        name="pwd">
-                                </div> -->
-                            </form>
+                            <div class="form-group pl-3">
+                                <form [formGroup]="accountDetailsForm"
+                                    (ngSubmit)="updateUserEmailId(accountDetailsForm)">
+                                    <label class="control-label"><b>Email Address</b></label>
+                                    <span class="edit-button" (click)=editEmailId() *ngIf="editEmailid">Edit</span>
+                                    <span class="edit-button" (click)=cancelEmailId() *ngIf="!editEmailid">Cancel</span>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <input #Email type="text" class="form-control" value="{{email}}"
+                                                name="emailId" formControlName="email" disabled>
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="submit" class="btn btn-primary"
+                                                *ngIf="!editEmailid">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="form-group pl-3">
+                                <form [formGroup]="accountDetailsForm"
+                                    (ngSubmit)="updatePhoneNumber(accountDetailsForm)">
+                                    <label class="control-label"><b>Phone Number</b></label>
+                                    <span class="edit-button" (click)=editUserPhoneNumber()
+                                        *ngIf="editPhoneNumber">Edit</span>
+                                    <span class="edit-button" (click)=cancelUserPhoneNumber()
+                                        *ngIf="!editPhoneNumber">Cancel</span>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <input #PhoneNumber type="number" class="form-control"
+                                                value="{{userPhoneNumber}}" name="emailId" formControlName="phoneNumber"
+                                                disabled>
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="submit" class="btn btn-primary"
+                                                *ngIf="!editPhoneNumber">Change</button>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="form-group pl-3 pt-3">
+                                <form [formGroup]="accountDetailsForm">
+                                    <div class=row>
+                                        <div class="col-4">
+                                            <a class="nav-link pointer" (click)="passwordChangeNewWindow()">Click here
+                                                to change password</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <div class="form-group pl-3 pt-3">
-                            <form [formGroup]="accountDetailsForm">
-                                <label class="control-label"><b>Change Password</b></label>
-                                <div class="row pb-3">
-                                    <div class="col-6">
-                                        <input type="password" class="form-control" id="pwd"
-                                            placeholder="Enter password" name="pwd" formControlName="password">
+                    </div>
+                    <!--Manage Address-->
+                    <div *ngIf="addressPage">
+                        <div class="card-header">
+                            Personal Information
+                        </div>
+                        <div class="card-body">
+                            <div class="pl-3">
+                                <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                    data-target="#exampleModal">Add Address</button>
+                            </div>
+                            <div class="p-3" *ngFor='let addresses of addressList'>
+                                <div class="card ">
+                                    <div class="card-header text-white bg-info ">
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <b>{{addresses.contact_person_name}}</b></div>
+                                            <div class="col-3">
+                                                <div>
+                                                    {{addresses.address_type}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div>
+                                            <b>Phone Number: {{addresses.contact_phone_number}}</b>
+                                        </div>
+                                        <br>
+                                        {{addresses.address_1}},{{addresses.address_2}}<br>
+                                        {{addresses.state_name}}, {{addresses.city_name}}, {{addresses.pincode}}
+                                    </div>
+                                    <div class="card-footer">
+                                        <a class="pointer card-link">Remove</a>
+                                        <a class="pointer card-link" data-toggle="modal"
+                                            data-target="#exampleModal">Edit</a>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="row pb-3">
-                                    <div class="col-6">
-                                        <input type="password" class="form-control" id="confPwd"
-                                            placeholder="Confirm password" name="confPwd"
-                                            formControlName="confirmPassword">
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Add New Address</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group pl-3 pr-3">
+                                                <form [formGroup]="newAddressForm"
+                                                    (ngSubmit)="addNewAddress(newAddressForm)">
+                                                    <div class="row pt-3">
+                                                        <div class=col-6>
+                                                            <input #FN type="text" class="form-control"
+                                                                placeholder="Full Name"
+                                                                formControlName="contactPersonName"
+                                                                [(ngModel)]="contactName">
+                                                        </div>
+                                                        <div class=col-6>
+                                                            <input #FN type="number" class="form-control"
+                                                                placeholder="10 Digit Contact Number"
+                                                                formControlName="contactPersonPhNo"
+                                                                [(ngModel)]="contactNumber">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row pt-3">
+                                                        <div class=col>
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Address line 1" formControlName="address1"
+                                                                [(ngModel)]="address1">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row pt-3">
+                                                        <div class=col>
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Address line 2/Landmark"
+                                                                formControlName="address2" [(ngModel)]="address2">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row pt-3 ">
+                                                        <div class="col-4">
+                                                            <div class="form-group">
+                                                                <select id="state" class="form-control"
+                                                                    formControlName="state"
+                                                                    (change)="selectCityOnStateId($event)">
+                                                                    <option [ngValue]="null" disabled>--Select
+                                                                        State--</option>
+                                                                    <option *ngFor='let state of stateList;let i =index'
+                                                                        value={{state.id}}>{{state.state_name}}
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="form-group">
+                                                                <select id="city" class="form-control"
+                                                                    formControlName="city">
+                                                                    <option [ngValue]="null" disabled>--Select
+                                                                        City--</option>
+                                                                    <option *ngFor='let city of cityList;let i =index'
+                                                                        value={{city.id}}>{{city.city_name}}
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <input type="number" class="form-control"
+                                                                placeholder="Pincode" formControlName="pinCode"
+                                                                [(ngModel)]="pincode">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row pt-3 ">
+                                                        <div class="col-9">
+                                                            <div class="row pl-3">
+                                                                <label class="form-check-label pr-3"
+                                                                    for="exampleRadios1">
+                                                                    <b>Address Type:</b>
+                                                                </label>
+                                                                <div class="form-check pr-3">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        formControlName="addressType"
+                                                                        id="exampleRadios1" value="Residential" checked>
+                                                                    <label class="form-check-label"
+                                                                        for="exampleRadios1">
+                                                                        Residential
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        formControlName="addressType"
+                                                                        id="exampleRadios2" value="Commercial">
+                                                                    <label class="form-check-label"
+                                                                        for="exampleRadios2">
+                                                                        Work
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value=1
+                                                                    formControlName="isDefault" id="defaultAddress">
+                                                                <label class="form-check-label" for="defaultCheck1">
+                                                                    Default Address
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row pt-3 ">
+                                                        <div class="col-12">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Delivery Instructions"
+                                                                formControlName="deliveryInstructions">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row pt-3 ">
+                                                        <div class="col-6">
+                                                            <button type="submit" class="btn btn-primary">Save
+                                                                changes</button>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <button type="button" class="btn btn-default"
+                                                                data-dismiss="modal">Cancel
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div> -->
                                     </div>
                                 </div>
-                                <div class=row>
-                                    <div class="col-4">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>

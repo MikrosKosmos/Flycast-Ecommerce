@@ -106,6 +106,7 @@ export class LoginComponent implements OnInit {
         this.isLogin = true;
         this.tostrService.success('Login Success', sessionStorage.getItem('FirstName'));
         this.router.navigate(['/products/all-products']);
+        window.location.reload();
       }
       else if (data.res.id == -1)
         this.tostrService.error('OTP validation failed');
