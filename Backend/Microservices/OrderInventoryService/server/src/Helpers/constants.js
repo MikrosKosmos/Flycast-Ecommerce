@@ -64,15 +64,19 @@ constants.REQUEST_TYPE = "type";
  * Status Values
  */
 
-constants.STATUS_CONFIRM = 1;
-constants.STATUS_VERIFIED = 2;
-constants.STATUS_PENDING = 3;
+constants.STATUS_PENDING = 1;
+constants.STATUS_CONFIRMED = 2;
+constants.STATUS_DISPATCHED = 3;
 constants.STATUS_CANCEL = 4;
-constants.STATUS_REJECTED = 5;
-constants.STATUS_SUSPENDED = 6;
-constants.STATUS_ERROR = 7;
-constants.STATUS_COMPLETED = 8;
-constants.STATUS_PROCESSING = 9;
+constants.STATUS_PAYMENT_ERROR = 5;
+constants.STATUS_NOT_YET_DISPATCHED = 6;
+constants.STATUS_SHIPPED = 7;
+constants.STATUS_DELIVERED = 8;
+constants.STATUS_IN_STOCK = 9;
+constants.STATUS_SOLD = 10;
+constants.STATUS_IN_TRANSIT = 11;
+constants.STATUS_WARRANTY_NOT_ACTIVATED = 12;
+constants.STATUS_WARRANTY_ACTIVATED = 13;
 
 /**
  * API Methods.
@@ -141,21 +145,17 @@ constants.AWS_IMAGES_BUCKET = "flycast-images";
 constants.DOUCMENTS_BUCKET_BASE_URL = "https://flycast-documents.s3.ap-south-1.amazonaws.com/";
 constants.IMAGES_BUCKET_BASE_URL = "https://flycast-images.s3.ap-south-1.amazonaws.com/";
 
+constants.MICROSERVICE_AUTH_KEY_VALUE = "api_auth";
+constants.API_AUTH_KEY = "key";
+constants.USER_SERVICE_PORT = 7001;
+constants.USER_SERVICE_HOST = "localhost";
+constants.USER_SERVICE_VALIDATE_TOKEN_PATH = "/auth/token";
+
 /**
  * SP Names.
  */
-constants.SP_CHECK_API_TOKEN = "sp_CheckApiToken";
-constants.SP_LOG_API_STATUS = "sp_LogApiStatus";
-constants.SP_REGISTER_USER = "sp_RegisterUser";
-constants.SP_GET_USER_DETAILS = "sp_GetUserDetails";
-constants.SP_VALIDATE_OR_CREATE_OTP = "sp_ValidateOrCreateOTP";
-constants.SP_UPDATE_USER_DETAILS = "sp_UpdateUserDetails";
-constants.SP_INSERT_UPDATE_ADDRESS = "sp_InsertUpdateUserAddress";
-constants.SP_GET_USER_ADDRESS = "sp_GetUserAddress";
-constants.SP_VALIDATE_LOGIN = "sp_ValidateLogin";
-constants.SP_INSERT_DOCUMENT_DETAILS = "sp_InsertDocumentDetails";
-constants.SP_GET_CITY = "sp_GetCities";
-constants.SP_GET_STATE = "sp_GetStates";
+constants.SP_CREATE_ATTRIBUTE = "sp_CreateAttribute";
+
 /**
  * Column Names
  */
@@ -167,37 +167,6 @@ constants.EMPLOYEE_ID = "employee_id";
 constants.ID = "id";
 constants.IS_VALID = "isValid";
 
-constants.FIRST_NAME = "first_name";
-constants.LAST_NAME = "last_name";
-constants.GENDER = "gender";
-constants.EMAIL = "email";
-constants.PHONE_NUMBER = "phone_number";
-constants.EXTRA_DATA = "extra_data";
-constants.USED_REFERRAL_CODE = "used_referral_code";
-constants.REFERRAL_CODE = "referral_code";
-constants.ROLE_ID = "role_id";
-constants.ROLE_NAME = "role_name";
-constants.ROLE_STATUS = "role_status";
-constants.STATUS_NAME = "status_name";
-constants.OTP = "otp";
-constants.PASSWORD = "password";
-
-constants.USER_ID = "user_id";
-constants.ADDRESS_ID = "address_id";
-constants.CONTACT_PERSON_NAME = "contact_person_name";
-constants.CONTACT_PHONE_NUMBER = "contact_phone_number";
-constants.ADDRESS_1 = "address_1";
-constants.ADDRESS_2 = "address_2";
-constants.CITY_ID = "city_id";
-constants.PINCODE = "pincode";
-constants.GPS_LAT = "gps_lat";
-constants.GPS_LONG = "gps_long";
-constants.ADDRESS_TYPE = "address_type";
-constants.DELIVERY_INSTRUCTION = "delivery_instructions";
-constants.IS_DEFAULT = "is_default";
-
-constants.STATE_ID = "state_id";
-constants.CITY_NAME = "city_name";
 
 /**
  * exporting the constants.
