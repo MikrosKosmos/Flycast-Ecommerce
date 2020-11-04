@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/shared/Services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import * as CryptoJS from 'crypto-js'; 
 
 @Component({
   selector: 'app-change-password',
@@ -26,11 +27,12 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   updatePassword(inputPassword){
-    console.log(inputPassword.value.password.length);
+    var encryptedText = CryptoJS.AES.encrypt('encrypt the text', inputPassword.value.confirmPassword).toString();
+    console.log(encryptedText);
     if(inputPassword.value.password == inputPassword.value.confirmPassword && inputPassword.value.password.length > 7){
       var updatePassword = {
         "id": Number(sessionStorage.getItem('UserID')),
-        "password": inputPassword.value.confirmPassword,
+        "password": encryptedText,
       };
       console.log('api var', updatePassword);
       this.userService.UpdateUserDetailsById(updatePassword).subscribe(data => {

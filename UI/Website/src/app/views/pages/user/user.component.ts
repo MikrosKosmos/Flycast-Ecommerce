@@ -31,10 +31,11 @@ export class UserComponent implements OnInit {
   isDefault: Number;
   stateName: string;
   cityName: string;
+  addressId: number = 0;
 
   /*Pages*/
   addressPage: boolean;
-  accountDetailsPage: boolean;
+  accountDetailsPage: boolean = true;
   ordersPage: boolean;
 
   /*button name changes*/
@@ -62,7 +63,6 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
     this.userName = sessionStorage.getItem('FirstName');
     this.getUserDetailsByID();
-    this.accountDetailsPage = true;
 
     this.accountDetailsForm = this.formBuilder.group({
       firstname: ['', Validators.required],
@@ -209,10 +209,10 @@ export class UserComponent implements OnInit {
   }
 
   addNewAddress(formInput) {
-    //console.log('form input value', formInput.value);
+    console.log('user ID', formInput.value, this.addressId);
     var putBody = {
       "user_id": Number(this.userId),
-      "address_id": 0,
+      "address_id": this.addressId,
       "contact_person_name": formInput.value.contactPersonName,
       "contact_phone_number": '+91' + formInput.value.contactPersonPhNo,
       "address_1": formInput.value.address1,
@@ -221,19 +221,19 @@ export class UserComponent implements OnInit {
       "pincode": Number(formInput.value.pinCode),
       "address_type": formInput.value.addressType,
       "delivery_instructions": formInput.value.deliveryInstructions,
-      "is_default": (formInput.value.isDefault == true) ? 1 : 0
+      "is_default": (formInput.value.isDefault == true) ? 1 : 0,
     };
-    //console.log('put body', putBody);
+    console.log('put body', putBody);
     this.userService.UpdateOrAddAddress(putBody).subscribe(data => {
-      //console.log('response', data.res);
+      console.log('response', data.res);
       if (data.res.id > 0) {
         this.toster.success('Address Updated');
       }
       else
         this.toster.error('Address Update Failed');
     });
-    window.location.reload();
     this.switchToAddress();
+    window.location.reload();
   }
 
   getUserAddressList() {
@@ -256,6 +256,7 @@ export class UserComponent implements OnInit {
         this.cityName = this.addressList[i].city_name;
         this.addressType = this.addressList[i].address_type;
         this.deliveryInstructions = this.addressList[i].delivery_instructions;
+        this.addressId = this.addressList[i].address_id;
         console.log('address at position ', i, this.addressList[i]);
       }
     }
