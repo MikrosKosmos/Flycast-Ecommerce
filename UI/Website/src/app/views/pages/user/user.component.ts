@@ -29,6 +29,8 @@ export class UserComponent implements OnInit {
   addressType: string;
   deliveryInstructions: string;
   isDefault: Number;
+  stateName: string;
+  cityName: string;
 
   /*Pages*/
   addressPage: boolean;
@@ -239,5 +241,23 @@ export class UserComponent implements OnInit {
       console.log('addresses', data.res);
       this.addressList = data.res;
     });
+  }
+
+  getAddressOnForm(addressIdInput) {
+    console.log('address id', addressIdInput, this.addressList.length);
+    for (var i = 0; i < this.addressList.length; i++) {
+      if (addressIdInput == this.addressList[i].address_id) {
+        this.contactName = this.addressList[i].contact_person_name;
+        this.contactNumber = this.addressList[i].contact_phone_number.replace('+91', '');
+        this.address1 = this.addressList[i].address_1;
+        this.address2 = this.addressList[i].address_2;
+        this.pincode = this.addressList[i].pincode;
+        this.stateName = this.addressList[i].state_name;
+        this.cityName = this.addressList[i].city_name;
+        this.addressType = this.addressList[i].address_type;
+        this.deliveryInstructions = this.addressList[i].delivery_instructions;
+        console.log('address at position ', i, this.addressList[i]);
+      }
+    }
   }
 }
