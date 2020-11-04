@@ -79,7 +79,13 @@ class Authentication {
    validateUserToken(jwToken) {
       return new Promise((resolve, reject) => {
          const userData = validateToken(jwToken);
-         resolve([constants.RESPONSE_SUCESS_LEVEL_1, userData]);
+         if (validators.validateUndefined(userData)) {
+            userData[constants.IS_VALID] = 1
+            resolve([constants.RESPONSE_SUCESS_LEVEL_1, userData]);
+         } else {
+            userData[constants.IS_VALID] = -1;
+            resolve([constants.RESPONSE_SUCESS_LEVEL_1, {id: -1}]);
+         }
       });
    }
 

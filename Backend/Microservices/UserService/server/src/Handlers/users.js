@@ -151,9 +151,6 @@ usersHandler.address = (dataObject) => {
          } else if (!addressId && (!address1 || !address2 || !pincode || !cityId || !addressType || !contactPersonName ||
             !contactPersonNumber)) {
             reject(responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1));
-         } else if (addressId && (address1 || address2 || pincode || cityId || addressType || contactPersonName ||
-            contactPersonNumber)) {
-            reject(responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1));
          } else {
             const users = new Users(userId, false, false, false, false, false, jwToken);
             users.updateOrCreateAddress(addressId, address1, address2, cityId, pincode, contactPersonName, contactPersonNumber,

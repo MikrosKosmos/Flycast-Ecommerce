@@ -105,6 +105,7 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('UserID', data.res.id);
         this.isLogin = true;
         this.tostrService.success('Login Success', sessionStorage.getItem('FirstName'));
+        window.location.reload();
         this.router.navigate(['/products/all-products']);
       }
       else if (data.res.id == -1)
