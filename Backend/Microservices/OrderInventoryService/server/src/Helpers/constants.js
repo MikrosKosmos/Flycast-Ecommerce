@@ -163,6 +163,9 @@ constants.SP_CREATE_ATTRIBUTE = "sp_CreateAttribute";
 constants.SP_CREATE_CATEGORY = "sp_CreateCategory";
 constants.SP_GET_CATEGORIES = "sp_GetCategories";
 constants.SP_CREATE_CATEGORY_ATTRIBUTES = "sp_CreateCategoryAttributes";
+constants.SP_GET_CATEGORY_ATTRIBUTES = "sp_GetCategoryAttribute";
+constants.SP_GET_ATTRIBUTE_POSSIBLE_VALUES = "sp_GetAttributePossibleValues";
+constants.SP_CREATE_ATTRIBUTE_POSSIBLE_VALUES = "sp_CreateAttributePossibleValues";
 
 /**
  * Column Names
@@ -180,6 +183,8 @@ constants.ROLE_STATUS = "role_status";
 constants.ATTRIBUTES = "attributes";
 constants.CATEGORIES = "categories";
 constants.CATEGORY_ID = "category_id";
+constants.ATTRIBUTE_ID = "attribute_id";
+constants.ATTRIBUTE_VALUES = "attribute_values";
 
 
 /**
