@@ -15,9 +15,9 @@ tokenValidator.validateToken = (userToken) => {
       body[constants.JW_TOKEN] = userToken;
       const networkHelper = new NetworkHelper(constants.USER_SERVICE_HOST, constants.USER_SERVICE_VALIDATE_TOKEN_PATH,
          constants.HTTP_POST, null, body, headers, constants.USER_SERVICE_PORT);
+      console.log("In validator.");
       networkHelper.request().then(response => {
          const isValid = response[constants.RESPONSE_KEY][constants.IS_VALID];
-         // noinspection EqualityComparisonWithCoercionJS
          if (isValid && response[constants.RESPONSE_KEY][constants.ID] > 0) {
             resolve(response[constants.RESPONSE_KEY]);
          } else {

@@ -105,7 +105,7 @@ constants.ERROR_MESSAGE = "Error";
 constants.USER_DATA = "user_data";
 constants.JW_TOKEN = "jw_token";
 constants.BAD_REQUEST_MESSAGE = "Incorrect Request";
-constants.FORBIDDEN_MESSAGE = "Incorrect Token or token expired.";
+constants.FORBIDDEN_MESSAGE = "Incorrect Token or token expired or the user doesn't have sufficient permissions.";
 constants.INSUFFICIENT_DATA_MESSAGE = "Insufficient Data";
 constants.INVALID_METHOD_MESSAGE = "Invalid Method";
 constants.INVALID_PATH = "Invalid Path";
@@ -162,6 +162,7 @@ constants.SP_LOG_API_STATUS = "sp_LogApiStatus";
 constants.SP_CREATE_ATTRIBUTE = "sp_CreateAttribute";
 constants.SP_CREATE_CATEGORY = "sp_CreateCategory";
 constants.SP_GET_CATEGORIES = "sp_GetCategories";
+constants.SP_CREATE_CATEGORY_ATTRIBUTES = "sp_CreateCategoryAttributes";
 
 /**
  * Column Names
@@ -173,6 +174,8 @@ constants.COLUMN_MODIFIED = "modified";
 constants.EMPLOYEE_ID = "employee_id";
 constants.ID = "id";
 constants.IS_VALID = "isValid";
+constants.ROLE_ID = "role_id";
+constants.ROLE_STATUS = "role_status";
 
 constants.ATTRIBUTES = "attributes";
 constants.CATEGORIES = "categories";

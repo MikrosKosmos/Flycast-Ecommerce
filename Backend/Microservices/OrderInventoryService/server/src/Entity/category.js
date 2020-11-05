@@ -30,6 +30,23 @@ class Category {
    }
 
    /**
+    * Method to check whether the user has permission for particular role.
+    * @param roleId: The role id to check for.
+    * @param userRoles: The array of roles for the user.
+    * @returns {boolean}: true, if the role exists, else false.
+    * @private
+    */
+   _checkWhetherRoleExists(userRoles, roleId) {
+      for (let i = 0; i < userRoles.length; i++) {
+         const oneRole = userRoles[i];
+         //1 for user service is confirmed status.
+         if (oneRole[constants.ROLE_ID] === roleId && oneRole[constants.ROLE_STATUS] === 1)
+            return true;
+      }
+      return false;
+   }
+
+   /**
     * Method to create a category.
     * @param categoryList: The list of categories.
     * @param jwToken: The token of the user.
@@ -71,13 +88,48 @@ class Category {
       return new Promise(async (resolve, reject) => {
          try {
             const userData = await this._validateUserToken(jwToken);
-            if (validators.validateUndefined(userData) && userData[constants.ID] > 0) {
+            if (validators.validateUndefined(userData) && userData[constants.ID] > 0 &&
+               this._checkWhetherRoleExists(userData[constants.ROLES], constants.ROLE_VENDOR_ID)) {
                database.runSp(constants.SP_GET_CATEGORIES, [this._categoryId]).then(_resultSet => {
                   const result = _resultSet[0];
                   if (validators.validateUndefined(result)) {
                      resolve([constants.RESPONSE_SUCESS_LEVEL_1, result]);
                   } else {
                      resolve([constants.RESPONSE_SUCESS_LEVEL_1, []]);
+                  }
+               }).catch(err => {
+                  printer.printError(err);
+                  reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
+               });
+            } else {
+               reject([constants.ERROR_LEVEL_4, constants.FORBIDDEN_MESSAGE]);
+            }
+         } catch (e) {
+            printer.printError(e);
+            reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
+         }
+      });
+   }
+
+   /**
+    * Method to create the category attribute set.
+    * @param attributesList: The list of attributes.
+    * @param jwToken: The token of the user.
+    * @returns {Promise<Array>}:
+    */
+   createCategoryAttribute(attributesList, jwToken) {
+      return new Promise(async (resolve, reject) => {
+         try {
+            const userData = await this._validateUserToken(jwToken);
+            if (validators.validateUndefined(userData) && userData[constants.ID] > 0 &&
+               this._checkWhetherRoleExists(userData[constants.ROLES], constants.ROLE_VENDOR_ID)) {
+               database.runSp(constants.SP_CREATE_CATEGORY_ATTRIBUTES,
+                  [this._categoryId, JSON.stringify(attributesList), userData[constants.ID]]).then(_resultSet => {
+                  const result = _resultSet[0][0];
+                  if (validators.validateUndefined(result) && result[constants.ID] > 0) {
+                     resolve([constants.RESPONSE_SUCESS_LEVEL_1, result]);
+                  } else {
+                     resolve([constants.RESPONSE_SUCESS_LEVEL_1, {id: -1}]);
                   }
                }).catch(err => {
                   printer.printError(err);

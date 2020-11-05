@@ -50,6 +50,9 @@ handlerObj.category = (dataObject) => {
          case "category":
             promise = category.category(dataObject);
             break;
+         case "attribute":
+            promise = category.attributes(dataObject);
+            break;
          default:
             reject(responseGenerator.generateErrorResponse(constants.ERROR_MESSAGE, constants.ERROR_LEVEL_2));
       }
