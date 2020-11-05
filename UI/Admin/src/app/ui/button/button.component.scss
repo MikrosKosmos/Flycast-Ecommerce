@@ -1,0 +1,21 @@
+@import "../../../assets/mixins";
+@import "../../../assets/variable";
+@import "../../../assets/common";
+
+:host {
+  width: 100%;
+}
+.cmn_btn {
+  background: $info;
+  border: 1px solid $info;
+  @include border_radius(4px);
+  @extend .emp-btn;
+}
+button:disabled {
+  background-color: $button-deactivetae-color;
+  border: 1px solid $button-deactivetae-color;
+  cursor: not-allowed;
+  &:hover {
+    background: $button-deactivetae-color;
+  }
+}

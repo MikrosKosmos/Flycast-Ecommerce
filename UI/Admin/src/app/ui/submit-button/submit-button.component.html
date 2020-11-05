@@ -1,0 +1,9 @@
+<div class="submit_btn-area d-flex align-items-center justify-content-between">
+  <button id="{{submitIdentifier}}" class="cmn_btn w-100 mr-10" (click)="clickSubmit()">
+    submit
+  </button>
+  <button id="{{cancelIdentifier}}" class="cmn_btn cancel-btn w-100" *ngIf="isCancel" (click)="clickCancel()">
+    cancel
+  </button>
+</div>
+

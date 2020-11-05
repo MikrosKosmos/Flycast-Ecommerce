@@ -1,0 +1,27 @@
+<div *ngIf="data" class="workflow d-flex align-items-center">
+    <div *ngFor="let flow of data; let i = index" class="workflow_single" [ngClass]="{
+                    'workflow_done':flow.taskStatusName === 'FINISHED' || flow.taskStatusName === 'REJECTED' || flow.taskStatusName === 'UNCLAIMED',
+                    'workflow_active':flow.taskStatusName === 'ASSIGNED'
+                }">
+        <div class="workflow_single-no">
+            {{i+1}}
+            <span class="mark"><i class="fa fa-check" aria-hidden="true"></i></span>
+        </div>
+        <div class="workflow_single-cont d-flex align-items-center justify-content-between">
+            <p class="p-2">{{getLabelName(flow.assignedToType)}}</p>
+            <!--<i class="fa fa-info-circle" aria-hidden="true" title="{{flow.employeeName}} - {{flow.designation}}"></i> -->
+        </div>
+    </div>
+
+
+    <!--<div class="workflow_single completed">
+        <div class="workflow_single-no">
+            {{data.length + 1}}
+            <span class="mark"><i class="fa fa-check" aria-hidden="true"></i></span>
+        </div>
+        <div class="workflow_single-cont d-flex align-items-center justify-content-between">
+            <p>{{data.assignedToType}}</p>
+            <i class="fa fa-info" aria-hidden="true"></i>
+        </div>
+    </div>-->
+</div>

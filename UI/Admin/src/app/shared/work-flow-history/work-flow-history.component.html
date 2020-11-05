@@ -1,0 +1,21 @@
+<div class="bx-white mt-5">
+    <h3 class="block-heading audittrail-heding" [ngClass]="collapseState" data-toggle="collapse" data-target="#workflowHistory" aria-expanded="false" aria-controls="workflowHistory" (click)="toggleAuditTrail()">WorkFlow History<i class="pull-right fa" [ngClass]="collapseStateIcon"></i></h3>
+    <div class="collapse audittrail-tble" id="workflowHistory">
+        <div class="row text-center p-3" *ngIf="!commentHistory || commentHistory.length === 0">
+            <div class="col-md-12 col-lg-12 alert alert-info">
+                No Record Found.
+            </div>
+        </div>
+        <div class="row padding-workflow" *ngFor="let work of commentHistory">
+            <div class="col-lg-12 col-md-12 decorated font-6"><span><b>{{work.assignedToTypeDescription | uppercase}}</b></span>
+            </div>
+            <div class="col-lg-12 col-md-12 pl-5"><b class="font-5">Comment : </b> {{work.commentDetails}}</div>
+            <div class="col-lg-6 col-md-6 mt-3 pl-5 font-5">
+                <b>Action : </b> <span class="text-primary"><b>{{work.actionTaken}}</b></span>
+            </div>
+            <div class="col-lg-6 col-md-6 mt-3 font-5">
+                <b>Actor : </b> {{work.userActor === null ? '--': work.userActor}}, {{work.actorProfile === null ? '--' : work.actorProfile}}, {{work.createdOn === null ? '--' : work.createdOn.split('T')[0]}}
+            </div>
+        </div>
+    </div>
+</div>

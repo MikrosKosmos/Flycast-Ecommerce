@@ -1,0 +1,210 @@
+<section class="emp-container">
+
+    <!-- <section class="main"> -->
+
+    <section class="header">
+        <div class="bread-crumbs">
+            <i class="fa fa-home"></i> / View CES Request
+        </div>
+        <div class="row">
+            <div class="col-12 page-header">
+                <!-- <h2><strong>CES(N) New</strong> Request Form</h2> -->
+            </div>
+            <!-- <div class="col-6"></div> -->
+        </div>
+    </section>
+
+    <emp-work-flow-route-map [data]="workFlowRouteMapDetails"></emp-work-flow-route-map>
+
+
+    <article class="content">
+        <!---- CES View ---->
+        <div class="bx-white card px-4 py-4 clearfix">
+            <form [formGroup]="cesSupportForm">
+                <div class="form-row">
+                    <h3 class="block-heading mb-4  col-lg-12">Initiator Details</h3>
+                    <div class="col-lg-4 col-md-6">
+                        <emp-input-field [identifier]="'requestorName'" [placeholder]="'Enter Requestor Name'"
+                            [name]="'requestorName'" [form]="cesSupportForm" [readonly]="true">
+                            <label>Requester Name</label>
+                        </emp-input-field>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <emp-input-field [identifier]="'empCode'" [placeholder]="'Enter Employee Code'"
+                            [name]="'empCode'" [form]="cesSupportForm" [readonly]="true">
+                            <label>Employee Code</label>
+                        </emp-input-field>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <emp-input-field [identifier]="'department'" [placeholder]="'Enter Department'"
+                            [name]="'department'" [form]="cesSupportForm" [readonly]="true">
+                            <label>Department</label>
+                        </emp-input-field>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <emp-input-field [identifier]="'grade'" [placeholder]="'Enter Grade'" [name]="'grade'"
+                            [form]="cesSupportForm" [readonly]="true">
+                            <label>Grade</label>
+                        </emp-input-field>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <emp-input-field [identifier]="'requestorLocation'" [placeholder]="'Enter Requestor Location'"
+                            [name]="'requestorLocation'" [form]="cesSupportForm" [readonly]="true">
+                            <label>Requestor Location</label>
+                        </emp-input-field>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <!-- <emp-input-option-list [options]="data['tlName']" [form]="cesSupportForm"
+                            name="sanctioningAuhorityDisplayName">
+                            <label>Sanction Authority</label>
+                        </emp-input-option-list> -->
+
+                        <emp-input-field [identifier]="'recommendingAuhorityDisplayName'"
+                            [name]="'recommendingAuhorityDisplayName'" [form]="cesSupportForm" [readonly]="true">
+                            <label>Team Leader/Plant Manager</label>
+                        </emp-input-field>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <emp-input-field [identifier]="'mobileNo'" [placeholder]="'Enter Mobile Number'"
+                            [name]="'mobileNo'" [form]="cesSupportForm" [readonly]="true">
+                            <label>Mobile Number</label>
+                        </emp-input-field>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <emp-input-field [identifier]="'contactNo'" [placeholder]="'Enter Contact / Ext No'"
+                            [name]="'contactNo'" [form]="cesSupportForm" [readonly]="true">
+                            <label>Contact / Ext No</label>
+                        </emp-input-field>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <emp-input-field [identifier]="'serviceCategoryDisplayName'"
+                            [placeholder]="'Enter Contact / Ext No'" [name]="'serviceCategoryDisplayName'"
+                            validation="true" [form]="cesSupportForm" required="required" [readonly]="true">
+                            <label>Service Category</label>
+                        </emp-input-field>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <emp-input-field [identifier]="'serviceSubCategoryDisplayName'"
+                            [placeholder]="'Enter Contact / Ext No'" [name]="'serviceSubCategoryDisplayName'"
+                            validation="true" [form]="cesSupportForm" required="required" [readonly]="true">
+                            <label>Service SubCategory</label>
+                        </emp-input-field>
+                    </div>
+                    <div class="col-md-12"></div>
+                    <div class="col-md-6">
+                        <emp-textarea-field [identifier]="'justification'" [placeholder]="'Enter Justification'"
+                            [name]="'justification'" [form]="cesSupportForm" [readonly]="true">
+                            <label>Justification</label>
+                        </emp-textarea-field>
+                    </div>
+                    <div class="col-md-6">
+                        <emp-textarea-field [identifier]="'requirement'" [placeholder]="'Enter Requirement'"
+                            [name]="'requirement'" [form]="cesSupportForm" [readonly]="true">
+                            <label>Requirement</label>
+                        </emp-textarea-field>
+                    </div>
+
+                    <h3 class="block-heading col-lg-12 mb-4 mt-3">Files</h3>
+                    <ng-container *ngIf="files">
+                        <div class="col-md-3 mt-4" *ngFor="let file of files">
+                            <ul class="upload-file">
+                                <li> <a href="https://i5usnlk1nj.execute-api.us-east-1.amazonaws.com/qa/cescontroller/attachment?filename={{file.fileName}}"
+                                        download="{{file.fileName}}" target="_blank">{{file.fileName}}</a></li>
+                            </ul>
+
+                        </div>
+                    </ng-container>
+                </div>
+            </form>
+        </div>
+
+    </article>
+
+    <article>
+        <div class="bx-white card px-4 py-4 my-3 clearfix">
+
+            <div class="form-row">
+
+                <h3 class="block-heading col-lg-12 mb-4 ">Workflow History</h3>
+                <!-- <ng-container *ngFor="let wfInstance of workFlowDetails"> -->
+                <div class="row divWorkFlowHistoryList mt-3" *ngFor="let wfInstance of workFlowDetails">
+                    <h3 class="block-heading col-lg-12 mb-4">{{wfInstance.sectionHeading}}</h3>
+                    <div class="col-lg-12 mt-3">
+                        <label><strong>Comment :</strong> </label> {{wfInstance.comment}}
+                    </div>
+                    <div class="col-lg-4 mt-3">
+                        <label><strong>Action : </strong> </label> <strong style="color:#1a45a2">
+                            {{wfInstance.action}}</strong>
+                    </div>
+                    <div class="col-lg-8 mt-3">
+                        <label><strong>Actor : </strong></label> {{wfInstance.name}} , {{wfInstance.designation}} on
+                        {{wfInstance.createdOn | date: 'MMM d, y, h:mm a'}}
+                    </div>
+                </div>
+
+                <!-- <div class="col-lg-6">
+                        <label>Designation</label>: {{wfInstance.designation}}
+                    </div> -->
+                <!-- <div class="col-lg-12">
+                        <hr>
+                    </div> -->
+
+                <!-- </ng-container> -->
+            </div>
+        </div>
+    </article>
+
+    <article>
+        <div class="bx-white card px-4 py-4 my-3 clearfix">
+            <form [formGroup]="cesLeaderSupportForm">
+
+                <div class="form-row">
+
+                    <h3 class="block-heading col-lg-12 mb-4 ">User Team Leader Support</h3>
+
+                    <div class="col-lg-6">
+
+                        <emp-textarea-field [identifier]="'comment'" [placeholder]="'Enter Comment'" [name]="'comment'"
+                            validation="true" [form]="cesLeaderSupportForm" required="required">
+                            <label>Comments</label>
+                        </emp-textarea-field>
+
+                    </div>
+
+                    <div class="col-lg-12"></div>
+
+                    <div class="col-lg-4 col-md-6">
+
+                        <!-- <input type="text" class="form-control" id="EmployeeCode" aria-describedby="EmployeeCode"
+                                value="Mr. Anirban Basu" readonly> -->
+                        <!-- <emp-input-field [identifier]="supportPerson" 
+                                [name]="supportPerson" [form]="cesSupportForm"
+                                [readonly]="true">
+                                <label>Proposed By</label>
+                            </emp-input-field> -->
+
+                    </div>
+
+                    <div class="text-center col-md-12  mt-4 btn-wrap">
+
+                        <!-- <button type="button" class="btn btn-Draft">Reject</button>
+
+                        <button type="button" class="btn btn-Submit mx-1">Support</button> -->
+
+                        <button type="button" class="btn btn-Draft col-x btn-sm">Reject</button>
+                        <button type="button" class="btn btn-Submit mx-1 btn-sm" (mousedown)="submitCesSupport()"
+                            [disabled]="cesLeaderSupportForm.invalid">Support</button>
+
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+
+        <emp-audit-trail *ngIf="taskId" [fromId]="'1'" [taskId]="taskId"></emp-audit-trail>
+    </article>
+
+    <!-- </section> -->
+
+</section>

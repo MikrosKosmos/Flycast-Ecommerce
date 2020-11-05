@@ -1,0 +1,27 @@
+<section class="main_layout-area d-flex">
+    <input type="checkbox" class="navigation__checkbox" id="navi-toggle" />
+    <label for="navi-toggle" class="navigation__button">
+        <span class="navigation_icon">
+            &nbsp;
+        </span>
+    </label>
+    <div class="navigation__nav">
+        <emp-navbar></emp-navbar>
+    </div>
+    <div class="main_body">
+        <div class="top_bar-area">
+            <emp-topbar></emp-topbar>
+        </div>
+        <!-- <div class="main_view">
+            <div class="main_view-cont"> -->
+        <div class="main">
+            <router-outlet></router-outlet>
+        </div>
+
+        <!-- </div>
+        </div> -->
+        <div class="footer_area">
+            <emp-footer></emp-footer>
+        </div>
+    </div>
+</section>

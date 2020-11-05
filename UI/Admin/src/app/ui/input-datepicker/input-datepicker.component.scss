@@ -1,0 +1,14 @@
+@import "../../../assets/mixins";
+@import "../../../assets/variable";
+
+label{
+    font-size: 1.4rem !important;
+    margin-bottom: .5rem;
+    line-height: 1;
+    color: $black;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+span.required-icon{
+    color:red;
+}

@@ -1,0 +1,27 @@
+<div class="cmn_auth" style="background: #e4e5e6;">
+    <div class="w-100 h-100 d-flex align-items-center justify-content-center flex-column">
+        <div class="cmn_auth-form d-flex align-items-center justify-content-center flex-column border shadow-sm">
+            <form [formGroup]="loginForm" class="w-100">
+                <div class="w-100 cmn_auth-heading text-center" style="font-family: 'Roboto', sans-serif">
+                    Login to your account
+                </div>
+                <div class="alert alert-danger text-center" role="alert" *ngIf="errorMessage && errorMessage !=''">
+                    {{errorMessage}}
+                </div>
+                <emp-input-field [identifier]="'loginUsername'" [placeholder]="'Username'" [name]="'username'"
+                    validation="true" [form]="loginForm">
+                </emp-input-field>
+                <emp-input-field [identifier]="'loginPass'" [placeholder]="'Password'" [name]="'password'"
+                    validation="true" type="password" [form]="loginForm">
+                </emp-input-field>
+                <div class="mt-3">
+                    <emp-button [identifier]="'submitLogin'" (buttonClicked)="onSubmitLogin()" class="mt-3">
+                        Login</emp-button>
+                </div>
+            </form>
+            <div class="register text-center mt-15">
+            </div>
+            <a routerLink="/auth/reset-password" class="text-color font-weight-bold">forget password ?</a>
+        </div>
+    </div>
+</div>

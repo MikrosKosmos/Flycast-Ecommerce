@@ -1,0 +1,19 @@
+<label>
+    <ng-content></ng-content><span class="required-icon" *ngIf="required"> *</span>
+  </label>
+
+<div class="form_warpper w-100">
+    <span class="inputfield_icon"></span>
+    <!------ [formControl]="loginForm.controls['email']" ------>
+    <input id="{{identifier}}" [formControl]="form.controls[name]" name="{{name}}" type="date" [placeholder]="readonly ? '' : placeholder" [autofocus]="autofocus ? 'autofocus' : null" required="{{required}}" [ngModel]="defaultValue" (ngModelChange)="ngModelChange($event)"
+        [readonly]="readonly" [min]="min" [max]="max" />
+    <!-- <ng-datepicker [(ngModel)]="date" /> -->
+    <!-- <ng-datepicker [formControl]="form.controls[name]"  /> -->
+
+    <!-- <dp-date-picker 
+    [formControl]="form.controls[name]"
+    ></dp-date-picker> -->
+    <!-- <input name="someName" [formControl]="form.controls[name]" [dpDayPicker]="config" /> -->
+
+    <emp-input-validation *ngIf="validation" [formInput]="form.controls[name]" [name]="name"></emp-input-validation>
+</div>

@@ -1,0 +1,39 @@
+@import "../../../assets/mixins";
+@import "../../../assets/variable";
+
+label {
+  font-size: 1.4rem !important;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+  color: $black;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+.form_warpper {
+  margin-bottom: 1rem;
+  input {
+    width: 100%;
+    height: 3.8rem;
+    padding: 5px 15px;
+    @include border_radius(3px);
+    border: 1px solid $nav-text-color;
+    background: $light-grey;
+    font-size: 11px;
+    font-family: "sinkin_sans400_regular";
+
+    &:focus {
+      box-shadow: none;
+      border: 1px solid rgb(4, 167, 216);
+      outline: 0;
+    }
+  }
+}
+input.ng-invalid.ng-touched {
+  border: 1px solid $danger;
+}
+input.ng-valid {
+  border: 1px solid $success !important;
+}
+span.required-icon {
+  color: red;
+}

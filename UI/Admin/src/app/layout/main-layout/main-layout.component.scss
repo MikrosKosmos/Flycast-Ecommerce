@@ -1,0 +1,27 @@
+@import "../../../assets/common";
+@import "../../../assets/variable";
+@import "../../../assets/responsive";
+.topbar_area {
+    height: 75px;
+}
+
+.main_body {
+    margin-left: 220px;
+    width: calc(100% - 220px);
+    transition: .3s;
+    min-height: 100vh;
+    .main_view {
+        padding: 0 15px 15px 15px;
+        // min-height: 600px
+        // min-height: 100vh;
+    }
+    @media #{$tab} {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+.top_bar-area {
+    @extend .sticky_position;
+    background: $nav-bg-color;
+}

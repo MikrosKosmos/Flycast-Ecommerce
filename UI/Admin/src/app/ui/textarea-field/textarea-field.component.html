@@ -1,0 +1,15 @@
+<label>
+    <ng-content></ng-content><span class="required-icon" *ngIf="required"> *</span>
+</label>
+<div class="field__wrapper" *ngIf="!maxLength">
+    <textarea name="{{name}}" [formControl]="form.controls[name]" (ngModelChange)="changeText($event)" id={{identifier}} [placeholder]="readonly ? '' : placeholder" [autofocus]="autofocus ? 'autofocus' : null" required="{{required}}" [readonly]="readonly">
+    </textarea>
+    <emp-input-validation *ngIf="validation" [formInput]="form.controls[name]" [name]="name"></emp-input-validation>
+</div>
+
+<div class="field__wrapper" *ngIf="maxLength">
+    <textarea name="{{name}}" [formControl]="form.controls[name]" (ngModelChange)="changeText($event)" id={{identifier}} [placeholder]="readonly ? '' : placeholder" [autofocus]="autofocus ? 'autofocus' : null" required="{{required}}" [readonly]="readonly"
+        [maxLength]="maxLength">
+    </textarea>
+    <emp-input-validation *ngIf="validation" [formInput]="form.controls[name]" [name]="name"></emp-input-validation>
+</div>

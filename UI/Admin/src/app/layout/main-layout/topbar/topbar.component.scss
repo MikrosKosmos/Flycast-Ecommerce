@@ -1,0 +1,106 @@
+@import "../../../../assets/variable";
+@import "../../../../assets/responsive";
+.top_bar {
+  padding: 0.75rem 2rem 0.75rem 2rem;
+  @media #{$mini-tab} {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+}
+
+.mobile_topbar {
+  &-cont {
+    margin: 0;
+    padding: 0.75rem 2rem 0.75rem 2rem;
+    background: $white;
+    .logo img {
+      height: 40px;
+    }
+  }
+  display: none !important;
+  @media #{$tab} {
+    display: block !important;
+  }
+  .hamb {
+    position: relative;
+    right: 0;
+    margin: 0;
+    a {
+      border-radius: 0;
+      box-shadow: none;
+    }
+  }
+}
+
+.profile_dropdown {
+  position: absolute;
+  top: 52px;
+  right: 0;
+  background: $white;
+  padding: 10px;
+  min-width: 255px;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  transition: 0.5s;
+  &.close_menu {
+    transform: scale(0);
+    opacity: 0;
+    visibility: hidden;
+    transform-origin: top right;
+  }
+  &.open_menu {
+    transform: scale(1);
+    opacity: 1;
+    visibility: visible;
+    transform-origin: top right;
+  }
+  ul {
+    margin-bottom: 0px;
+    li {
+      line-height: 1;
+      a {
+        padding: 9px 0;
+        font-size: 13px;
+        color: #676767;
+        border-bottom: 1px solid #ddd;
+        display: block;
+        text-decoration: none;
+        font-style: normal;
+        text-transform: capitalize;
+        letter-spacing: 0.5px;
+        border-top: 1px solid #ddd;
+        margin-bottom: 10px;
+        &:hover {
+          color: $header_color;
+        }
+      }
+      p {
+        font-family: sinkin_sans600_semibold;
+        font-size: 13px;
+        font-style: normal;
+        margin-bottom: 10px;
+      }
+      span {
+        font-family: sinkin_sans400_regular;
+        font-size: 10px;
+        font-style: normal;
+        color: #676767;
+        margin-bottom: 25px;
+        display: block;
+      }
+    }
+  }
+}
+
+.profile_btn {
+  line-height: 1;
+  width: 100%;
+  padding: 9px 10px;
+  border-radius: 4px;
+  color: #fff;
+  font-family: sinkin_sans500_medium;
+  text-transform: uppercase;
+  background: $info;
+  border: 1px solid $info;
+  font-size: 11px;
+}

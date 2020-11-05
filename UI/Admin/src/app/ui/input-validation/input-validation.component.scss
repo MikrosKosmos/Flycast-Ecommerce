@@ -1,0 +1,13 @@
+@import "../../../assets/variable";
+.forminput__error {
+    color: $danger;
+    margin-bottom: 0;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+// @-webkit-keyframes example{
+//     0%   {transform: translateY(-17px);}
+//   50% {transform: translateY(-10px);}
+//   100% {transform: translateY(-3px);}
+// }

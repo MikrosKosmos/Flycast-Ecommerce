@@ -1,0 +1,46 @@
+@import "../../../assets/mixins";
+@import "../../../assets/variable";
+label{
+    font-size: 1.4rem !important;
+    margin-bottom: .5rem;
+    line-height: 1;
+    color: $black;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+.select_option{
+    position: relative;
+    .form-control{
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        appearance: none;
+        height: 35px;
+        font-size: 1.2rem;
+        border: 1px solid $light-grey;
+        background: $light-grey;
+        color: $black;
+        @include border_radius(3px);
+        &:focus{
+            box-shadow: none;
+            border:1px solid rgb(4, 167, 216);
+        }
+    }
+    margin-bottom: 1rem;
+    &::after{
+        position: absolute;
+        top: 15px;
+        right:13px;
+        content: "";
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 6px 4px 0 4px;
+        border-color: $black transparent transparent transparent;
+    }
+    
+}
+span.required-icon{
+    color:red;
+}

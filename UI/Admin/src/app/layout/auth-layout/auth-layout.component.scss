@@ -1,0 +1,29 @@
+.auth {
+  &_header {
+    height: 7rem;
+    border-bottom: 1px solid #ccc;
+    padding: 1rem 3%;
+    background: #fff;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16),
+      0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    position: relative;
+    z-index: 9;
+  }
+  &_logo {
+    img {
+      height: 60px;
+      max-width: 100%;
+    }
+  }
+  &_area {
+    // height: 100%;
+    // width: 100%;
+    background-color: #fff;
+    // height: calc(100% - 110px);
+  }
+}
+.auth_area {
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+}
