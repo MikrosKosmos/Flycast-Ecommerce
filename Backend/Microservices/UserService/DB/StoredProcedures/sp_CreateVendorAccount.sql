@@ -8,6 +8,7 @@ begin
         select id into @roleId from tbl_RoleMaster where role_name = 'Vendor';
         insert into tbl_UserRoleMapping (user_id, role_id, role_status, created_by)
             value (parUserId, @roleId, 3, parUserId);
+        update tbl_UserMaster set modified_by=parUserId, modified=now() where id = parUserId;
         select last_insert_id() as id;
     else
         select -1 as id;
