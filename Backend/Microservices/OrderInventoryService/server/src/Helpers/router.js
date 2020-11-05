@@ -1,7 +1,8 @@
 const handlers = require('./../Handlers');
 const validator = require('validatorswithgenerators').validators;
 const routes = {
-   "attribute": handlers.attribute
+   "attribute": handlers.attribute,
+   "category": handlers.category
 };
 
 const path = {};
