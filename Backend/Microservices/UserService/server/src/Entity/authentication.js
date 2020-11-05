@@ -77,14 +77,24 @@ class Authentication {
     * @returns {Promise<Array>}:
     */
    validateUserToken(jwToken) {
-      return new Promise((resolve, reject) => {
-         const userData = validateToken(jwToken);
-         if (validators.validateUndefined(userData)) {
-            userData[constants.IS_VALID] = 1
-            resolve([constants.RESPONSE_SUCESS_LEVEL_1, userData]);
-         } else {
-            userData[constants.IS_VALID] = -1;
-            resolve([constants.RESPONSE_SUCESS_LEVEL_1, {id: -1}]);
+      return new Promise(async (resolve, reject) => {
+         try {
+            const userData = validateToken(jwToken);
+            if (validators.validateUndefined(userData)) {
+               const User = require("./users");
+               const user = new User(userData[constants.ID], false,
+                  false, false, false, false, jwToken);
+               const userDetails = await user.getUserDetails();
+               userData[constants.ROLES] = userDetails[1][constants.ROLES];
+               userData[constants.IS_VALID] = 1
+               resolve([constants.RESPONSE_SUCESS_LEVEL_1, userData]);
+            } else {
+               userData[constants.IS_VALID] = -1;
+               resolve([constants.RESPONSE_SUCESS_LEVEL_1, {id: -1}]);
+            }
+         } catch (e) {
+            printer.printError(e);
+            reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
          }
       });
    }
