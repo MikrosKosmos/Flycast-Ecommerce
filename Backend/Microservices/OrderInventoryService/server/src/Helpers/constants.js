@@ -160,6 +160,8 @@ constants.USER_SERVICE_VALIDATE_TOKEN_PATH = "/auth/token";
 constants.SP_CHECK_API_TOKEN = "sp_CheckApiToken";
 constants.SP_LOG_API_STATUS = "sp_LogApiStatus";
 constants.SP_CREATE_ATTRIBUTE = "sp_CreateAttribute";
+constants.SP_CREATE_CATEGORY = "sp_CreateCategory";
+constants.SP_GET_CATEGORIES = "sp_GetCategories";
 
 /**
  * Column Names
@@ -173,6 +175,8 @@ constants.ID = "id";
 constants.IS_VALID = "isValid";
 
 constants.ATTRIBUTES = "attributes";
+constants.CATEGORIES = "categories";
+constants.CATEGORY_ID = "category_id";
 
 
 /**

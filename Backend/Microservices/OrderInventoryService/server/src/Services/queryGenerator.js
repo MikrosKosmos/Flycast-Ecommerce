@@ -10,7 +10,7 @@ const queryGenerator = {};
 queryGenerator.generateSPQuery = (spName, params) => {
    if (validators.validateString(spName)) {
       let query = "CALL " + spName;
-      if (params.length > 0) {
+      if (params.length > 0 && validators.validateArray(params)) {
          params = params.filter((data) => {
             return data !== undefined;
          });

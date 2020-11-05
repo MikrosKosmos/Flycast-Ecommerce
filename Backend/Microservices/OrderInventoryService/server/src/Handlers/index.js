@@ -4,6 +4,7 @@ const generator = require("validatorswithgenerators").generators;
 const constants = require("./../Helpers/constants");
 const responseGenerator = require("./../Services/responseGenerator");
 const attribute = require("./attribute");
+const category = require("./category");
 
 /**
  * Method to handle the Error path requests.
@@ -26,6 +27,28 @@ handlerObj.attribute = (dataObject) => {
       switch (dataObject.path) {
          case "attribute":
             promise = attribute.attribute(dataObject);
+            break;
+         default:
+            reject(responseGenerator.generateErrorResponse(constants.ERROR_MESSAGE, constants.ERROR_LEVEL_2));
+      }
+      promise.then(data => {
+         resolve(data);
+      }).catch(err => {
+         reject(err);
+      });
+   });
+};
+/**
+ * Method to handle the category first path requests.
+ * @param dataObject: The request object.
+ * @returns {Promise<Array>}:
+ */
+handlerObj.category = (dataObject) => {
+   return new Promise((resolve, reject) => {
+      let promise;
+      switch (dataObject.path) {
+         case "category":
+            promise = category.category(dataObject);
             break;
          default:
             reject(responseGenerator.generateErrorResponse(constants.ERROR_MESSAGE, constants.ERROR_LEVEL_2));
