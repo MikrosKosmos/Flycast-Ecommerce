@@ -5,6 +5,7 @@ const constants = require("./../Helpers/constants");
 const responseGenerator = require("./../Services/responseGenerator");
 const attribute = require("./attribute");
 const category = require("./category");
+const sku = require("./sku");
 
 /**
  * Method to handle the Error path requests.
@@ -52,6 +53,28 @@ handlerObj.category = (dataObject) => {
             break;
          case "attribute":
             promise = category.attributes(dataObject);
+            break;
+         default:
+            reject(responseGenerator.generateErrorResponse(constants.ERROR_MESSAGE, constants.ERROR_LEVEL_2));
+      }
+      promise.then(data => {
+         resolve(data);
+      }).catch(err => {
+         reject(err);
+      });
+   });
+};
+/**
+ * Method to handle the SKU requests.
+ * @param dataObject: The request object.
+ * @returns {Promise<Array>}:
+ */
+handlerObj.sku = (dataObject) => {
+   return new Promise((resolve, reject) => {
+      let promise;
+      switch (dataObject.path) {
+         case "sku":
+            promise = sku.sku(dataObject);
             break;
          default:
             reject(responseGenerator.generateErrorResponse(constants.ERROR_MESSAGE, constants.ERROR_LEVEL_2));

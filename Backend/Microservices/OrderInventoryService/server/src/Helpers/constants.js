@@ -166,6 +166,8 @@ constants.SP_CREATE_CATEGORY_ATTRIBUTES = "sp_CreateCategoryAttributes";
 constants.SP_GET_CATEGORY_ATTRIBUTES = "sp_GetCategoryAttribute";
 constants.SP_GET_ATTRIBUTE_POSSIBLE_VALUES = "sp_GetAttributePossibleValues";
 constants.SP_CREATE_ATTRIBUTE_POSSIBLE_VALUES = "sp_CreateAttributePossibleValues";
+constants.SP_CREATE_SKU = "sp_CreateSKU";
+constants.SP_GET_SKU = "sp_GetSKUs";
 
 /**
  * Column Names
@@ -185,6 +187,13 @@ constants.CATEGORIES = "categories";
 constants.CATEGORY_ID = "category_id";
 constants.ATTRIBUTE_ID = "attribute_id";
 constants.ATTRIBUTE_VALUES = "attribute_values";
+constants.SKU = "sku";
+constants.BRAND = "brand";
+constants.MODEL = "model";
+constants.COLOR = "color";
+constants.PRODUCT_GRADE = "product_grade";
+constants.STORAGE = "storage";
+constants.PARENT_CATEGORY = "parent_category";
 
 
 /**

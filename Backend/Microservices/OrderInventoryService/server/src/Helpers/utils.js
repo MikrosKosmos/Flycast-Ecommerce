@@ -1,5 +1,6 @@
 const utilsHandler = {};
 const constants = require("./constants");
+const tokenValidator = require("./tokenValidator");
 /**
  * Method to check whether the user has permission for particular role.
  * @param roleId: The role id to check for.
@@ -15,6 +16,20 @@ utilsHandler.checkWhetherRoleExists = (userRoles, roleId) => {
    }
    return false;
 };
+/**
+ * Method to validate the user token.
+ * @param userToken: The token to be validated.
+ * @returns {Promise<Object>}: the user data.
+ */
+utilsHandler.validateUserToken = (userToken) => {
+   return new Promise((resolve, reject) => {
+      tokenValidator.validateToken(userToken).then(userData => {
+         resolve(userData);
+      }).catch(err => {
+         reject(err);
+      });
+   });
+}
 /**
  * Exporting the util handler.
  */

@@ -15,22 +15,6 @@ class Attribute {
    }
 
    /**
-    * Method to validate the user token.
-    * @param userToken: The token to be validated.
-    * @returns {Promise<Object>}: the user data.
-    * @private
-    */
-   _validateUserToken(userToken) {
-      return new Promise((resolve, reject) => {
-         tokenValidator.validateToken(userToken).then(userData => {
-            resolve(userData);
-         }).catch(err => {
-            reject(err);
-         });
-      });
-   }
-
-   /**
     * Method to create attribute.
     * @param attributeLists: The array containing the attribute lists.
     * @param jwToken: the user token.
@@ -39,7 +23,7 @@ class Attribute {
    createAttribute(attributeLists, jwToken) {
       return new Promise(async (resolve, reject) => {
          try {
-            const userData = await this._validateUserToken(jwToken);
+            const userData = await utils.validateUserToken(jwToken);
             if (validators.validateUndefined(userData) &&
                utils.checkWhetherRoleExists(userData[constants.ROLES], constants.ROLE_VENDOR_ID)) {
                const userId = userData[constants.ID];
@@ -73,7 +57,7 @@ class Attribute {
    getAttributesByCategoryId(categoryId, jwToken) {
       return new Promise(async (resolve, reject) => {
          try {
-            const userData = await this._validateUserToken(jwToken);
+            const userData = await utils.validateUserToken(jwToken);
             if (validators.validateUndefined(userData) && userData[constants.ID] > 0) {
                database.runSp(constants.SP_GET_CATEGORY_ATTRIBUTES, [categoryId]).then(_resultSet => {
                   const result = _resultSet[0];
@@ -104,7 +88,7 @@ class Attribute {
    getPossibleValues(jwToken) {
       return new Promise(async (resolve, reject) => {
          try {
-            const userData = await this._validateUserToken(jwToken);
+            const userData = await utils.validateUserToken(jwToken);
             if (validators.validateUndefined(userData) && userData[constants.ID] > 0) {
                database.runSp(constants.SP_GET_ATTRIBUTE_POSSIBLE_VALUES, [this._attributeId]).then(_resultSet => {
                   const result = _resultSet[0];
@@ -136,7 +120,7 @@ class Attribute {
    createPossibleValues(valueList, jwToken) {
       return new Promise(async (resolve, reject) => {
          try {
-            const userData = await this._validateUserToken(jwToken);
+            const userData = await utils.validateUserToken(jwToken);
             if (validators.validateUndefined(userData) &&
                userData[constants.ID] > 0 && utils.checkWhetherRoleExists(userData[constants.ROLES], constants.ROLE_VENDOR_ID)) {
                database.runSp(constants.SP_CREATE_ATTRIBUTE_POSSIBLE_VALUES, [this._attributeId,

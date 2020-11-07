@@ -15,22 +15,6 @@ class Category {
    }
 
    /**
-    * Method to validate the user token.
-    * @param userToken: The token to be validated.
-    * @returns {Promise<Object>}: the user data.
-    * @private
-    */
-   _validateUserToken(userToken) {
-      return new Promise((resolve, reject) => {
-         tokenValidator.validateToken(userToken).then(userData => {
-            resolve(userData);
-         }).catch(err => {
-            reject(err);
-         });
-      });
-   }
-
-   /**
     * Method to create a category.
     * @param categoryList: The list of categories.
     * @param jwToken: The token of the user.
@@ -39,7 +23,7 @@ class Category {
    createCategory(categoryList, jwToken) {
       return new Promise(async (resolve, reject) => {
          try {
-            const userData = await this._validateUserToken(jwToken);
+            const userData = await utils.validateUserToken(jwToken);
             if (validators.validateUndefined(userData) &&
                utils.checkWhetherRoleExists(userData[constants.ROLES], constants.ROLE_VENDOR_ID)) {
                database.runSp(constants.SP_CREATE_CATEGORY,
@@ -72,7 +56,7 @@ class Category {
    getCategory(jwToken) {
       return new Promise(async (resolve, reject) => {
          try {
-            const userData = await this._validateUserToken(jwToken);
+            const userData = await utils.validateUserToken(jwToken);
             if (validators.validateUndefined(userData) && userData[constants.ID] > 0 &&
                utils.checkWhetherRoleExists(userData[constants.ROLES], constants.ROLE_VENDOR_ID)) {
                database.runSp(constants.SP_GET_CATEGORIES, [this._categoryId]).then(_resultSet => {
@@ -105,7 +89,7 @@ class Category {
    createCategoryAttribute(attributesList, jwToken) {
       return new Promise(async (resolve, reject) => {
          try {
-            const userData = await this._validateUserToken(jwToken);
+            const userData = await utils.validateUserToken(jwToken);
             if (validators.validateUndefined(userData) && userData[constants.ID] > 0 &&
                utils.checkWhetherRoleExists(userData[constants.ROLES], constants.ROLE_VENDOR_ID)) {
                database.runSp(constants.SP_CREATE_CATEGORY_ATTRIBUTES,
