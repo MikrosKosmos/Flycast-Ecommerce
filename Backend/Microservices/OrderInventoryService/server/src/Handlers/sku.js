@@ -45,7 +45,7 @@ skuHandler.sku = (dataObject) => {
             dataObject.postData[constants.PARENT_CATEGORY] : false;
          const jwToken = validators.validateString(dataObject[constants.JW_TOKEN]) ?
             dataObject[constants.JW_TOKEN] : false;
-         if (brand && model && color && grade && storage && parentCategory && jwToken) {
+         if (brand && model && color && grade && parentCategory && jwToken) {
             const sku = new Sku(brand, model, color, grade, storage, parentCategory, false);
             sku.createSku(jwToken).then(response => {
                resolve(responseGenerator.generateResponse(response[1], response[0]));

@@ -3,7 +3,8 @@ const validator = require('validatorswithgenerators').validators;
 const routes = {
    "attribute": handlers.attribute,
    "category": handlers.category,
-   "sku": handlers.sku
+   "sku": handlers.sku,
+   "cart": handlers.cart
 };
 
 const path = {};

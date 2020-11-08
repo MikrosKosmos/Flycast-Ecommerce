@@ -168,6 +168,8 @@ constants.SP_GET_ATTRIBUTE_POSSIBLE_VALUES = "sp_GetAttributePossibleValues";
 constants.SP_CREATE_ATTRIBUTE_POSSIBLE_VALUES = "sp_CreateAttributePossibleValues";
 constants.SP_CREATE_SKU = "sp_CreateSKU";
 constants.SP_GET_SKU = "sp_GetSKUs";
+constants.SP_GET_CART_DETAILS = "sp_GetCartDetails";
+constants.SP_CREATE_UPDATE_CART = "sp_CreateUpdateCart";
 
 /**
  * Column Names
@@ -194,6 +196,7 @@ constants.COLOR = "color";
 constants.PRODUCT_GRADE = "product_grade";
 constants.STORAGE = "storage";
 constants.PARENT_CATEGORY = "parent_category";
+constants.QUANTITY = "quantity";
 
 
 /**

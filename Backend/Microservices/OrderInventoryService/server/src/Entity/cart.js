@@ -4,42 +4,34 @@ const validators = require("validatorswithgenerators").validators;
 const printer = require("./../Helpers/printer");
 const utils = require("./../Helpers/utils");
 
-class SKU {
+class Cart {
    /**
     *
-    * @param brand
-    * @param model
-    * @param color
-    * @param grade
-    * @param storage
-    * @param parentCategory
+    * @param cartId
     * @param sku
+    * @param quantity
     */
-   constructor(brand, model, color, grade, storage, parentCategory, sku) {
-      this._brand = validators.validateString(brand) ? brand : false;
-      this._model = validators.validateString(model) ? model : false;
-      this._color = validators.validateString(color) ? color : false;
-      this._grade = validators.validateString(grade) ? grade : false;
-      this._storage = validators.validateString(storage) ? storage : false;
-      this._parentCategory = validators.validateNumber(parentCategory) ? parentCategory : false;
+   constructor(cartId, sku, quantity) {
+      this._cartId = validators.validateNumber(cartId) ? cartId : false;
       this._sku = validators.validateString(sku) ? sku : false;
+      this._quantity = validators.validateNumber(quantity) ? quantity : false;
    }
 
    /**
-    * Method to create the SKU.
-    * @param jwToken: The token of the vendor user.
+    * Method to create or update the cart details for a user.
+    * @param jwToken: The user token.
     * @returns {Promise<Array>}:
     */
-   createSku(jwToken) {
+   createOrUpdate(jwToken) {
       return new Promise(async (resolve, reject) => {
          try {
             const userData = await utils.validateUserToken(jwToken);
             if (validators.validateUndefined(userData) && userData[constants.ID] > 0 &&
-               utils.checkWhetherRoleExists(userData[constants.ROLES], constants.ROLE_VENDOR_ID)) {
-               database.runSp(constants.SP_CREATE_SKU, [this._brand, this._model, this._color,
-                  this._grade, this._storage, this._parentCategory, userData[constants.ID]]).then(_resultSet => {
+               utils.checkWhetherRoleExists(userData[constants.ROLES], constants.ROLE_CUSTOMER_ID)) {
+               database.runSp(constants.SP_CREATE_UPDATE_CART, [userData[constants.ID],
+                  this._sku, this._quantity]).then(_resultSet => {
                   const result = _resultSet[0][0];
-                  if (validators.validateUndefined(result)) {
+                  if (validators.validateUndefined(result) && result[constants.ID] > 0) {
                      resolve([constants.RESPONSE_SUCESS_LEVEL_1, result]);
                   } else {
                      resolve([constants.RESPONSE_SUCESS_LEVEL_1, {id: -1}]);
@@ -59,16 +51,16 @@ class SKU {
    }
 
    /**
-    * Method to get the SKU.
+    * Method to get the cart details for a user.
     * @param jwToken: The token of the user.
     * @returns {Promise<Array>}:
     */
-   getSku(jwToken) {
+   getCartDetails(jwToken) {
       return new Promise(async (resolve, reject) => {
          try {
             const userData = await utils.validateUserToken(jwToken);
             if (validators.validateUndefined(userData) && userData[constants.ID] > 0) {
-               database.runSp(constants.SP_GET_SKU, [this._sku, this._brand, this._model]).then(_resultSet => {
+               database.runSp(constants.SP_GET_CART_DETAILS, [userData[constants.ID]]).then(_resultSet => {
                   const result = _resultSet[0];
                   if (validators.validateUndefined(result)) {
                      resolve([constants.RESPONSE_SUCESS_LEVEL_1, result]);
@@ -91,6 +83,6 @@ class SKU {
 }
 
 /**
- * Exporting the SKUs.
+ * Exporting the Cart Class.
  */
-module.exports = SKU;
+module.exports = Cart;
