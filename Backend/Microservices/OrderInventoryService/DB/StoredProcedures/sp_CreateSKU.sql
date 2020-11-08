@@ -10,7 +10,7 @@ begin
         set @sku = '';
         #Checking if all the valid details are present.
         if length(parBrand) > 0 and length(parModel) > 0 and length(parColor) > 0 and length(parGrade) > 0 then
-            set @sku = concat('FC-', parBrand, '-', parModel, '-', parColor, '-', parGrade);
+            set @sku = concat('FC-', lower(parBrand), '-', lower(parModel), '-', lower(parColor), '-', lower(parGrade));
             if length(parStorage) > 0 then
                 set @sku = concat(@sku, '-', parStorage);
             end if;
