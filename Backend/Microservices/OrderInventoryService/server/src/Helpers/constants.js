@@ -170,6 +170,7 @@ constants.SP_CREATE_SKU = "sp_CreateSKU";
 constants.SP_GET_SKU = "sp_GetSKUs";
 constants.SP_GET_CART_DETAILS = "sp_GetCartDetails";
 constants.SP_CREATE_UPDATE_CART = "sp_CreateUpdateCart";
+constants.SP_CREATE_ASSET = "sp_CreateAsset";
 
 /**
  * Column Names
@@ -197,6 +198,20 @@ constants.PRODUCT_GRADE = "product_grade";
 constants.STORAGE = "storage";
 constants.PARENT_CATEGORY = "parent_category";
 constants.QUANTITY = "quantity";
+
+constants.ASSET_UNIQUE_NUMBER = "asset_unique_number";
+constants.ASSET_ID = "asset_id";
+constants.ASSET_CATEGORY = "category";
+constants.ASSET_SUB_CATEGORY = "sub_category";
+constants.ASSET_MANUFACTERER = "manufacturer";
+constants.ASSET_NAME = "asset_name";
+constants.ASSET_LOCATION = "location";
+constants.ASSET_VENDOR_ID = "vendor_id";
+constants.PROCUREMENT_PRICE = "procurement_price";
+constants.BASE_PRICE = "base_price";
+constants.SELLING_PRICE = "selling_price";
+constants.ASSET_STATUS = "asset_status";
+constants.WARRANTY_STATUS = "warranty_status";
 
 
 /**
