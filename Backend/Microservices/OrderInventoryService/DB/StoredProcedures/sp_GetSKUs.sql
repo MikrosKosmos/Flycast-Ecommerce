@@ -3,7 +3,7 @@ create procedure sp_GetSKUs(parSKU varchar(255), parBrand varchar(255), parModel
 begin
     set @whereClaus = '';
     if length(parSKU) > 0 then
-        set @whereClaus = concat(' and sku =''', parSKU, '''');
+        set @whereClaus = concat(' and s.sku =''', parSKU, '''');
     end if;
     if length(parBrand) > 0 then
         set @whereClaus = concat(@whereClaus, ' and brand = ''', parBrand, '''');
@@ -19,10 +19,16 @@ begin
            storage,
            s.parent_category,
            cm.category_name,
-           sku
+           s.sku,
+           sp.image_url,
+           sp.position
     from tbl_SkuMaster s
              left join tbl_CategoryMaster cm
-                       on s.parent_category = cm.id where s.is_active = 1 ', @whereClaus)
+                       on s.parent_category = cm.id
+                left join tbl_SkuPictures sp
+                    on sp.sku=s.sku
+                    and sp.is_active=1
+             where s.is_active = 1 ', @whereClaus)
     into @stmtSQL;
     #select @stmtSQL;
     prepare stmtExec from @stmtSQL;
