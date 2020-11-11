@@ -146,7 +146,7 @@ constants.ROLES = "roles";
 constants.AWS_DOCUMENTS_BUCKET = "flycast-documents";
 constants.AWS_IMAGES_BUCKET = "flycast-images";
 constants.DOUCMENTS_BUCKET_BASE_URL = "https://flycast-documents.s3.ap-south-1.amazonaws.com/";
-constants.IMAGES_BUCKET_BASE_URL = "https://flycast-images.s3.ap-south-1.amazonaws.com/";
+constants.IMAGES_BUCKET_BASE_URL = "http://d3lnfv74g3xcms.cloudfront.net/";
 
 constants.MICROSERVICE_AUTH_KEY_VALUE = "api_auth";
 constants.API_AUTH_KEY = "key";
@@ -203,6 +203,9 @@ constants.PRODUCT_GRADE = "product_grade";
 constants.STORAGE = "storage";
 constants.PARENT_CATEGORY = "parent_category";
 constants.QUANTITY = "quantity";
+constants.SKU_IMAGE_DATA = "image_data";
+constants.FILE_EXTENSION = "file_extension";
+constants.SKU_IMAGE_POSITION = "position";
 
 constants.ASSET_UNIQUE_NUMBER = "asset_unique_number";
 constants.ASSET_ID = "asset_id";

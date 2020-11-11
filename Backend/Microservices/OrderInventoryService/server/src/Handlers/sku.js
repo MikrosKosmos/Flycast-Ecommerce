@@ -43,11 +43,17 @@ skuHandler.sku = (dataObject) => {
             dataObject.postData[constants.STORAGE] : false;
          const parentCategory = validators.validateNumber(dataObject.postData[constants.PARENT_CATEGORY]) ?
             dataObject.postData[constants.PARENT_CATEGORY] : false;
+         const imageData = validators.validateString(dataObject.postData[constants.SKU_IMAGE_DATA]) ?
+            dataObject.postData[constants.SKU_IMAGE_DATA] : false;
+         const fileExtension = validators.validateString(dataObject.postData[constants.FILE_EXTENSION]) ?
+            dataObject.postData[constants.FILE_EXTENSION] : false;
+         const imagePosition = validators.validateNumber(dataObject.postData[constants.SKU_IMAGE_POSITION]) ?
+            dataObject.postData[constants.SKU_IMAGE_POSITION] : 1;
          const jwToken = validators.validateString(dataObject[constants.JW_TOKEN]) ?
             dataObject[constants.JW_TOKEN] : false;
-         if (brand && model && color && grade && parentCategory && jwToken) {
+         if (brand && model && color && grade && parentCategory && imageData && fileExtension && jwToken) {
             const sku = new Sku(brand, model, color, grade, storage, parentCategory, false);
-            sku.createSku(jwToken).then(response => {
+            sku.createSku(jwToken, imageData, fileExtension, imagePosition).then(response => {
                resolve(responseGenerator.generateResponse(response[1], response[0]));
             }).catch(err => {
                reject(responseGenerator.generateErrorResponse(err[1], err[0]));
