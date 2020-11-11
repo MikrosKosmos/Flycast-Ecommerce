@@ -171,6 +171,7 @@ constants.SP_GET_SKU = "sp_GetSKUs";
 constants.SP_GET_CART_DETAILS = "sp_GetCartDetails";
 constants.SP_CREATE_UPDATE_CART = "sp_CreateUpdateCart";
 constants.SP_CREATE_ASSET = "sp_CreateAsset";
+constants.SP_GET_ASSET = "sp_GetAsset";
 
 /**
  * Column Names
@@ -190,6 +191,10 @@ constants.CATEGORIES = "categories";
 constants.CATEGORY_ID = "category_id";
 constants.ATTRIBUTE_ID = "attribute_id";
 constants.ATTRIBUTE_VALUES = "attribute_values";
+constants.ATTRIBUTE_NAME = "attribute_name";
+constants.ATTRIBUTE_DEFAULT_VALUE = "default_value";
+constants.ASSET_ATTRIBUTE_VALUE = "attribute_value";
+constants.ATTRIBUTE_DESCRIPTION = "attribute_description";
 constants.SKU = "sku";
 constants.BRAND = "brand";
 constants.MODEL = "model";
@@ -212,6 +217,7 @@ constants.BASE_PRICE = "base_price";
 constants.SELLING_PRICE = "selling_price";
 constants.ASSET_STATUS = "asset_status";
 constants.WARRANTY_STATUS = "warranty_status";
+constants.CATEGORY_NAME = "category_name";
 
 
 /**

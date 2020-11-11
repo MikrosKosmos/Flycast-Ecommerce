@@ -63,6 +63,55 @@ class Asset {
          }
       });
    }
+
+   /**
+    * Method to get teh Asset Details.
+    * @param jwToken: The token of the user.
+    * @returns {Promise<Array>}
+    */
+   getAsset(jwToken) {
+      return new Promise(async (resolve, reject) => {
+         try {
+            const userData = await utils.validateUserToken(jwToken);
+            if (validators.validateUndefined(userData) && userData[constants.ID] > 0) {
+               database.runSp(constants.SP_GET_ASSET, [this._assetId]).then(_resultSet => {
+                  const result = _resultSet[0];
+                  if (validators.validateUndefined(result) && result.length > 0) {
+                     let assetResult = {};
+                     let attributeValues = [];
+                     for (let i = 0; i < result.length; i++) {
+                        let oneAttributeValue = {};
+                        oneAttributeValue[constants.ATTRIBUTE_ID] = result[i][constants.ATTRIBUTE_ID];
+                        oneAttributeValue[constants.ATTRIBUTE_NAME] = result[i][constants.ATTRIBUTE_NAME];
+                        oneAttributeValue[constants.ATTRIBUTE_DESCRIPTION] = result[i][constants.ATTRIBUTE_DESCRIPTION];
+                        oneAttributeValue[constants.ATTRIBUTE_DEFAULT_VALUE] = result[i][constants.ATTRIBUTE_DEFAULT_VALUE];
+                        oneAttributeValue[constants.ASSET_ATTRIBUTE_VALUE] = result[i][constants.ASSET_ATTRIBUTE_VALUE];
+                        attributeValues.push(oneAttributeValue);
+                     }
+                     assetResult = result[0];
+                     delete assetResult[constants.ATTRIBUTE_ID];
+                     delete assetResult[constants.ATTRIBUTE_NAME];
+                     delete assetResult[constants.ATTRIBUTE_DEFAULT_VALUE];
+                     delete assetResult[constants.ATTRIBUTE_DESCRIPTION];
+                     delete assetResult[constants.ASSET_ATTRIBUTE_VALUE];
+                     assetResult[constants.ATTRIBUTE_VALUES] = attributeValues;
+                     resolve([constants.RESPONSE_SUCESS_LEVEL_1, assetResult]);
+                  } else {
+                     resolve([constants.RESPONSE_SUCESS_LEVEL_1, {id: -1}]);
+                  }
+               }).catch(err => {
+                  printer.printError(err);
+                  reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
+               });
+            } else {
+               reject([constants.ERROR_LEVEL_4, constants.FORBIDDEN_MESSAGE]);
+            }
+         } catch (e) {
+            printer.printError(e);
+            reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
+         }
+      });
+   }
 }
 
 /**
