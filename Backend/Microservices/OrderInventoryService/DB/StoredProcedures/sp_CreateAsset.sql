@@ -7,16 +7,16 @@ create procedure sp_CreateAsset(parAssetName varchar(255), parUniqueNumber varch
 begin
     set @isExists = 0;
     set @isValidCategory = 0;
-    set @isValidParentCategory = 0;
+    set @isValidParentCategory = 1;
     #Validating the data.
     select id into @isExists from tbl_AssetMaster where asset_unique_number = parUniqueNumber and is_active = 1;
     select id into @isValidCategory from tbl_CategoryMaster where id = parCategory and is_active = 1;
-    select id
+    /*select id
     into @isValidParentCategory
     from tbl_CategoryMaster
     where id = parSubCategory
       and parent_category = parCategory
-      and is_active = 1;
+      and is_active = 1;*/
     if @isExists = 0 and @isValidParentCategory > 0 and @isValidCategory > 0 then
         set @assetId = 0;
         #inserting the asset.
