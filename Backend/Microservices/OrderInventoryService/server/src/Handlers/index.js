@@ -120,6 +120,9 @@ handlerObj.asset = (dataObject) => {
          case "asset":
             promise = asset.asset(dataObject);
             break;
+         case "product":
+            promise = asset.products(dataObject);
+            break;
          default:
             reject(responseGenerator.generateErrorResponse(constants.ERROR_MESSAGE, constants.ERROR_LEVEL_2));
       }

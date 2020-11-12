@@ -14,10 +14,12 @@ assetHandler.asset = (dataObject) => {
       if (method === constants.HTTP_GET) {
          const assetId = validators.validateNumber(dataObject.queryString[constants.ASSET_ID]) ?
             dataObject.queryString[constants.ASSET_ID] : false;
+         const categoryId = validators.validateNumber(dataObject.queryString[constants.CATEGORY_ID]) ?
+            dataObject.queryString[constants.CATEGORY_ID] : false;
          const jwToken = validators.validateString(dataObject[constants.JW_TOKEN]) ?
             dataObject[constants.JW_TOKEN] : false;
-         if (assetId && jwToken) {
-            const asset = new Asset(assetId);
+         if ((assetId || categoryId) && jwToken) {
+            const asset = new Asset(assetId, false, categoryId);
             asset.getAsset(jwToken).then(response => {
                resolve(responseGenerator.generateResponse(response[1], response[0]));
             }).catch(err => {
@@ -66,6 +68,26 @@ assetHandler.asset = (dataObject) => {
          }
       } else if (method === constants.HTTP_PUT) {
          //TODO:
+      } else {
+         reject(responseGenerator.generateErrorResponse(constants.INVALID_METHOD_MESSAGE, constants.ERROR_LEVEL_1));
+      }
+   });
+};
+/**
+ * Method to handle the asset product requests.
+ * @param dataObject: The request object.
+ * @returns {Promise<Array>}:
+ */
+assetHandler.products = (dataObject) => {
+   return new Promise((resolve, reject) => {
+      const method = dataObject.method;
+      if (method === constants.HTTP_GET) {
+         const asset = new Asset();
+         asset.getProducts().then(response => {
+            resolve(responseGenerator.generateResponse(response[1], response[0]));
+         }).catch(err => {
+            reject(responseGenerator.generateErrorResponse(err[1], err[0]));
+         });
       } else {
          reject(responseGenerator.generateErrorResponse(constants.INVALID_METHOD_MESSAGE, constants.ERROR_LEVEL_1));
       }
