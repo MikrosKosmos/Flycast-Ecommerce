@@ -101,6 +101,47 @@ class SKU {
          }
       });
    }
+
+   /**
+    * Method to create the SKU pictures.
+    * @param imageData: The image data.
+    * @param fileExtension: The file extension.
+    * @param position: The position.
+    * @param jwToken: The token of the user.
+    * @returns {Promise<Array>}:
+    */
+   createSkuPictures(imageData, fileExtension, position, jwToken) {
+      return new Promise(async (resolve, reject) => {
+         try {
+            const userData = await utils.validateUserToken(jwToken);
+            if (validators.validateUndefined(userData) && userData[constants.ID] > 0 &&
+               utils.checkWhetherRoleExists(userData[constants.ROLES], constants.ROLE_VENDOR_ID)) {
+               const fileName = generator.generateRandomToken(16) + "." + fileExtension;
+               const imageUrl = constants.IMAGES_BUCKET_BASE_URL + fileName;
+               let promiseArray = [];
+               promiseArray.push(s3Helper.uploadFile(imageData, fileName, false));
+               promiseArray.push(database.runSp(constants.SP_CREATE_SKU_PICTURES, [this._sku,
+                  imageUrl, position, userData[constants.ID]]));
+               Promise.all(promiseArray).then(results => {
+                  const dbResult = results[1][0][0];
+                  if (dbResult[constants.ID] > 0 && validators.validateUndefined(results[1])) {
+                     resolve([constants.RESPONSE_SUCESS_LEVEL_1, {id: 1, url: imageUrl}]);
+                  } else {
+                     resolve([constants.RESPONSE_SUCESS_LEVEL_1, {id: -1}]);
+                  }
+               }).catch(err => {
+                  printer.printError(err);
+                  reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
+               });
+            } else {
+               reject([constants.ERROR_LEVEL_4, constants.FORBIDDEN_MESSAGE]);
+            }
+         } catch (err) {
+            printer.printError(err);
+            reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
+         }
+      });
+   }
 }
 
 /**

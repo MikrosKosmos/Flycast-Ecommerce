@@ -76,6 +76,9 @@ handlerObj.sku = (dataObject) => {
          case "sku":
             promise = sku.sku(dataObject);
             break;
+         case "picture":
+            promise = sku.pictures(dataObject);
+            break;
          default:
             reject(responseGenerator.generateErrorResponse(constants.ERROR_MESSAGE, constants.ERROR_LEVEL_2));
       }
