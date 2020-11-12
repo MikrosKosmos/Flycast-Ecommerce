@@ -1,0 +1,17 @@
+<label>
+  <ng-content></ng-content><span class="required-icon" *ngIf="required"> *</span>
+</label>
+<div class="select_option">
+  <select [formControl]="form.controls[name]" *ngIf="!displayField" (change)='onOptionListChange($event)' class="form-control">
+      <option value="" *ngIf="defaultLabel && !placeHolder" selected>Please Select An Option</option>
+      <option value="" *ngIf="defaultLabel && placeHolder" selected>{{placeHolder}}</option>
+    <option *ngFor="let option of options;let i=index" [value]="option.code">{{option.value}}</option>
+  </select>
+  <select [formControl]="form.controls[name]" *ngIf="displayField" (change)='onOptionListChange($event)' class="form-control">
+      <option value="" *ngIf="defaultLabel" selected>Please Select An Option</option>
+      <option value="" *ngIf="defaultLabel && placeHolder" selected>{{placeHolder}}</option>
+    <option *ngFor="let option of options;let i=index" [value]="option.code">{{option[displayField]}}</option>
+  </select>
+  <emp-input-validation *ngIf="validation" [formInput]="form.controls[name]" [name]="name" ></emp-input-validation>
+</div>
+

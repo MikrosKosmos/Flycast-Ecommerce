@@ -1,0 +1,32 @@
+<div class="bx-white">
+    <h3 class="block-heading audittrail-heding" [ngClass]="collapseState" data-toggle="collapse" data-target="#audittrail" aria-expanded="false" aria-controls="audittrail" (click)="toggleAuditTrail()">Audit trail<i class="pull-right fa" [ngClass]="collapseStateIcon"></i></h3>
+    <div class="table-responsive collapse audittrail-tble" id="audittrail">
+        <table class="table text-center table-Audit  mb-0">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Comment</th>
+                    <th>name</th>
+                    <th>designation</th>
+                    <th>Date & Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="auditTrails && auditTrails.length;  else noDataFound"></ng-container>
+                <tr *ngFor="let audit of auditTrails">
+                    <td>{{audit.action | titlecase}}</td>
+                    <td>{{audit.comment ? audit.comment : '--'}}</td>
+                    <td>{{audit.empName ? audit.empName : '--'}}</td>
+                    <td>{{audit.designation ? audit.designation : '--'}}</td>
+                    <!-- <td>{{_helperService.getDateAndTime(audit.createdOn) | date:'short'}}</td> -->
+                    <td>{{getDateAsFormat(audit.createdOn)}}</td>
+                </tr>
+                <ng-template #noDataFound>
+                    <tr>
+                        <td colspan="7">No Entries</td>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 const constants = require("./../Helpers/constants");
 const database = require("./../Services/databaseService");
 const validators = require("validatorswithgenerators").validators;
+const generators = require("validatorswithgenerators").generators;
 const printer = require("./../Helpers/printer");
 const utils = require("./../Helpers/utils");
 
@@ -42,6 +43,8 @@ class Asset {
             const userData = await utils.validateUserToken(jwToken);
             if (validators.validateUndefined(userData) && userData[constants.ID] > 0 &&
                utils.checkWhetherRoleExists(userData[constants.ROLES], constants.ROLE_VENDOR_ID)) {
+               this._assetUniqueNumber = validators.validateString(this._assetUniqueNumber) ?
+                  this._assetUniqueNumber : generators.generateRandomToken(16);
                database.runSp(constants.SP_CREATE_ASSET, [this._assetName, this._assetUniqueNumber,
                   this._category, this._subCategory, this._sku, this._manufacturer,
                   validators.validateString(productGrade) ? productGrade : false,
@@ -74,7 +77,7 @@ class Asset {
          try {
             const userData = await utils.validateUserToken(jwToken);
             if (validators.validateUndefined(userData) && userData[constants.ID] > 0) {
-               database.runSp(constants.SP_GET_ASSET, [this._assetId]).then(_resultSet => {
+               database.runSp(constants.SP_GET_ASSET, [this._assetId, this._category]).then(_resultSet => {
                   const result = _resultSet[0];
                   if (validators.validateUndefined(result) && result.length > 0) {
                      let assetResult = {};
@@ -110,6 +113,26 @@ class Asset {
             printer.printError(e);
             reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
          }
+      });
+   }
+
+   /**
+    * Method to get the products.
+    * @returns {Promise<Array>}:
+    */
+   getProducts() {
+      return new Promise((resolve, reject) => {
+         database.runSp(constants.SP_GET_PRODUCTS, []).then(_resultSet => {
+            const result = _resultSet[0];
+            if (validators.validateUndefined(result)) {
+               resolve([constants.RESPONSE_SUCESS_LEVEL_1, result]);
+            } else {
+               resolve([constants.RESPONSE_SUCESS_LEVEL_1, []]);
+            }
+         }).catch(err => {
+            printer.printError(err);
+            reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
+         });
       });
    }
 }

@@ -1,0 +1,128 @@
+// @import "../../../../assets/responsive";
+// @import "../../../../assets/variable";
+
+// .workflow {
+//   padding: 20px 0;
+//   flex-wrap: wrap;
+//   &_single {
+//     display: flex;
+//     align-items: center;
+//     width: 20%;
+//     padding-right: 45px;
+//     position: relative;
+//     padding-right: 4%;
+//     @media #{$small-desktop} {
+//       width: 50%;
+//       padding-right: 10%;
+//       margin-bottom: 10px;
+//     }
+//     @media #{$medium-tab} {
+//       width:100%;
+//       padding-right: 0px;
+//       &:before{
+//         display: none;
+       
+//       }
+//     }
+//     &.workflow_active {
+//       .mark {
+//         display: block;
+//       }
+//       .workflow_single-no {
+//         border: 1px solid #29caf5;
+//       }
+//       &:before {
+//         background: #29caf5;
+//       }
+//     }
+//     &.completed {
+//       .workflow_single-no {
+//         border: 1px solid #295cca;
+//         background: #2f69e6;
+//       }
+//       .workflow_single-cont {
+//         p {
+//           font-family: "sinkin_sans600_semibold";
+//           font-size: 13px;
+//         }
+//         i {
+//           display: none;
+//         }
+//       }
+//     }
+//     &:before {
+//       position: absolute;
+//       top: 50%;
+//       -webkit-transform: translateY(-50%);
+//       transform: translateY(-50%);
+//       width: 12%;
+//       height: 2px;
+//       background: $white;
+//       content: "";
+//       right: 4%;
+//     }
+//     &:last-child:before {
+//       display: none;
+//     }
+//     p {
+//       color: $white;
+//       font-size: 12px;
+//       font-family: "sinkin_sans500_medium";
+//       margin: 0 7px;
+//     }
+//     i {
+//       color: $white;
+//       font-size: 14px;
+//     }
+//     &-cont {
+//       width: calc(100% - 40px);
+//     }
+//     &-no {
+//       width: 40px;
+//       height: 40px;
+//       color: $white;
+//       text-align: center;
+//       line-height: 37px;
+//       font-size: 15px;
+//       border: 1px solid $white;
+//       position: relative;
+//       border-radius: 50%;
+//       .mark {
+//         position: absolute;
+//         width: 20px;
+//         display: inline-block;
+//         height: 20px;
+//         padding: 0;
+//         top: -4px;
+//         right: -5px;
+//         border-radius: 50%;
+//         background: #1ed11e;
+//         display: none;
+//         i {
+//           font-size: 12px;
+//           vertical-align: top;
+//           margin-top: 4px;
+//         }
+//       }
+//     }
+//   }
+// }
+
+.divWorkFlowHistoryList {
+  width: 100%;
+  display: flex;
+  border-top: 1px solid #234cad;
+  margin-bottom: 20px;
+  margin-left: 0px;
+  position: relative;
+  padding-top: 15px;
+
+  .block-heading {
+    position: absolute;
+    top: -7px;
+    left: 25px;
+    background: white;
+    width: auto;
+    color: #234a8f
+  }
+}

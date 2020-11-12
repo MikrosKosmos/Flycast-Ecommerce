@@ -172,6 +172,7 @@ constants.SP_GET_CART_DETAILS = "sp_GetCartDetails";
 constants.SP_CREATE_UPDATE_CART = "sp_CreateUpdateCart";
 constants.SP_CREATE_ASSET = "sp_CreateAsset";
 constants.SP_GET_ASSET = "sp_GetAsset";
+constants.SP_GET_PRODUCTS = "sp_GetProducts";
 
 /**
  * Column Names
