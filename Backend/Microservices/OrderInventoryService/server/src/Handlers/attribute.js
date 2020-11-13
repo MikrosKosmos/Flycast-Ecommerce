@@ -67,6 +67,32 @@ attributeHandler.attribute = (dataObject) => {
    });
 };
 /**
+ * Method to handle the requests for Attributes SKU.
+ * @param dataObject: The request object.
+ * @returns {Promise<Array>}:
+ */
+attributeHandler.sku = (dataObject) => {
+   return new Promise((resolve, reject) => {
+      const method = dataObject.method;
+      if (method === constants.HTTP_GET) {
+         const sku = validators.validateString(dataObject.queryString[constants.SKU]) ?
+            dataObject.queryString[constants.SKU] : false;
+         if (sku) {
+            const attribute = new Attribute();
+            attribute.getAttributeBySku(sku).then(response => {
+               resolve(responseGenerator.generateResponse(response[1], response[0]));
+            }).catch(err => {
+               reject(responseGenerator.generateErrorResponse(err[1], err[0]));
+            });
+         } else {
+            reject(responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1));
+         }
+      } else {
+         reject(responseGenerator.generateErrorResponse(constants.INVALID_METHOD_MESSAGE, constants.ERROR_LEVEL_1));
+      }
+   });
+};
+/**
  * Exporting the module.
  */
 module.exports = attributeHandler;

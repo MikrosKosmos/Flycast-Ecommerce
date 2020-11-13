@@ -144,6 +144,27 @@ class Attribute {
          }
       });
    }
+
+   /**
+    * Method to search for attribute values by SKU.
+    * @param sku: The sku for which the attributes are required.
+    * @returns {Promise<Array>}:
+    */
+   getAttributeBySku(sku) {
+      return new Promise((resolve, reject) => {
+         database.runSp(constants.SP_GET_ATTRIBUTE_VALUE_BY_SKU, [sku]).then(_resultSet => {
+            const result = _resultSet[0];
+            if (validators.validateUndefined(result)) {
+               resolve([constants.RESPONSE_SUCESS_LEVEL_1, result]);
+            } else {
+               resolve([constants.RESPONSE_SUCESS_LEVEL_1, []]);
+            }
+         }).catch(err => {
+            printer.printError(err);
+            reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
+         });
+      });
+   }
 }
 
 /**

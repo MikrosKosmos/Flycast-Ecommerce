@@ -29,6 +29,9 @@ handlerObj.attribute = (dataObject) => {
          case "attribute":
             promise = attribute.attribute(dataObject);
             break;
+         case "sku":
+            promise = attribute.sku(dataObject);
+            break;
          default:
             reject(responseGenerator.generateErrorResponse(constants.ERROR_MESSAGE, constants.ERROR_LEVEL_2));
       }
