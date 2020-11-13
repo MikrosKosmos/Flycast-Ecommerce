@@ -45,6 +45,6 @@ begin
                  left join tbl_InventoryMaster im
                            on im.sku = sm.sku
         where sm.is_active = 1
-          and sm.parent_category = cm.parent_category;
+          and sm.parent_category = parCategory;
     end if;
 end;
