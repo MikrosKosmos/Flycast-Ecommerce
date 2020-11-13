@@ -122,7 +122,7 @@ class Asset {
     */
    getProducts() {
       return new Promise((resolve, reject) => {
-         database.runSp(constants.SP_GET_PRODUCTS, []).then(_resultSet => {
+         database.runSp(constants.SP_GET_PRODUCTS, [this._category]).then(_resultSet => {
             const result = _resultSet[0];
             if (validators.validateUndefined(result)) {
                resolve([constants.RESPONSE_SUCESS_LEVEL_1, result]);

@@ -82,7 +82,9 @@ assetHandler.products = (dataObject) => {
    return new Promise((resolve, reject) => {
       const method = dataObject.method;
       if (method === constants.HTTP_GET) {
-         const asset = new Asset();
+         const category = validators.validateNumber(dataObject.queryString[constants.CATEGORY_ID]) ?
+            dataObject.queryString[constants.CATEGORY_ID] : false;
+         const asset = new Asset(false, false, category);
          asset.getProducts().then(response => {
             resolve(responseGenerator.generateResponse(response[1], response[0]));
          }).catch(err => {
