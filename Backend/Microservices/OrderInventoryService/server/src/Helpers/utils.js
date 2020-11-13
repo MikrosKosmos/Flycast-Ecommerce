@@ -1,5 +1,6 @@
 const utilsHandler = {};
 const constants = require("./constants");
+const generator = require("validatorswithgenerators").generators;
 const tokenValidator = require("./tokenValidator");
 /**
  * Method to check whether the user has permission for particular role.
@@ -29,7 +30,18 @@ utilsHandler.validateUserToken = (userToken) => {
          reject(err);
       });
    });
-}
+};
+/**
+ * Method to generate the Flycast Order Number.
+ * @param orderDate: The order date.
+ * @param addressId: The address id.
+ * @param userId: The user id who is placing the order.
+ * @param amount: The amount of the order.
+ * @returns {string}: The Flycast Order Id.
+ */
+utilsHandler.generateOrderId = (orderDate, addressId, userId, amount) => {
+   return "FC-" + orderDate + "-" + addressId + "-" + userId + "-" + amount + "-" + generator.generateRandomNumber(6);
+};
 /**
  * Exporting the util handler.
  */
