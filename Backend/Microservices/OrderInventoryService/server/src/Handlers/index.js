@@ -82,6 +82,9 @@ handlerObj.sku = (dataObject) => {
          case "picture":
             promise = sku.pictures(dataObject);
             break;
+         case "rating":
+            promise = sku.rating(dataObject);
+            break;
          default:
             reject(responseGenerator.generateErrorResponse(constants.ERROR_MESSAGE, constants.ERROR_LEVEL_2));
       }

@@ -7,6 +7,7 @@ begin
       set @assetId = 0;
       select id into @assetId from tbl_AssetMaster where sku = parSKU and is_active = 1;
       select am.id,
+
              am.attribute_name,
              am.attribute_description,
              am.default_value,

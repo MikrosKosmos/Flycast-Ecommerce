@@ -100,7 +100,36 @@ skuHandler.pictures = (dataObject) => {
       }
    });
 };
-
+/**
+ * Method to handle the requests for SKU ratings.
+ * @param dataObject: The request object.
+ * @returns {Promise<Array>}:
+ */
+skuHandler.rating = (dataObject) => {
+   return new Promise((resolve, reject) => {
+      const method = dataObject.method;
+      if (method === constants.HTTP_PUT) {
+         const skuValue = validators.validateString(dataObject.postData[constants.SKU]) ?
+            dataObject.postData[constants.SKU] : false;
+         const jwToken = validators.validateString(dataObject[constants.JW_TOKEN]) ?
+            dataObject[constants.JW_TOKEN] : false;
+         const rating = validators.validateNumber(dataObject.postData[constants.RATING]) ?
+            dataObject.postData[constants.RATING] : false;
+         if (skuValue && jwToken && rating) {
+            const sku = new Sku(false, false, false, false, false, false, skuValue);
+            sku.updateSKURating(rating, jwToken).then(response => {
+               resolve(responseGenerator.generateResponse(response[1], response[0]));
+            }).catch(err => {
+               reject(responseGenerator.generateErrorResponse(err[1], err[0]));
+            });
+         } else {
+            reject(responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1));
+         }
+      } else {
+         reject(responseGenerator.generateErrorResponse(constants.INVALID_METHOD_MESSAGE, constants.ERROR_LEVEL_1));
+      }
+   });
+};
 /**
  * Exporting the SKU handler.
  */

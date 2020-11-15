@@ -175,6 +175,7 @@ constants.SP_GET_ASSET = "sp_GetAsset";
 constants.SP_GET_PRODUCTS = "sp_GetProducts";
 constants.SP_CREATE_SKU_PICTURES = "sp_CreateSKUPictures";
 constants.SP_GET_ATTRIBUTE_VALUE_BY_SKU = "sp_GetAttributesBySKU";
+constants.SP_CREATE_SKU_RATINGS = "sp_CreateSKURating";
 
 /**
  * Column Names
@@ -224,6 +225,7 @@ constants.SELLING_PRICE = "selling_price";
 constants.ASSET_STATUS = "asset_status";
 constants.WARRANTY_STATUS = "warranty_status";
 constants.CATEGORY_NAME = "category_name";
+constants.RATING = "rating";
 
 
 /**
