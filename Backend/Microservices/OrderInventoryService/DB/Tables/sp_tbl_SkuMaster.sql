@@ -37,6 +37,16 @@ begin
         ) then
         create index IDX_sku on tbl_SkuMaster (sku);
     end if;
+    if not exists(
+            select 1
+            from information_schema.COLUMNS
+            where TABLE_SCHEMA = currentSchema
+              and TABLE_NAME = 'tbl_SkuMaster'
+              and COLUMN_NAME = 'average_rating'
+        ) then
+        alter table tbl_SkuMaster
+            add column average_rating float default 0.0 after sku;
+    end if;
 end;
 call sp_tbl_SkuMaster();
 drop procedure if exists sp_tbl_SkuMaster;

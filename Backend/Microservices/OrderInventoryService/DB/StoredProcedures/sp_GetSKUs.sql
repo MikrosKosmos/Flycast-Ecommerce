@@ -20,6 +20,7 @@ begin
            s.parent_category,
            cm.category_name,
            s.sku,
+           s.average_rating,
            sp.image_url,
            sp.position
     from tbl_SkuMaster s
