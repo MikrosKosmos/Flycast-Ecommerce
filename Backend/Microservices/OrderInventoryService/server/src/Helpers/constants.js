@@ -148,6 +148,14 @@ constants.AWS_IMAGES_BUCKET = "flycast-images";
 constants.DOUCMENTS_BUCKET_BASE_URL = "https://flycast-documents.s3.ap-south-1.amazonaws.com/";
 constants.IMAGES_BUCKET_BASE_URL = "http://d3lnfv74g3xcms.cloudfront.net/";
 
+constants.SQS_ORDER_TO_PAYMENT_QUEUE_URL = "https://sqs.ap-south-1.amazonaws.com/076796648158/order_to_payment.fifo";
+constants.SQS_MESSAGE_BODY = "MessageBody";
+constants.SQS_QUEUE_URL = "QueueUrl";
+constants.SQS_MESSAGE_GROUP_ID = "MessageGroupId";
+constants.SQS_DEDUPLICATION_ID = "MessageDeduplicationId";
+constants.SQS_MAX_NUMBER_OF_MESSAGE = "MaxNumberOfMessages";
+constants.SQS_RECEIPT_HANDLE = "ReceiptHandle";
+
 constants.MICROSERVICE_AUTH_KEY_VALUE = "api_auth";
 constants.API_AUTH_KEY = "key";
 constants.USER_SERVICE_PORT = 7001;
@@ -176,6 +184,7 @@ constants.SP_GET_PRODUCTS = "sp_GetProducts";
 constants.SP_CREATE_SKU_PICTURES = "sp_CreateSKUPictures";
 constants.SP_GET_ATTRIBUTE_VALUE_BY_SKU = "sp_GetAttributesBySKU";
 constants.SP_CREATE_SKU_RATINGS = "sp_CreateSKURating";
+constants.SP_CREATE_ORDER = "sp_CreateOrder";
 
 /**
  * Column Names
@@ -226,6 +235,12 @@ constants.ASSET_STATUS = "asset_status";
 constants.WARRANTY_STATUS = "warranty_status";
 constants.CATEGORY_NAME = "category_name";
 constants.RATING = "rating";
+
+constants.ORDER_ID = "order_id";
+constants.TRANSACTION_ID = "transaction_id";
+constants.ORDER_DATE = "order_date";
+constants.ADDRESS_ID = "address_id";
+constants.BASE_AMOUNT = "base_amount";
 
 
 /**

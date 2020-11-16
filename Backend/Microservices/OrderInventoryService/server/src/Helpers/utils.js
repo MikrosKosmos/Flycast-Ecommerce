@@ -40,7 +40,7 @@ utilsHandler.validateUserToken = (userToken) => {
  * @returns {string}: The Flycast Order Id.
  */
 utilsHandler.generateOrderId = (orderDate, addressId, userId, amount) => {
-   return "FC-" + orderDate + "-" + addressId + "-" + userId + "-" + amount + "-" + generator.generateRandomNumber(6);
+   return "FC-" + orderDate + "-00" + addressId + "-00" + userId + "-00" + amount + "-" + generator.generateRandomNumber(4);
 };
 /**
  * Exporting the util handler.
