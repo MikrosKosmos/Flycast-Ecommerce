@@ -34,6 +34,7 @@ begin
                cm.id as category_id,
                cm.category_name,
                sm.sku,
+               im.price,
                sp.image_url,
                sp.position
         from tbl_SkuMaster sm

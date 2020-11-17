@@ -24,6 +24,16 @@ begin
             );
         end;
     end if;
+    if not exists(
+            select 1
+            from information_schema.COLUMNS
+            where TABLE_SCHEMA = currentSchema
+              and TABLE_NAME = 'tbl_InventoryMaster'
+              and COLUMN_NAME = 'price'
+        ) then
+        alter table tbl_InventoryMaster
+            add column price float default 0.0 after stock_quantity;
+    end if;
 end;
 call sp_tbl_InventoryMaster();
 drop procedure if exists sp_tbl_InventoryMaster;

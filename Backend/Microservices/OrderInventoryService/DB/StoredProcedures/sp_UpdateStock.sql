@@ -25,8 +25,10 @@ begin
                 where sku = parSku
                   and is_active = 1;
             else
-                insert into tbl_InventoryMaster (sku, stock_quantity, created_by)
-                    value (parSku, parCounter, parUserId);
+                set @price = 0;
+                select selling_price into @price from tbl_AssetMaster where sku = parSku and is_active = 1 limit 1;
+                insert into tbl_InventoryMaster (sku, stock_quantity, price, created_by)
+                    value (parSku, parCounter, @price, parUserId);
             end if;
         end if;
         set parIsUpdated = 1;
