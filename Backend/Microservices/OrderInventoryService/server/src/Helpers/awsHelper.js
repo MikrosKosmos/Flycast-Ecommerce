@@ -9,6 +9,7 @@ aws.config.update({
 });
 awsHelper.sns = new aws.SNS();
 awsHelper.s3 = new aws.S3({apiVersion: '2006-03-01'});
+awsHelper.sqs = new aws.SQS({apiVersion: '2012-11-05'});
 /**
  * Exporting the module.
  */
