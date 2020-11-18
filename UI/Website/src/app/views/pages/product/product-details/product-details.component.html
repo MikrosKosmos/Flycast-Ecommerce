@@ -51,14 +51,14 @@
                                 </p> -->
                                 <rating [(ngModel)]="rate" [max]="max" [readonly]="isReadonly"
                                     (onHover)="hoveringOverRating($event)" (onLeave)="resetStar()"
-                                    (click)="updateRating()"
+                                    (click)="updateRating()" 
                                     [titles]="['Star 1','Star 2','Star 3','Star 4','Star 5']">
                                 </rating>
-                                <span class="label"
+                                <button class="label"
                                     [ngClass]="{'label-warning': overStar<2, 'label-info': overStar>=2 && overStar<4, 'label-success': overStar>=4}"
                                     [ngStyle]="{display: (overStar && !isReadonly) ? 'inline' : 'none'}">{{overStar}}
                                     star
-                                </span>
+                                </button>
                                 <p>Colour: {{product.color}}</p>
                                 <p>Condition: {{product.product_grade}}</p>
                                 <h4>Price: {{product.price|currency:"INR"}}</h4>
