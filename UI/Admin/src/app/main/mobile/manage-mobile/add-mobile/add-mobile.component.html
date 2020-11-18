@@ -29,48 +29,231 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="row">
                             <div class="col-lg-3 col-md-6">
-                                <emp-input-option-list [form]="parentForm" [name]="'brand'" required="required"
-                                    validation="true" [options]="brandList">
-                                    <label>Brand</label>
+                                <emp-input-field [form]="parentForm" [name]="'asset_name'" required="required"
+                                    validation="true">
+                                    <label>Asset Name</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'asset_unique_number'" required="required"
+                                    validation="true">
+                                    <label>Unique Number</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'manufacturer'" required="required"
+                                    validation="true">
+                                    <label>Manufacturer</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'location'" required="required"
+                                    validation="true">
+                                    <label>Location</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-option-list [form]="parentForm" [name]="'sku'" required="required"
+                                    validation="true" [options]="SKUList">
+                                    <label>SKU</label>
                                 </emp-input-option-list>
                             </div>
                             <div class="col-lg-3 col-md-6">
-                                <emp-input-option-list [form]="parentForm" [name]="'product'" required="required"
-                                    validation="true" [options]="brandList">
-                                    <label>Product</label>
+                                <emp-input-option-list [form]="parentForm" [name]="'product_grade'" required="required"
+                                    validation="true" [options]="productGradeList">
+                                    <label>Product Grade</label>
                                 </emp-input-option-list>
                             </div>
                             <div class="col-lg-3 col-md-6">
-                                <emp-input-field [name]="'imei_one'" [form]="parentForm" required="required"
+                                <emp-input-field [form]="parentForm" [name]="'procurement_price'" required="required"
                                     validation="true" type="number">
-                                    <label>IMEI 1</label>
+                                    <label>Procurement Price</label>
                                 </emp-input-field>
                             </div>
                             <div class="col-lg-3 col-md-6">
-                                <emp-input-field [name]="'imei_two'" [form]="parentForm" type="number">
-                                    <label>IMEI 2</label>
+                                <emp-input-field [form]="parentForm" [name]="'base_price'" required="required"
+                                    validation="true" type="number">
+                                    <label>Base Price</label>
                                 </emp-input-field>
                             </div>
                             <div class="col-lg-3 col-md-6">
-                                <emp-input-option-list [form]="parentForm" [name]="'ram'" [options]="brandList">
-                                    <label>RAM</label>
-                                </emp-input-option-list>
+                                <emp-input-field [form]="parentForm" [name]="'selling_price'" required="required"
+                                    validation="true" type="number">
+                                    <label>Selling Price</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-9 col-md-6"></div>
+                            <div class="col-12 my-4">
+                                <div class="block-heading">Attributes</div>
+                                <hr class="mt-0">
                             </div>
                             <div class="col-lg-3 col-md-6">
-                                <emp-input-option-list [form]="parentForm" [name]="'storage'" [options]="brandList">
-                                    <label>Storage</label>
-                                </emp-input-option-list>
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <emp-input-option-list [form]="parentForm" [name]="'color'" [options]="brandList"
-                                    required="required" validation="true">
-                                    <label>Color</label>
-                                </emp-input-option-list>
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <emp-input-option-list [form]="parentForm" [name]="'display'" [options]="brandList">
+                                <emp-input-field [form]="parentForm" [name]="'Display'" required="required"
+                                    validation="true">
                                     <label>Display</label>
-                                </emp-input-option-list>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'Batteries'" required="required"
+                                    validation="true">
+                                    <label>Batteries</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'USB_C'" required="required"
+                                    validation="true">
+                                    <label>USB-C Cable & Adapter</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'Micro_SD_Card'" required="required"
+                                    validation="true">
+                                    <label>Micro SD Card</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'CPU'" required="required"
+                                    validation="true">
+                                    <label>CPU</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'GPU'" required="required"
+                                    validation="true">
+                                    <label>GPU</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'RAM'" required="required"
+                                    validation="true">
+                                    <label>RAM</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'storage'" required="required"
+                                    validation="true">
+                                    <label>Storage</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'Primary_Camera'" required="required"
+                                    validation="true">
+                                    <label>Primary Camera</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'Secondary_Camera'" required="required"
+                                    validation="true">
+                                    <label>Secondary Camera</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'Wireless'" required="required"
+                                    validation="true">
+                                    <label>Wireless</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'GPS'" required="required"
+                                    validation="true">
+                                    <label>GPS</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'Length'" required="required"
+                                    validation="true">
+                                    <label>Length</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'Width'" required="required"
+                                    validation="true">
+                                    <label>Width</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'Breadth'" required="required"
+                                    validation="true">
+                                    <label>Breadth</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'Height'" required="required"
+                                    validation="true">
+                                    <label>Height</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'Resolution'" required="required"
+                                    validation="true">
+                                    <label>Resolution</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'Color'" required="required"
+                                    validation="true">
+                                    <label>Color</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'Manufacturer'" required="required"
+                                    validation="true">
+                                    <label>Manufacturer</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'Weight'" required="required"
+                                    validation="true">
+                                    <label>Weight</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'Water_Resistant'" required="required"
+                                    validation="true">
+                                    <label>Water Resistant</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'Dust_Resistant'" required="required"
+                                    validation="true">
+                                    <label>Dust Resistant</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'Form_Factor'" required="required"
+                                    validation="true">
+                                    <label>Form Factor</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'Audio_Jack'" required="required"
+                                    validation="true">
+                                    <label>Audio Jack</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'USB_Connector'" required="required"
+                                    validation="true">
+                                    <label>USB Connector</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'Wireless_Charge'" required="required"
+                                    validation="true">
+                                    <label>Wireless Charge</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'Model_Name'" required="required"
+                                    validation="true">
+                                    <label>Model Name</label>
+                                </emp-input-field>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <emp-input-field [form]="parentForm" [name]="'Brand'" required="required"
+                                    validation="true">
+                                    <label>Brand</label>
+                                </emp-input-field>
                             </div>
                             <div class="text-center col-md-12  mt-4 btn-wrap">
                                 <button type="button" class="btn btn-Submit mx-1 btn-sm"

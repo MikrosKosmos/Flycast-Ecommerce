@@ -36,26 +36,153 @@ export class ManageMobileComponent implements OnInit {
     }
     if (this.fromActive.add) {
       this.addMobileForm = this.formBuilder.group({
-        brand: [
+        asset_name: [
           "",
-          Validators.compose([RequiredValidator("Brand is required")]),
+          Validators.compose([RequiredValidator("Asset name is required")]),
         ],
-        product: [
+        asset_unique_number: [
           "",
-          Validators.compose([RequiredValidator("Product is required")]),
+          Validators.compose([RequiredValidator("Unique number is required")]),
         ],
-        imei_one: [
+        manufacturer: [
           "",
-          Validators.compose([RequiredValidator("IMEI One is required")]),
+          Validators.compose([RequiredValidator("Manufacturer is required")]),
         ],
-        imei_two: [""],
-        ram: [""],
-        storage: [""],
-        color: [
+        location: [
           "",
-          Validators.compose([RequiredValidator("Color is required")]),
+          Validators.compose([RequiredValidator("Location is required")]),
         ],
-        display: [""],
+        sku: ["", Validators.compose([RequiredValidator("SKU is required")])],
+        product_grade: [
+          "",
+          Validators.compose([RequiredValidator("Product Grade is required")]),
+        ],
+        procurement_price: [
+          "",
+          Validators.compose([
+            RequiredValidator("Procurement Price is required"),
+          ]),
+        ],
+        base_price: [
+          "",
+          Validators.compose([RequiredValidator("Base Price is required")]),
+        ],
+        selling_price: [
+          "",
+          Validators.compose([RequiredValidator("Selling Price is required")]),
+        ],
+        Display: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        Batteries: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        USB_C: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        Micro_SD_Card: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        CPU: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        GPU: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        RAM: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        storage: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        Primary_Camera: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        Secondary_Camera: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        Wireless: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        GPS: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        Length: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        Width: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        Breadth: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        Height: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        Resolution: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        Color: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        Manufacturer: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        Weight: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        Water_Resistant: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        Dust_Resistant: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        Form_Factor: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        Audio_Jack: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        USB_Connector: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        Wireless_Charge: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        Model_Name: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
+        Brand: [
+          "",
+          Validators.compose([RequiredValidator("This field is required")]),
+        ],
       });
     }
   }
