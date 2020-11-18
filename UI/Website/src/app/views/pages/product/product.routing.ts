@@ -19,7 +19,7 @@ export const ProdcutRoutes: Routes = [
         component: IndexComponent
       },
       {
-        path: "all-products",
+        path: "all-products/:catId",
         component: ProductListComponent
       }, 
       {
@@ -31,7 +31,7 @@ export const ProdcutRoutes: Routes = [
         component: WishlistProductComponent
       },
       {
-        path: "product/:id",
+        path: "product/:sku",
         component: ProductDetailsComponent
       }
     ]

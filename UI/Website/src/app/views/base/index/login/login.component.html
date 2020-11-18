@@ -6,7 +6,7 @@
       <form (ngSubmit)="formLogin(loginForm)" [formGroup]="loginForm">
         <div class="form-group">
           <input type="number" formControlName="phoneNumber" placeholder="Enter Phone Number" id="ph_no"
-            class="form-control" required [(ngModel)]="userLoginPhoneNumber">
+            class="form-control" autofocus="autofocus" required [(ngModel)]="userLoginPhoneNumber">
         </div>
         <label>
           <input type="checkbox" checked="checked" name="remember"> Remember me
@@ -31,7 +31,8 @@
     <div class="card-body">
       <form (ngSubmit)="formLogin(loginForm)" [formGroup]="loginForm">
         <div class="form-group">
-          <input type="number" formControlName="otp" placeholder="Enter OTP" id="otp" class="form-control" required>
+          <input type="number" formControlName="otp" placeholder="Enter OTP" id="otp" class="form-control"
+            autofocus="autofocus" required>
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-success">Verify</button>
@@ -49,7 +50,7 @@
         <div class="form-group"
           [ngClass]="{'has-error': loginForm.get('firstname').errors && (loginForm.get('firstname').touched || loginForm.get('firstname').dirty)}">
           <input type="text" formControlName="firstname" placeholder="First Name" id="fname" class="form-control"
-            required>
+            autofocus="autofocus" required>
           <span class="help-block"
             *ngIf="loginForm.get('firstname').errors && (loginForm.get('firstname').touched || loginForm.get('firstname').dirty)">
             <span *ngIf="loginForm.get('firstname').errors?.required">First Name is Required</span>

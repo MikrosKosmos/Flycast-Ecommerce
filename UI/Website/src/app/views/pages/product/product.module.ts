@@ -12,6 +12,10 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ProductComponent } from './product.component';
 import { WishlistProductComponent } from './wishlist-product/wishlist-product.component';
+import { FormsModule } from '@angular/forms';
+import { RatingModule } from 'ngx-bootstrap/rating';
+import { StarRatingComponent } from 'ng-starrating';
+import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,10 @@ import { WishlistProductComponent } from './wishlist-product/wishlist-product.co
     CommonModule,
     RouterModule.forChild(ProdcutRoutes),
     SharedModule,
-    CheckoutModule
+    CheckoutModule,
+    FormsModule,
+    RatingModule.forRoot(),
+    //NgbRatingModule.forRoot()
   ]
 })
 export class ProductModule { }

@@ -139,8 +139,12 @@ export class LoginComponent implements OnInit {
           'Login Success',
           sessionStorage.getItem('FirstName')
         );
-        window.location.reload();
-        this.router.navigate(['/products/all-products']);
+        //this.router.navigate(['/']);
+        const currentRoute = this.router.url; //get current route
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/']); // navigate to same route
+        });
+        //window.location.reload();
       } else if (data.res.id == -1)
         this.tostrService.error('OTP validation failed');
     });
