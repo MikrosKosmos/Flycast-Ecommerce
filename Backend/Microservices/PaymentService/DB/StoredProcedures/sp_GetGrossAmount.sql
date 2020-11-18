@@ -1,5 +1,6 @@
-drop function if exists fn_GetGrossAmount;
-create function fn_GetGrossAmount(parBaseAmount float, parCouponCode varchar(50), parCategoryId int) returns float READS SQL DATA
+drop procedure if exists sp_GetGrossAmount;
+create procedure sp_GetGrossAmount(parBaseAmount float, parCouponCode varchar(50), parCategoryId int,
+                                   OUT parGrossAmount float, OUT parDiscountAmount float, OUT parTaxAmount float)
 begin
     set @isValid = 0;
     set @startDate = '',@endDate = '';
@@ -20,10 +21,13 @@ begin
     where category_id = parCategoryId
       and is_active = 1;
     #Calculating amount.
+    set @taxAmount = (@taxPercentage * parBaseAmount) / 100;
     if @isValid > 0 and @currentDate between @startDate and @endDate and @discountValue > 0 then
-        set @grossAmount = (((@taxPercentage * parBaseAmount) / 100) + parBaseAmount) - @discountValue;
+        set @grossAmount = (@taxAmount + parBaseAmount) - @discountValue;
     else
-        set @grossAmount = ((@taxPercentage * parBaseAmount) / 100) + parBaseAmount;
+        set @grossAmount = (@taxAmount + parBaseAmount);
     end if;
-    return @grossAmount;
+    set parGrossAmount = @grossAmount;
+    set parDiscountAmount = @discountValue;
+    set parTaxAmount = @taxAmount;
 end;
