@@ -157,6 +157,9 @@ constants.USER_SERVICE_VALIDATE_TOKEN_PATH = "/auth/token";
  */
 constants.SP_CHECK_API_TOKEN = "sp_CheckApiToken";
 constants.SP_LOG_API_STATUS = "sp_LogApiStatus";
+constants.SP_CREATE_ORDER_PAYMENT = "sp_CreateOrderPayment";
+constants.SP_UPDATE_PAYMENT_STATUS = "sp_UpdatePaymentStatus";
+constants.SP_GET_PAYMENT_DETAILS = "sp_GetPaymentDetails";
 
 /**
  * Column Names
@@ -171,49 +174,25 @@ constants.IS_VALID = "isValid";
 constants.ROLE_ID = "role_id";
 constants.ROLE_STATUS = "role_status";
 
-constants.ATTRIBUTES = "attributes";
-constants.CATEGORIES = "categories";
+constants.COUPON_CODE = "coupon_code";
 constants.CATEGORY_ID = "category_id";
-constants.ATTRIBUTE_ID = "attribute_id";
-constants.ATTRIBUTE_VALUES = "attribute_values";
-constants.ATTRIBUTE_NAME = "attribute_name";
-constants.ATTRIBUTE_DEFAULT_VALUE = "default_value";
-constants.ASSET_ATTRIBUTE_VALUE = "attribute_value";
-constants.ATTRIBUTE_DESCRIPTION = "attribute_description";
-constants.SKU = "sku";
-constants.BRAND = "brand";
-constants.MODEL = "model";
-constants.COLOR = "color";
-constants.PRODUCT_GRADE = "product_grade";
-constants.STORAGE = "storage";
+constants.GROSS_AMOUNT = "gross_amount";
+constants.TAX_AMOUNT = "tax_amount";
+constants.DICOUNT_AMOUNT = "discount_amount";
 constants.PARENT_CATEGORY = "parent_category";
 constants.QUANTITY = "quantity";
 constants.SKU_IMAGE_DATA = "image_data";
 constants.FILE_EXTENSION = "file_extension";
 constants.SKU_IMAGE_POSITION = "position";
 
-constants.ASSET_UNIQUE_NUMBER = "asset_unique_number";
-constants.ASSET_ID = "asset_id";
-constants.ASSET_CATEGORY = "category";
-constants.ASSET_SUB_CATEGORY = "sub_category";
-constants.ASSET_MANUFACTERER = "manufacturer";
-constants.ASSET_NAME = "asset_name";
-constants.ASSET_LOCATION = "location";
-constants.ASSET_VENDOR_ID = "vendor_id";
-constants.PROCUREMENT_PRICE = "procurement_price";
 constants.BASE_PRICE = "base_price";
-constants.SELLING_PRICE = "selling_price";
-constants.ASSET_STATUS = "asset_status";
-constants.WARRANTY_STATUS = "warranty_status";
 constants.CATEGORY_NAME = "category_name";
 constants.RATING = "rating";
 
 constants.ORDER_ID = "order_id";
 constants.TRANSACTION_ID = "transaction_id";
-constants.ORDER_DATE = "order_date";
-constants.ADDRESS_ID = "address_id";
 constants.BASE_AMOUNT = "base_amount";
-
+constants.PAYMENT_ID = "payment_id";
 
 /**
  * exporting the constants.

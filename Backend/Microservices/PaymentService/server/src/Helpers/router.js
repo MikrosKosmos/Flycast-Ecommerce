@@ -1,6 +1,8 @@
 const handlers = require('./../Handlers');
 const validator = require('validatorswithgenerators').validators;
-const routes = {};
+const routes = {
+   "payment": handlers.payment
+};
 
 const path = {};
 /**

@@ -15,6 +15,7 @@
     "dotenv": "^8.2.0",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
+    "razorpay": "^2.0.6",
     "validatorswithgenerators": "^1.0.3"
   }
 }
