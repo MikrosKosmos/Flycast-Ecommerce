@@ -21,6 +21,7 @@ begin
            cm.category_name,
            s.sku,
            s.average_rating,
+           im.price,
            sp.image_url,
            sp.position
     from tbl_SkuMaster s
@@ -29,6 +30,8 @@ begin
                 left join tbl_SkuPictures sp
                     on sp.sku=s.sku
                     and sp.is_active=1
+                left join tbl_InventoryMaster im
+                    on s.sku=im.sku
              where s.is_active = 1 ', @whereClaus)
     into @stmtSQL;
     #select @stmtSQL;
