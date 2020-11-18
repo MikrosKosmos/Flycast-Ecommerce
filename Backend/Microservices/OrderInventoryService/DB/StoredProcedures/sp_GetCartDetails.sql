@@ -17,12 +17,19 @@ begin
                catm.id              as category_id,
                category_name        as parent_category_name,
                category_description as parent_category_description,
+               i.price,
+               sp.position,
+               sp.image_url,
                cd.quantity
         from tbl_CartMaster cm
                  left join tbl_CartDetails cd
                            on cd.cart_id = cm.id
                  left join tbl_SkuMaster sm
                            on cd.sku = sm.sku
+                 left join tbl_InventoryMaster i
+                           on i.sku = sm.sku
+                 left join tbl_SkuPictures sp
+                           on sp.sku = sm.sku
                  left join tbl_CategoryMaster catm
                            on sm.parent_category = catm.id
         where cm.user_id = parUserId
