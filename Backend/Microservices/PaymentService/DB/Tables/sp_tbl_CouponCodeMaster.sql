@@ -12,7 +12,7 @@ begin
         CREATE TABLE `tbl_CouponCodeMaster`
         (
             `id`                  int          NOT NULL AUTO_INCREMENT,
-            `coupon_name`         varchar(255) NOT NULL,
+            `coupon_code`         varchar(255) NOT NULL,
             `discount_amount`     decimal(18, 2)        DEFAULT NULL,
             `discount_percentage` decimal(18, 2)        DEFAULT NULL,
             `coupon_start_date`   date         NOT NULL,
