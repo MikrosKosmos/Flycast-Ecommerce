@@ -17,12 +17,12 @@ const AppRoutes: Routes = [
   },
   {
     path: "",
-    //canActivate: [AuthGuardService],
+    canActivate: [AuthGuardService],
     component: MainLayoutComponent,
     children: [
       {
         path: "dashboard",
-        //canActivate: [AuthGuardService],
+        canActivate: [AuthGuardService],
         loadChildren: "./main/dashboard/dashboard.module#DashboardModule",
       },
       {
