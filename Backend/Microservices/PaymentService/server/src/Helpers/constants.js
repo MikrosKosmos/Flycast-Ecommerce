@@ -63,23 +63,13 @@ constants.REQUEST_TYPE = "type";
 /**
  * Status Values
  */
-
-constants.STATUS_PENDING = 1;
-constants.STATUS_CONFIRMED = 2;
-constants.STATUS_DISPATCHED = 3;
-constants.STATUS_CANCEL = 4;
-constants.STATUS_PAYMENT_ERROR = 5;
-constants.STATUS_NOT_YET_DISPATCHED = 6;
-constants.STATUS_SHIPPED = 7;
-constants.STATUS_DELIVERED = 8;
-constants.STATUS_IN_STOCK = 9;
-constants.STATUS_SOLD = 10;
-constants.STATUS_IN_TRANSIT = 11;
-constants.STATUS_WARRANTY_NOT_ACTIVATED = 12;
-constants.STATUS_WARRANTY_ACTIVATED = 13;
-constants.STATUS_ERROR = 14;
-constants.STATUS_COMPLETED = 15;
-constants.STATUS_PROCESSING = 16;
+constants.STATUS_PAYMENT_CAPTURED = 1;
+constants.STATUS_PAYMENT_REJECTED = 2;
+constants.STATUS_PAYMENT_AUTHORIZED = 3;
+constants.STATUS_PAYMENT_FAILED = 4;
+constants.STATUS_ERROR = 5;
+constants.STATUS_COMPLETED = 6;
+constants.STATUS_PROCESSING = 7;
 
 /**
  * API Methods.
@@ -165,7 +155,8 @@ constants.USER_SERVICE_VALIDATE_TOKEN_PATH = "/auth/token";
 /**
  * SP Names.
  */
-
+constants.SP_CHECK_API_TOKEN = "sp_CheckApiToken";
+constants.SP_LOG_API_STATUS = "sp_LogApiStatus";
 
 /**
  * Column Names
