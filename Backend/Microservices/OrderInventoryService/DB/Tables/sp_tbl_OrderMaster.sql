@@ -21,7 +21,6 @@ begin
                 shipping_address_id   int                    not null,
                 order_base_amount     float                  not null,
                 order_discount_amount float        default 0,
-                order_tax_amount      float                  not null,
                 order_total_amount    float                  not null null,
                 dispatch_before       date         default null,
                 waybill_number        varchar(255) default null,
@@ -34,6 +33,16 @@ begin
                 modified              timestamp    default null
             );
         end;
+    end if;
+    if exists(
+            select 1
+            from information_schema.COLUMNS
+            where TABLE_SCHEMA = currentSchema
+              and TABLE_NAME = 'tbl_OrderMaster'
+              and COLUMN_NAME = 'order_tax_amount'
+        ) then
+        alter table tbl_OrderMaster
+            drop column order_tax_amount;
     end if;
 end;
 call sp_tbl_OrderMaster();
