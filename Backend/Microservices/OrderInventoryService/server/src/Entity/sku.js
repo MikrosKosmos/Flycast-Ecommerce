@@ -73,32 +73,21 @@ class SKU {
 
    /**
     * Method to get the SKU.
-    * @param jwToken: The token of the user.
     * @returns {Promise<Array>}:
     */
-   getSku(jwToken) {
+   getSku() {
       return new Promise(async (resolve, reject) => {
-         try {
-            const userData = await utils.validateUserToken(jwToken);
-            if (validators.validateUndefined(userData) && userData[constants.ID] > 0) {
-               database.runSp(constants.SP_GET_SKU, [this._sku, this._brand, this._model]).then(_resultSet => {
-                  const result = _resultSet[0];
-                  if (validators.validateUndefined(result)) {
-                     resolve([constants.RESPONSE_SUCESS_LEVEL_1, result]);
-                  } else {
-                     resolve([constants.RESPONSE_SUCESS_LEVEL_1, []]);
-                  }
-               }).catch(err => {
-                  printer.printError(err);
-                  reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
-               });
+         database.runSp(constants.SP_GET_SKU, [this._sku, this._brand, this._model]).then(_resultSet => {
+            const result = _resultSet[0];
+            if (validators.validateUndefined(result)) {
+               resolve([constants.RESPONSE_SUCESS_LEVEL_1, result]);
             } else {
-               reject([constants.ERROR_LEVEL_4, constants.FORBIDDEN_MESSAGE]);
+               resolve([constants.RESPONSE_SUCESS_LEVEL_1, []]);
             }
-         } catch (e) {
-            printer.printError(e);
+         }).catch(err => {
+            printer.printError(err);
             reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
-         }
+         });
       });
    }
 

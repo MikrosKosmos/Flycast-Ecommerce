@@ -12,17 +12,15 @@ skuHandler.sku = (dataObject) => {
    return new Promise((resolve, reject) => {
       const method = dataObject.method;
       if (method === constants.HTTP_GET) {
-         const jwToken = validators.validateString(dataObject[constants.JW_TOKEN]) ?
-            dataObject[constants.JW_TOKEN] : false;
          const brand = validators.validateString(dataObject.queryString[constants.BRAND]) ?
             dataObject.queryString[constants.BRAND] : false;
          const model = validators.validateString(dataObject.queryString[constants.MODEL]) ?
             dataObject.queryString[constants.MODEL] : false;
          const skuValue = validators.validateString(dataObject.queryString[constants.SKU]) ?
             dataObject.queryString[constants.SKU] : false;
-         if (jwToken && (skuValue || brand || model)) {
+         if (skuValue || brand || model) {
             const sku = new Sku(brand, model, false, false, false, false, skuValue);
-            sku.getSku(jwToken).then(response => {
+            sku.getSku().then(response => {
                resolve(responseGenerator.generateResponse(response[1], response[0]));
             }).catch(err => {
                reject(responseGenerator.generateErrorResponse(err[1], err[0]));
