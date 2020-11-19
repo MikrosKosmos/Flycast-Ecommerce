@@ -21,6 +21,17 @@
                 <li (click)="subMenu()"><a routerLink="/drone/drone-list">Drones</a> </li>
                 <li (click)="subMenu()"><a>Headphone</a> </li>
             </ul>
+            <li class="Sub" data-toggle="collapse" href="#collapseAttribute" aria-expanded="false"
+                aria-controls="collapseAttribute">
+                <span><i class="menu-03"></i><a>Others</a></span></li>
+            <ul class="selected" class="collapse sub-menu" id="collapseAttribute">
+                <li (click)="subMenu()"><a routerLink="/category/category-list">Category</a> </li>
+                <li (click)="subMenu()"><a routerLink="/mobile/mobile-list">Attribute</a> </li>
+                <li (click)="subMenu()"><a routerLink="/mobile/mobile-list">Category Attributes</a> </li>
+                <li (click)="subMenu()"><a routerLink="/drone/drone-list">Attributes Possible Vaus</a> </li>
+                <li (click)="subMenu()"><a>SKU</a> </li>
+                <li (click)="subMenu()"><a>SKU Pictures</a> </li>
+            </ul>
         </ul>
     </div>
 </nav>

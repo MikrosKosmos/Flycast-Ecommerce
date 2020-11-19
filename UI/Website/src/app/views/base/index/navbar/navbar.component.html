@@ -19,14 +19,15 @@
         <a class="nav-link nav-text" routerLink="/login" href="#">Login \ Register<span
             class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-link ">
+      <li class="nav-link " *ngIf="isRegistered">
         <div class="dropdown">
           <button class="btn btn-light dropdown-toggle pt-0" type="button" id="dropdownMenuButton"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" [userName]="userName">
             {{userName}}
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" routerLink="/users">Go To Account</a>
+            <a class="dropdown-item" routerLink="/products/order-list">Orders</a>
             <a class="dropdown-item" (click)="logout()">Logout</a>
           </div>
         </div>

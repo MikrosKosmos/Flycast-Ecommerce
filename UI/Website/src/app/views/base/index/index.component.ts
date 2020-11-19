@@ -16,6 +16,7 @@ export class IndexComponent implements OnInit {
   pauseOnHover = true;
   pauseOnFocus = true;
   AssetList = [];
+  userName: string;
 
   constructor(
     private productService: ProductService,
@@ -32,6 +33,8 @@ export class IndexComponent implements OnInit {
     this.categoryMobile = "../assets/img/slide/IndexPage/Best-Phones-of-2020.jpg";
     this.categoryDrone = "../assets/img/slide/IndexPage/drone-img.webp"
     this.categoryAccessories = "../assets/img/slide/IndexPage/MB-Mobile-Accessories.webp";
+    this.userName = sessionStorage.getItem('FirstName');
+    console.log('firstname from index', this.userName);
     //this.getAllAssets();
   }
 
@@ -41,7 +44,7 @@ export class IndexComponent implements OnInit {
     this.productService.getAllAssetsList(value).subscribe(data => {
       console.log('product list', data.res);
       if (data.res.length > 1) {
-        this.router.navigate(['/products/all-products/',value]);
+        this.router.navigate(['/products/all-products/', value]);
       }
       else {
         this.toster.error('Products Unavailable');
