@@ -139,6 +139,7 @@ constants.DOUCMENTS_BUCKET_BASE_URL = "https://flycast-documents.s3.ap-south-1.a
 constants.IMAGES_BUCKET_BASE_URL = "http://d3lnfv74g3xcms.cloudfront.net/";
 
 constants.SQS_ORDER_TO_PAYMENT_QUEUE_URL = "https://sqs.ap-south-1.amazonaws.com/076796648158/order_to_payment.fifo";
+constants.SQS_PAYMENT_TO_ORDER_QUEUE_URL = "https://sqs.ap-south-1.amazonaws.com/076796648158/payment_to_order.fifo";
 constants.SQS_MESSAGE_BODY = "MessageBody";
 constants.SQS_BODY = "Body";
 constants.SQS_QUEUE_URL = "QueueUrl";
@@ -194,6 +195,7 @@ constants.ORDER_ID = "order_id";
 constants.TRANSACTION_ID = "transaction_id";
 constants.BASE_AMOUNT = "base_amount";
 constants.PAYMENT_ID = "payment_id";
+constants.IS_PAYMENT_CONFIRMED = "is_payment_confirmed";
 
 /**
  * exporting the constants.
