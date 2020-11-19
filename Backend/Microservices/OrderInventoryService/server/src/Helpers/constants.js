@@ -241,7 +241,10 @@ constants.TRANSACTION_ID = "transaction_id";
 constants.ORDER_DATE = "order_date";
 constants.ADDRESS_ID = "address_id";
 constants.BASE_AMOUNT = "base_amount";
-
+constants.DISCOUNT_AMOUNT = "discount_amount";
+constants.COUPON_CODE = "coupon_code";
+constants.REPLACE_ORDER_ID = "replacement_order_id";
+constants.ORDER_PRODUCTS = "order_products";
 
 /**
  * exporting the constants.

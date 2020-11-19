@@ -5,7 +5,8 @@ const routes = {
    "category": handlers.category,
    "sku": handlers.sku,
    "cart": handlers.cart,
-   "asset": handlers.asset
+   "asset": handlers.asset,
+   "order": handlers.order
 };
 
 const path = {};

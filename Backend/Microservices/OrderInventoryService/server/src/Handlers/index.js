@@ -6,6 +6,7 @@ const category = require("./category");
 const sku = require("./sku");
 const cart = require("./cart");
 const asset = require("./asset");
+const order = require("./order");
 
 /**
  * Method to handle the Error path requests.
@@ -131,6 +132,28 @@ handlerObj.asset = (dataObject) => {
             break;
          case "product":
             promise = asset.products(dataObject);
+            break;
+         default:
+            reject(responseGenerator.generateErrorResponse(constants.ERROR_MESSAGE, constants.ERROR_LEVEL_2));
+      }
+      promise.then(data => {
+         resolve(data);
+      }).catch(err => {
+         reject(err);
+      });
+   });
+};
+/**
+ * Method to handle the order requests.
+ * @param dataObject: The request object.
+ * @returns {Promise<Array>}:
+ */
+handlerObj.order = (dataObject) => {
+   return new Promise((resolve, reject) => {
+      let promise;
+      switch (dataObject.path) {
+         case "order":
+            promise = order.order(dataObject);
             break;
          default:
             reject(responseGenerator.generateErrorResponse(constants.ERROR_MESSAGE, constants.ERROR_LEVEL_2));
