@@ -8,6 +8,10 @@ export const url = {
     GetCity: environment.api_url + '/city?state_id=',
     AddOrUpdateAddress: environment.api_url + '/users/address',
     GetUserAddress: environment.api_url + '/users/address?user_id=',
+    GetAllAssetsByCategory: environment.api_url + '/asset/product?category_id=',
+    GetSKUs: environment.api_url + '/sku?sku=',
+    AddToCart: environment.api_url + '/cart',
+    UpdateRating: environment.api_url + '/sku/rating',
 }
 
 export const apiKey = {

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { ProductService } from 'src/app/shared/Services/product.service';
 
 @Component({
   selector: 'app-index',
@@ -7,16 +10,49 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
   images: any;
+  categoryMobile: string;
+  categoryDrone: string;
+  categoryAccessories: string;
   pauseOnHover = true;
   pauseOnFocus = true;
-  constructor() { }
+  AssetList = [];
+
+  constructor(
+    private productService: ProductService,
+    public router: Router,
+    public toster: ToastrService,
+  ) { }
 
   ngOnInit() {
     this.images = [
       "../assets/img/slide/Drone-Photography-UAV-Coach.jpg",
       "../assets/img/slide/photo-drone-1500x750.jpg",
       "../assets/img/slide/wp1896530-drone-wallpapers.jpg"
-    ]
+    ];
+    this.categoryMobile = "../assets/img/slide/IndexPage/Best-Phones-of-2020.jpg";
+    this.categoryDrone = "../assets/img/slide/IndexPage/drone-img.webp"
+    this.categoryAccessories = "../assets/img/slide/IndexPage/MB-Mobile-Accessories.webp";
+    //this.getAllAssets();
   }
+
+  getAllAssets(value) {
+    //console.log(value);
+    sessionStorage.setItem('CategoryId', value);
+    this.productService.getAllAssetsList(value).subscribe(data => {
+      console.log('product list', data.res);
+      if (data.res.length > 1) {
+        this.router.navigate(['/products/all-products/',value]);
+      }
+      else {
+        this.toster.error('Products Unavailable');
+      }
+    });
+  }
+  // get data(): any{
+  //   return this.productService.productList;
+  // }
+  // set data(value:any){
+  //   this.productService.productList = value;
+  // }
 
 }

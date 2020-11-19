@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.userName = sessionStorage.getItem('FirstName');
-    console.log('username ', this.userName);
+    //console.log('username ', this.userName);
     if (this.userName != null) this.isRegistered = true;
     else this.isRegistered = false;
   }

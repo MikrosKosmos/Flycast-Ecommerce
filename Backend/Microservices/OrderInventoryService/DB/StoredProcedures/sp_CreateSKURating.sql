@@ -1,6 +1,8 @@
 drop procedure if exists sp_CreateSKURating;
-create procedure sp_CreateSKURating(parSku varchar(255), parRating int, parUserId int)
+DELIMITER $$
+CREATE PROCEDURE `sp_CreateSKURating`(parSku varchar(255), parRating int, parUserId int)
 begin
+	SET SQL_SAFE_UPDATES = 0; 
     set @isValid = 0;
     select id into @isValid from tbl_SkuMaster where sku = parSku and is_active = 1;
     if @isValid > 0 then
@@ -32,4 +34,6 @@ begin
     else
         select -1 as id;
     end if;
-end;
+    SET SQL_SAFE_UPDATES = 1;
+end$$
+DELIMITER ;
