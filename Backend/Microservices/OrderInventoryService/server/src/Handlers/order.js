@@ -12,7 +12,18 @@ orderHandler.order = (dataObject) => {
    return new Promise((resolve, reject) => {
       const method = dataObject.method;
       if (method === constants.HTTP_GET) {
-         //TODO:
+         const jwToken = validators.validateString(dataObject[constants.JW_TOKEN]) ?
+            dataObject[constants.JW_TOKEN] : false;
+         if (jwToken) {
+            const order = new Order();
+            order.getOrderDetails(jwToken).then(response => {
+               resolve(responseGenerator.generateResponse(response[1], response[0]));
+            }).catch(err => {
+               reject(responseGenerator.generateErrorResponse(err[1], err[0]));
+            });
+         } else {
+            reject(responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1));
+         }
       } else if (method === constants.HTTP_POST) {
          const orderDate = validators.validateDate(dataObject.postData[constants.ORDER_DATE]) ?
             dataObject.postData[constants.ORDER_DATE] : false;

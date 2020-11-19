@@ -27,7 +27,7 @@ utilsHandler.validateUserToken = (userToken) => {
       tokenValidator.validateToken(userToken).then(userData => {
          resolve(userData);
       }).catch(err => {
-         reject(err);
+         resolve(false);
       });
    });
 };

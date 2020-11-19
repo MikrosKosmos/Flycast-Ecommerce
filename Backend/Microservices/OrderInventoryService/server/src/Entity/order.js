@@ -114,6 +114,33 @@ class Order {
          }
       });
    }
+
+   /**
+    * Method to get the order details.
+    * @param jwToken: The token of the user.
+    * @returns {Promise<Array>}:
+    */
+   getOrderDetails(jwToken) {
+      return new Promise(async (resolve, reject) => {
+         try {
+            const userData = await utils.validateUserToken(jwToken);
+            if (validators.validateUndefined(userData) && userData[constants.ID] > 0) {
+               database.runSp(constants.SP_GET_ORDER_DETAILS, [userData[constants.ID]]).then(_resultSet => {
+                  const result = _resultSet[0];
+                  resolve([constants.RESPONSE_SUCESS_LEVEL_1, result]);
+               }).catch(err => {
+                  printer.printError(err);
+                  reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
+               });
+            } else {
+               reject([constants.ERROR_LEVEL_4, constants.FORBIDDEN_MESSAGE]);
+            }
+         } catch (e) {
+            printer.printError(e);
+            reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
+         }
+      });
+   }
 }
 
 /**
