@@ -48,7 +48,7 @@ class SqsHelper {
          const receiveParams = {};
          receiveParams[constants.SQS_QUEUE_URL] = this._queueUrl;
          receiveParams[constants.SQS_MAX_NUMBER_OF_MESSAGE] = maxNumberOfMessage;
-         awsHelper.sns.receiveMessage(receiveParams, (err, data) => {
+         awsHelper.sqs.receiveMessage(receiveParams, (err, data) => {
             if (err) {
                printer.printError(err);
                reject(false);

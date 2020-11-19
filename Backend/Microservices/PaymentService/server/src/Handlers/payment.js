@@ -37,13 +37,11 @@ paymentHandler.payment = (dataObject) => {
             dataObject.postData[constants.BASE_AMOUNT] : false;
          const couponCode = validators.validateString(dataObject.postData[constants.COUPON_CODE]) ?
             dataObject.postData[constants.COUPON_CODE] : false;
-         const categoryId = validators.validateNumber(dataObject.postData[constants.CATEGORY_ID]) ?
-            dataObject.postData[constants.CATEGORY_ID] : false;
          const jwToken = validators.validateString(dataObject[constants.JW_TOKEN]) ?
             dataObject[constants.JW_TOKEN] : false;
-         if (orderId && transactionId && baseAmount && categoryId && jwToken) {
+         if (orderId && transactionId && baseAmount && jwToken) {
             const payment = new Payment(false, orderId, transactionId);
-            payment.createAndCapturePayment(baseAmount, couponCode, categoryId, jwToken).then(response => {
+            payment.createAndCapturePayment(baseAmount, couponCode, jwToken).then(response => {
                resolve(responseGenerator.generateResponse(response[1], response[0]));
             }).catch(err => {
                reject(responseGenerator.generateErrorResponse(err[1], err[0]));

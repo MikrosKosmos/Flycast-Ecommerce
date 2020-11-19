@@ -140,6 +140,7 @@ constants.IMAGES_BUCKET_BASE_URL = "http://d3lnfv74g3xcms.cloudfront.net/";
 
 constants.SQS_ORDER_TO_PAYMENT_QUEUE_URL = "https://sqs.ap-south-1.amazonaws.com/076796648158/order_to_payment.fifo";
 constants.SQS_MESSAGE_BODY = "MessageBody";
+constants.SQS_BODY = "Body";
 constants.SQS_QUEUE_URL = "QueueUrl";
 constants.SQS_MESSAGE_GROUP_ID = "MessageGroupId";
 constants.SQS_DEDUPLICATION_ID = "MessageDeduplicationId";

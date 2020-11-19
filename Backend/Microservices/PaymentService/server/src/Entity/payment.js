@@ -48,17 +48,16 @@ class Payment {
     * Method to create and Capture the payment for a transaction.
     * @param baseAmount: The base amount.
     * @param couponCode: The coupon code applied.
-    * @param categoryId: The category id of the product.
     * @param jwToken: The jwToken of the user.
     * @returns {Promise<Array>}:
     */
-   createAndCapturePayment(baseAmount, couponCode, categoryId, jwToken) {
+   createAndCapturePayment(baseAmount, couponCode, jwToken) {
       return new Promise(async (resolve, reject) => {
          try {
             const userData = await utils.validateUserToken(jwToken);
             if (validators.validateUndefined(userData) && userData[constants.ID] > 0) {
                database.runSp(constants.SP_CREATE_ORDER_PAYMENT, [this._orderId, this._transactionId,
-                  baseAmount, validators.validateString(couponCode) ? couponCode : false, categoryId,
+                  baseAmount, validators.validateString(couponCode) ? couponCode : false,
                   userData[constants.ID]]).then(async _resultSet => {
                   const result = _resultSet[0][0];
                   if (validators.validateUndefined(result) && result[constants.ID] > 0) {
