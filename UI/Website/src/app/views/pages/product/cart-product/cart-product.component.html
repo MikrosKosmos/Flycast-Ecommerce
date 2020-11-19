@@ -1,10 +1,10 @@
 <div class="container-fluid">
   <div *ngFor="let cart of cartDetails">
     <ul class="list-unstyled">
-      <li class="media">
+      <li class="media pt-3">
         <div class="col-md-3 ">
-          <img class="mr-3" src="..." alt="Product Image"></div>
-        <div class="col-md-6">
+          <img class="mr-3" src="{{cart.image_url}}" alt="Product Image" style="height: 20rem;"></div>
+        <div class="col-md-6 pt-3">
           <div class="media-body">
             <div class="col-md-8">
               <h4 class="m-1 mb-2">{{cart.brand}} {{cart.model}} </h4>
@@ -27,7 +27,8 @@
             </div>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 pt-3">
+          <h5>Price: {{cart.price|currency:"INR"}}</h5>
           <button class="btn btn-primary m-2">Proceed to buy</button>
         </div>
       </li>

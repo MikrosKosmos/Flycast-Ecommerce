@@ -16,6 +16,8 @@ import { FormsModule } from '@angular/forms';
 import { RatingModule } from 'ngx-bootstrap/rating';
 import { StarRatingComponent } from 'ng-starrating';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthGuard } from 'src/app/shared/Guards/auth.guard';
+import { OrderListComponent } from './order-list/order-list.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
     ProductDetailsComponent,
     ProductListComponent,
     CartProductComponent,
-    WishlistProductComponent
+    WishlistProductComponent,
+    OrderListComponent
   ],
   imports: [
     CommonModule,
@@ -33,6 +36,9 @@ import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     RatingModule.forRoot(),
     //NgbRatingModule.forRoot()
+  ],
+  providers:[
+    AuthGuard
   ]
 })
 export class ProductModule { }
