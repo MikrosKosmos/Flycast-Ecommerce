@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 require('dotenv').config();
 const server = require('./src/Helpers/server');
+const Worker = require("./src/Workers");
 const os = require('os');
 const cluster = require('cluster');
 const app = {};
@@ -10,6 +11,8 @@ const app = {};
 app.init = () => {
    const cpuLength = os.cpus().length;
    if (cluster.isMaster) {
+      const worker = new Worker();
+      worker.init();
       for (let i = 0; i < cpuLength; i++) {
          cluster.fork();
       }

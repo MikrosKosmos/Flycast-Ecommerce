@@ -149,6 +149,8 @@ constants.DOUCMENTS_BUCKET_BASE_URL = "https://flycast-documents.s3.ap-south-1.a
 constants.IMAGES_BUCKET_BASE_URL = "http://d3lnfv74g3xcms.cloudfront.net/";
 
 constants.SQS_ORDER_TO_PAYMENT_QUEUE_URL = "https://sqs.ap-south-1.amazonaws.com/076796648158/order_to_payment.fifo";
+constants.SQS_PAYMENT_TO_ORDER_QUEUE_URL = "https://sqs.ap-south-1.amazonaws.com/076796648158/payment_to_order.fifo";
+constants.SQS_BODY = "Body";
 constants.SQS_MESSAGE_BODY = "MessageBody";
 constants.SQS_QUEUE_URL = "QueueUrl";
 constants.SQS_MESSAGE_GROUP_ID = "MessageGroupId";
@@ -185,6 +187,7 @@ constants.SP_CREATE_SKU_PICTURES = "sp_CreateSKUPictures";
 constants.SP_GET_ATTRIBUTE_VALUE_BY_SKU = "sp_GetAttributesBySKU";
 constants.SP_CREATE_SKU_RATINGS = "sp_CreateSKURating";
 constants.SP_CREATE_ORDER = "sp_CreateOrder";
+constants.SP_UPDATE_ORDER_STATUS = "sp_UpdateOrderStatus";
 
 /**
  * Column Names
@@ -245,6 +248,7 @@ constants.DISCOUNT_AMOUNT = "discount_amount";
 constants.COUPON_CODE = "coupon_code";
 constants.REPLACE_ORDER_ID = "replacement_order_id";
 constants.ORDER_PRODUCTS = "order_products";
+constants.IS_PAYMENT_CONFIRMED = "is_payment_confirmed";
 
 /**
  * exporting the constants.

@@ -85,6 +85,35 @@ class Order {
          }
       });
    }
+
+   /**
+    * Method to update the order status.
+    * @param statusId: The status id to be updated with.
+    * @param jwToken: The token of the user.
+    * @returns {Promise<Array>}:
+    */
+   updateOrderStatus(statusId, jwToken) {
+      return new Promise(async (resolve, reject) => {
+         try {
+            const userData = await utils.validateUserToken(jwToken);
+            if (validators.validateUndefined(userData) && userData[constants.ID] > 0) {
+               database.runSp(constants.SP_UPDATE_ORDER_STATUS, [this._orderId, statusId, userData[constants.ID]])
+                  .then(_resultSet => {
+                     const result = _resultSet[0][0];
+                     resolve([constants.RESPONSE_SUCESS_LEVEL_1, result]);
+                  }).catch(err => {
+                  printer.printError(err);
+                  reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
+               });
+            } else {
+               reject([constants.ERROR_LEVEL_4, constants.FORBIDDEN_MESSAGE]);
+            }
+         } catch (e) {
+            printer.printError(e);
+            reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
+         }
+      });
+   }
 }
 
 /**
