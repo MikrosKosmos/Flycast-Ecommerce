@@ -27,11 +27,18 @@ const AppRoutes: Routes = [
       },
       {
         path: "mobile",
+        canActivate: [AuthGuardService],
         loadChildren: "./main/mobile/mobile.module#MobileModule",
       },
       {
         path: "drone",
+        canActivate: [AuthGuardService],
         loadChildren: "./main/drone/drone.module#DroneModule",
+      },
+      {
+        path: "category",
+        canActivate: [AuthGuardService],
+        loadChildren: "./main/category/category.module#CategoryModule",
       },
       { path: "**", redirectTo: "dashboard" },
     ],
