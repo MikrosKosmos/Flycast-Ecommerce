@@ -1,17 +1,17 @@
 import { FormGroup } from "@angular/forms";
 import { Component, Input, OnInit } from "@angular/core";
-import Swal from "sweetalert2";
 import { Router } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { ToastrService } from "ngx-toastr";
 import { AuthenticationService } from "src/app/authentication.service";
+import Swal from "sweetalert2";
 
 @Component({
-  selector: "emp-create-category",
-  templateUrl: "./create-category.component.html",
-  styleUrls: ["./create-category.component.scss"],
+  selector: "emp-create-attribute",
+  templateUrl: "./create-attribute.component.html",
+  styleUrls: ["./create-attribute.component.scss"],
 })
-export class CreateCategoryComponent implements OnInit {
+export class CreateAttributeComponent implements OnInit {
   @Input() parentForm: FormGroup;
   constructor(
     private _authService: AuthenticationService,
@@ -37,9 +37,9 @@ export class CreateCategoryComponent implements OnInit {
   }
 
   /**
-   * Method to create Category
+   * Method to create new attribute
    */
-  submitCreateCategoryt = () => {
+  submitNewAttribute = () => {
     if (this.parentForm.invalid) this.markFormGroupTouched(this.parentForm);
     else {
       Swal.fire({
@@ -55,11 +55,14 @@ export class CreateCategoryComponent implements OnInit {
           this.spinner.show();
           const data = { ...this.parentForm.value };
           this._authService
-            .request("post", "category", data)
+            .request("post", "attribute", data)
             .subscribe((response) => {
               if (response.res.id > 0) {
-                this.toastr.success("Flycast", "Category Created Successfully");
-                this.router.navigateByUrl("/category/category-list");
+                this.toastr.success(
+                  "Flycast",
+                  "Attribute Created Successfully"
+                );
+                this.router.navigateByUrl("/attribute/attributes-list");
                 this.spinner.hide();
               } else {
                 this.toastr.error("Flycast", "Something went wrong!");

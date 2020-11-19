@@ -1,0 +1,64 @@
+<article class="content card mb-4 mt-4" style="font-family: 'Roboto', sans-serif !important;">
+    <form [formGroup]="parentForm" class="emp-form-group">
+        <div class="form-row">
+            <div class="col-lg-12 col-md-12 card px-0">
+                <div class="card-header block-heading">Assign Attribute</div>
+                <div class="card-body">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4">
+                                <emp-input-option-list [form]="parentForm" [name]="'category_id'" required="required"
+                                    validation="true" [options]="categoryList"
+                                    (optionValueChange)="selectedCategory($event)">
+                                    <label>Category</label>
+                                </emp-input-option-list>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label>Attributes</label>
+                                    </div>
+                                    <div class="col-12">
+                                        <ng-container formArrayName="attributes"
+                                            *ngFor="let item of attributeFormArray.controls; let i = index">
+                                            <div class="d-flex">
+                                                <div class="custom_select_option w-75" [formGroupName]="i">
+                                                    <select class="form-control" formControlName="attribute_id">
+                                                        <option *ngFor="let element of attributeList"
+                                                            [value]="element.code">
+                                                            {{element.value}}</option>
+                                                    </select>
+                                                    <div *ngIf="isSubmitted && parentForm.controls.attributes['controls'][i]['controls'].attribute_id.errors"
+                                                        style="color: red;">
+                                                        <div
+                                                            *ngIf="isSubmitted && parentForm.controls.attributes['controls'][i]['controls'].attribute_id.required">
+                                                            This field is required
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-25 text-center">
+                                                    <button type="button" class="btn btn-danger"
+                                                        (mousedown)="removeItem(i)" *ngIf="i!=0"><i class="fa fa-close"
+                                                            style="font-size:17px; height: auto;"></i></button>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                    <div class="col-12  mb-5 btn-wrap">
+                                        <button type="button" class="btn btn-success"
+                                            (mousedown)="addAttributeForm()">More
+                                            Attribute</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center col-md-12  mt-4 btn-wrap">
+                                <button type="button" class="btn btn-Submit mx-1 btn-sm"
+                                    (mousedown)="assignAttribute()">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</article>
