@@ -1,9 +1,4 @@
-const constants = require("./../Helpers/constants");
-const SQSHelper = require("./../Helpers/sqsHelper");
 const printer = require("./../Helpers/printer");
-const Order = require("./../Entity/order");
-const validators = require("validatorswithgenerators").validators;
-const generator = require("validatorswithgenerators").generators;
 const orderStatusProcessor = require("./orderStatusProcessor");
 const scheduler = require("node-schedule");
 
