@@ -29,6 +29,26 @@ begin
             `modified`             timestamp       NULL     DEFAULT NULL
         );
     end if;
+    if exists(
+            select 1
+            from information_schema.COLUMNS
+            where TABLE_SCHEMA = currentSchema
+              and TABLE_NAME = 'tbl_OrderPaymentTransaction'
+              and COLUMN_NAME = 'category_id'
+        ) then
+        alter table tbl_OrderPaymentTransaction
+            drop column category_id;
+    end if;
+    if exists(
+            select 1
+            from information_schema.COLUMNS
+            where TABLE_SCHEMA = currentSchema
+              and TABLE_NAME = 'tbl_OrderPaymentTransaction'
+              and COLUMN_NAME = 'gst_amount'
+        ) then
+        alter table tbl_OrderPaymentTransaction
+            drop column gst_amount;
+    end if;
 end;
 call sp_tbl_OrderPaymentTransaction();
 drop procedure if exists sp_tbl_OrderPaymentTransaction;

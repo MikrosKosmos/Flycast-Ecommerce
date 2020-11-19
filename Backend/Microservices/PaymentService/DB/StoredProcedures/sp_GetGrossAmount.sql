@@ -1,6 +1,6 @@
 drop procedure if exists sp_GetGrossAmount;
-create procedure sp_GetGrossAmount(parBaseAmount float, parCouponCode varchar(50), parCategoryId int,
-                                   OUT parGrossAmount float, OUT parDiscountAmount float, OUT parTaxAmount float)
+create procedure sp_GetGrossAmount(parBaseAmount float, parCouponCode varchar(50), OUT parGrossAmount float,
+                                   OUT parDiscountAmount float)
 begin
     set @isValid = 0;
     set @startDate = '',@endDate = '';
@@ -14,20 +14,12 @@ begin
       and is_active = 1;
     set @grossAmount = 0;
     set @taxPercentage = 0;
-    #Getting GST percentage.
-    select gst_percentage
-    into @taxPercentage
-    from tbl_CategoryGSTMapping
-    where category_id = parCategoryId
-      and is_active = 1;
     #Calculating amount.
-    set @taxAmount = (@taxPercentage * parBaseAmount) / 100;
     if @isValid > 0 and @currentDate between @startDate and @endDate and @discountValue > 0 then
-        set @grossAmount = (@taxAmount + parBaseAmount) - @discountValue;
+        set @grossAmount = (parBaseAmount - @discountValue);
     else
-        set @grossAmount = (@taxAmount + parBaseAmount);
+        set @grossAmount = (parBaseAmount);
     end if;
     set parGrossAmount = @grossAmount;
     set parDiscountAmount = @discountValue;
-    set parTaxAmount = @taxAmount;
 end;
