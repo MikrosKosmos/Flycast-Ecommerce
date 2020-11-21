@@ -8,11 +8,16 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "src/app/shared/shared.module";
 import { UiModule } from "src/app/ui/ui.module";
 import { CategoryAttributeComponent } from "./category-attribute/category-attribute.component";
+import { AttributePossibleValueComponent } from "./attribute-possible-value/attribute-possible-value.component";
 
 const attributeRoutes: Routes = [
   { path: "attributes-list", component: AttributeListComponent },
   { path: "create-attribute", component: ManageAttributeComponent },
   { path: "category-attribute", component: CategoryAttributeComponent },
+  {
+    path: "attribute-possible-value",
+    component: AttributePossibleValueComponent,
+  },
 ];
 @NgModule({
   declarations: [
@@ -20,6 +25,7 @@ const attributeRoutes: Routes = [
     ManageAttributeComponent,
     CreateAttributeComponent,
     CategoryAttributeComponent,
+    AttributePossibleValueComponent,
   ],
   imports: [
     CommonModule,

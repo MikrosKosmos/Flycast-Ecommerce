@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
 import { RequiredValidator } from "src/app/core/validators/required.validator";
@@ -132,19 +133,34 @@ export class CategoryAttributeComponent implements OnInit {
     this.isSubmitted = true;
     if (this.parentForm.invalid) this.markFormGroupTouched(this.parentForm);
     else {
-      this.spinner.show();
-      this._authService
-        .request("post", `category/attribute`, this.parentForm.value)
-        .subscribe((response) => {
-          if (response.res.id > 0) {
-            this.router.navigateByUrl("/attribute/attributes-list");
-            this.toastr.success("Flycast", "Attributes assigned successfully");
-            this.spinner.hide();
-          } else {
-            this.toastr.error("Flycast", "Something went wrong");
-            this.spinner.hide();
-          }
-        });
+      Swal.fire({
+        title: "Do you want to assign these attributes?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "",
+        confirmButtonText: "Yes, Assign it!",
+        allowOutsideClick: false,
+      }).then((result) => {
+        if (result.value) {
+          this.spinner.show();
+          this._authService
+            .request("post", `category/attribute`, this.parentForm.value)
+            .subscribe((response) => {
+              if (response.res.id > 0) {
+                this.router.navigateByUrl("/attribute/attributes-list");
+                this.toastr.success(
+                  "Flycast",
+                  "Attributes assigned successfully"
+                );
+                this.spinner.hide();
+              } else {
+                this.toastr.error("Flycast", "Something went wrong");
+                this.spinner.hide();
+              }
+            });
+        }
+      });
     }
   };
 }
