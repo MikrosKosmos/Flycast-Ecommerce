@@ -45,6 +45,11 @@ const AppRoutes: Routes = [
         canActivate: [AuthGuardService],
         loadChildren: "./main/attribute/attribute.module#AttributeModule",
       },
+      {
+        path: "asset",
+        canActivate: [AuthGuardService],
+        loadChildren: "./main/assets/assets.module#AssetsModule",
+      },
       { path: "**", redirectTo: "dashboard" },
     ],
   },
