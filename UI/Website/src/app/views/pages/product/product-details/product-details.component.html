@@ -1,3 +1,6 @@
+<ngx-spinner size="large">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
 <div class="container-fluid">
     <div class="card mt-3 mb-3">
         <div class="card-body">
@@ -51,8 +54,7 @@
                                 </p> -->
                                 <rating [(ngModel)]="rate" [max]="max" [readonly]="isReadonly"
                                     (onHover)="hoveringOverRating($event)" (onLeave)="resetStar()"
-                                    (click)="updateRating()" 
-                                    [titles]="['Star 1','Star 2','Star 3','Star 4','Star 5']">
+                                    (click)="updateRating()" [titles]="['Star 1','Star 2','Star 3','Star 4','Star 5']">
                                 </rating>
                                 <button class="label"
                                     [ngClass]="{'label-warning': overStar<2, 'label-info': overStar>=2 && overStar<4, 'label-success': overStar>=4}"

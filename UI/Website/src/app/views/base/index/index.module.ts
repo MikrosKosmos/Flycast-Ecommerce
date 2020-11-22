@@ -12,6 +12,7 @@ import { IndexRoutes } from './index.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     ProductModule,
     NgbModule,
+    NgxSpinnerModule,
     RouterModule.forChild(IndexRoutes)
   ],
   schemas: [NO_ERRORS_SCHEMA],

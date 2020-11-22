@@ -1,3 +1,6 @@
+<ngx-spinner size="large">
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
 <div class="container-fluid">
   <div *ngFor="let cart of cartDetails">
     <ul class="list-unstyled">
@@ -29,7 +32,7 @@
         </div>
         <div class="col-md-3 pt-3">
           <h5>Price: {{cart.price|currency:"INR"}}</h5>
-          <button class="btn btn-primary m-2">Proceed to buy</button>
+          <button class="btn btn-primary m-2" (click)="proceedToBuy()">Proceed to buy</button>
         </div>
       </li>
       <!-- <li class="media my-4">

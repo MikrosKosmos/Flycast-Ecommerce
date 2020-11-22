@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProductService } from 'src/app/shared/Services/product.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-index',
@@ -22,9 +23,11 @@ export class IndexComponent implements OnInit {
     private productService: ProductService,
     public router: Router,
     public toster: ToastrService,
+    public spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit() {
+    this.spinner.show();
     this.images = [
       "../assets/img/slide/Drone-Photography-UAV-Coach.jpg",
       "../assets/img/slide/photo-drone-1500x750.jpg",
@@ -35,6 +38,7 @@ export class IndexComponent implements OnInit {
     this.categoryAccessories = "../assets/img/slide/IndexPage/MB-Mobile-Accessories.webp";
     this.userName = sessionStorage.getItem('FirstName');
     console.log('firstname from index', this.userName);
+    this.spinner.hide();
     //this.getAllAssets();
   }
 

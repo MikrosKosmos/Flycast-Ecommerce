@@ -1,1 +1,51 @@
-<p>shipping-details works!</p>
+<ngx-spinner size="large">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+<!-- <div class="container-fluid">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">Select Delivery Address</div>
+            <div>
+                <div class="card-body" *ngFor="let address of addressList">
+                    <label style="display: block;">
+                        <input type="radio" name="address" value="{{address.address_id}}">
+                        <p><b>{{address.contact_person_name}}</b></p>
+                        <p>{{address.contact_phone_number}}</p>
+                        <span>{{address.address_1}}, {{address.address_2}}, {{address.state_name}},
+                            {{address.city_name}}-{{address.pincode}}</span>
+                        <p><b>{{address.address_type}}</b></p>
+                    </label>
+                    <button class="btn btn-success" type="submit" (click)="getDeliveryAddress(address.address_id)">Deliver Here</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<section id="addressSection">
+    <div class="container-fluid">
+        <div class="title">
+            <h3>Select Deliver Address</h3>
+        </div>
+        <div class="row">
+            <div *ngFor="let address of addressList">
+                <div class="col-md-3 col-sm-12">
+                    <div class="card text-center">
+                        <div class="card-header p-2">
+                            <h5>{{address.contact_person_name}}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>{{address.contact_phone_number}}</p>
+                            <span>{{address.address_1}}, {{address.address_2}}, {{address.state_name}},
+                                {{address.city_name}}-{{address.pincode}}</span>
+                            <p><b>{{address.address_type}}</b></p>
+                        </div>
+                        <div class="card-footer p-1">
+                            <a (click)="getAddressId(address.address_id)">Deliver Here</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

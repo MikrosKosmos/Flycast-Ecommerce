@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from 'src/app/shared/Services/product.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-product-list',
@@ -19,7 +20,8 @@ export class ProductListComponent implements OnInit {
     private modalService: NgbModal,
     private productService: ProductService,
     private route: Router,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
@@ -41,8 +43,10 @@ export class ProductListComponent implements OnInit {
     // ];
     this.productCategory = this.activeRoute.snapshot.paramMap.get("catId");
     //console.log('cat id: ', this.productCategory)
+    this.spinner.show();
     this.productService.getAllAssetsList(this.productCategory).subscribe(data => {
       console.log(data.res);
+      this.spinner.hide();
       this.productCategoryName = data.res[0].category_name;
       this.productDetails = data.res;
     });
