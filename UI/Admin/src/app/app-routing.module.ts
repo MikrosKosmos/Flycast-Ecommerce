@@ -50,6 +50,11 @@ const AppRoutes: Routes = [
         canActivate: [AuthGuardService],
         loadChildren: "./main/assets/assets.module#AssetsModule",
       },
+      {
+        path: "sku",
+        canActivate: [AuthGuardService],
+        loadChildren: "./main/sku/sku.module#SkuModule",
+      },
       { path: "**", redirectTo: "dashboard" },
     ],
   },
