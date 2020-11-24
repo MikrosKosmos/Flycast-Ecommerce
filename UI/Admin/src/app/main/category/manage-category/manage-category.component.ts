@@ -13,16 +13,7 @@ export class ManageCategoryComponent implements OnInit {
 
   ngOnInit() {
     this.createCategoryForm = this.formBuilder.group({
-      category_name: [
-        "",
-        Validators.compose([RequiredValidator("Category Name is required")]),
-      ],
-      category_description: [
-        "",
-        Validators.compose([
-          RequiredValidator("Category Description is required"),
-        ]),
-      ],
+      categories: this.formBuilder.array([]),
     });
   }
 }
