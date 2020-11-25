@@ -23,12 +23,7 @@ export class CreateAssetsComponent implements OnInit {
     { code: "Poor", value: "Poor" },
     { code: "Very Poor", value: "Very Poor" },
   ];
-  SKUList = [
-    {
-      code: "FC-Mavic-Mavic-Mini-Blue-Excellent",
-      value: "FC-Mavic-Mavic-Mini-Blue-Excellent",
-    },
-  ];
+  SKUList = [];
   categoryList = [];
   attributeList = [];
   attributePossibleValue = [];
@@ -47,6 +42,7 @@ export class CreateAssetsComponent implements OnInit {
     this.initParentForm();
     this.initAttributeValueForm();
     this.getCategoryList();
+    this.getSKUList();
   }
 
   /**
@@ -223,6 +219,16 @@ export class CreateAssetsComponent implements OnInit {
     }
   };
 
+  getSKUList = () => {
+    this._authService.request("get", "sku").subscribe((response) => {
+      if (response.res.length > 0) {
+        response.res.forEach((element) => {
+          this.SKUList.push({ code: element.sku, value: element.sku });
+        });
+      }
+    });
+  };
+
   /**
    * Method to create new asste
    */
@@ -249,15 +255,20 @@ export class CreateAssetsComponent implements OnInit {
           this.spinner.show();
           const data = { ...this.parentForm.value };
           data.attribute_values = this.attribute_values;
+          console.log(data);
           this._authService
             .request("post", `asset`, data)
             .subscribe((response) => {
-              if (response.res.id > 0) {
+              console.log(response);
+              if (
+                response.res.asset_id > 0 &&
+                response.res.is_stock_updated > 0
+              ) {
                 this.toastr.success("Flycast", "Asset is created");
                 this.router.navigateByUrl("/asset/assets-list");
                 this.spinner.hide();
               } else {
-                this.toastr.error("Flycast", "Something went wrong");
+                this.toastr.error("Flycast", "Something went wrong!");
                 this.spinner.hide();
               }
             });
