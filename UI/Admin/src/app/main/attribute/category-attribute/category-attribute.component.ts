@@ -111,18 +111,16 @@ export class CategoryAttributeComponent implements OnInit {
     if (value) {
       this.attributeList = [];
       this.clearFormArray(this.attributeFormArray);
-      this._authService
-        .request("get", `attribute?category_id=${value}`)
-        .subscribe((response) => {
-          if (response.res.length > 0) {
-            response.res.forEach((element) => {
-              this.attributeList.push({
-                code: element.attribute_id,
-                value: element.attribute_name,
-              });
+      this._authService.request("get", `attribute`).subscribe((response) => {
+        if (response.res.length > 0) {
+          response.res.forEach((element) => {
+            this.attributeList.push({
+              code: element.attribute_id,
+              value: element.attribute_name,
             });
-          }
-        });
+          });
+        }
+      });
     }
   };
 

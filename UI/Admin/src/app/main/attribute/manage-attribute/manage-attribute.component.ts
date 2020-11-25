@@ -14,16 +14,7 @@ export class ManageAttributeComponent implements OnInit {
 
   ngOnInit() {
     this.createAttributeForm = this.formBuilder.group({
-      attribute_name: [
-        "",
-        Validators.compose([RequiredValidator("Attribute Name is required")]),
-      ],
-      attribute_description: [
-        "",
-        Validators.compose([
-          RequiredValidator("Attribute Description is required"),
-        ]),
-      ],
+      attributes: this.formBuilder.array([]),
     });
   }
 }

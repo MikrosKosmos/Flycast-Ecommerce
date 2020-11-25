@@ -52,7 +52,6 @@ export class AttributeListComponent implements OnInit {
       this._authService
         .request("get", `attribute?attribute_id=${categoryId}`)
         .subscribe((response) => {
-          console.log("Attributes", response);
           this.attributeList = response.res;
           this.spinner.hide();
         });

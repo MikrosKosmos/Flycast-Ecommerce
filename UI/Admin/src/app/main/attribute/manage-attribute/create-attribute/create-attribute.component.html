@@ -6,17 +6,50 @@
                 <div class="card-body">
                     <div class="col-lg-12 col-md-12">
                         <div class="row">
-                            <div class="col-lg-6 col-md-6">
-                                <emp-input-field [form]="parentForm" [name]="'attribute_name'" required="required"
-                                    validation="true">
-                                    <label>Attribute Name</label>
-                                </emp-input-field>
+                            <div class="col-lg-12 col-md-12">
+                                <ng-container formArrayName="attributes"
+                                    *ngFor="let item of attributeFormArray.controls; let i = index">
+                                    <div [formGroupName]="i">
+                                        <div class="row">
+                                            <div class="col-lg-5 col-md-5">
+                                                <div class="custom_form_warpper">
+                                                    <label>Attribute Name <span style="color: red;">*</span></label>
+                                                    <input type="text" formControlName="attribute_name">
+                                                    <div *ngIf="isSubmitted && parentForm.controls.attributes['controls'][i]['controls'].attribute_name.errors"
+                                                        style="color: red;">
+                                                        <div
+                                                            *ngIf="isSubmitted && parentForm.controls.attributes['controls'][i]['controls'].attribute_name.errors.required">
+                                                            This field is required
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5 col-md-5">
+                                                <div class="custom_form_warpper">
+                                                    <label>Attribute Description<span
+                                                            style="color: red;">*</span></label>
+                                                    <textarea formControlName="attribute_description"></textarea>
+                                                    <div *ngIf="isSubmitted && parentForm.controls.attributes['controls'][i]['controls'].attribute_description.errors"
+                                                        style="color: red;">
+                                                        <div
+                                                            *ngIf="isSubmitted && parentForm.controls.attributes['controls'][i]['controls'].attribute_description.errors.required">
+                                                            This field is required
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2">
+                                                <button type="button" class="btn btn-danger mt-5"
+                                                    (mousedown)="removeItem(i)" *ngIf="i!=0"><i class="fa fa-close"
+                                                        style="font-size:17px;"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
                             </div>
-                            <div class="col-lg-6 col-md-6">
-                                <emp-textarea-field [form]="parentForm" [name]="'attribute_description'"
-                                    required="required" validation="true">
-                                    <label>Attribute Description</label>
-                                </emp-textarea-field>
+                            <div class="col-lg-12 col-md-12 btn-wrap text-right">
+                                <button type="button" class="btn btn-success" (mousedown)="addForm()">More
+                                    Attributes</button>
                             </div>
                             <div class="text-center col-md-12  mt-4 btn-wrap">
                                 <button type="button" class="btn btn-Submit mx-1 btn-sm"

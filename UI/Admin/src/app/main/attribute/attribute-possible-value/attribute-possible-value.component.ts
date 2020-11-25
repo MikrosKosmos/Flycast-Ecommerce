@@ -156,19 +156,21 @@ export class AttributePossibleValueComponent implements OnInit {
           this.spinner.show();
           let data = { ...this.possibleValuForm.value };
           delete data.category;
-          this._authService.request("post", "", data).subscribe((response) => {
-            if (response.res.id > 0) {
-              this.toastr.success(
-                "Flycast",
-                "Value added with attribute successfully"
-              );
-              this.router.navigateByUrl("/attribute/attributes-list");
-              this.spinner.hide();
-            } else {
-              this.toastr.success("Flycast", "Something went wrong!");
-              this.spinner.hide();
-            }
-          });
+          this._authService
+            .request("post", "attribute", data)
+            .subscribe((response) => {
+              if (response.res.id > 0) {
+                this.toastr.success(
+                  "Flycast",
+                  "Value added with attribute successfully"
+                );
+                this.router.navigateByUrl("/attribute/attributes-list");
+                this.spinner.hide();
+              } else {
+                this.toastr.success("Flycast", "Something went wrong!");
+                this.spinner.hide();
+              }
+            });
         }
       });
     }
