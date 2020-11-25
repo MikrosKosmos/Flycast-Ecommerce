@@ -176,6 +176,7 @@ constants.SP_CREATE_CATEGORY_ATTRIBUTES = "sp_CreateCategoryAttributes";
 constants.SP_GET_CATEGORY_ATTRIBUTES = "sp_GetCategoryAttribute";
 constants.SP_GET_ATTRIBUTE_POSSIBLE_VALUES = "sp_GetAttributePossibleValues";
 constants.SP_CREATE_ATTRIBUTE_POSSIBLE_VALUES = "sp_CreateAttributePossibleValues";
+constants.SP_GET_ALL_ATTRIBUTES = "sp_GetAllAttributes";
 constants.SP_CREATE_SKU = "sp_CreateSKU";
 constants.SP_GET_SKU = "sp_GetSKUs";
 constants.SP_GET_CART_DETAILS = "sp_GetCartDetails";

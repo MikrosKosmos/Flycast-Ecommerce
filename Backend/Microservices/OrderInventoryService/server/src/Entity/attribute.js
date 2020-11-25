@@ -81,6 +81,26 @@ class Attribute {
    }
 
    /**
+    * Method to get all the possible attributes.
+    * @returns {Promise<Array>}:
+    */
+   getAllAttributes() {
+      return new Promise((resolve, reject) => {
+         database.runSp(constants.SP_GET_ALL_ATTRIBUTES, []).then(_resultSet => {
+            const result = _resultSet[0];
+            if (validators.validateUndefined(result)) {
+               resolve([constants.RESPONSE_SUCESS_LEVEL_1, result]);
+            } else {
+               resolve([constants.RESPONSE_SUCESS_LEVEL_1, []]);
+            }
+         }).catch(err => {
+            printer.printError(err);
+            reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
+         });
+      });
+   }
+
+   /**
     * Method to get the possible values of an attribute.
     * @param jwToken: The token of the user.
     * @returns {Promise<Array>}:

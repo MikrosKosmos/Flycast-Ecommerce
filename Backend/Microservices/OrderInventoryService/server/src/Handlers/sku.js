@@ -18,16 +18,12 @@ skuHandler.sku = (dataObject) => {
             dataObject.queryString[constants.MODEL] : false;
          const skuValue = validators.validateString(dataObject.queryString[constants.SKU]) ?
             dataObject.queryString[constants.SKU] : false;
-         if (skuValue || brand || model) {
-            const sku = new Sku(brand, model, false, false, false, false, skuValue);
-            sku.getSku().then(response => {
-               resolve(responseGenerator.generateResponse(response[1], response[0]));
-            }).catch(err => {
-               reject(responseGenerator.generateErrorResponse(err[1], err[0]));
-            });
-         } else {
-            reject(responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1));
-         }
+         const sku = new Sku(brand, model, false, false, false, false, skuValue);
+         sku.getSku().then(response => {
+            resolve(responseGenerator.generateResponse(response[1], response[0]));
+         }).catch(err => {
+            reject(responseGenerator.generateErrorResponse(err[1], err[0]));
+         });
       } else if (method === constants.HTTP_POST) {
          const brand = validators.validateString(dataObject.postData[constants.BRAND]) ?
             dataObject.postData[constants.BRAND] : false;

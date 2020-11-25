@@ -33,7 +33,12 @@ attributeHandler.attribute = (dataObject) => {
                reject(responseGenerator.generateErrorResponse(err[1], err[0]));
             });
          } else {
-            reject(responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1));
+            const attribute = new Attribute();
+            attribute.getAllAttributes().then(response => {
+               resolve(responseGenerator.generateResponse(response[1], response[0]));
+            }).catch(err => {
+               reject(responseGenerator.generateErrorResponse(err[1], err[0]));
+            });
          }
       } else if (method === constants.HTTP_POST) {
          const jwToken = validators.validateString(dataObject[constants.JW_TOKEN]) ?
