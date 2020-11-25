@@ -9,7 +9,7 @@ import { url, apiKey } from 'src/app/config';
 export class UserService {
 
   constructor(private http: HttpClient) { }
-
+  
   UserDetailsById(userId): Observable<any> {
     var header = new HttpHeaders({
       'key': apiKey.key,

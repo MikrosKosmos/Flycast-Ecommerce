@@ -1,0 +1,163 @@
+@import "../../../../../assets/variable";
+@import "../../../../../assets/mixins";
+.custom-radio-input {
+  margin-bottom: 1rem;
+  input {
+    // width: 100%;
+    // height: 3.8rem;
+    padding: 5px 15px;
+    @include border_radius(3px);
+    border: 1px solid $light-grey;
+    background: $light-grey;
+    font-size: 11px;
+    font-family: "sinkin_sans400_regular";
+    margin-left: 10px;
+    margin-right: 5px;
+    &:focus {
+      box-shadow: none;
+      border: 1px solid rgb(4, 167, 216);
+      outline: 0;
+    }
+  }
+}
+
+ul.a {
+  list-style-type: circle;
+}
+
+.modal-design {
+  zoom: 2;
+  outline: none;
+}
+
+.custom-radio-input {
+  margin-bottom: 1rem;
+  input {
+    // width: 100%;
+    // height: 3.8rem;
+    padding: 5px 15px;
+    //@include border_radius(3px);
+    border: 1px solid light-grey;
+    background: light-grey;
+    font-size: 11px;
+    font-family: "sinkin_sans400_regular";
+    margin-left: 10px;
+    margin-right: 5px;
+    &:focus {
+      box-shadow: none;
+      border: 1px solid rgb(4, 167, 216);
+      outline: 0;
+    }
+  }
+}
+
+.custom_form_warpper {
+  margin-bottom: 1rem;
+  input {
+    width: 100%;
+    height: 3.5rem;
+    padding: 5px 15px;
+    //@include border_radius(3px);
+    border: 1px solid #eaeaea;
+    background: #eaeaea;
+    font-size: 11px;
+    border-radius: 3px;
+    font-family: "sinkin_sans400_regular";
+    &:focus {
+      box-shadow: none;
+      border: 1px solid rgb(4, 167, 216);
+      outline: 0;
+    }
+  }
+  textarea {
+    width: 100%;
+    height: 9rem;
+    padding: 5px 15px;
+    // @include border_radius(3px);
+    border: 1px solid #eaeaea;
+    background: #eaeaea;
+    font-size: 11px;
+    border-radius: 3px;
+    font-family: "sinkin_sans400_regular";
+    resize: none;
+    &:focus {
+      box-shadow: none;
+      border: 1px solid rgb(4, 167, 216);
+      outline: 0;
+    }
+  }
+}
+
+.input-type-field {
+  background: #eaeaea;
+  border: 1px solid #eaeaea;
+  border-radius: 3px;
+  width: 100%;
+  height: 35px;
+}
+
+.textarea-type-field {
+  background: #eaeaea;
+  border: 1px solid #eaeaea;
+  border-radius: 3px;
+  width: 100%;
+  height: 90px;
+}
+
+.custom_select_option {
+  position: relative;
+  .form-control {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    height: 35px;
+    //font-size: 1.2rem;
+    border: 1px solid #eaeaea;
+    background: #eaeaea;
+    color: black;
+    font-family: "sinkin_sans400_regular";
+    padding-right: 21px;
+    //@include border_radius(3px);
+    &:focus {
+      box-shadow: none;
+      border: 1px solid rgb(4, 167, 216);
+    }
+  }
+  margin-bottom: 1rem;
+  &::after {
+    position: absolute;
+    top: 40px;
+    right: 22px;
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 4px 0 4px;
+    border-color: black transparent transparent transparent;
+  }
+}
+
+.meal_booking_date_style1 {
+  position: relative;
+  .form_warpper {
+    input {
+      background: #eaeaea;
+      border: 1px solid #eaeaea;
+      height: 3.8rem;
+      padding: 5px 15px;
+      border-radius: 3px;
+      width: 100%;
+    }
+  }
+  &:after {
+    position: absolute;
+    top: 31px;
+    right: 21px;
+    content: "";
+    font-family: "fontAwesome";
+    font-size: 14px;
+    background: #eaeaea;
+  }
+}

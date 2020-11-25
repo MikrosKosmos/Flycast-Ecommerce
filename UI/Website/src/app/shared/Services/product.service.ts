@@ -35,7 +35,7 @@ export class ProductService {
     return this.httpClient.put(url.AddToCart, putBody, { headers: header });
   }
 
-  getCartDetails(){
+  getCartDetails(): Observable<any> {
     var header = new HttpHeaders({
       'key': apiKey.key,
       'jw_token': sessionStorage.getItem('JwToken')
@@ -43,7 +43,7 @@ export class ProductService {
     return this.httpClient.get(url.AddToCart, { headers: header });
   }
 
-  updateSKURating(putBody): Observable<any>{
+  updateSKURating(putBody): Observable<any> {
     var header = new HttpHeaders({
       'key': apiKey.key,
       'jw_token': sessionStorage.getItem('JwToken')

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProductService } from 'src/app/shared/Services/product.service';
 import { StarRatingComponent } from 'ng-starrating';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-product-details',
@@ -25,7 +26,8 @@ export class ProductDetailsComponent implements OnInit {
     private router: Router,
     private activeRoute: ActivatedRoute,
     private productService: ProductService,
-    private toaster: ToastrService
+    private toaster: ToastrService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
@@ -34,8 +36,10 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   getProductDetailsBySKU() {
+    this.spinner.show();
     this.productService.getProductDetailsBySKU(this.productSKU).subscribe(data => {
       this.productDetails = data['res'];
+      this.spinner.hide();
       //this.overStar = data['res'][0].average_rating;
       this.rate = data['res'][0].average_rating;
       if (data['res'][0].stock_quantity > 0)
@@ -43,7 +47,7 @@ export class ProductDetailsComponent implements OnInit {
       else
         this.IsAvailable = false;
       // this.IsAvailable = 
-      console.log(data['res'][0])
+      //console.log(data['res'][0])
     });
   }
 
@@ -52,10 +56,11 @@ export class ProductDetailsComponent implements OnInit {
       "sku": this.productSKU,
       "quantity": Number(this.productQuantity)
     }
-
-    console.log('add to cart put body', putBody);
+    this.spinner.show();
+    //console.log('add to cart put body', putBody);
     this.productService.addProductTocart(putBody).subscribe(data => {
-      console.log(data['res'].id);
+      //console.log(data['res'].id);
+      this.spinner.hide();
       if (data['res'].id > 0) {
         this.toaster.success('Product has been added into cart');
       }
@@ -82,7 +87,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   updateRating() {
-    console.log(this.rate);
+    //console.log(this.rate);
     var putBody = {
       "sku": this.productSKU,
       "rating": Number(this.rate)

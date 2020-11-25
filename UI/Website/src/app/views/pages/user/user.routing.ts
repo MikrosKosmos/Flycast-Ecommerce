@@ -9,7 +9,7 @@ export const UserRoutes: Routes = [
   {
     path: "",
     component: UserComponent,
-    //canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       {
         path: "userDetails",

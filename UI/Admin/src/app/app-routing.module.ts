@@ -40,6 +40,21 @@ const AppRoutes: Routes = [
         canActivate: [AuthGuardService],
         loadChildren: "./main/category/category.module#CategoryModule",
       },
+      {
+        path: "attribute",
+        canActivate: [AuthGuardService],
+        loadChildren: "./main/attribute/attribute.module#AttributeModule",
+      },
+      {
+        path: "asset",
+        canActivate: [AuthGuardService],
+        loadChildren: "./main/assets/assets.module#AssetsModule",
+      },
+      {
+        path: "sku",
+        canActivate: [AuthGuardService],
+        loadChildren: "./main/sku/sku.module#SkuModule",
+      },
       { path: "**", redirectTo: "dashboard" },
     ],
   },

@@ -8,23 +8,28 @@ import { ShippingDetailsComponent } from './shipping-details/shipping-details.co
 
 export const checkoutRoutes: Routes = [{
     path: "checkouts",
-    component: CheckoutComponent,
+    //component: CheckoutComponent,
     canActivate: [AuthGuard],
     children: [
         {
+            path: '', component: CheckoutComponent
+        },
+        {
             path: "shipping-details",
             component: ShippingDetailsComponent,
-            outlet: "checkOutlet",
+            canActivate: [AuthGuard]
+            //outlet: "checkOutlet",
         },
         {
             path: "billing-details",
             component: BillingDetailsComponent,
-            outlet: "checkOutlet",
+            canActivate: [AuthGuard]
+            //outlet: "checkOutlet",
         },
         {
             path: "result",
             component: ResultComponent,
-            outlet: "checkOutlet",
+            //outlet: "checkOutlet",
         },
     ],
 }];

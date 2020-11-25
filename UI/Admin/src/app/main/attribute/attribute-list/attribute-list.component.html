@@ -1,0 +1,94 @@
+<section class="header" style="font-family: 'Roboto', sans-serif !important;">
+    <div class="row my-3">
+        <div class="col-sm-6 page-header">
+            <div class="search-wrap  table-search">
+                <form class="form-inline">
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-6 ">
+            <div class="pull-right">
+                <a routerLink="/attribute/create-attribute" class="btn btn-rounded btn-Request btn-new-request mr-2">
+                    new attribute</a>
+                <a routerLink="/attribute/category-attribute" class="btn btn-rounded btn-Request btn-new-request mr-2">
+                    Category Attribute</a>
+                <a routerLink="/attribute/attribute-possible-value" class="btn btn-rounded btn-Request btn-new-request">
+                    Attribute Possible Value</a>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="main-wrap" style="font-family: 'Roboto', sans-serif !important;">
+    <div class="tab-wrap my-3">
+        <div class="tab-nav clearfix">
+            <a (mousedown)="tabChanged(0)" [ngClass]="activeOpenTab" style="cursor: pointer">Mobiles</a>
+            <a (mousedown)="tabChanged(1)" [ngClass]="activeLatestTab" style="cursor: pointer">Drones</a>
+        </div>
+        <div class="bx-white tab-container p-0 pt-0 mbt-3 clearfix">
+            <div id="accordion" *ngIf="currentIndex === 0">
+                <div class="table-responsive">
+                    <table class="table text-center table-Audit  mb-0 shadow">
+                        <thead>
+                            <tr class="custom thead-dark">
+                                <th colspan="7">Mobile List</th>
+                            </tr>
+                        </thead>
+                        <thead class="electricity-list-thead">
+                            <tr>
+                                <th>ID</th>
+                                <th>attribute name</th>
+                                <th>attribute description</th>
+                            </tr>
+                        </thead>
+                        <tbody class="electricity-list-tbody">
+                            <ng-container *ngIf="attributeList && attributeList.length; else noDataFound">
+                                <tr *ngFor="let entry of attributeList">
+                                    <td>{{entry.id}}</td>
+                                    <td>{{entry.attribute_name}}</td>
+                                    <td>{{entry.attribute_description}}</td>
+                                </tr>
+                            </ng-container>
+                            <ng-template #noDataFound>
+                                <tr>
+                                    <td colspan="5">No Entries</td>
+                                </tr>
+                            </ng-template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="accordion" *ngIf="currentIndex === 1">
+                <div class="table-responsive">
+                    <table class="table text-center table-Audit  mb-0 shadow">
+                        <thead>
+                            <tr class="custom thead-dark">
+                                <th colspan="7">Drone List</th>
+                            </tr>
+                        </thead>
+                        <thead class="electricity-list-thead">
+                            <tr>
+                                <th>ID</th>
+                                <th>attribute name</th>
+                                <th>attribute description</th>
+                            </tr>
+                        </thead>
+                        <tbody class="electricity-list-tbody">
+                            <ng-container *ngIf="attributeList && attributeList.length; else noDataFound">
+                                <tr *ngFor="let entry of attributeList">
+                                    <td>{{entry.id}}</td>
+                                    <td>{{entry.attribute_name}}</td>
+                                    <td>{{entry.attribute_description}}</td>
+                                </tr>
+                            </ng-container>
+                            <ng-template #noDataFound>
+                                <tr>
+                                    <td colspan="5">No Entries</td>
+                                </tr>
+                            </ng-template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

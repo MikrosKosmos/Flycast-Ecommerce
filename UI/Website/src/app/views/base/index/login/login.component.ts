@@ -12,6 +12,7 @@ import { HttpHeaders } from '@angular/common/http';
 import * as $ from 'jquery';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     public router: Router,
     public authService: AuthService,
-    public tostrService: ToastrService
+    public tostrService: ToastrService,
+    public spinner: NgxSpinnerService,
   ) {
     this.displayCount = 1;
   }
@@ -72,10 +74,12 @@ export class LoginComponent implements OnInit {
       gender: formInput.value.gender,
     };
     console.log('registrationDetails', registrationDetails);
+    this.spinner.show();
     this.authService
       .UserRegistrationValidation(registrationDetails)
       .subscribe((data) => {
         console.log('LOGIN data', data.res.id);
+        this.spinner.hide();
         if (data.res.id > 0) {
           this.isUserRegistered = true;
           this.registeredUserPhoneNumber = registrationDetails.phone_number;
@@ -123,6 +127,8 @@ export class LoginComponent implements OnInit {
       otp: formInput.value.otp,
     };
     console.log('input variables: ', otpVerification);
+    if (formInput.value.otp > 0)
+      this.spinner.show();
     this.authService.UserLogin(otpVerification).subscribe((data) => {
       console.log('after otp validation: ', data);
       if (data.res.id > 1) {
@@ -139,6 +145,7 @@ export class LoginComponent implements OnInit {
           'Login Success',
           sessionStorage.getItem('FirstName')
         );
+        this.spinner.hide();
         //this.router.navigate(['/']);
         const currentRoute = this.router.url; //get current route
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {

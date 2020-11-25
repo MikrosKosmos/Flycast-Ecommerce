@@ -12,6 +12,8 @@ export const url = {
     GetSKUs: environment.api_url + '/sku?sku=',
     AddToCart: environment.api_url + '/cart',
     UpdateRating: environment.api_url + '/sku/rating',
+    CreateOrder: environment.api_url + '/order',
+    GetOrderDetails: environment.api_url + '/order',
 }
 
 export const apiKey = {

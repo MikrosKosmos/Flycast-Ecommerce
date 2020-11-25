@@ -188,6 +188,7 @@ constants.SP_GET_ATTRIBUTE_VALUE_BY_SKU = "sp_GetAttributesBySKU";
 constants.SP_CREATE_SKU_RATINGS = "sp_CreateSKURating";
 constants.SP_CREATE_ORDER = "sp_CreateOrder";
 constants.SP_UPDATE_ORDER_STATUS = "sp_UpdateOrderStatus";
+constants.SP_GET_ORDER_DETAILS = "sp_GetOrderDetails";
 
 /**
  * Column Names

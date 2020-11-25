@@ -132,11 +132,12 @@ export class AuthenticationService {
           headers: config.apiKey,
         });
       } else {
+        var headerPost = new HttpHeaders({
+          key: this.apiKey,
+          jw_token: this.getToken(),
+        });
         base = this.http.post(`${this.baseUrl}/${type}`, data, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${this.getToken()}`,
-          },
+          headers: headerPost,
         });
       }
     } else if (method === "put") {

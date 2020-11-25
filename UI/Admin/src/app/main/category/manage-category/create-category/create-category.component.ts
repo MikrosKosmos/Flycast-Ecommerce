@@ -1,10 +1,11 @@
-import { FormGroup } from "@angular/forms";
+import { FormGroup, Validators } from "@angular/forms";
 import { Component, Input, OnInit } from "@angular/core";
 import Swal from "sweetalert2";
 import { Router } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { ToastrService } from "ngx-toastr";
 import { AuthenticationService } from "src/app/authentication.service";
+import { FormArray, FormBuilder } from "@angular/forms";
 
 @Component({
   selector: "emp-create-category",
@@ -13,14 +14,18 @@ import { AuthenticationService } from "src/app/authentication.service";
 })
 export class CreateCategoryComponent implements OnInit {
   @Input() parentForm: FormGroup;
+  isSubmitted: boolean = false;
   constructor(
     private _authService: AuthenticationService,
     private spinner: NgxSpinnerService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private formBuilder: FormBuilder
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.addForm();
+  }
 
   /**
    * Marks all controls in a form group as touched
@@ -37,9 +42,37 @@ export class CreateCategoryComponent implements OnInit {
   }
 
   /**
+   * Dynamic form section
+   */
+  get categoryFormArray() {
+    return this.parentForm.get("categories") as FormArray;
+  }
+
+  createForm = () => {
+    return this.formBuilder.group({
+      category_name: ["", Validators.compose([Validators.required])],
+      category_description: ["", Validators.compose([Validators.required])],
+      parent_category: 0,
+    });
+  };
+
+  addForm = () => {
+    this.categoryFormArray.push(this.createForm());
+  };
+
+  /**
+   * Method to remove item from formArray
+   * @param index Index of item
+   */
+  removeItem = (index) => {
+    this.categoryFormArray.removeAt(index);
+  };
+
+  /**
    * Method to create Category
    */
   submitCreateCategoryt = () => {
+    this.isSubmitted = true;
     if (this.parentForm.invalid) this.markFormGroupTouched(this.parentForm);
     else {
       Swal.fire({
@@ -59,7 +92,7 @@ export class CreateCategoryComponent implements OnInit {
             .subscribe((response) => {
               if (response.res.id > 0) {
                 this.toastr.success("Flycast", "Category Created Successfully");
-                this.router.navigateByUrl("category/category-list");
+                this.router.navigateByUrl("/category/category-list");
                 this.spinner.hide();
               } else {
                 this.toastr.error("Flycast", "Something went wrong!");

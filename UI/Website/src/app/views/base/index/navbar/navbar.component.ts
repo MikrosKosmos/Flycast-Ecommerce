@@ -9,7 +9,7 @@ import { LoginComponent } from '../login/login.component';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  isRegistered: boolean;
+  isRegistered: boolean = true;
   userName: string;
   isCollapsed = true;
   isCollapsed2 = true;
@@ -23,15 +23,15 @@ export class NavbarComponent implements OnInit {
     public location: Location,
     private element: ElementRef
   ) {
-    this.sidebarVisible = false;
-    this.router.routeReuseStrategy.shouldReuseRoute = function () {
-      return false;
-    }
-    this.isLoggedIn = this.router.events.subscribe((e: any) => {
-      if (event instanceof NavigationEnd) {
-        this.router.navigated = false;
-      }
-    });
+    // this.sidebarVisible = false;
+    // this.router.routeReuseStrategy.shouldReuseRoute = function () {
+    //   return false;
+    // }
+    // this.isLoggedIn = this.router.events.subscribe((e: any) => {
+    //   if (event instanceof NavigationEnd) {
+    //     this.router.navigated = false;
+    //   }
+    // });
   }
 
   //@ViewChild(LoginComponent) loginComponent: LoginComponent;
@@ -39,8 +39,10 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.userName = sessionStorage.getItem('FirstName');
     console.log('username ', this.userName);
-    if (this.userName != null) this.isRegistered = true;
-    else this.isRegistered = false;
+    setTimeout(() => {
+      if (this.userName != null) this.isRegistered = true;
+      else this.isRegistered = false;
+    }, 1000)
     //this.getUserName();
   }
 

@@ -23,17 +23,17 @@ class Authentication {
     * @returns {Promise<Array>}
     */
    createAndSendOTP(extraData) {
-      return new Promise(async (resolve, reject) => {
+      return new Promise((resolve, reject) => {
          try {
             const otp = generator.generateOTP();
             const validity = generator.generateAheadTime(1);
             const otpMessage = constants.OTP_MESSAGE + otp;
-            await notificationManager.sendSMS(otpMessage, this._phone);
             database.runSp(constants.SP_VALIDATE_OR_CREATE_OTP, [this._phone, otp, validity, 0,
                validators.validateString(extraData) ? extraData : false
-            ]).then(_resultSet => {
+            ]).then(async _resultSet => {
                const result = _resultSet[0][0].id;
                if (result > 0) {
+                  await notificationManager.sendSMS(otpMessage, this._phone);
                   resolve([constants.RESPONSE_SUCESS_LEVEL_1, {"id": 1}]);
                } else {
                   resolve([constants.RESPONSE_SUCESS_LEVEL_1, {id: -1}]);
