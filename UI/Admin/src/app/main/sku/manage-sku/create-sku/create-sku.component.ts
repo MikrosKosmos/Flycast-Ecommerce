@@ -44,9 +44,9 @@ export class CreateSkuComponent implements OnInit {
       this.uploadErrorMessage =
         file.type === "image/jpeg" || file.type === "image/png"
           ? ""
-          : "Only jpeg or png file";
+          : "Only jpeg or png image";
       this.fileSizeErrorMessage =
-        file.size / 1024 / 1024 <= 4 ? "" : "Only jpeg or png file";
+        file.size / 1024 / 1024 <= 4 ? "" : "Can not upload more than 4 MB";
 
       if (!this.uploadErrorMessage && !this.fileSizeErrorMessage) {
         let fileReader = new FileReader();

@@ -14,6 +14,10 @@ export class CreatePuctureSkuComponent implements OnInit {
   parentForm: FormGroup;
   SKUList = [];
   isSKUSelected: boolean = false;
+  imageTypeError: string;
+  imagesSizeError: string;
+  successMessage: string;
+  uploadedImageList = [];
   constructor(
     private _authService: AuthenticationService,
     private spinner: NgxSpinnerService,
@@ -53,12 +57,82 @@ export class CreatePuctureSkuComponent implements OnInit {
   };
 
   /**
-   * Method to upload image at position one
-   * @param event Variable which will recive Image at position one
+   * Method to check image type if image type is jpge or png will return true else return false
+   * @param type Variable which will recive type of images
    */
-  uploadFilePosOne = (event) => {
-    this.spinner.show();
+  checkFileType = (type) => {
+    return type === "image/jpeg" || type === "image/png";
+  };
+
+  /**
+   * Method to check image type if image size is <= 4 MB will return true else return false
+   * @param size Variable which will recive size of images
+   */
+  checkImageSize = (size) => {
+    return size / 1024 / 1024 <= 4;
+  };
+
+  /**
+   * Method will return file type jpge or png
+   * @param type Variable which will recive type of images
+   */
+  getImageType = (type) => {
+    return type.split("/")[1];
+  };
+
+  /**
+   * Method to upload image at position one
+   * @param event Variable which will recive Image at position one.
+   * @param pos variable will recive position.
+   */
+  convertImageAsBinaryString = (event, pos) => {
+    //this.spinner.show();
     let file = event.target.files[0];
-    let fileReader = new FileReader();
+    let imageExt = this.getImageType(file.type);
+    this.imageTypeError = this.checkFileType(file.type)
+      ? ""
+      : "Only jpeg or png Image";
+    this.imagesSizeError = this.checkImageSize(file.size)
+      ? ""
+      : "Can not upload more than 4 MB";
+    if (!this.imageTypeError && !this.imagesSizeError) {
+      let fileReader = new FileReader();
+      fileReader.readAsBinaryString(file);
+      fileReader.onload = () =>
+        this.uploadImageToServer(
+          btoa(fileReader.result.toString()),
+          pos,
+          imageExt
+        );
+    }
+  };
+
+  /**
+   * Method to upload image to server
+   * @param encryptedImage : Variable for value of encrypted iames
+   * @param pos Variable for position of image,
+   * @param imgExt Variable for image extension.
+   */
+  uploadImageToServer = (encryptedImage, pos, imgExt) => {
+    if (encryptedImage && pos && imgExt) {
+      this.spinner.show();
+      let data = {};
+      data["file_extension"] = imgExt;
+      data["position"] = pos;
+      data["sku"] = this.parentForm.controls.sku.value;
+      data["image_data"] = encryptedImage;
+      this._authService
+        .request("post", "sku/picture", data)
+        .subscribe((response) => {
+          if (response.res.id > 0) {
+            this.uploadedImageList.push(response.res.url);
+            this.toastr.success("Flycast", "Image uploaded successfully");
+            this.spinner.hide();
+          } else {
+            this.toastr.error("Flycast", "Something went wrong!");
+            this.spinner.hide();
+          }
+        });
+    }
   };
 }
