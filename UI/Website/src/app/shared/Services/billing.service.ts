@@ -15,14 +15,14 @@ export class BillingService {
   getOrderList(): Observable<any> {
     var header = new HttpHeaders({
       'key': apiKey.key,
-      'jw_token': sessionStorage.getItem('JwToken')
+      'jw_token': sessionStorage.getItem('JwToken') ? sessionStorage.getItem('JwToken') : localStorage.getItem('JwToken')
     });
     return this.httpClient.get(url.GetOrderDetails, { headers: header });
   }
   createOrder(postBody): Observable<any> {
     var header = new HttpHeaders({
       'key': apiKey.key,
-      'jw_token': sessionStorage.getItem('JwToken')
+      'jw_token': sessionStorage.getItem('JwToken') ? sessionStorage.getItem('JwToken') : localStorage.getItem('JwToken')
     });
     return this.httpClient.post(url.CreateOrder, postBody, { headers: header });
   }

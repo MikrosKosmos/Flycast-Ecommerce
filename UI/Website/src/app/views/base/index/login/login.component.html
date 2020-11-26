@@ -1,8 +1,7 @@
-
 <ngx-spinner size="large">
   <p style="font-size: 20px; color: white">Loading...</p>
 </ngx-spinner>
-<div class="container my-5" style="font-family: 'Roboto', sans-serif !important;">
+<div class="container my-5" style="font-family: 'Roboto', sans-serif !important; " [style.width.px]="scrWidth" [style.height.px]="scrHeight">
   <!-- LOGIN CARD START -->
   <div class="card bg-dark text-white mx-auto" style="width: 20rem;"
     [style.display]="displayCount === 1 ? 'block' : 'none'">
@@ -13,7 +12,7 @@
             class="form-control" autofocus="autofocus" required [(ngModel)]="userLoginPhoneNumber">
         </div>
         <label>
-          <input type="checkbox" checked="checked" name="remember"> Remember me
+          <input type="checkbox" checked="checked" formControlName="rememberMe" name="remember"> Remember me
         </label>
         <div class="form-group">
           <button type="submit" class="btn btn-success">Login</button>

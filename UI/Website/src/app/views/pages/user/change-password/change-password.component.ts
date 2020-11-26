@@ -31,7 +31,7 @@ export class ChangePasswordComponent implements OnInit {
     console.log(encryptedText);
     if(inputPassword.value.password == inputPassword.value.confirmPassword && inputPassword.value.password.length > 7){
       var updatePassword = {
-        "id": Number(sessionStorage.getItem('UserID')),
+        "id": Number(sessionStorage.getItem('UserID') ? sessionStorage.getItem('UserID') : localStorage.getItem('UserID')),
         "password": encryptedText,
       };
       console.log('api var', updatePassword);
@@ -40,6 +40,7 @@ export class ChangePasswordComponent implements OnInit {
         // if (data.res.id == 1) {
           this.toster.success('Passowrd updated');
           sessionStorage.clear();
+          localStorage.clear();
           this.router.navigate(['/login']);
           this.toster.success('Login with new password');
         // }

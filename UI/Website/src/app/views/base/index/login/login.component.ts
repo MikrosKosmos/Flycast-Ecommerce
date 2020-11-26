@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -13,6 +13,7 @@ import * as $ from 'jquery';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
+//import { CookieService } from 'angular2-cookie/core';
 
 @Component({
   selector: 'app-login',
@@ -28,22 +29,34 @@ export class LoginComponent implements OnInit {
   registeredUserId: number;
   registeredUserPhoneNumber: string = '';
   public displayCount: number;
+  public formData: any = {};
+  scrHeight:any;
+  scrWidth:any;
 
+  @HostListener('window:resize', ['$event'])
+  getScreenSize(event?) {
+        this.scrHeight = window.innerHeight;
+        this.scrWidth = window.innerWidth;
+        console.log('screen dimension:', this.scrHeight, this.scrWidth);
+  }
   constructor(
     private formBuilder: FormBuilder,
     public router: Router,
     public authService: AuthService,
     public tostrService: ToastrService,
     public spinner: NgxSpinnerService,
+    //private cookieService: CookieService
   ) {
     this.displayCount = 1;
   }
 
   ngOnInit(): void {
+    this.getScreenSize();
     this.loginForm = this.formBuilder.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       otp: ['', Validators.required],
+      rememberMe: [''],
       // username: ['', Validators.required],
       // password: ['', Validators.required],
       // confirmPassword: ['', Validators.required],
@@ -126,24 +139,39 @@ export class LoginComponent implements OnInit {
       phone_number: '+91' + this.registeredUserPhoneNumber,
       otp: formInput.value.otp,
     };
-    console.log('input variables: ', otpVerification);
-    if (formInput.value.otp > 0)
+    console.log('input variables: ', otpVerification, formInput);
+    if (formInput.value.otp > 0) {
       this.spinner.show();
+    }
+    /*if (this.cookieService.get('remember')) {
+      console.log('remember me works!');
+      this.formData.rememberMe = this.cookieService.get('remember');
+      this.cookieService.put('remember', this.formData.rememberMe);
+      console.log('remember', this.cookieService);
+    }*/
     this.authService.UserLogin(otpVerification).subscribe((data) => {
       console.log('after otp validation: ', data);
       if (data.res.id > 1) {
+        if (formInput.value.rememberMe == true) {
+          console.log('local storage');
+          localStorage.setItem('FirstName', data.res.first_name);
+          localStorage.setItem('LastName', data.res.last_name);
+          localStorage.setItem('JwToken', data.res.jw_token);
+          localStorage.setItem('UserID', data.res.id);
+        } else {
+          console.log('session storage');
+          sessionStorage.setItem('FirstName', data.res.first_name);
+          sessionStorage.setItem('LastName', data.res.last_name);
+          sessionStorage.setItem('JwToken', data.res.jw_token);
+          sessionStorage.setItem('UserID', data.res.id);
+        }
         //this.tostrService.success('OTP validation successful', formInput.value.firstname + ' ' + formInput.value.lastname);
-        sessionStorage.setItem('FirstName', data.res.first_name);
-        sessionStorage.setItem('LastName', data.res.last_name);
-        sessionStorage.setItem('JwToken', data.res.jw_token);
-        sessionStorage.setItem('RoleName', data.res.roles[0].role_name);
-        sessionStorage.setItem('RequestKey', data.res.request_Key);
-        sessionStorage.setItem('UserID', data.res.id);
+
         this.isLogin = true;
         this.displayCount = 2;
         this.tostrService.success(
           'Login Success',
-          sessionStorage.getItem('FirstName')
+          sessionStorage.getItem('FirstName') ? sessionStorage.getItem('FirstName') : localStorage.getItem('FirstName')
         );
         this.spinner.hide();
         //this.router.navigate(['/']);

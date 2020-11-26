@@ -4,7 +4,7 @@
             <div class="col-3">
                 <div class=row style="margin-left: 15px;">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header text-white bg-primary">
                             Welcome, {{userName}}
                         </div>
                         <div class="card-body">
@@ -14,7 +14,7 @@
                             <a class="dropdown-item nav-link pointer" (click)="switchToAddress()">Manage Addresses</a>
 
                             <h2 class="dropdown-header">Order Details</h2>
-                            <a class="dropdown-item nav-link pointer" href="#">My Orders</a>
+                            <a class="dropdown-item nav-link pointer" routerLink="/products/order-list">My Orders</a>
                         </div>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                 <div class="card">
                     <!--Account Details-->
                     <div *ngIf="accountDetailsPage">
-                        <div class="card-header">
+                        <div class="card-header text-white bg-primary">
                             Personal Information
                         </div>
                         <div class="card-body">
@@ -96,8 +96,12 @@
                                 <form [formGroup]="accountDetailsForm">
                                     <div class=row>
                                         <div class="col-4">
-                                            <a class="nav-link pointer" (click)="passwordChangeNewWindow()">Click here
-                                                to change password</a>
+                                            <div class="test">
+                                                <a class="nav-link pointer" (click)="passwordChangeNewWindow()">Click
+                                                    here
+                                                    to change password</a>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </form>
@@ -106,7 +110,7 @@
                     </div>
                     <!--Manage Address-->
                     <div *ngIf="addressPage">
-                        <div class="card-header">
+                        <div class="card-header text-white bg-primary">
                             Personal Information
                         </div>
                         <div class="card-body">

@@ -13,7 +13,7 @@ export class AuthService {
   ) { }
 
   UserLogin(loginDetails): Observable<any> {
-    console.log('Login post body: ', loginDetails);
+    //console.log('Login post body: ', loginDetails);
     var header = new HttpHeaders({ 'key': apiKey.key });
     return this.http.post(url.Login, loginDetails, { headers: header });
   }
@@ -25,7 +25,7 @@ export class AuthService {
   }
 
   UserOTPRegistration(otpPhoneNumber): Observable<any> {
-    console.log('user regsitration details: ', otpPhoneNumber);
+    //console.log('user regsitration details: ', otpPhoneNumber);
     var header = new HttpHeaders({ 'key': apiKey.key });
     return this.http.post(url.RegisterUser, otpPhoneNumber, { headers: header });
   }

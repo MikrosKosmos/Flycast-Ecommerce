@@ -22,7 +22,7 @@ export class ProductService {
   getProductDetailsBySKU(sku: string) {
     var header = new HttpHeaders({
       'key': apiKey.key,
-      'jw_token': sessionStorage.getItem('JwToken')
+      'jw_token': sessionStorage.getItem('JwToken') ? sessionStorage.getItem('JwToken') : localStorage.getItem('JwToken')
     });
     return this.httpClient.get(url.GetSKUs + sku, { headers: header });
   };
@@ -30,7 +30,7 @@ export class ProductService {
   addProductTocart(putBody) {
     var header = new HttpHeaders({
       'key': apiKey.key,
-      'jw_token': sessionStorage.getItem('JwToken')
+      'jw_token': sessionStorage.getItem('JwToken') ? sessionStorage.getItem('JwToken') : localStorage.getItem('JwToken')
     });
     return this.httpClient.put(url.AddToCart, putBody, { headers: header });
   }
@@ -38,7 +38,7 @@ export class ProductService {
   getCartDetails(): Observable<any> {
     var header = new HttpHeaders({
       'key': apiKey.key,
-      'jw_token': sessionStorage.getItem('JwToken')
+      'jw_token': sessionStorage.getItem('JwToken') ? sessionStorage.getItem('JwToken') : localStorage.getItem('JwToken')
     });
     return this.httpClient.get(url.AddToCart, { headers: header });
   }
@@ -46,7 +46,7 @@ export class ProductService {
   updateSKURating(putBody): Observable<any> {
     var header = new HttpHeaders({
       'key': apiKey.key,
-      'jw_token': sessionStorage.getItem('JwToken')
+      'jw_token': sessionStorage.getItem('JwToken') ? sessionStorage.getItem('JwToken') : localStorage.getItem('JwToken')
     });
     console.log(url.UpdateRating, putBody, { headers: header });
     return this.httpClient.put(url.UpdateRating, putBody, { headers: header });

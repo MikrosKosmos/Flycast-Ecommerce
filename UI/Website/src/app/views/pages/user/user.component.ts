@@ -48,7 +48,7 @@ export class UserComponent implements OnInit {
   accountDetailsForm: FormGroup;
   newAddressForm: FormGroup;
 
-  userId = sessionStorage.getItem('UserID');
+  userId = sessionStorage.getItem('UserID') ? sessionStorage.getItem('UserID') : localStorage.getItem('UserID');
 
   @ViewChild('FN') inputFirstName: ElementRef;
   @ViewChild('LN') inputLastName: ElementRef;
@@ -61,7 +61,7 @@ export class UserComponent implements OnInit {
     private toster: ToastrService) { }
 
   ngOnInit(): void {
-    this.userName = sessionStorage.getItem('FirstName');
+    this.userName = sessionStorage.getItem('FirstName') ? sessionStorage.getItem('FirstName') : localStorage.getItem('FirstName');
     this.getUserDetailsByID();
 
     this.accountDetailsForm = this.formBuilder.group({

@@ -13,6 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -30,10 +32,11 @@ import { NgxSpinnerModule } from "ngx-spinner";
     ProductModule,
     NgbModule,
     NgxSpinnerModule,
+    //BrowserModule,
     RouterModule.forChild(IndexRoutes)
   ],
   schemas: [NO_ERRORS_SCHEMA],
   exports: [NavbarComponent, FooterComponent],
-  providers: [],
+  //providers: [CookieService],
 })
 export class IndexModule { }

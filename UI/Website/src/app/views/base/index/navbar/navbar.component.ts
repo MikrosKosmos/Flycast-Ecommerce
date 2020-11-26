@@ -37,8 +37,8 @@ export class NavbarComponent implements OnInit {
   //@ViewChild(LoginComponent) loginComponent: LoginComponent;
 
   ngOnInit(): void {
-    this.userName = sessionStorage.getItem('FirstName');
-    console.log('username ', this.userName);
+    this.userName = sessionStorage.getItem('FirstName') ? sessionStorage.getItem('FirstName') : localStorage.getItem('FirstName');
+    console.log('username ', sessionStorage.getItem('FirstName'), localStorage.getItem('FirstName'));
     setTimeout(() => {
       if (this.userName != null) this.isRegistered = true;
       else this.isRegistered = false;
@@ -54,6 +54,7 @@ export class NavbarComponent implements OnInit {
   logout() {
     //console.log('clear the session');
     sessionStorage.clear();
+    localStorage.clear();
     this.router.navigate(['/login']);
     window.location.reload();
   }

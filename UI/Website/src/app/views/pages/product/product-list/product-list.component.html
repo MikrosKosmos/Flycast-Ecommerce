@@ -1,97 +1,33 @@
 <ngx-spinner size="large">
     <p style="font-size: 20px; color: white">Loading...</p>
-  </ngx-spinner>
-<div class="container-fluid">
+</ngx-spinner>
+<div class="container-fluid body-background">
     <div class="row pt-3 pb-3">
-        <!-- <div class="col-md-2">
-            <div class="card">
-                <div class="card-header">
-                    Filter
-                </div>
-                <div class="card-body">
-                    <div ngbDropdown placement="top-right" class="d-inline-block">
-                        <div *ngFor="let filter of filterCategories">
-                            <button class="btn btn-outline-primary" id="filterDropdown" ngbDropdownToggle>
-                                {{filter.filterType}}
-                            </button>
-                            <div ngbDropdownMenu aria-labelledby="sortMenu">
-                                <ul ngbDropdownItem style="list-style-type:none;">
-                                    <li>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox">One
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox">Two
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <!--Product Lists-->
-        <div class="col-md-12 col-sm-12">
-            <div class="card" style="border: none;">
-                <div class="card-header" style="border: none; background-color: white;">
-                    {{productCategoryName}}
-                </div><!-- <div class="container-fluid"> -->
-                <!-- <div class=" card-group  pt-2">
-                    <div class="col-md-4 col-sm-6" *ngFor="let products of productDetails">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>{{products.brand}} {{products.model}}</h5>
-                            </div>
-                            <div class="card-body container-fluid p-0">
-                                <div class="img-thumbnail card-img-top">
-                                    <img src="{{products.image_url}}" alt="" class="img-responsive"
-                                        style="height: 16rem" (click)="getProductDetailsBySKU(products.sku)">
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    (15 reviews)
-                                </p>
-                                <div class="btn-ground ">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#product_view" (click)="quickViewProductsById(content, products)">
-                                        <i class="fa fa-search"></i>
-                                        Quick View</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <div class="img-thumbnail">
+        <div class="col-md-12 col-sm-12 ">
+            <div class="text-center text-white display-4" style="border: none;">
+                {{productCategoryName}}
+            </div>
+            <!-- <div class="img-thumbnail">
                     <div class="card-group p-1">
                         <div class="col-md-6 col-sm-12" *ngFor="let products of productDetails">
                             <div class="card">
-                                <div class="card body">
+                                <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-4 col-sm-12" style="cursor: pointer;">
                                             <img src="{{products.image_url}}" alt="" class="img-responsive"
                                                 style="height: 16rem" (click)="getProductDetailsBySKU(products.sku)">
                                         </div>
-                                        <!-- <span>
+                                        
+
+                                        <span>
                                             <a placement="top" mdbTooltip="Add to Wishlist" container="body"
                                                 (click)="addFavourite(products)">
                                                 <i class="fa fa-heart"></i>
                                             </a>
-                                        </span> -->
+                                        </span>
+                                        
+                                        
                                         <div class="col-md-8 col-sm-12">
                                             <div class="caption">
                                                 <div class="text-center">
@@ -110,31 +46,38 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- </div>
-                                        <div class="col-3">
-                                            <h4 class="pull-right"></h4>
-                                            <div class="ratings">
-                                                <p>
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                    (15 reviews)
-                                                </p>
-                                            </div>
-                                        </div> -->
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div> -->
+            <div class="card-group p-1">
+                <div class="col-md-3" *ngFor="let products of productDetails">
+                    <div class="card">
+                        <div class="image">
+                            <img src="{{products.image_url}}" class="img-responsive" style="height: 16rem"
+                                (click)="getProductDetailsBySKU(products.sku)" />
+                        </div>
+                        <div class="card-inner">
+                            <div class="header">
+                                <h2><a (click)="getProductDetailsBySKU(products.sku)">{{products.brand}}
+                                        {{products.model}}</a></h2>
+                                <h3>{{products.price|currency:'INR'}}</h3>
+                            </div>
+                            <div class="content">
+                                <p>Colour: {{products.color}}</p>
+                                <p>Grade: {{products.product_grade}}</p>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#product_view" (click)="quickViewProductsById(content, products)">
+                                <i class="fa fa-search"></i>
+                                Quick View</button>
+                        </div>
+                    </div>
                 </div>
-
-                <!-- </div> -->
-
-
             </div>
+
         </div>
     </div>
 </div>

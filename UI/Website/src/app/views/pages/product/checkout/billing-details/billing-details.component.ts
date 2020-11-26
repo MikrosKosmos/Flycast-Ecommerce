@@ -16,10 +16,10 @@ declare const Razorpay: any;
 })
 export class BillingDetailsComponent implements OnInit {
 
-  userId = sessionStorage.getItem('UserID');
-  firstName = sessionStorage.getItem('FirstName');
-  lastName = sessionStorage.getItem('LastName');
-  addressId = sessionStorage.getItem('AddressId');
+  userId = sessionStorage.getItem('UserID') ? sessionStorage.getItem('UserID') : localStorage.getItem('UserID');
+  firstName = sessionStorage.getItem('FirstName') ? sessionStorage.getItem('FirstName') : localStorage.getItem('FirstName');
+  lastName = sessionStorage.getItem('LastName') ? sessionStorage.getItem('LastName') : localStorage.getItem('LastName');
+  addressId = sessionStorage.getItem('AddressId') ? sessionStorage.getItem('AddressId') : localStorage.getItem('AddressId');
   cartId: number = Number(localStorage.getItem('CartId'));
   address1: string;
   address2: string;

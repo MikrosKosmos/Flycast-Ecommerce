@@ -9,11 +9,11 @@ import { url, apiKey } from 'src/app/config';
 export class UserService {
 
   constructor(private http: HttpClient) { }
-  
+
   UserDetailsById(userId): Observable<any> {
     var header = new HttpHeaders({
       'key': apiKey.key,
-      'jw_token': sessionStorage.getItem('JwToken')
+      'jw_token': sessionStorage.getItem('JwToken') ? sessionStorage.getItem('JwToken') : localStorage.getItem('JwToken')
     });
     return this.http.get(url.GetUserDetails + Number(userId), { headers: header });
   }
@@ -21,7 +21,7 @@ export class UserService {
   UpdateUserDetailsById(body): Observable<any> {
     var header = new HttpHeaders({
       'key': apiKey.key,
-      'jw_token': sessionStorage.getItem('JwToken')
+      'jw_token': sessionStorage.getItem('JwToken') ? sessionStorage.getItem('JwToken') : localStorage.getItem('JwToken')
     });
     return this.http.put(url.RegisterUser, body, { headers: header });
   }
@@ -29,7 +29,7 @@ export class UserService {
   UpdateOrAddAddress(body): Observable<any> {
     var header = new HttpHeaders({
       'key': apiKey.key,
-      'jw_token': sessionStorage.getItem('JwToken')
+      'jw_token': sessionStorage.getItem('JwToken') ? sessionStorage.getItem('JwToken') : localStorage.getItem('JwToken')
     });
     return this.http.put(url.AddOrUpdateAddress, body, { headers: header });
   }
@@ -37,7 +37,7 @@ export class UserService {
   GetUserAddress(userId): Observable<any> {
     var header = new HttpHeaders({
       'key': apiKey.key,
-      'jw_token': sessionStorage.getItem('JwToken')
+      'jw_token': sessionStorage.getItem('JwToken') ? sessionStorage.getItem('JwToken') : localStorage.getItem('JwToken')
     });
     return this.http.get(url.GetUserAddress + Number(userId), { headers: header });
   }

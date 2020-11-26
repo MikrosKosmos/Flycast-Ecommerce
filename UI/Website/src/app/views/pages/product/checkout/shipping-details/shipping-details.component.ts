@@ -22,7 +22,7 @@ export class ShippingDetailsComponent implements OnInit {
     private constant: Constant) { }
 
   addressList = [];
-  userId = sessionStorage.getItem('UserID');
+  userId = sessionStorage.getItem('UserID') ? sessionStorage.getItem('UserID') : localStorage.getItem('UserID');
   contactName: string;
   contactNumber: string;
   address1: string;

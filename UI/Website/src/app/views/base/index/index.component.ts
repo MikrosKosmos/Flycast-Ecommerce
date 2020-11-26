@@ -36,7 +36,7 @@ export class IndexComponent implements OnInit {
     this.categoryMobile = "../assets/img/slide/IndexPage/Best-Phones-of-2020.jpg";
     this.categoryDrone = "../assets/img/slide/IndexPage/drone-img.webp"
     this.categoryAccessories = "../assets/img/slide/IndexPage/MB-Mobile-Accessories.webp";
-    this.userName = sessionStorage.getItem('FirstName');
+    this.userName = sessionStorage.getItem('FirstName') ? sessionStorage.getItem('FirstName') : localStorage.getItem('FirstName');
     console.log('firstname from index', this.userName);
     this.spinner.hide();
     //this.getAllAssets();
