@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
 import { NgxSpinnerService } from "ngx-spinner";
 import { AuthenticationService } from "src/app/authentication.service";
@@ -8,36 +9,41 @@ import { AuthenticationService } from "src/app/authentication.service";
   styleUrls: ["./attribute-list.component.scss"],
 })
 export class AttributeListComponent implements OnInit {
-  activeOpenTab: string = "tab-active";
-  activeLatestTab: string = "";
-  currentIndex: number = 0;
+  parentForm: FormGroup;
   attributeList = [];
+  categoryList = [];
+  isCategorySelected: boolean = false;
 
   constructor(
     private _authService: AuthenticationService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
-    this.spinner.show();
+    this.parentForm = this.formBuilder.group({
+      category: [""],
+    });
+    this.getCategoryList();
     this.getAttribute(0);
   }
 
-  /**
-   * Method to change attribute tab
-   * @param index : Variable to get attribute
-   */
-  tabChanged(index) {
-    this.currentIndex = index;
-    if (index == 0) {
-      this.activeOpenTab = "tab-active";
-      this.activeLatestTab = "";
-    } else if (index == 1) {
-      this.activeOpenTab = "";
-      this.activeLatestTab = "tab-active";
-    }
-    this.getAttribute(index);
-  }
+  getCategoryList = () => {
+    this.spinner.show();
+    setTimeout(() => {
+      this._authService.request("get", "category").subscribe((response) => {
+        if (response.res.length > 0) {
+          response.res.forEach((element) => {
+            this.categoryList.push({
+              code: element.id,
+              value: element.category_name,
+            });
+          });
+        }
+      });
+    }, 1000);
+    this.spinner.hide();
+  };
 
   /**
    * Method to get attribute by category
@@ -45,16 +51,17 @@ export class AttributeListComponent implements OnInit {
    */
   getAttribute = (index) => {
     this.spinner.show();
-    let categoryId;
-    if (index === 0) categoryId = 1;
-    if (index === 1) categoryId = 2;
-    setTimeout(() => {
-      this._authService
-        .request("get", `attribute?attribute_id=${categoryId}`)
-        .subscribe((response) => {
-          this.attributeList = response.res;
-          this.spinner.hide();
-        });
-    }, 1000);
+    if (index) {
+      this.isCategorySelected = true;
+      this.attributeList.length = 0;
+      setTimeout(() => {
+        this._authService
+          .request("get", `attribute?category_id=${index}`)
+          .subscribe((response) => {
+            this.attributeList = response.res;
+            this.spinner.hide();
+          });
+      }, 1000);
+    }
   };
 }
