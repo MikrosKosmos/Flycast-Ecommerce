@@ -43,15 +43,13 @@ export class AssetsListComponent implements OnInit {
    * Method to get assets list
    */
   getAssetsList = (value) => {
-    console.log(value);
     if (value) {
       this.spinner.show();
       this.isCategory = true;
       setTimeout(() => {
         this._authService
-          .request("get", `asset?category_id=${value}`)
+          .request("get", `asset/product?category_id=${value}`)
           .subscribe((response) => {
-            console.log("assets list ", response);
             this.assetsList = response.res;
             this.spinner.hide();
           });

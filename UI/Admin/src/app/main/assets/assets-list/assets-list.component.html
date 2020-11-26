@@ -14,8 +14,8 @@
     </div>
 </section>
 <article class="content">
-    <div class="bx-white card p-0 pt-0 my-3 clearfix">
-        <div class="row p-4">
+    <div class="bx-white card p-4 pt-0 my-3 clearfix">
+        <div class="row">
             <div class="col-lg-4 col-md-4">
                 <emp-input-option-list [form]="parentForm" [name]="'category'" [options]="categoryList"
                     (optionValueChange)="getAssetsList($event)">
@@ -23,7 +23,7 @@
                 </emp-input-option-list>
             </div>
         </div>
-        <div class="table-responsive" *ngIf="isCategory">
+        <div class="table-responsive">
             <table class="table text-center table-Audit  mb-0 shadow">
                 <thead>
                     <tr class="custom thead-dark">
@@ -33,9 +33,7 @@
                 <thead class="electricity-list-thead">
                     <tr>
                         <th>Asset Name</th>
-                        <th>Unique No</th>
-                        <th>Category</th>
-                        <th>Manufacturer</th>
+                        <th>Brand</th>
                         <th>Model</th>
                         <th>Color</th>
                         <th>Grade</th>
@@ -44,10 +42,8 @@
                 <tbody class="electricity-list-tbody">
                     <ng-container *ngIf="assetsList && assetsList.length; else noDataFound">
                         <tr *ngFor="let item of assetsList">
-                            <td>{{item.asset_name}}</td>
-                            <td>{{item.asset_unique_number}}</td>
                             <td>{{item.category_name}}</td>
-                            <td>{{item.manufacturer}}</td>
+                            <td>{{item.brand}}</td>
                             <td>{{item.model}}</td>
                             <td>{{item.color}}</td>
                             <td>{{item.product_grade}}</td>
@@ -55,7 +51,7 @@
                     </ng-container>
                     <ng-template #noDataFound>
                         <tr>
-                            <td colspan="5">No Entries</td>
+                            <td colspan="7">No Entries</td>
                         </tr>
                     </ng-template>
                 </tbody>
