@@ -21,32 +21,33 @@
             <table class="table text-center table-Audit  mb-0 shadow">
                 <thead>
                     <tr class="custom thead-dark">
-                        <th colspan="7">Assets List</th>
+                        <th colspan="7">SKU List</th>
                     </tr>
                 </thead>
                 <thead class="electricity-list-thead">
                     <tr>
-                        <th>IMEI</th>
-                        <th>Company</th>
-                        <th>Brand</th>
+                        <th>brand</th>
+                        <th>model</th>
                         <th>Color</th>
-                        <th>Storage</th>
-                        <th>Price</th>
-                        <th>ACTION</th>
+                        <th>product grade</th>
+                        <th>sku</th>
                     </tr>
                 </thead>
                 <tbody class="electricity-list-tbody">
-                    <ng-container>
-                        <tr>
-                            <td>123456789</td>
-                            <td>Apple</td>
-                            <td>iPhone 7</td>
-                            <td>Black</td>
-                            <td>64 GB</td>
-                            <td>32000</td>
-                            <td><button type="button" class="btn btn-info ml-2">View</button></td>
+                    <ng-container *ngIf="skuList && skuList.length; else noDataFound">
+                        <tr *ngFor="let sku of skuList">
+                            <td>{{sku.brand}}</td>
+                            <td>{{sku.model}}</td>
+                            <td>{{sku.color}}</td>
+                            <td>{{sku.product_grade}}</td>
+                            <td>{{sku.sku}}</td>
                         </tr>
                     </ng-container>
+                    <ng-template #noDataFound>
+                        <tr>
+                            <td colspan="5">No Entries</td>
+                        </tr>
+                    </ng-template>
                 </tbody>
 
             </table>

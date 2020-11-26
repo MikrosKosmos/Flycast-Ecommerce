@@ -12,12 +12,7 @@ import { AuthenticationService } from "src/app/authentication.service";
 })
 export class CreatePuctureSkuComponent implements OnInit {
   parentForm: FormGroup;
-  SKUList = [
-    {
-      code: "FC-Mavic-Mavic-Mini-Blue-Excellent",
-      value: "FC-Mavic-Mavic-Mini-Blue-Excellent",
-    },
-  ];
+  SKUList = [];
   isSKUSelected: boolean = false;
   constructor(
     private _authService: AuthenticationService,
@@ -39,7 +34,11 @@ export class CreatePuctureSkuComponent implements OnInit {
    */
   getSKUList = () => {
     this._authService.request("get", "sku").subscribe((response) => {
-      console.log("SKU list ", response);
+      if (response.res.length > 0) {
+        response.res.forEach((element) => {
+          this.SKUList.push({ code: element.sku, value: element.sku });
+        });
+      }
     });
   };
 

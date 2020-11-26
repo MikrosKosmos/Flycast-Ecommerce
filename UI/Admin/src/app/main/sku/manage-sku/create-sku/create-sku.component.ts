@@ -20,6 +20,10 @@ export class CreateSkuComponent implements OnInit {
     { code: "Poor", value: "Poor" },
     { code: "Very Poor", value: "Very Poor" },
   ];
+  uploadErrorMessage: string = "";
+  fileSizeErrorMessage: string = "";
+  encryptedImage: string = "";
+  fileExt: string;
   constructor(
     private _authService: AuthenticationService,
     private spinner: NgxSpinnerService,
@@ -28,6 +32,39 @@ export class CreateSkuComponent implements OnInit {
   ) {}
 
   ngOnInit() {}
+
+  /**
+   * Method to upload file in server.
+   * @param event Variable which recive uploaded file.
+   */
+  uploadImage = (event) => {
+    if (event) {
+      let file = event.target.files[0];
+      let ext = file.type.split("/")[1];
+      this.uploadErrorMessage =
+        file.type === "image/jpeg" || file.type === "image/png"
+          ? ""
+          : "Only jpeg or png file";
+      this.fileSizeErrorMessage =
+        file.size / 1024 / 1024 <= 4 ? "" : "Only jpeg or png file";
+
+      if (!this.uploadErrorMessage && !this.fileSizeErrorMessage) {
+        let fileReader = new FileReader();
+        fileReader.readAsBinaryString(file);
+        fileReader.onload = () =>
+          this.getEncryptedImageValue(btoa(fileReader.result.toString()), ext);
+      }
+    }
+  };
+
+  /**
+   * Method to assign encrypted value in variable
+   * @param value Variable which recive encrypted value.
+   */
+  getEncryptedImageValue = (value, ext) => {
+    this.encryptedImage = value;
+    this.fileExt = ext;
+  };
 
   /**
    * Marks all controls in a form group as touched
@@ -62,9 +99,11 @@ export class CreateSkuComponent implements OnInit {
           this.spinner.show();
           const data = { ...this.parentForm.value };
           data.parent_category = 1;
-          this._authService
-            .request("post", "sku", data)
-            .subscribe((response) => {
+          data.image_data = this.encryptedImage;
+          data.file_extension = this.fileExt;
+          data.position = 1;
+          this._authService.request("post", "sku", data).subscribe(
+            (response) => {
               if (response.res.id > 0) {
                 this.toastr.success("Flycast", "SKU created successfully");
                 this.router.navigateByUrl("/sku/sku-list");
@@ -73,7 +112,15 @@ export class CreateSkuComponent implements OnInit {
                 this.toastr.error("Flycast", "Something went wrong!");
                 this.spinner.hide();
               }
-            });
+            },
+            (err) => {
+              this.toastr.error(
+                "Flycast",
+                "Something went wrong. Please try again!"
+              );
+              this.spinner.hide();
+            }
+          );
         }
       });
     }
