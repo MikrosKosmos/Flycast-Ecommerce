@@ -6,7 +6,7 @@ import { UserService } from 'src/app/shared/Services/user.service';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
   /*personal details input variables*/
@@ -48,7 +48,9 @@ export class UserComponent implements OnInit {
   accountDetailsForm: FormGroup;
   newAddressForm: FormGroup;
 
-  userId = sessionStorage.getItem('UserID') ? sessionStorage.getItem('UserID') : localStorage.getItem('UserID');
+  userId = sessionStorage.getItem('UserID')
+    ? sessionStorage.getItem('UserID')
+    : localStorage.getItem('UserID');
 
   @ViewChild('FN') inputFirstName: ElementRef;
   @ViewChild('LN') inputLastName: ElementRef;
@@ -58,10 +60,13 @@ export class UserComponent implements OnInit {
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private toster: ToastrService) { }
+    private toster: ToastrService
+  ) {}
 
   ngOnInit(): void {
-    this.userName = sessionStorage.getItem('FirstName') ? sessionStorage.getItem('FirstName') : localStorage.getItem('FirstName');
+    this.userName = sessionStorage.getItem('FirstName')
+      ? sessionStorage.getItem('FirstName')
+      : localStorage.getItem('FirstName');
     this.getUserDetailsByID();
 
     this.accountDetailsForm = this.formBuilder.group({
@@ -70,13 +75,20 @@ export class UserComponent implements OnInit {
       email: [''],
       password: [''],
       confirmPassword: [''],
-      phoneNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+      phoneNumber: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(10),
+        ],
+      ],
       gender: ['', Validators.required],
     });
   }
 
   getUserDetailsByID() {
-    this.userService.UserDetailsById(this.userId).subscribe(data => {
+    this.userService.UserDetailsById(this.userId).subscribe((data) => {
       console.log('UserDetails: ', data.res.phone_number);
       this.firstName = data.res.first_name;
       this.lastName = data.res.last_name;
@@ -115,11 +127,11 @@ export class UserComponent implements OnInit {
 
   updateUserEmailId(emailInput) {
     var updateEmail = {
-      "id": Number(this.userId),
-      "email": emailInput.value.email,
+      id: Number(this.userId),
+      email: emailInput.value.email,
     };
     //console.log('api body', updateEmail);
-    this.userService.UpdateUserDetailsById(updateEmail).subscribe(data => {
+    this.userService.UpdateUserDetailsById(updateEmail).subscribe((data) => {
       console.log('after update', data);
       if (data.res.id == 1) {
         this.toster.success('EmailId updated');
@@ -139,11 +151,11 @@ export class UserComponent implements OnInit {
 
   updatePhoneNumber(phoneNumberInput) {
     var updateNumber = {
-      "id": Number(this.userId),
-      "phone_number": "+91" + phoneNumberInput.value.phoneNumber,
-    }
+      id: Number(this.userId),
+      phone_number: '+91' + phoneNumberInput.value.phoneNumber,
+    };
     //need to integrate OTP service
-    this.userService.UpdateUserDetailsById(updateNumber).subscribe(data => {
+    this.userService.UpdateUserDetailsById(updateNumber).subscribe((data) => {
       console.log('after update', data);
       if (data.res.id == 1) {
         this.toster.success('Phone Number Changed');
@@ -187,13 +199,13 @@ export class UserComponent implements OnInit {
       pinCode: ['', Validators.required],
       addressType: ['', Validators.required],
       deliveryInstructions: [''],
-      isDefault: ['']
+      isDefault: [''],
     });
   }
 
   getStatesList() {
     this.stateList = [];
-    this.userService.GetStateList().subscribe(data => {
+    this.userService.GetStateList().subscribe((data) => {
       this.stateList = data.res;
       //console.log('state list', this.stateList);
     });
@@ -202,43 +214,43 @@ export class UserComponent implements OnInit {
   selectCityOnStateId(event) {
     this.cityList = [];
     //console.log('state id value', event.target.value);
-    this.userService.GetCityListByStateId(event.target.value).subscribe(data => {
-      //console.log(data.res);
-      this.cityList = data.res;
-    });
+    this.userService
+      .GetCityListByStateId(event.target.value)
+      .subscribe((data) => {
+        //console.log(data.res);
+        this.cityList = data.res;
+      });
   }
 
   addNewAddress(formInput) {
     console.log('user ID', formInput.value, this.addressId);
     var putBody = {
-      "user_id": Number(this.userId),
-      "address_id": this.addressId,
-      "contact_person_name": formInput.value.contactPersonName,
-      "contact_phone_number": '+91' + formInput.value.contactPersonPhNo,
-      "address_1": formInput.value.address1,
-      "address_2": formInput.value.address2,
-      "city_id": Number(formInput.value.city),
-      "pincode": Number(formInput.value.pinCode),
-      "address_type": formInput.value.addressType,
-      "delivery_instructions": formInput.value.deliveryInstructions,
-      "is_default": (formInput.value.isDefault == true) ? 1 : 0,
+      user_id: Number(this.userId),
+      address_id: this.addressId,
+      contact_person_name: formInput.value.contactPersonName,
+      contact_phone_number: '+91' + formInput.value.contactPersonPhNo,
+      address_1: formInput.value.address1,
+      address_2: formInput.value.address2,
+      city_id: Number(formInput.value.city),
+      pincode: Number(formInput.value.pinCode),
+      address_type: formInput.value.addressType,
+      delivery_instructions: formInput.value.deliveryInstructions,
+      is_default: formInput.value.isDefault == true ? 1 : 0,
     };
     console.log('put body', putBody);
-    this.userService.UpdateOrAddAddress(putBody).subscribe(data => {
+    this.userService.UpdateOrAddAddress(putBody).subscribe((data) => {
       console.log('response', data.res);
       if (data.res.id > 0) {
         this.toster.success('Address Updated');
-      }
-      else
-        this.toster.error('Address Update Failed');
+      } else this.toster.error('Address Update Failed');
     });
     this.switchToAddress();
     window.location.reload();
   }
 
   getUserAddressList() {
-    this.userService.GetUserAddress(this.userId).subscribe(data => {
-      console.log('addresses', data.res);
+    this.userService.GetUserAddress(this.userId).subscribe((data) => {
+      console.log('addresses', data);
       this.addressList = data.res;
     });
   }
@@ -248,7 +260,10 @@ export class UserComponent implements OnInit {
     for (var i = 0; i < this.addressList.length; i++) {
       if (addressIdInput == this.addressList[i].address_id) {
         this.contactName = this.addressList[i].contact_person_name;
-        this.contactNumber = this.addressList[i].contact_phone_number.replace('+91', '');
+        this.contactNumber = this.addressList[i].contact_phone_number.replace(
+          '+91',
+          ''
+        );
         this.address1 = this.addressList[i].address_1;
         this.address2 = this.addressList[i].address_2;
         this.pincode = this.addressList[i].pincode;

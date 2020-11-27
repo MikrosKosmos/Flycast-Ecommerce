@@ -15,11 +15,11 @@
       <li class="nav-item active">
         <a class="nav-link nav-text" routerLink="/products/cart-items">Cart<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item active" [style.display]="!isRegistered ? 'block':'none'">
+      <li class="nav-item active" [style.display]="!getUserDetails() ? 'block':'none'">
         <a class="nav-link nav-text" routerLink="/login" href="#">Login \ Register<span
             class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-link " [style.display]="isRegistered ? 'block':'none'">
+      <li class="nav-link pt-1" [style.display]="getUserDetails() ? 'block':'none'">
         <div class="dropdown">
           <button class="btn btn-light dropdown-toggle pt-0" type="button" id="dropdownMenuButton"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" [userName]="userName">
@@ -28,7 +28,7 @@
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" routerLink="/users">Go To Account</a>
             <a class="dropdown-item" routerLink="/products/order-list">Orders</a>
-            <a class="dropdown-item" (click)="logout()">Logout</a>
+            <a class="dropdown-item" (click)="logout()" style="cursor: pointer;">Logout</a>
           </div>
         </div>
       </li>

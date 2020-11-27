@@ -1,26 +1,28 @@
 <div class="container-fluid">
     <div class="pt-4 pb-4">
-        <div class="row">
-            <div class="col-3">
-                <div class=row style="margin-left: 15px;">
-                    <div class="card">
+        <div class="row mx-auto">
+            <div class="col-lg-3 col-md-3 col-sm-12 my-2">
+                <div class="row">
+                    <div class="card w-100">
                         <div class="card-header text-white bg-primary">
                             Welcome, {{userName}}
                         </div>
                         <div class="card-body">
-                            <h2 class="dropdown-header">Account Details</h2>
+                            <!-- <h2 class="dropdown-header">Account Details</h2>
+                            <hr class="mt-0"> -->
                             <a class="dropdown-item nav-link pointer" (click)="switchToAccountDetails()">Account
                                 Details</a>
                             <a class="dropdown-item nav-link pointer" (click)="switchToAddress()">Manage Addresses</a>
 
-                            <h2 class="dropdown-header">Order Details</h2>
+                            <!-- <h2 class="dropdown-header">Order Details</h2>
+                            <hr class="mt-0"> -->
                             <a class="dropdown-item nav-link pointer" routerLink="/products/order-list">My Orders</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-9">
-                <div class="card">
+            <div class="col-lg-9 col-md-9 col-sm-12 my-2">
+                <div class="card w-100">
                     <!--Account Details-->
                     <div *ngIf="accountDetailsPage">
                         <div class="card-header text-white bg-primary">
@@ -35,17 +37,17 @@
                                     <span class="edit-button" (click)=cancelPersonalInformation()
                                         *ngIf="!editPI">Cancel</span>
                                     <div class="row pb-3">
-                                        <div class="col-4">
+                                        <div class="col-md-4 col-lg-4 col-sm-12 my-2">
                                             <input #FN type="text" class="form-control" value="{{firstName}}"
                                                 name="firstName" formControlName="firstname" [(ngModel)]="firstName"
                                                 disabled>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-md-4 col-lg-4 col-sm-12 my-2">
                                             <input #LN type="text" class="form-control" value="{{lastName}}"
                                                 name="lastName" formControlName="lastname" [(ngModel)]="lastName"
                                                 disabled>
                                         </div>
-                                        <div class="col-4" *ngIf="!editPI">
+                                        <div class="col-4 my-2" *ngIf="!editPI">
                                             <button type="submit" class="btn btn-primary">Submit</button>
                                         </div>
                                     </div>
@@ -59,11 +61,11 @@
                                     <span class="edit-button" (click)=editEmailId() *ngIf="editEmailid">Edit</span>
                                     <span class="edit-button" (click)=cancelEmailId() *ngIf="!editEmailid">Cancel</span>
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-md-6 col-lg-6 col-sm-12 my-2">
                                             <input #Email type="text" class="form-control" value="{{email}}"
                                                 name="emailId" formControlName="email" disabled>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-4 my-2">
                                             <button type="submit" class="btn btn-primary"
                                                 *ngIf="!editEmailid">Submit</button>
                                         </div>
@@ -79,12 +81,12 @@
                                     <span class="edit-button" (click)=cancelUserPhoneNumber()
                                         *ngIf="!editPhoneNumber">Cancel</span>
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-md-6 col-lg-6 col-sm-12 my-2">
                                             <input #PhoneNumber type="number" class="form-control"
                                                 value="{{userPhoneNumber}}" name="emailId" formControlName="phoneNumber"
                                                 disabled>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-4 my-2">
                                             <button type="submit" class="btn btn-primary"
                                                 *ngIf="!editPhoneNumber">Change</button>
                                         </div>
@@ -95,7 +97,7 @@
                             <div class="form-group pl-3 pt-3">
                                 <form [formGroup]="accountDetailsForm">
                                     <div class=row>
-                                        <div class="col-4">
+                                        <div class="col-12">
                                             <div class="test">
                                                 <a class="nav-link pointer" (click)="passwordChangeNewWindow()">Click
                                                     here
@@ -118,31 +120,36 @@
                                 <button type="button" class="btn btn-secondary" data-toggle="modal"
                                     data-target="#exampleModal">Add Address</button>
                             </div>
-                            <div class="p-3" *ngFor='let addresses of addressList'>
-                                <div class="card ">
-                                    <div class="card-header text-white bg-info ">
-                                        <div class="row">
-                                            <div class="col-9">
-                                                <b>{{addresses.contact_person_name}}</b></div>
-                                            <div class="col-3">
-                                                <div>
-                                                    {{addresses.address_type}}
+                            <div class="text-center p-5" *ngIf="addressList.length === 0">
+                                <h4 class="text-muted">No Addresss Found!</h4>
+                            </div>
+                            <div *ngIf="addressList.length !== 0">
+                                <div class="p-3" *ngFor='let addresses of addressList'>
+                                    <div class="card ">
+                                        <div class="card-header text-white bg-info ">
+                                            <div class="row">
+                                                <div class="col-9">
+                                                    <b>{{addresses.contact_person_name}}</b></div>
+                                                <div class="col-3">
+                                                    <div>
+                                                        {{addresses.address_type}}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div>
-                                            <b>Phone Number: {{addresses.contact_phone_number}}</b>
+                                        <div class="card-body">
+                                            <div>
+                                                <b>Phone Number: {{addresses.contact_phone_number}}</b>
+                                            </div>
+                                            <br>
+                                            {{addresses.address_1}},{{addresses.address_2}}<br>
+                                            {{addresses.state_name}}, {{addresses.city_name}}, {{addresses.pincode}}
                                         </div>
-                                        <br>
-                                        {{addresses.address_1}},{{addresses.address_2}}<br>
-                                        {{addresses.state_name}}, {{addresses.city_name}}, {{addresses.pincode}}
-                                    </div>
-                                    <div class="card-footer">
-                                        <a class="pointer card-link">Remove</a>
-                                        <a class="pointer card-link" data-toggle="modal" data-target="#exampleModal"
-                                            (click)="getAddressOnForm(addresses.address_id)">Edit</a>
+                                        <div class="card-footer">
+                                            <a class="pointer card-link">Remove</a>
+                                            <a class="pointer card-link" data-toggle="modal" data-target="#exampleModal"
+                                                (click)="getAddressOnForm(addresses.address_id)">Edit</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -164,13 +171,13 @@
                                                 <form [formGroup]="newAddressForm"
                                                     (ngSubmit)="addNewAddress(newAddressForm)">
                                                     <div class="row pt-3">
-                                                        <div class=col-6>
+                                                        <div class="col-md-6 col-lg-6 col-sm-12 my-2">
                                                             <input #FN type="text" class="form-control"
                                                                 placeholder="Full Name"
                                                                 formControlName="contactPersonName"
                                                                 [(ngModel)]="contactName">
                                                         </div>
-                                                        <div class=col-6>
+                                                        <div class="col-md-6 col-lg-6 col-sm-12 my-2">
                                                             <input #FN type="number" class="form-control"
                                                                 placeholder="10 Digit Contact Number"
                                                                 formControlName="contactPersonPhNo"
@@ -178,21 +185,21 @@
                                                         </div>
                                                     </div>
                                                     <div class="row pt-3">
-                                                        <div class=col>
+                                                        <div class="col">
                                                             <input type="text" class="form-control"
                                                                 placeholder="Address line 1" formControlName="address1"
                                                                 [(ngModel)]="address1">
                                                         </div>
                                                     </div>
                                                     <div class="row pt-3">
-                                                        <div class=col>
+                                                        <div class="col">
                                                             <input type="text" class="form-control"
                                                                 placeholder="Address line 2/Landmark"
                                                                 formControlName="address2" [(ngModel)]="address2">
                                                         </div>
                                                     </div>
                                                     <div class="row pt-3 ">
-                                                        <div class="col-4">
+                                                        <div class="col-sm-12 col-lg-4 col-md-4">
                                                             <div class="form-group">
                                                                 <select id="state" class="form-control"
                                                                     formControlName="state"
@@ -207,7 +214,7 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div class="col-4">
+                                                        <div class="col-sm-12 col-lg-4 col-md-4">
                                                             <div class="form-group">
                                                                 <select id="city" class="form-control"
                                                                     formControlName="city" [(ngModel)]="cityName">
@@ -220,14 +227,14 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div class="col-4">
+                                                        <div class="col-sm-12 col-lg-4 col-md-4">
                                                             <input type="number" class="form-control"
                                                                 placeholder="Pincode" formControlName="pinCode"
                                                                 [(ngModel)]="pincode">
                                                         </div>
                                                     </div>
                                                     <div class="row pt-3 ">
-                                                        <div class="col-9">
+                                                        <div class="col-sm-12 col-lg-9 col-md-9">
                                                             <div class="row pl-3">
                                                                 <label class="form-check-label pr-3"
                                                                     for="exampleRadios1">
@@ -255,7 +262,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-3">
+                                                        <div class="col-md-3 col-lg-3 col-sm-12 my-3">
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox" value=1
                                                                     formControlName="isDefault" id="defaultAddress">
@@ -276,7 +283,7 @@
                                                     <div class="row pt-3 ">
                                                         <div class="col-6">
                                                             <button type="submit" class="btn btn-primary">Save
-                                                                changes</button>
+                                                                Address</button>
                                                         </div>
                                                         <div class="col-6">
                                                             <button type="button" class="btn btn-default"
