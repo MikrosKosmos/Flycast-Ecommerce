@@ -1,12 +1,17 @@
 <ngx-spinner size="large">
   <p style="font-size: 20px; color: white">Loading...</p>
 </ngx-spinner>
-<div class="container my-5" style="font-family: 'Roboto', sans-serif !important; " [style.width.px]="scrWidth" [style.height.px]="scrHeight">
+<div class="container-fluid my-5" style="font-family: 'Roboto', sans-serif !important; " [style.width.px]="scrWidth"
+  [style.height.px]="scrHeight">
   <!-- LOGIN CARD START -->
   <div class="card bg-dark text-white mx-auto" style="width: 20rem;"
     [style.display]="displayCount === 1 ? 'block' : 'none'">
     <div class="card-body">
       <form (ngSubmit)="formLogin(loginForm)" [formGroup]="loginForm">
+        <div class="p-5">
+          <h4 class="text-center">LOGIN</h4>
+        </div>
+        
         <div class="form-group">
           <input type="number" formControlName="phoneNumber" placeholder="Enter Phone Number" id="ph_no"
             class="form-control" autofocus="autofocus" required [(ngModel)]="userLoginPhoneNumber">
@@ -18,12 +23,12 @@
           <button type="submit" class="btn btn-success">Login</button>
         </div>
       </form>
-      <ul class="radioLabel mx-auto">
+      <div class="radioLabel mx-auto text-center">
         <li class="nav-link">
           <input type='radio' value='2' name='registerRadio' id='registerRadio' (change)="displayCount = 3" />
           <label for='registerRadio' style="font-size: 15px; color: white;">Register Here</label>
         </li>
-      </ul>
+      </div>
     </div>
   </div>
   <!-- LOGIN CARD END -->
@@ -50,6 +55,9 @@
     [style.display]="displayCount === 3 ? 'block' : 'none'">
     <div class="card-body">
       <form (ngSubmit)="registerUser(loginForm)" [formGroup]="loginForm">
+        <div class="p-5">
+          <h4 class="text-center">REGISTER</h4>
+        </div>
         <div class="form-group"
           [ngClass]="{'has-error': loginForm.get('firstname').errors && (loginForm.get('firstname').touched || loginForm.get('firstname').dirty)}">
           <input type="text" formControlName="firstname" placeholder="First Name" id="fname" class="form-control"
@@ -111,9 +119,15 @@
           </p>
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-success" [disabled]="!isAccepted">Login</button>
+          <button type="submit" class="btn btn-success" [disabled]="!isAccepted">Register</button>
         </div>
       </form>
+      <div class="radioLabel mx-auto text-center">
+        <li class="nav-link">
+          <input type='radio' name='loginRadio' id='loginRadio' (change)="displayCount = 1" />
+          <label for='loginRadio' style="font-size: 15px; color: white;">Login Here</label>
+        </li>
+      </div>
     </div>
   </div>
   <!-- REGISTRATION FORM END -->
@@ -134,165 +148,3 @@
   <!-- REGISTRATION OTP VERIFICATION FORM END -->
   <!-- REGISTRATION CARD END -->
 </div>
-<!-- <div>
-  <div class="container pt-5 pb-5">
-    <div class="row">
-      <div class="col-4"></div>
-      <div class="col-4" *ngIf="isLogin">
-        <div class="row">
-          <div class="col-6">
-            <ul class="radioLabel">
-              <li class="nav-link">
-                <input type='radio' value='1' name='loginRadio' id='loginRadio' />
-                <label for='loginRadio' style="font-size: 16px;">Customer Log in</label>
-              </li>
-            </ul>
-          </div>
-          <div class="col-6">
-            <ul class="radioLabel">
-              <li class="nav-link">
-                <input type='radio' value='2' name='registerRadio' id='registerRadio' (change)="isLogin=false" />
-                <label for='registerRadio' style="font-size: 16px;">Customer Register</label>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card bg-dark text-white" *ngIf="!isUserRegistered">
-          <div class="card-body">
-            <form (ngSubmit)="formLogin(loginForm)" [formGroup]="loginForm">
-              <div class="form-group">
-                <input type="number" formControlName="phoneNumber" placeholder="Enter Phone Number" id="ph_no"
-                  class="form-control" required [(ngModel)]="userLoginPhoneNumber">
-              </div>
-              <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-              </label>
-              <div class="form-group">
-                <button type="submit" class="btn btn-success">Login</button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="card bg-dark text-white" *ngIf="isUserRegistered">
-          <div class="card-body">
-            <form (ngSubmit)="formLogin(loginForm)" [formGroup]="loginForm">
-              <div class="form-group">
-                <input type="number" formControlName="otp" placeholder="Enter OTP" id="otp" class="form-control"
-                  required>
-              </div>
-              <div class="form-group">
-                <button type="submit" class="btn btn-success">Verify</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="col-4" *ngIf="!isLogin">
-        <div class="row">
-          <div class="col-6">
-            <ul class="radioLabel">
-              <li class="nav-link">
-                <input type='radio' value='1' name='loginRadio' id='loginRadio' (change)="isLogin=true"
-                  (click)="changeFormType($event)" />
-                <label for='loginRadio' style="font-size: 16px;">Customer Log in</label>
-              </li>
-            </ul>
-          </div>
-          <div class="col-6">
-            <ul class="radioLabel">
-              <li class="nav-link">
-                <input type='radio' value='2' name='registerRadio' id='registerRadio' />
-                <label for='registerRadio' style="font-size: 16px;">Customer Register</label>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card bg-dark text-white" *ngIf="!isUserRegistered">
-          <div class="card-body">
-            <form (ngSubmit)="registerUser(loginForm)" [formGroup]="loginForm">
-              <div class="form-group"
-                [ngClass]="{'has-error': loginForm.get('firstname').errors && (loginForm.get('firstname').touched || loginForm.get('firstname').dirty)}">
-                <input type="text" formControlName="firstname" placeholder="First Name" id="fname" class="form-control"
-                  required>
-                <span class="help-block"
-                  *ngIf="loginForm.get('firstname').errors && (loginForm.get('firstname').touched || loginForm.get('firstname').dirty)">
-                  <span *ngIf="loginForm.get('firstname').errors?.required">First Name is Required</span>
-                </span>
-              </div>
-              <div class="form-group"
-                [ngClass]="{'has-error': loginForm.get('lastname').errors && (loginForm.get('lastname').touched || loginForm.get('lastname').dirty)}">
-                <input type="text" formControlName="lastname" placeholder="Last Name" id="lname" class="form-control"
-                  required>
-                <span class="help-block"
-                  *ngIf="loginForm.get('lastname').errors && (loginForm.get('lastname').touched || loginForm.get('lastname').dirty)">
-                  <span *ngIf="loginForm.get('lastname').errors?.required">Last Name is Required</span>
-                </span>
-              </div>
-              <div class="form-group"
-                [ngClass]="{'has-error': loginForm.get('phoneNumber').errors && (loginForm.get('phoneNumber').touched || loginForm.get('phoneNumber').dirty)}">
-                <input type="number" formControlName="phoneNumber" placeholder="Phone Number" id="ph_no"
-                  class="form-control" required>
-                <span class="help-block"
-                  *ngIf="loginForm.get('phoneNumber').errors && (loginForm.get('phoneNumber').touched || loginForm.get('phoneNumber').dirty)">
-                  <span
-                    *ngIf="loginForm.get('phoneNumber').errors?.minlength || loginForm.get('phoneNumber').errors?.maxlength">
-                    10 digit phone mumber is required
-                  </span>
-                  <span *ngIf="loginForm.get('phoneNumber').errors?.required">Phone mumber is required</span>
-                </span>
-
-              </div>
-              <div class="form-group"
-                [ngClass]="{'has-error': loginForm.get('gender').errors && (loginForm.get('gender').touched || loginForm.get('gender').dirty)}">
-                <label style="padding-right: 20px;">
-                  <input type="radio" value="M" formControlName="gender" class="form-control" required>
-                  <span>Male</span>
-                </label>
-                <label style="padding-right: 20px;">
-                  <input type="radio" value="F" formControlName="gender" class="form-control" required>
-                  <span>Female</span>
-                </label>
-                <label>
-                  <input type="radio" value="O" formControlName="gender" class="form-control" required>
-                  <span>Other</span>
-                </label>
-                <span class="help-block"
-                  *ngIf="loginForm.get('gender').errors && (loginForm.get('gender').touched || loginForm.get('gender').dirty)">
-                  <span *ngIf="loginForm.get('gender').errors?.required">Gender is Required</span>
-                </span>
-              </div>
-              <div class="form-group">
-                <label>
-                  <input type="checkbox" name="remember" (change)="onCheckboxChange($event)" required> Accept Terms and
-                  Conditions
-                </label>
-                <p class="error" *ngIf="this.loginForm.controls['checkArray'].errors?.required">
-                  **Accept the terms and conditions
-                </p>
-              </div>
-              <div class="form-group">
-                <button type="submit" class="btn btn-success" [disabled]="!isAccepted">Login</button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="card bg-dark text-white" *ngIf="isUserRegistered">
-          <div class="card-body">
-            <form (ngSubmit)="otpVerification(loginForm)" [formGroup]="loginForm">
-              <div class="form-group">
-                <input type="number" formControlName="otp" placeholder="Enter OTP" id="otp" class="form-control"
-                  required>
-              </div>
-              <div class="form-group">
-                <button type="submit" class="btn btn-success">Verify</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="col-4"></div>
-    </div>
-  </div>
-</div> -->

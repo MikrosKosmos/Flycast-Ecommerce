@@ -1,32 +1,44 @@
 .container {
     padding: 16px;
 }
+
 .btn {
     width: 100%;
 }
+
 .radioLabel {
     list-style: none;
 }
+
 .radioLabel li {
     display     : inline-block;
     margin-right: 15px;
 }
+
 .radioLabel li input {
     visibility: hidden;
 }
+
 .radioLabel li label {
-    cursor: pointer;
+    cursor   : pointer;
     font-size: 30px;
-    color: darkblue;
+    color    : darkblue;
 }
-.radioLabel li input:active + label {
+
+.radioLabel li input:active+label {
     // background: red;
-    color: crimson;
+    color      : crimson;
     font-weight: 700;
 }
-.error{
+
+.error {
     color: crimson;
 }
+
 .help-block {
     color: crimson;
 }
+
+// .card {
+//     min-width: 400px;
+// }
