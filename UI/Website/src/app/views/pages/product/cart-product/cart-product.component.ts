@@ -25,6 +25,7 @@ export class CartProductComponent implements OnInit {
   email: string;
   paymentAmount: Number;
   addressDetais = [];
+  isEmptyCart: boolean;
 
   constructor(
     private productService: ProductService,
@@ -43,8 +44,14 @@ export class CartProductComponent implements OnInit {
     this.productService.getCartDetails().subscribe(data => {
       this.spinner.show();
       this.cartDetails = data['res'];
-      this.paymentAmount = data['res'][0]['price'];
-      localStorage.setItem('CartId', data['res'][0]['id']);
+      console.log('cart details', this.cartDetails.length);
+      if (this.cartDetails.length > 0) {
+        this.paymentAmount = data['res'][0]['price'];
+        localStorage.setItem('CartId', data['res'][0]['id']);
+        this.isEmptyCart = false;
+      }
+      else
+        this.isEmptyCart = true;
       this.spinner.hide();
       console.log(this.cartDetails, this.paymentAmount, localStorage.getItem('CartId'));
       // if(this.cartDetails['total_products'])

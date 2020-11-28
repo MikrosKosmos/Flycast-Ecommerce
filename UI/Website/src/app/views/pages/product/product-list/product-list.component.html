@@ -8,50 +8,6 @@
             <div class="text-center text-white display-4" style="border: none;">
                 {{productCategoryName}}
             </div>
-            <!-- <div class="img-thumbnail">
-                    <div class="card-group p-1">
-                        <div class="col-md-6 col-sm-12" *ngFor="let products of productDetails">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-4 col-sm-12" style="cursor: pointer;">
-                                            <img src="{{products.image_url}}" alt="" class="img-responsive"
-                                                style="height: 16rem" (click)="getProductDetailsBySKU(products.sku)">
-                                        </div>
-                                        
-
-                                        <span>
-                                            <a placement="top" mdbTooltip="Add to Wishlist" container="body"
-                                                (click)="addFavourite(products)">
-                                                <i class="fa fa-heart"></i>
-                                            </a>
-                                        </span>
-                                        
-                                        
-                                        <div class="col-md-8 col-sm-12">
-                                            <div class="caption">
-                                                <div class="text-center">
-                                                    <h4 style="cursor: pointer;"><a
-                                                            (click)="getProductDetailsBySKU(products.sku)">{{products.brand}}
-                                                            {{products.model}}</a>
-                                                    </h4>
-                                                    <div class="space-ten"></div>
-                                                    <p>{{products.price|currency:'INR'}}
-                                                    </p>
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                        data-target="#product_view"
-                                                        (click)="quickViewProductsById(content, products)">
-                                                        <i class="fa fa-search"></i>
-                                                        Quick View</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             <div class="card-group p-1">
                 <div class="col-md-3" *ngFor="let products of productDetails">
                     <div class="card">
@@ -91,7 +47,7 @@
     <div class="modal-body">
         <div class="row" *ngFor="let product of productInModal">
             <div class="col-md-6 product_img">
-                <img src="{{product.image_url}}" class="img-responsive" style="height: 500px;">
+                <img src="{{product.image_url}}" class="img-responsive" style="height: 500px; width: 500px;">
             </div>
             <div class="col-md-6 product_content">
                 <h4><span>{{product.brand}} {{product.model}}</span></h4>
@@ -112,6 +68,7 @@
                 <div class="row">
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <p>Colour: {{product.color}}</p>
+                        <p>Grade: {{product.product_grade}}</p>
                         <p>Quantity Available: {{product.stock_quantity}}</p>
                         <!-- <select class="form-control" name="select">
                             <option value="" selected="">Color</option>
@@ -121,24 +78,6 @@
                             <option value="rose gold">Rose Gold</option>
                         </select> -->
                     </div>
-                    <!-- end col -->
-                    <!-- <div class="col-md-4 col-sm-6 col-xs-12">
-                        <select class="form-control" name="select">
-                            <option value="">Capacity</option>
-                            <option value="">16GB</option>
-                            <option value="">32GB</option>
-                            <option value="">64GB</option>
-                            <option value="">128GB</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                        <select class="form-control" name="select">
-                            <option value="" selected="">QTY</option>
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
-                        </select>
-                    </div> -->
                 </div>
                 <div class="space-ten"></div>
                 <div class="btn-ground">

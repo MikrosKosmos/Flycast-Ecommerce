@@ -2,53 +2,64 @@
   <p style="font-size: 20px; color: white">Loading...</p>
 </ngx-spinner>
 <div class="container-fluid">
-  <div *ngFor="let cart of cartDetails">
-    <ul class="list-unstyled">
-      <li class="media pt-3">
-        <div class="col-md-3 ">
-          <img class="mr-3" src="{{cart.image_url}}" alt="Product Image" style="height: 20rem;"></div>
-        <div class="col-md-6 pt-3">
-          <div class="media-body">
-            <div class="col-md-8">
-              <h4 class="m-1 mb-2">{{cart.brand}} {{cart.model}} </h4>
-              <div class="row ml-1">
-                <p>Colour: {{cart.color}}</p>
+  <div *ngIf="!isEmptyCart">
+    <div *ngFor="let cart of cartDetails">
+      <ul class="list-unstyled">
+        <li class="media pt-3">
+          <div class="col-md-3 ">
+            <img class="mr-3" src="{{cart.image_url}}" alt="Product Image" style="height: 20rem;"></div>
+          <div class="col-md-6 pt-3">
+            <div class="media-body">
+              <div class="col-md-8">
+                <h4 class="m-1 mb-2">{{cart.brand}} {{cart.model}} </h4>
+                <div class="row ml-1">
+                  <p>Colour: {{cart.color}}</p>
+                </div>
+                <div class="row ml-1">
+                  <p>Condition: {{cart.product_grade}}</p>
+                </div>
+                <div class="row ml-1">
+                  <h5>Quantity: {{cart.quantity}}
+                    <!-- <button class="btn" (click)="changeQuantity(qty.value, 'dec')"><i
+                                          class="fa fa-minus-circle"></i></button>
+                                   <h5 #qty>{{cart.quantity}}</h5>
+                                  <button class="btn" (click)="changeQuantity(qty.value, 'inc')"><i
+                                          class="fa fa-plus-circle"></i></button> -->
+                  </h5>
+                </div>
+                <button class="btn btn-danger m-2" (click)="deleteFromCart(cart.sku)">Delete</button>
               </div>
-              <div class="row ml-1">
-                <p>Condition: {{cart.product_grade}}</p>
-              </div>
-              <div class="row ml-1">
-                <h5>Quantity: {{cart.quantity}}
-                  <!-- <button class="btn" (click)="changeQuantity(qty.value, 'dec')"><i
-                                        class="fa fa-minus-circle"></i></button>
-                                 <h5 #qty>{{cart.quantity}}</h5>
-                                <button class="btn" (click)="changeQuantity(qty.value, 'inc')"><i
-                                        class="fa fa-plus-circle"></i></button> -->
-                </h5>
-              </div>
-              <button class="btn btn-danger m-2" (click)="deleteFromCart(cart.sku)">Delete</button>
             </div>
           </div>
-        </div>
-        <div class="col-md-3 pt-3">
-          <h5>Price: {{cart.price|currency:"INR"}}</h5>
-          <button class="btn btn-primary m-2" (click)="proceedToBuy()">Proceed to buy</button>
-        </div>
-      </li>
-      <!-- <li class="media my-4">
-              <img class="mr-3" src="..." alt="Generic placeholder image">
-              <div class="media-body">
-                <h5 class="mt-0 mb-1">List-based media object</h5>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-              </div>
-            </li>
-            <li class="media">
-              <img class="mr-3" src="..." alt="Generic placeholder image">
-              <div class="media-body">
-                <h5 class="mt-0 mb-1">List-based media object</h5>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-              </div>
-            </li> -->
-    </ul>
+          <div class="col-md-3 pt-3">
+            <h5>Price: {{cart.price|currency:"INR"}}</h5>
+            <button class="btn btn-primary m-2" (click)="proceedToBuy()">Proceed to buy</button>
+          </div>
+        </li>
+        <!-- <li class="media my-4">
+                <img class="mr-3" src="..." alt="Generic placeholder image">
+                <div class="media-body">
+                  <h5 class="mt-0 mb-1">List-based media object</h5>
+                  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                </div>
+              </li>
+              <li class="media">
+                <img class="mr-3" src="..." alt="Generic placeholder image">
+                <div class="media-body">
+                  <h5 class="mt-0 mb-1">List-based media object</h5>
+                  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                </div>
+              </li> -->
+      </ul>
+    </div>
   </div>
+
+  <div *ngIf="isEmptyCart">
+    <div class="jumbotron text-center m-0">
+      <h1 class="text-danger">Cart is empty</h1>
+      <i class="fa fa-cart-arrow-down fa-4x" aria-hidden="true"></i>
+      <a routerLink=''>Shop Now</a>
+    </div>
+  </div>
+
 </div>

@@ -32,13 +32,28 @@
                         </div>
                         <div class="card-footer" style="border: none; background-color: white;">
                             <div class="row">
-                                <div class="col-6 product-allignment-center">
-                                    <button type="button" class="btn btn-primary" (click)="addToCart()">Add To
-                                        Cart</button>
-                                </div>
-                                <div class="col-6 product-allignment-center">
-                                    <button type="button" class="btn btn-success">Buy Now</button>
-                                </div>
+                                <div *ngIf="IsAvailable;then availableBtn else outOfStockBtn"></div>
+                                <ng-template #availableBtn>
+                                    <div class="col-6 product-allignment-center">
+                                        <button type="button" class="btn btn-primary" (click)="addToCart()">Add To
+                                            Cart</button>
+                                    </div>
+                                    <div class="col-6 product-allignment-center">
+                                        <button type="button" class="btn btn-success">Buy Now</button>
+                                    </div>
+                                </ng-template>
+                                <ng-template #outOfStockBtn>
+                                    <div class="col-6 product-allignment-center">
+                                        <button type="button" class="btn btn-primary" disabled="disabled"
+                                            (click)="addToCart()">Add To
+                                            Cart</button>
+                                    </div>
+                                    <div class="col-6 product-allignment-center">
+                                        <button type="button" class="btn btn-success" disabled="disabled">Buy
+                                            Now</button>
+                                    </div>
+                                </ng-template>
+
                             </div>
                         </div>
                     </div>
