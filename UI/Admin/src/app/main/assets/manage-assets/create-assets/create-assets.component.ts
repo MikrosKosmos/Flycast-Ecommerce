@@ -54,10 +54,7 @@ export class CreateAssetsComponent implements OnInit {
         "",
         Validators.compose([RequiredValidator("Asset Name is required")]),
       ],
-      asset_unique_number: [
-        "",
-        Validators.compose([RequiredValidator("Unique Number is required")]),
-      ],
+      asset_unique_number: [""],
       category: [
         "",
         Validators.compose([RequiredValidator("Category is required")]),
@@ -255,11 +252,9 @@ export class CreateAssetsComponent implements OnInit {
           this.spinner.show();
           const data = { ...this.parentForm.value };
           data.attribute_values = this.attribute_values;
-          console.log(data);
           this._authService
             .request("post", `asset`, data)
             .subscribe((response) => {
-              console.log(response);
               if (
                 response.res.asset_id > 0 &&
                 response.res.is_stock_updated > 0

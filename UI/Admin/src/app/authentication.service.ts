@@ -50,20 +50,20 @@ export class AuthenticationService {
   }
 
   private saveToken(token: string): void {
-    localStorage.setItem("mean-token", token);
+    sessionStorage.setItem("mean-token", token);
     this.token = token;
   }
 
   public getAuthToken(): string {
     if (!this.token) {
-      this.token = localStorage.getItem("mean-token");
+      this.token = sessionStorage.getItem("mean-token");
     }
     return this.token;
   }
 
   private getToken(): string {
     if (!this.token) {
-      this.token = localStorage.getItem("mean-token");
+      this.token = sessionStorage.getItem("mean-token");
     }
     return this.token;
   }
@@ -72,7 +72,7 @@ export class AuthenticationService {
     const token = this.getToken();
     let payload;
     if (token) {
-      let userDetails = localStorage.getItem("user");
+      let userDetails = sessionStorage.getItem("user");
       if (userDetails) {
         return JSON.parse(userDetails);
       } else {
@@ -197,7 +197,7 @@ export class AuthenticationService {
         referralCode: data.referral_code,
         role: data.roles,
       };
-      localStorage.setItem("user", JSON.stringify(userData));
+      sessionStorage.setItem("user", JSON.stringify(userData));
     }
     return data;
   };
@@ -218,9 +218,9 @@ export class AuthenticationService {
     // /Users/logout
     this.token = "";
     // this.request('post', 'users/logout', {}).subscribe((response) => {
-    window.localStorage.removeItem("mean-token");
-    window.localStorage.removeItem("user");
-    window.localStorage.removeItem("ul");
+    window.sessionStorage.removeItem("mean-token");
+    window.sessionStorage.removeItem("user");
+    window.sessionStorage.removeItem("ul");
     this.router.navigateByUrl("auth/login");
     // }, (err) => {
     //   window.localStorage.removeItem('mean-token');
@@ -233,10 +233,10 @@ export class AuthenticationService {
     this.token = "";
     this.request("post", "users/logout", {}).subscribe(
       (response) => {
-        window.localStorage.removeItem("mean-token");
+        window.sessionStorage.removeItem("mean-token");
       },
       (err) => {
-        window.localStorage.removeItem("mean-token");
+        window.sessionStorage.removeItem("mean-token");
       }
     );
   }

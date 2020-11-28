@@ -37,6 +37,7 @@
                         <th>Model</th>
                         <th>Color</th>
                         <th>Grade</th>
+                        <th>Quantity</th>
                     </tr>
                 </thead>
                 <tbody class="electricity-list-tbody">
@@ -47,6 +48,7 @@
                             <td>{{item.model}}</td>
                             <td>{{item.color}}</td>
                             <td>{{item.product_grade}}</td>
+                            <td>{{item.stock_quantity ? item.stock_quantity : "0"}}</td>
                         </tr>
                     </ng-container>
                     <ng-template #noDataFound>
