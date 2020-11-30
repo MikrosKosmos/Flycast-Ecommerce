@@ -28,6 +28,9 @@ begin
         select id into @isRoleValid from tbl_RoleMaster where id = parRoleId and is_active = 1;
         if @isRoleValid > 0 then
             #inserting into tbl_UserMaster;
+            if length(parEmail) = 0 then
+                set parEmail = null;
+            end if;
             insert into tbl_UserMaster (first_name, last_name, gender, email, phone_number, referral_code,
                                         used_referral_code, created_by)
                 value (parFirstName, parLastName, parGender, parEmail, parPhone, parReferralCode, parUsedReferralCode,

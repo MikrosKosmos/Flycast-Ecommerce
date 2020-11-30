@@ -3,7 +3,7 @@ create procedure sp_UpdatePaymentStatus(parPaymentId int, parStatusId int, parUs
 begin
     set @isValid = 0;
     select id into @isValid from tbl_OrderPaymentTransaction where id = parPaymentId and is_active = 1;
-    if @isValid = 0 then
+    if @isValid > 0 then
         update tbl_OrderPaymentTransaction
         set payment_status_id =parStatusId,
             modified_by=parUserId,

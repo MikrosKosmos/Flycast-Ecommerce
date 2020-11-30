@@ -62,6 +62,11 @@ begin
                 where user_id = parUserId
                   and is_active = 1;
             end if;
+            set @isFirstAddress = 0;
+            select id into @isFirstAddress from tbl_UserAddress where user_id = parUserId and is_active = 1;
+            if @isFirstAddress = 0 then
+                set parIsDefault = 1;
+            end if;
             insert into tbl_UserAddress (user_id, contact_person_name, contact_phone_number, address_1, address_2,
                                          city_id, pincode, gps_lat, gps_long, address_type, delivery_instructions,
                                          is_default, created_by)
