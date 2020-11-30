@@ -30,14 +30,14 @@ export class LoginComponent implements OnInit {
   registeredUserPhoneNumber: string = '';
   public displayCount: number;
   public formData: any = {};
-  scrHeight:any;
-  scrWidth:any;
+  scrHeight: any;
+  scrWidth: any;
 
   @HostListener('window:resize', ['$event'])
   getScreenSize(event?) {
-        this.scrHeight = window.innerHeight;
-        this.scrWidth = window.innerWidth;
-        console.log('screen dimension:', this.scrHeight, this.scrWidth);
+    this.scrHeight = window.innerHeight;
+    this.scrWidth = window.innerWidth;
+    console.log('screen dimension:', this.scrHeight, this.scrWidth);
   }
   constructor(
     private formBuilder: FormBuilder,
@@ -101,9 +101,9 @@ export class LoginComponent implements OnInit {
             this.isUserRegistered,
             this.registeredUserPhoneNumber
           );
-          this.tostrService.success(
-            'Customer account registered',
-            formInput.value.firstname + ' ' + formInput.value.lastname
+          this.tostrService.warning(
+            formInput.value.firstname + ' ' + formInput.value.lastname,
+            'OTP was sent to your registered phone number'
           );
         } else this.tostrService.error('Contact number not found');
       });
@@ -122,10 +122,20 @@ export class LoginComponent implements OnInit {
           'OTP validation successful',
           formInput.value.firstname + ' ' + formInput.value.lastname
         );
+        sessionStorage.setItem('FirstName', data.res.first_name);
+        sessionStorage.setItem('LastName', data.res.last_name);
+        sessionStorage.setItem('JwToken', data.res.jw_token);
+        sessionStorage.setItem('UserID', data.res.id);
         this.isLogin = true;
-        this.tostrService.success('Please Login with your phone number');
-        //this.router.navigate(['/products/all-products']);
-      } else this.tostrService.error('OTP validation failed');
+        if (formInput.value.otp != null) {
+          this.tostrService.success(
+            sessionStorage.getItem('FirstName') ? sessionStorage.getItem('FirstName') : localStorage.getItem('FirstName'), 'Welcome');
+        }
+        this.router.navigate(['']);
+      } else {
+        this.tostrService.error('OTP validation failed');
+        this.router.navigate(['/login']);
+      }
     });
     //this.router.navigate(['/userDetails']);
   }
@@ -170,8 +180,8 @@ export class LoginComponent implements OnInit {
         this.isLogin = true;
         this.displayCount = 2;
         this.tostrService.success(
-          'Login Success',
-          sessionStorage.getItem('FirstName') ? sessionStorage.getItem('FirstName') : localStorage.getItem('FirstName')
+          sessionStorage.getItem('FirstName') ? sessionStorage.getItem('FirstName') : localStorage.getItem('FirstName'),
+          'Welcome'
         );
         this.spinner.hide();
         //this.router.navigate(['/']);

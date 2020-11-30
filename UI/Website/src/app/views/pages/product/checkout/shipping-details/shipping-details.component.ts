@@ -36,6 +36,7 @@ export class ShippingDetailsComponent implements OnInit {
   cityName: string;
   addressId: number = 0;
   isAddressSelected: boolean;
+  isAddressExists: boolean;
 
   ngOnInit(): void {
     this.getUserAddressList();
@@ -46,6 +47,11 @@ export class ShippingDetailsComponent implements OnInit {
       console.log('addresses', data.res);
       this.spinner.hide();
       this.addressList = data.res;
+      if (this.addressList.length >= 1)
+        this.isAddressExists = true;
+      else
+        this.isAddressExists = false;
+      console.log('address exists', this.isAddressExists);
     });
     console.log(this.addressList);
   }
@@ -69,7 +75,7 @@ export class ShippingDetailsComponent implements OnInit {
     }
   }
 
-  getAddressId(value){
+  getAddressId(value) {
     sessionStorage.setItem('AddressId', value);
     console.log('Address id', sessionStorage.getItem('AddressId'));
     this.toastr.success('Address Selected');

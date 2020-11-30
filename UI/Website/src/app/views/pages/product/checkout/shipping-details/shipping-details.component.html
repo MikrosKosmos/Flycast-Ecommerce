@@ -23,29 +23,37 @@
 </div> -->
 <section id="addressSection">
     <div class="container-fluid">
-        <div class="title">
-            <h3>Select Deliver Address</h3>
-        </div>
-        <div class="row">
-            <div *ngFor="let address of addressList">
-                <div class="col-md-3 col-sm-12">
-                    <div class="card text-center">
-                        <div class="card-header p-2">
-                            <h5>{{address.contact_person_name}}</h5>
+        <div *ngIf="isAddressExists">
+            <div class=" text-center m-0">
+                <h3>Select Deliver Address</h3>
+            </div>
+            <div class="row">
+                <div *ngFor="let address of addressList">
+                    <div class="col-md-3 col-sm-12">
+                        <div class="card text-center">
+                            <div class="card-header p-2">
+                                <h5>{{address.contact_person_name}}</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>{{address.contact_phone_number}}</p>
+                                <span>{{address.address_1}}, {{address.address_2}}, {{address.state_name}},
+                                    {{address.city_name}}-{{address.pincode}}</span>
+                                <p><b>{{address.address_type}}</b></p>
+                            </div>
+                            <div class="card-footer p-1">
+                                <a (click)="getAddressId(address.address_id)">Deliver Here</a>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <p>{{address.contact_phone_number}}</p>
-                            <span>{{address.address_1}}, {{address.address_2}}, {{address.state_name}},
-                                {{address.city_name}}-{{address.pincode}}</span>
-                            <p><b>{{address.address_type}}</b></p>
-                        </div>
-                        <div class="card-footer p-1">
-                            <a (click)="getAddressId(address.address_id)">Deliver Here</a>
-                        </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
+        </div>
+        <div *ngIf="isAddressExists">
+            <div class=" text-center m-0">
+                <h1 class="text-danger">Shipping address not found</h1>
+                <a routerLink=''>Add a new address</a>
+              </div>
         </div>
     </div>
 </section>
