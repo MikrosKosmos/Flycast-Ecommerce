@@ -5,8 +5,21 @@ create procedure sp_RegisterUser(parFirstName varchar(255), parLastName varchar(
                                  parUsedReferralCode varchar(8))
 begin
     set @isExists = 0;
+    set @whereClaus = '';
+    if length(parEmail) > 0 then
+        set @whereClaus = concat(@whereClaus, ' email = ''', parEmail, ''' and ');
+    end if;
+    if length(parPhone) > 0 then
+        set @whereClaus = concat(@whereClaus, ' phone_number = ''', parPhone, ''' and ');
+    end if;
     #checking whether the email or phone already registered.
-    select id into @isExists from tbl_LoginMaster where email = parEmail or phone_number = parPhone and is_active = 1;
+    select concat('select id into @isExists from tbl_LoginMaster where ', @whereClaus
+               , ' is_active = 1')
+    into @stmtSQL;
+    #select @stmtSQL;
+    prepare stmtExec from @stmtSQL;
+    execute stmtExec;
+    deallocate prepare stmtExec;
     if @isExists > 0 then
         select -1 as id;
     else
