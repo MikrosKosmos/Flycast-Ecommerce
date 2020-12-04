@@ -77,7 +77,7 @@ export class CreateAttributeComponent implements OnInit {
     if (this.parentForm.invalid) this.markFormGroupTouched(this.parentForm);
     else {
       Swal.fire({
-        title: "Do you want to create these attributes?",
+        title: "Do you want to create these features?",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -93,10 +93,7 @@ export class CreateAttributeComponent implements OnInit {
             .request("post", "attribute", data)
             .subscribe((response) => {
               if (response.res.id > 0) {
-                this.toastr.success(
-                  "Flycast",
-                  "Attribute Created Successfully"
-                );
+                this.toastr.success("Flycast", "Features Created Successfully");
                 this.router.navigateByUrl("/attribute/attributes-list");
                 this.spinner.hide();
               } else {

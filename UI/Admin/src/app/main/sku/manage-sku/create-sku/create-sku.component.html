@@ -40,6 +40,8 @@
                                 <div class="text-danger mt-2" *ngIf="uploadErrorMessage">{{uploadErrorMessage}}</div>
                                 <div class="text-danger mt-2" *ngIf="fileSizeErrorMessage">{{fileSizeErrorMessage}}
                                 </div>
+                                <div class="text-success mt-2" *ngIf="fileUploadMessage">{{fileUploadMessage}}</div>
+                                <div class="text-danger mt-2" *ngIf="noFileUploaded">{{noFileUploaded}}</div>
                             </div>
                             <div class="text-center col-md-12  mt-4 btn-wrap">
                                 <button type="button" class="btn btn-Submit mx-1 btn-sm"

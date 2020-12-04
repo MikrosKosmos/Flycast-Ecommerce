@@ -23,7 +23,9 @@ export class CreateSkuComponent implements OnInit {
   uploadErrorMessage: string = "";
   fileSizeErrorMessage: string = "";
   encryptedImage: string = "";
+  fileUploadMessage: string = "";
   fileExt: string;
+  noFileUploaded: string = "";
   constructor(
     private _authService: AuthenticationService,
     private spinner: NgxSpinnerService,
@@ -39,6 +41,7 @@ export class CreateSkuComponent implements OnInit {
    */
   uploadImage = (event) => {
     if (event) {
+      this.spinner.show();
       let file = event.target.files[0];
       let ext = file.type.split("/")[1];
       this.uploadErrorMessage =
@@ -64,6 +67,11 @@ export class CreateSkuComponent implements OnInit {
   getEncryptedImageValue = (value, ext) => {
     this.encryptedImage = value;
     this.fileExt = ext;
+    this.fileUploadMessage =
+      this.encryptedImage && this.fileExt ? "Image uploaded successfully!" : "";
+    this.noFileUploaded =
+      this.encryptedImage && this.fileExt ? "" : "No Image uploaded!";
+    this.spinner.hide();
   };
 
   /**
@@ -84,8 +92,15 @@ export class CreateSkuComponent implements OnInit {
    * Method to create SKU.
    */
   submitSku = () => {
-    if (this.parentForm.invalid) this.markFormGroupTouched(this.parentForm);
-    else {
+    if (this.parentForm.invalid) {
+      this.markFormGroupTouched(this.parentForm);
+      if (!this.encryptedImage && !this.fileExt) {
+        this.noFileUploaded = "No Image uploaded!";
+      }
+    } else if (!this.encryptedImage && !this.fileExt) {
+      this.noFileUploaded = "No Image uploaded!";
+    } else {
+      this.noFileUploaded = "";
       Swal.fire({
         title: "Do you want to create this SKU?",
         type: "warning",

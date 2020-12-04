@@ -132,7 +132,7 @@ export class CategoryAttributeComponent implements OnInit {
     if (this.parentForm.invalid) this.markFormGroupTouched(this.parentForm);
     else {
       Swal.fire({
-        title: "Do you want to assign these attributes?",
+        title: "Do you want to assign these Features?",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -149,7 +149,7 @@ export class CategoryAttributeComponent implements OnInit {
                 this.router.navigateByUrl("/attribute/attributes-list");
                 this.toastr.success(
                   "Flycast",
-                  "Attributes assigned successfully"
+                  "Features assigned successfully"
                 );
                 this.spinner.hide();
               } else {
