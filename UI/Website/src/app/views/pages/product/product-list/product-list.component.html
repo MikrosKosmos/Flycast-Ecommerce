@@ -47,7 +47,7 @@
     <div class="modal-body">
         <div class="row" *ngFor="let product of productInModal">
             <div class="col-md-6 product_img">
-                <img src="{{product.image_url}}" class="img-responsive" style="height: 500px; width: 500px;">
+                <img src="{{product.image_url}}" class="img-responsive img-position">
             </div>
             <div class="col-md-6 product_content">
                 <h4><span>{{product.brand}} {{product.model}}</span></h4>
@@ -80,12 +80,10 @@
                     </div>
                 </div>
                 <div class="space-ten"></div>
-                <div class="btn-ground">
+                <!-- <div class="btn-ground">
                     <button type="button" class="btn btn-primary"><span
                             class="glyphicon glyphicon-shopping-cart"></span> Add To Cart</button>
-                    <!-- <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-heart"></span> Add To
-                        Wishlist</button> -->
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
