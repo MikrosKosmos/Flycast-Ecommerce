@@ -20,6 +20,11 @@
   font-family        : "Roboto", sans-serif !important;
 }
 
+.scoll {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 .banner-text {
   text-align: center;
   position  : absolute;

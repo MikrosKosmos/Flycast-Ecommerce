@@ -1,109 +1,55 @@
-<!-- <ngb-carousel>
-    <ng-template ngbSlide>
-        <img [src]="" alt="Random first slide">
-        <div class="carousel-caption">
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </div>
-    </ng-template>
-    <ng-template ngbSlide>
-        <img [src]="" alt="Random first slide">
-        <div class="carousel-caption">
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </div>
-    </ng-template>
-    <ng-template ngbSlide>
-        <img [src]="" alt="Random first slide">
-        <div class="carousel-caption">
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </div>
-    </ng-template>
-</ngb-carousel> -->
-
-
-<!-- <ngb-carousel *ngIf="images" [pauseOnHover]="pauseOnHover" [interval]="1000" [pauseOnFocus]="pauseOnFocus"
-    style="outline: none; width: 100%;">
-    <ng-template ngbSlide>
-        <div>
-            <div class="imgbox">
-                <img [src]="images[0]" alt="Random first slide" class="center-fit img-fuild">
-            </div>
-            <div class="carousel-caption">
-                <h3>First slide label</h3>
-                <p>Description 1.</p>
-            </div>
-        </div>
-
-    </ng-template>
-    <ng-template ngbSlide>
-        <div class="imgbox">
-            <img [src]="images[1]" alt="Random second slide" class="center-fit img-fuild">
-        </div>
-        <div class="carousel-caption">
-            <h3>Second slide label</h3>
-            <p>Description 2.</p>
-        </div>
-    </ng-template>
-    <ng-template ngbSlide>
-        <div class="imgbox">
-            <img [src]="images[2]" alt="Random third slide" class="center-fit img-fuild">
-        </div>
-        <div class="carousel-caption">
-            <h3>Third slide label</h3>
-            <p>Description 3.</p>
-        </div>
-    </ng-template>
-</ngb-carousel> -->
 <ngx-spinner size="large">
     <p style="font-size: 20px; color: white">Loading...</p>
 </ngx-spinner>
 
-<div class="banner container-fluid">
-    <!-- <div class="banner-text">Mobile Drone Accessories</div> -->
-</div>
+<div class="container-fluid" style="padding: 0;">
+    <div class="banner container-fluid">
+        <!-- <div class="banner-text">Mobile Drone Accessories</div> -->
+    </div>
 
-<div class="container">
-    <div class="row my-4">
-        <div class="col-12 text-center">
-            <p class="product-text"></p>
-        </div>
-        <div class="col-md-4 col-lg-4 col-12 text-center my-3">
-            <div class="card mx-auto">
-                <img class="card-img-top" src="{{categoryMobile}}" alt="Card image cap" style="height: 10.5rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Mobiles</h5>
-                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p> -->
-                    <a (click)=getAllAssets(1) class="btn btn-primary text-white">Explore More</a>
+    <div>
+        <div class="row my-4">
+            <div class="col-12 text-center">
+                <p class="product-text"></p>
+            </div>
+            <div class="col-md-4 col-lg-4 col-12 text-center my-3">
+                <div class="card mx-auto">
+                    <img class="card-img-top" src="{{categoryMobile}}" alt="Card image cap" style="height: 10.5rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Mobiles</h5>
+                        <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                            card's
+                            content.</p> -->
+                        <a (click)=getAllAssets(1) class="btn btn-primary text-white">Explore More</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4 col-lg-4 col-12 text-center my-3">
-            <div class="card mx-auto">
-                <img class="card-img-top" src="{{categoryDrone}}" alt="Card image cap" style="height: 10.5rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Drones</h5>
-                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p> -->
-                    <a (click)=getAllAssets(2) class="btn btn-primary text-white">Explore More</a>
+            <div class="col-md-4 col-lg-4 col-12 text-center my-3">
+                <div class="card mx-auto">
+                    <img class="card-img-top" src="{{categoryDrone}}" alt="Card image cap" style="height: 10.5rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Drones</h5>
+                        <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                            card's
+                            content.</p> -->
+                        <a (click)=getAllAssets(2) class="btn btn-primary text-white">Explore More</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4 col-lg-4 col-12 text-center my-3">
-            <div class="card mx-auto">
-                <img class="card-img-top" src="{{categoryAccessories}}" alt="Card image cap" style="height: 10.5rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Accessories</h5>
-                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p> -->
-                    <a (click)=getAllAssets(3) class="btn btn-primary text-white">Explore More</a>
+            <div class="col-md-4 col-lg-4 col-12 text-center my-3">
+                <div class="card mx-auto">
+                    <img class="card-img-top" src="{{categoryAccessories}}" alt="Card image cap"
+                        style="height: 10.5rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Accessories</h5>
+                        <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                            card's
+                            content.</p> -->
+                        <a (click)=getAllAssets(3) class="btn btn-primary text-white">Explore More</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>

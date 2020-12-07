@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProductService } from 'src/app/shared/Services/product.service';
@@ -18,6 +18,8 @@ export class IndexComponent implements OnInit {
   pauseOnFocus = true;
   AssetList = [];
   userName: string;
+  scrHeight: any;
+  scrWidth: any;
 
   constructor(
     private productService: ProductService,
@@ -25,8 +27,15 @@ export class IndexComponent implements OnInit {
     public toster: ToastrService,
     public spinner: NgxSpinnerService,
   ) { }
-
+  
+  @HostListener('window:resize', ['$event'])
+  getScreenSize(event?) {
+    this.scrHeight = window.innerHeight;
+    this.scrWidth = window.innerWidth;
+    console.log('screen dimension:', this.scrHeight, this.scrWidth);
+  }
   ngOnInit() {
+    this.getScreenSize();
     this.spinner.show();
     this.images = [
       "../assets/img/slide/Drone-Photography-UAV-Coach.jpg",
