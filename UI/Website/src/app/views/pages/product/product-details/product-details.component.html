@@ -26,21 +26,20 @@
                 <div class="col-md-4 col-sm-12">
                     <div class="card" style="border: none;">
                         <div class="card-body product-allignment-center">
-                            <div style="height:inherit;width:inherit">
-                                <img src="{{product.image_url}}" style="height: 25.5rem;">
-                            </div>
+                            <!-- <div style="height:inherit;width:inherit">
+                                <img src="{{product.image_url}}" style="height: 25.5rem;" class="border">
+                            </div> -->
+                            <img src="{{product.image_url}}" class="img-fluid">
                         </div>
-                        <div class="card-footer" style="border: none; background-color: white;">
+                        <!-- <div class="card-footer" style="border: none; background-color: white;">
                             <div class="row d-flex justify-content-center">
                                 <div *ngIf="IsAvailable;then availableBtn else outOfStockBtn"></div>
                                 <ng-template #availableBtn>
                                     <div class="col-6 product-allignment-center">
-                                        <button type="button" class="btn btn-primary" (click)="addToCart()">Add To
+                                        <button type="button" class="btn btn-primary btn-sm" (click)="addToCart()">Add
+                                            To
                                             Cart</button>
                                     </div>
-                                    <!-- <div class="col-6 product-allignment-center">
-                                        <button type="button" class="btn btn-success">Buy Now</button>
-                                    </div> -->
                                 </ng-template>
                                 <ng-template #outOfStockBtn>
                                     <div class="col-6 product-allignment-center">
@@ -48,14 +47,10 @@
                                             (click)="addToCart()">Add To
                                             Cart</button>
                                     </div>
-                                    <!-- <div class="col-6 product-allignment-center">
-                                        <button type="button" class="btn btn-success" disabled="disabled">Buy
-                                            Now</button>
-                                    </div> -->
                                 </ng-template>
 
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="col-md-8 col-sm-12">
@@ -76,8 +71,8 @@
                                     [ngStyle]="{display: (overStar && !isReadonly) ? 'inline' : 'none'}">{{overStar}}
                                     star
                                 </button>
-                                <p>Colour: {{product.color}}</p>
-                                <p>Condition: {{product.product_grade}}</p>
+                                <p style="font-size: 14px;">Colour: {{product.color}}<br>
+                                    Condition: {{product.product_grade}}</p>
                                 <h4>Price: {{product.price|currency:"INR"}}</h4>
                                 <div *ngIf="IsAvailable;then available else outOfStock"></div>
                                 <ng-template #available>
@@ -87,14 +82,22 @@
                                     <p class="text-danger">Out of Stock</p>
                                 </ng-template>
                             </div>
-                            <span>Quantity: </span>
-                            <select class="dropdown" (change)="changeQuantity($event.target.value)">
+                            <span *ngIf="IsAvailable">Quantity: &nbsp;&nbsp;&nbsp;</span>
+                            <select *ngIf="IsAvailable" class="dropdown rounded"
+                                (change)="changeQuantity($event.target.value)">
                                 <option value=1 selected>1</option>
                                 <option value=2>2</option>
                                 <option value=3>3</option>
                                 <option value=4>4</option>
                                 <option value=5>5</option>
                             </select>
+                            <div class="row my-4">
+                                <div class="col-12" *ngIf="IsAvailable">
+                                    <button type="button" class="btn btn-info btn-sm" (click)="addToCart()">Add
+                                        To
+                                        Cart</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

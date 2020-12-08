@@ -3,15 +3,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProductService } from 'src/app/shared/Services/product.service';
 import { StarRatingComponent } from 'ng-starrating';
-import { NgxSpinnerService } from "ngx-spinner";
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.scss']
+  styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit {
-
   productSKU: string;
   productDetails: [];
   productQuantity: number = 1;
@@ -28,37 +27,37 @@ export class ProductDetailsComponent implements OnInit {
     private productService: ProductService,
     private toaster: ToastrService,
     private spinner: NgxSpinnerService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.productSKU = this.activeRoute.snapshot.paramMap.get("sku");
+    this.productSKU = this.activeRoute.snapshot.paramMap.get('sku');
     this.getProductDetailsBySKU();
   }
 
   getProductDetailsBySKU() {
     this.spinner.show();
-    this.productService.getProductDetailsBySKU(this.productSKU).subscribe(data => {
-      this.productDetails = data['res'];
-      this.spinner.hide();
-      //this.overStar = data['res'][0].average_rating;
-      this.rate = data['res'][0].average_rating;
-      if (data['res'][0].stock_quantity > 0)
-        this.IsAvailable = true;
-      else
-        this.IsAvailable = false;
-      // this.IsAvailable = 
-      //console.log(data['res'][0])
-    });
+    this.productService
+      .getProductDetailsBySKU(this.productSKU)
+      .subscribe((data) => {
+        this.productDetails = data['res'];
+        this.spinner.hide();
+        //this.overStar = data['res'][0].average_rating;
+        this.rate = data['res'][0].average_rating;
+        if (data['res'][0].stock_quantity > 0) this.IsAvailable = true;
+        else this.IsAvailable = false;
+        // this.IsAvailable =
+        //console.log(data['res'][0])
+      });
   }
 
   addToCart() {
     var putBody = {
-      "sku": this.productSKU,
-      "quantity": Number(this.productQuantity)
-    }
+      sku: this.productSKU,
+      quantity: Number(this.productQuantity),
+    };
     this.spinner.show();
     //console.log('add to cart put body', putBody);
-    this.productService.addProductTocart(putBody).subscribe(data => {
+    this.productService.addProductTocart(putBody).subscribe((data) => {
       //console.log(data['res'].id);
       this.spinner.hide();
       if (data['res'].id > 0) {
@@ -72,7 +71,11 @@ export class ProductDetailsComponent implements OnInit {
     //console.log('Quantity', qty);
     this.productQuantity = qty;
   }
-  onRate($event: { oldValue: number, newValue: number, starRating: StarRatingComponent }) {
+  onRate($event: {
+    oldValue: number;
+    newValue: number;
+    starRating: StarRatingComponent;
+  }) {
     alert(`Old Value:${$event.oldValue}, 
       New Value: ${$event.newValue}, 
       Checked Color: ${$event.starRating.checkedcolor}, 
@@ -90,14 +93,13 @@ export class ProductDetailsComponent implements OnInit {
   updateRating() {
     //console.log(this.rate);
     var putBody = {
-      "sku": this.productSKU,
-      "rating": Number(this.rate)
-    }
+      sku: this.productSKU,
+      rating: Number(this.rate),
+    };
     console.log('add to cart put body', putBody);
-    this.productService.updateSKURating(putBody).subscribe(data => {
+    this.productService.updateSKURating(putBody).subscribe((data) => {
       console.log(data.res.id);
-      if (data.res.id > 0)
-        this.ngOnInit();
+      if (data.res.id > 0) this.ngOnInit();
       //   window.location.reload();
     });
   }

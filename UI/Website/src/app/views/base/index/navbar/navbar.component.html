@@ -15,7 +15,7 @@
       <div class="row">
         <div class="pl-3 pr-3">
           <li class="nav-item active">
-            <a class="nav-link nav-text" data-toggle="tooltip" data-placement="bottom" title="Cart"
+            <a class="nav-link nav-text pt-0" data-toggle="tooltip" data-placement="bottom" title="Cart"
               routerLink="/products/cart-items"><i class="fa fa-shopping-cart fa-2x"></i><span
                 class="badge badge-pill badge-primary">{{cartItemsCount}}</span><span
                 class="sr-only">(current)</span></a>
@@ -23,14 +23,12 @@
         </div>
         <div>
           <li class="nav-item active" [style.display]="!getUserDetails() ? 'block':'none'">
-            <a class="nav-link nav-text" routerLink="/login" style="font-size: 1.05rem;">Login \ Register<span
-                class="sr-only">(current)</span></a>
+            <a class="nav-link nav-text pt-1" routerLink="/login">Login \ Registration</a>
           </li>
           <li class="nav-link pt-1" [style.display]="getUserDetails() ? 'block':'none'">
             <div class="dropdown">
-              <button class="btn btn-light dropdown-toggle pt-0" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" [userName]="userName"
-                style="font-size: 1.5rem;">
+              <button class="btn btn-light dropdown-toggle pt-0 nav-text" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" [userName]="userName">
                 {{userName}}
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
