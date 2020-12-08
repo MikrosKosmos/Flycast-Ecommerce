@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
   getScreenSize(event?) {
     this.scrHeight = window.innerHeight;
     this.scrWidth = window.innerWidth;
-    console.log('screen dimension:', this.scrHeight, this.scrWidth);
+    //console.log('screen dimension:', this.scrHeight, this.scrWidth);
   }
   constructor(
     private formBuilder: FormBuilder,
@@ -153,15 +153,9 @@ export class LoginComponent implements OnInit {
     if (formInput.value.otp > 0) {
       this.spinner.show();
     }
-    /*if (this.cookieService.get('remember')) {
-      console.log('remember me works!');
-      this.formData.rememberMe = this.cookieService.get('remember');
-      this.cookieService.put('remember', this.formData.rememberMe);
-      console.log('remember', this.cookieService);
-    }*/
     this.authService.UserLogin(otpVerification).subscribe((data) => {
       console.log('after otp validation: ', data);
-      if (data.res.id > 1) {
+      if (data.res.id > 0 && formInput.value.otp > 0) {
         if (formInput.value.rememberMe == true) {
           console.log('local storage');
           localStorage.setItem('FirstName', data.res.first_name);

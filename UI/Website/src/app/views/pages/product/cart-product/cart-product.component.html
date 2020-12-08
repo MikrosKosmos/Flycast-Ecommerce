@@ -55,10 +55,12 @@
   </div>
 
   <div *ngIf="isEmptyCart">
-    <div class="jumbotron text-center m-0">
-      <h1 class="text-danger">Cart is empty</h1>
-      <i class="fa fa-cart-arrow-down fa-4x" aria-hidden="true"></i>
-      <a routerLink=''>Shop Now</a>
+    <div class="jumbotron d-flex justify-content-center align-items-center m-0">
+      <div class="my-custom-cart">
+        <h1 class="text-danger">Cart is empty</h1>
+        <i class="fa fa-cart-arrow-down fa-4x" aria-hidden="true"></i>  
+        <a routerLink=''>Shop Now</a>
+      </div>
     </div>
   </div>
 

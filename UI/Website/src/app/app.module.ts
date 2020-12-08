@@ -8,7 +8,7 @@ import { SharedModule } from "./shared/shared.module";
 import { IndexModule } from './views/base/index/index.module';
 import { ProductModule } from './views/pages/product/product.module';
 import { UserModule } from './views/pages/user/user.module';
-import { CommonModule } from '@angular/common';
+import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
@@ -33,7 +33,10 @@ import { NgxSpinnerModule } from "ngx-spinner";
     NgbModule,
     NgxSpinnerModule,
   ],
-  providers: [],
+  providers: [{
+    provide: LocationStrategy,
+    useClass: HashLocationStrategy
+  }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

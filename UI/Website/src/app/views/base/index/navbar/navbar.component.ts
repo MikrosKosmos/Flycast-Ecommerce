@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { ProductService } from 'src/app/shared/Services/product.service';
 import { LoginComponent } from '../login/login.component';
 
 @Component({
@@ -16,34 +17,31 @@ export class NavbarComponent implements OnInit {
   private toggleButton: any;
   private sidebarVisible: boolean;
   isLoggedIn: any;
+  cartItemsCount: Number;
 
   @Input('userName') userNameButton: string;
   constructor(
     private router: Router,
     public location: Location,
-    private element: ElementRef
+    private element: ElementRef,
+    private productService: ProductService
   ) {
-    // this.sidebarVisible = false;
-    // this.router.routeReuseStrategy.shouldReuseRoute = function () {
-    //   return false;
-    // }
-    // this.isLoggedIn = this.router.events.subscribe((e: any) => {
-    //   if (event instanceof NavigationEnd) {
-    //     this.router.navigated = false;
-    //   }
-    // });
   }
 
-  //@ViewChild(LoginComponent) loginComponent: LoginComponent;
-
   ngOnInit(): void {
-    console.log(
-      'username ',
-      sessionStorage.getItem('FirstName'),
-      localStorage.getItem('FirstName')
-    );
+    // console.log(
+    //   'username ',
+    //   sessionStorage.getItem('FirstName'),
+    //   localStorage.getItem('FirstName')
+    // );
     setTimeout(() => {
-      if (this.userName != null) this.isRegistered = true;
+      if (this.userName != null) {
+        this.isRegistered = true;
+        this.productService.getCartDetails().subscribe(data => {
+          console.log('cart', data.res.length)
+          this.cartItemsCount = +data.res.length
+        });
+      }
       else this.isRegistered = false;
     }, 1000);
     //this.getUserName();

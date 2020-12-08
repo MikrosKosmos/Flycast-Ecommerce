@@ -63,6 +63,7 @@ export class ProductDetailsComponent implements OnInit {
       this.spinner.hide();
       if (data['res'].id > 0) {
         this.toaster.success('Product has been added into cart');
+        window.location.reload();
       }
     });
   }
