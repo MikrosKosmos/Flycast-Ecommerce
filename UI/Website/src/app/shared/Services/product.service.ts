@@ -21,8 +21,7 @@ export class ProductService {
 
   getProductDetailsBySKU(sku: string) {
     var header = new HttpHeaders({
-      'key': apiKey.key,
-      'jw_token': sessionStorage.getItem('JwToken') ? sessionStorage.getItem('JwToken') : localStorage.getItem('JwToken')
+      'key': apiKey.key
     });
     return this.httpClient.get(url.GetSKUs + sku, { headers: header });
   };
