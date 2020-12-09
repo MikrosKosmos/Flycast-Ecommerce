@@ -4,10 +4,7 @@ begin
     select am.id as attribute_id,
            am.attribute_name,
            am.attribute_description,
-           am.default_value,
-           ifnull(ap.possible_value, 'NA')
+           am.default_value
     from tbl_AttributeMaster am
-             left join tbl_AttributePossibleValues ap
-                       on ap.attribute_id = am.id
     where am.is_active = 1;
 end;

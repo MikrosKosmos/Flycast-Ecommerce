@@ -5,6 +5,7 @@ begin
         set @isValid = -1, @extraData = '';
         call sp_CheckOTP(parPhone, parOTP, @isValid, @extraData);
         if @isValid > 0 then
+            delete from tbl_OtpMaster where phone_number=parPhone and otp=parOTP;
             select u.id,
                    u.first_name,
                    last_name,
