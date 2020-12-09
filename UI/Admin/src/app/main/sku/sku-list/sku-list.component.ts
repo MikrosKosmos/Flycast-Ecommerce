@@ -28,6 +28,8 @@ export class SkuListComponent implements OnInit {
         if (response.res.length > 0) {
           this.skuList = response.res;
           this.spinner.hide();
+        } else {
+          this.spinner.hide();
         }
       });
     }, 1000);
