@@ -1,7 +1,7 @@
 <ngx-spinner size="large">
     <p style="font-size: 20px; color: white">Loading...</p>
 </ngx-spinner>
-<div class="container-fluid body-background">
+<div class="container-fluid body-background" style="font-family: 'Roboto', sans-serif !important;">
     <div class="row pt-3 pb-3">
         <!--Product Lists-->
         <div class="col-md-12 col-sm-12 ">
@@ -10,25 +10,24 @@
             </div>
             <div class="card-group p-1">
                 <div class="col-md-3" *ngFor="let products of productDetails">
-                    <div class="card">
+                    <div class="card" (click)="getProductDetailsBySKU(products.sku)" style="cursor: pointer;">
                         <div class="image">
-                            <img src="{{products.image_url}}" class="img-responsive" style="height: 16rem"
-                                (click)="getProductDetailsBySKU(products.sku)" />
+                            <img src="{{products.image_url}}" class="img-responsive" style="height: 16rem" />
                         </div>
                         <div class="card-inner">
                             <div class="header">
-                                <h2><a (click)="getProductDetailsBySKU(products.sku)">{{products.brand}}
-                                        {{products.model}}</a></h2>
-                                <h3>{{products.price|currency:'INR'}}</h3>
+                                <h4><a (click)="getProductDetailsBySKU(products.sku)">{{products.brand}}
+                                        {{products.model}}</a></h4>
                             </div>
-                            <div class="content">
-                                <p>Colour: {{products.color}}</p>
-                                <p>Grade: {{products.product_grade}}</p>
+                            <div class="content" style="font-size: 14px;">
+                                <p><b>{{products.price|currency:'INR'}}</b><br>
+                                    <b>Colour: {{products.color}}</b><br>
+                                    <b>Grade: {{products.product_grade}}</b></p>
                             </div>
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                            <!-- <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                                 data-target="#product_view" (click)="quickViewProductsById(content, products)">
                                 <i class="fa fa-search"></i>
-                                Quick View</button>
+                                Quick View</button> -->
                         </div>
                     </div>
                 </div>

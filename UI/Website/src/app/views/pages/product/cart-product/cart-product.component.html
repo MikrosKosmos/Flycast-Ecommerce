@@ -7,19 +7,23 @@
       <ul class="list-unstyled">
         <li class="media pt-3">
           <div class="col-md-3 ">
-            <img class="mr-3" src="{{cart.image_url}}" alt="Product Image" style="height: 20rem;"></div>
+            <img class="mr-3 border rounded" src="{{cart.image_url}}" alt="Product Image" style="height: 20rem;"></div>
           <div class="col-md-6 pt-3">
             <div class="media-body">
               <div class="col-md-8">
                 <h4 class="m-1 mb-2">{{cart.brand}} {{cart.model}} </h4>
                 <div class="row ml-1">
-                  <p>Colour: {{cart.color}}</p>
+                  <p>
+                    Colour: {{cart.color}}<br>
+                    Condition: {{cart.product_grade}}<br>
+                    Quantity: <b>{{cart.quantity}}</b>
+                  </p>
                 </div>
                 <div class="row ml-1">
-                  <p>Condition: {{cart.product_grade}}</p>
+
                 </div>
                 <div class="row ml-1">
-                  <h5>Quantity: {{cart.quantity}}
+                  <h5>
                     <!-- <button class="btn" (click)="changeQuantity(qty.value, 'dec')"><i
                                           class="fa fa-minus-circle"></i></button>
                                    <h5 #qty>{{cart.quantity}}</h5>
@@ -27,13 +31,13 @@
                                           class="fa fa-plus-circle"></i></button> -->
                   </h5>
                 </div>
-                <button class="btn btn-danger m-2" (click)="deleteFromCart(cart.sku)">Delete</button>
+                <button class="btn btn-danger m-2 btn-sm" (click)="deleteFromCart(cart.sku)">Delete</button>
               </div>
             </div>
           </div>
           <div class="col-md-3 pt-3">
             <h5>Price: {{cart.price|currency:"INR"}}</h5>
-            <button class="btn btn-primary m-2" (click)="proceedToBuy()">Proceed to buy</button>
+            <button class="btn btn-primary m-2 btn-sm" (click)="proceedToBuy()">Proceed to buy</button>
           </div>
         </li>
         <!-- <li class="media my-4">
@@ -55,10 +59,15 @@
   </div>
 
   <div *ngIf="isEmptyCart">
-    <div class="jumbotron text-center m-0">
-      <h1 class="text-danger">Cart is empty</h1>
-      <i class="fa fa-cart-arrow-down fa-4x" aria-hidden="true"></i>
-      <a routerLink=''>Shop Now</a>
+    <div class="jumbotron d-flex justify-content-center align-items-center m-0">
+      <div class="my-custom-cart">
+        <p class="text-center">
+          <span class="text-muted" style="font-size: 25px;"><b>Cart is empty!</b></span><br>
+          <a routerLink='' style="font-size: 15px;">Shop Now</a>
+        </p>
+        <!-- <i class="fa fa-cart-arrow-down fa-4x" aria-hidden="true"></i> -->
+        <!-- <a routerLink=''>Shop Now</a> -->
+      </div>
     </div>
   </div>
 
