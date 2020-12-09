@@ -55,7 +55,7 @@ assetHandler.asset = (dataObject) => {
             dataObject.postData[constants.ATTRIBUTE_VALUES] : false;
          const jwToken = validators.validateString(dataObject[constants.JW_TOKEN]) ?
             dataObject[constants.JW_TOKEN] : false;
-         if (assetName && assetUniqueNumber && category && sku && manufacturer && grade && location && procurementPrice &&
+         if (assetName && category && sku && manufacturer && grade && location && procurementPrice &&
             sellingPrice && attributesValue && jwToken) {
             const asset = new Asset(false, assetUniqueNumber, category, subCategory, sku, manufacturer, assetName);
             asset.createAsset(grade, location, procurementPrice, basePrice, sellingPrice, attributesValue, jwToken).then(response => {

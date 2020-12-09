@@ -44,7 +44,7 @@ class SKU {
                const fileName = generator.generateRandomToken(16) + "." + fileExtension;
                const imageUrl = constants.IMAGES_BUCKET_BASE_URL + fileName;
                let promisesArray = [];
-               promisesArray.push(s3Helper.uploadFile(skuImageData, fileName, true));
+               promisesArray.push(s3Helper.uploadFile(skuImageData, fileName, false));
                promisesArray.push(database.runSp(constants.SP_CREATE_SKU, [this._brand, this._model, this._color,
                   this._grade, this._storage, this._parentCategory, imageUrl,
                   validators.validateNumber(position) ? position : 0,
