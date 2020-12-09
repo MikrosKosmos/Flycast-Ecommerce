@@ -27,7 +27,7 @@ export class IndexComponent implements OnInit {
     public toster: ToastrService,
     public spinner: NgxSpinnerService,
   ) { }
-  
+
   @HostListener('window:resize', ['$event'])
   getScreenSize(event?) {
     this.scrHeight = window.innerHeight;
@@ -56,11 +56,11 @@ export class IndexComponent implements OnInit {
     sessionStorage.setItem('CategoryId', value);
     this.productService.getAllAssetsList(value).subscribe(data => {
       console.log('product list', data.res);
-      if (data.res.length > 1) {
+      if (data.res.length > 0) {
         this.router.navigate(['/products/all-products/', value]);
       }
       else {
-        this.toster.error('Products Unavailable');
+        this.toster.success('Comming Soon');
       }
     });
   }

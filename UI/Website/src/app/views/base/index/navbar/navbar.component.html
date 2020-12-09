@@ -32,7 +32,7 @@
                 {{userName}}
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" routerLink="/users">Go To Account</a>
+                <a class="dropdown-item" routerLink="/users" (click)="gotoMyAccount()">Go To Account</a>
                 <a class="dropdown-item" routerLink="/products/order-list">Orders</a>
                 <a class="dropdown-item" (click)="logout()" style="cursor: pointer;">Logout</a>
               </div>

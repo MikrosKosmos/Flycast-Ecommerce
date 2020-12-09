@@ -53,7 +53,7 @@ export class CartProductComponent implements OnInit {
       else
         this.isEmptyCart = true;
       this.spinner.hide();
-      console.log(this.cartDetails, this.paymentAmount, localStorage.getItem('CartId'));
+      console.log('cart details',this.cartDetails, this.paymentAmount, localStorage.getItem('CartId'));
       // if(this.cartDetails['total_products'])
     });
   }

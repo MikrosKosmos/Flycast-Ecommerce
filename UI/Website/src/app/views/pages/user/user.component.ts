@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/shared/Services/user.service';
 
@@ -18,6 +19,7 @@ export class UserComponent implements OnInit {
   stateList = [];
   cityList = [];
   addressList = [];
+  isAddressAvailable: boolean;
 
   /*new address input variables*/
   contactName: string;
@@ -37,6 +39,7 @@ export class UserComponent implements OnInit {
   addressPage: boolean;
   accountDetailsPage: boolean = true;
   ordersPage: boolean;
+  isLoadAddressPage: boolean;
 
   /*button name changes*/
   editPI: boolean = true;
@@ -60,14 +63,22 @@ export class UserComponent implements OnInit {
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private toster: ToastrService
-  ) {}
+    private toster: ToastrService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.userName = sessionStorage.getItem('FirstName')
       ? sessionStorage.getItem('FirstName')
       : localStorage.getItem('FirstName');
     this.getUserDetailsByID();
+
+    this.userService.currentPage.subscribe(data => this.isLoadAddressPage = data);
+    //console.log('load address tab', this.isLoadAddressPage);
+    if (this.isLoadAddressPage == true)
+      this.switchToAddress();
+    else
+      this.switchToAccountDetails();
 
     this.accountDetailsForm = this.formBuilder.group({
       firstname: ['', Validators.required],
@@ -92,7 +103,7 @@ export class UserComponent implements OnInit {
       console.log('UserDetails: ', data.res.phone_number);
       this.firstName = data.res.first_name;
       this.lastName = data.res.last_name;
-      this.email = data.res.email;
+      this.email = data.res.email ? this.email : 'NA';
       this.gender = data.res.gender;
       this.userPhoneNumber = data.res.phone_number.replace('+91', '');
       console.log('Phone Number 1', this.userPhoneNumber);
@@ -164,7 +175,8 @@ export class UserComponent implements OnInit {
   }
 
   passwordChangeNewWindow() {
-    window.open('/users/change-password', '_blank');
+    //window.open('/users/change-password', '_blank');
+    this.router.navigateByUrl('/users/change-password');
   }
 
   switchToAddress() {
@@ -250,8 +262,12 @@ export class UserComponent implements OnInit {
 
   getUserAddressList() {
     this.userService.GetUserAddress(this.userId).subscribe((data) => {
-      console.log('addresses', data);
+      console.log('addresses', data.res.length);
       this.addressList = data.res;
+      if (this.addressList[0]['address_id'] == null)
+        this.isAddressAvailable = false;
+      else
+        this.isAddressAvailable = true;
     });
   }
 

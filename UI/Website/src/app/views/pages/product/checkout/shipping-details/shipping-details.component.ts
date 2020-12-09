@@ -44,13 +44,16 @@ export class ShippingDetailsComponent implements OnInit {
   getUserAddressList() {
     this.spinner.show();
     this.userService.GetUserAddress(this.userId).subscribe(data => {
-      console.log('addresses', data.res);
-      this.spinner.hide();
       this.addressList = data.res;
-      if (this.addressList.length >= 1)
+      console.log('addresses', data.res, this.addressList[0]['address_id']);
+      if (this.addressList[0]['address_id'] >= 1) {
         this.isAddressExists = true;
-      else
+        this.spinner.hide();
+      }
+      else {
         this.isAddressExists = false;
+        this.spinner.hide();
+      }
       console.log('address exists', this.isAddressExists);
     });
     console.log(this.addressList);
@@ -80,5 +83,10 @@ export class ShippingDetailsComponent implements OnInit {
     console.log('Address id', sessionStorage.getItem('AddressId'));
     this.toastr.success('Address Selected');
     this.router.navigate(['/checkouts/billing-details']);
+  }
+
+  gotoAddAddressPage() {
+    this.userService.loadAddressPage(true);
+    this.router.navigateByUrl('/users');
   }
 }

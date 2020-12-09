@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { url, apiKey } from 'src/app/config';
 
 @Injectable({
@@ -8,7 +8,14 @@ import { url, apiKey } from 'src/app/config';
 })
 export class UserService {
 
+  private switchToAddressPage = new BehaviorSubject(true);
+  currentPage = this.switchToAddressPage.asObservable();
+
   constructor(private http: HttpClient) { }
+
+  loadAddressPage(isAddressTab: boolean) {
+    this.switchToAddressPage.next(isAddressTab);
+  }
 
   UserDetailsById(userId): Observable<any> {
     var header = new HttpHeaders({

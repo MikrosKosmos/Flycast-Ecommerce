@@ -22,7 +22,7 @@
     </div>
 </div> -->
 <section id="addressSection">
-    <div class="container-fluid">
+    <div class="container-fluid" style="min-height: 70vh;">
         <div *ngIf="isAddressExists">
             <div class=" text-center m-0">
                 <h3>Select Deliver Address</h3>
@@ -49,11 +49,19 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="isAddressExists">
-            <div class=" text-center m-0">
-                <h1 class="text-danger">Shipping address not found</h1>
-                <a routerLink=''>Add a new address</a>
-              </div>
+        <div *ngIf="!isAddressExists">
+            <div class=" d-flex justify-content-center align-items-center m-0">
+                <div class="my-custom-cart">
+                    <p class="text-center">
+                        <span class="text-muted" style="font-size: 25px;"><b>Shipping address not found!</b></span><br>
+                        <a style="cursor: pointer;" class="nav-link" (click)='gotoAddAddressPage()'
+                            style="font-size: 15px;"><span class="glyphicon glyphicon-log-in"></span>Add a new
+                            address</a>
+                    </p>
+                    <!-- <i class="fa fa-cart-arrow-down fa-4x" aria-hidden="true"></i> -->
+                    <!-- <a routerLink=''>Shop Now</a> -->
+                </div>
+            </div>
         </div>
     </div>
 </section>

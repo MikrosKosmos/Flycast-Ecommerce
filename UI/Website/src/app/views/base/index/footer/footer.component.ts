@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private tostr: ToastrService
+  ) { }
 
   ngOnInit(): void {
   }
-
+  showAlert() {
+    this.tostr.success('Comming Soon');
+  }
 }
