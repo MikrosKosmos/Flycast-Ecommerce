@@ -31,26 +31,6 @@
                             </div> -->
                             <img src="{{product.image_url}}" class="img-fluid">
                         </div>
-                        <!-- <div class="card-footer" style="border: none; background-color: white;">
-                            <div class="row d-flex justify-content-center">
-                                <div *ngIf="IsAvailable;then availableBtn else outOfStockBtn"></div>
-                                <ng-template #availableBtn>
-                                    <div class="col-6 product-allignment-center">
-                                        <button type="button" class="btn btn-primary btn-sm" (click)="addToCart()">Add
-                                            To
-                                            Cart</button>
-                                    </div>
-                                </ng-template>
-                                <ng-template #outOfStockBtn>
-                                    <div class="col-6 product-allignment-center">
-                                        <button type="button" class="btn btn-primary" disabled="disabled"
-                                            (click)="addToCart()">Add To
-                                            Cart</button>
-                                    </div>
-                                </ng-template>
-
-                            </div>
-                        </div> -->
                     </div>
                 </div>
                 <div class="col-md-8 col-sm-12">
@@ -85,11 +65,9 @@
                             <span *ngIf="IsAvailable">Quantity: &nbsp;&nbsp;&nbsp;</span>
                             <select *ngIf="IsAvailable" class="dropdown rounded"
                                 (change)="changeQuantity($event.target.value)">
-                                <option value=1 selected>1</option>
-                                <option value=2>2</option>
-                                <option value=3>3</option>
-                                <option value=4>4</option>
-                                <option value=5>5</option>
+                                <option value={{items.qty}} [selected]="items.qty == 1"
+                                    *ngFor='let items of dropdownItems'>{{items.qty}}
+                                </option>
                             </select>
                             <div class="row my-4">
                                 <div class="col-12" *ngIf="IsAvailable">

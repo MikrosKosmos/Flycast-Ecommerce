@@ -15,6 +15,9 @@ export class ProductDetailsComponent implements OnInit {
   productDetails: [];
   productQuantity: number = 1;
   IsAvailable: boolean;
+  qtyDropdown: Number;
+  dropdownItems: any;
+
   /*Test Rating*/
   max: number = 5;
   rate: number;
@@ -27,7 +30,7 @@ export class ProductDetailsComponent implements OnInit {
     private productService: ProductService,
     private toaster: ToastrService,
     private spinner: NgxSpinnerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.productSKU = this.activeRoute.snapshot.paramMap.get('sku');
@@ -43,10 +46,23 @@ export class ProductDetailsComponent implements OnInit {
         this.spinner.hide();
         //this.overStar = data['res'][0].average_rating;
         this.rate = data['res'][0].average_rating;
-        if (data['res'][0].stock_quantity > 0) this.IsAvailable = true;
-        else this.IsAvailable = false;
+        if (data['res'][0].stock_quantity > 0) {
+          this.IsAvailable = true;
+          if (data['res'][0].stock_quantity >= 5)
+            this.qtyDropdown = 5;
+          else
+            this.qtyDropdown = data['res'][0].stock_quantity;
+
+          this.dropdownItems = [];
+          for (var i = 1; i <= this.qtyDropdown; i++) {
+            this.dropdownItems.push({ 'qty': +i });
+          }
+          console.log('total qty', this.dropdownItems);
+        }
+        else {
+          this.IsAvailable = false;
+        }
         // this.IsAvailable =
-        //console.log(data['res'][0])
       });
   }
 
