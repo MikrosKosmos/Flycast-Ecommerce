@@ -1,3 +1,7 @@
+<ngx-spinner size="large">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+
 <div class="container-fluid" style="min-height: 70vh;">
     <div class="pt-4 pb-4">
         <div class="row mx-auto">
@@ -118,7 +122,7 @@
                         <div class="card-body">
                             <div class="pl-3">
                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
-                                    data-target="#exampleModal"><i class="fa fa-plus" aria-hidden="true"></i>
+                                    data-target="#addressFormModal"><i class="fa fa-plus" aria-hidden="true"></i>
                                     Add Address</button>
                             </div>
                             <div class="text-center p-5" *ngIf="!isAddressAvailable">
@@ -148,7 +152,7 @@
                                         </div>
                                         <div class="card-footer">
                                             <!-- <a class="pointer card-link">Remove</a> -->
-                                            <a class="pointer card-link" data-toggle="modal" data-target="#exampleModal"
+                                            <a class="pointer card-link" data-toggle="modal" data-target="#addressFormModal"
                                                 (click)="getAddressOnForm(addresses.address_id)">Edit</a>
                                         </div>
                                     </div>
@@ -157,7 +161,7 @@
 
 
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                            <div class="modal fade" #addressFormModal id="addressFormModal" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                     <div class="modal-content">

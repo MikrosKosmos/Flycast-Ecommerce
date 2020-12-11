@@ -1,8 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { NgxSpinner } from 'ngx-spinner/lib/ngx-spinner.enum';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/shared/Services/user.service';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-user',
@@ -60,12 +63,14 @@ export class UserComponent implements OnInit {
   @ViewChild('LN') inputLastName: ElementRef;
   @ViewChild('Email') inputEmail: ElementRef;
   @ViewChild('PhoneNumber') inputNumber: ElementRef;
+  @ViewChild('addressFormModal') public addressFormModal: ElementRef;
 
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
     private toster: ToastrService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) { this.getUserDetailsByID(); }
 
   ngOnInit(): void {
@@ -246,6 +251,8 @@ export class UserComponent implements OnInit {
   }
 
   addNewAddress(formInput) {
+    console.log(formInput, this.newAddressForm.valid, this.addressFormModal);
+    this.spinner.show();
     if (this.newAddressForm.valid) {
       this.newAddressSubmitted = true;
       console.log('user ID', formInput.value, this.addressId);
@@ -264,13 +271,19 @@ export class UserComponent implements OnInit {
       };
       console.log('put body', putBody);
       this.userService.UpdateOrAddAddress(putBody).subscribe((data) => {
-        console.log('response', data.res);
+        console.log('response', data.res.id);
         if (data.res.id > 0) {
+          this.spinner.hide();
+          document.getElementById('addressFormModal').click();
           this.toster.success('Address Updated');
-        } else this.toster.error('Address Update Failed');
+        } else {
+          this.spinner.hide();
+          this.toster.error('Address Update Failed');
+        }
       });
+      this.spinner.hide();
       this.switchToAddress();
-      window.location.reload();
+      //window.location.reload();
     }
     else {
       alert('Please provide all the details');

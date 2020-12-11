@@ -62,7 +62,7 @@ export class BillingDetailsComponent implements OnInit {
       this.cartDetails[0]['total_amount'] = this.cartDetails[0]['price'] * Number(this.cartDetails[0]['quantity']);
       // this.paymentAmount = data['res'][0]['price'];
       this.spinner.hide();
-      //console.log(this.cartDetails, localStorage.getItem('CartId'), this.cartId);
+      console.log('cart details', this.cartDetails, localStorage.getItem('CartId'), this.cartId);
       // if(this.cartDetails['total_products'])
     });
   }
