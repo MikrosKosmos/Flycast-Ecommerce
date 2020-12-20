@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="card mt-3 mb-3">
         <div class="card-body">
-            <div class="row" *ngFor='let product of productDetails'>
+            <div class="row" *ngFor="let product of productDetails; first as isFirst">
                 <!-- <div class="media">
                     <div class="col-md-4 col-sm-12">
                         <div class="media-left product-allignment-center">
@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-md-8 col-sm-12"></div>
                 </div> -->
-                <div class="col-md-4 col-sm-12">
+                <div class="col-md-4 col-sm-12" *ngIf="isFirst">
                     <div class="card" style="border: none;">
                         <div class="card-body product-allignment-center">
                             <!-- <div style="height:inherit;width:inherit">
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8 col-sm-12">
+                <div class="col-md-8 col-sm-12" *ngIf="isFirst">
                     <div class="card" style="border: none;">
                         <div class="card-body">
                             <div style="height:inherit;width:inherit">

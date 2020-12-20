@@ -17,6 +17,7 @@ export class ProductDetailsComponent implements OnInit {
   IsAvailable: boolean;
   qtyDropdown: Number;
   dropdownItems: any;
+  userId = sessionStorage.getItem('UserID') ? sessionStorage.getItem('UserID') : localStorage.getItem('UserID');
 
   /*Test Rating*/
   max: number = 5;
@@ -42,16 +43,17 @@ export class ProductDetailsComponent implements OnInit {
     this.productService
       .getProductDetailsBySKU(this.productSKU)
       .subscribe((data) => {
-        this.productDetails = data['res'];
+        //console.log('product', data.res[0]);
+        this.productDetails = data.res;
         this.spinner.hide();
-        //this.overStar = data['res'][0].average_rating;
-        this.rate = data['res'][0].average_rating;
-        if (data['res'][0].stock_quantity > 0) {
+        //this.overStar = data.res[0].average_rating;
+        this.rate = data.res[0].average_rating;
+        if (data.res[0].stock_quantity > 0) {
           this.IsAvailable = true;
-          if (data['res'][0].stock_quantity >= 5)
+          if (data.res[0].stock_quantity >= 5)
             this.qtyDropdown = 5;
           else
-            this.qtyDropdown = data['res'][0].stock_quantity;
+            this.qtyDropdown = data.res[0].stock_quantity;
 
           this.dropdownItems = [];
           for (var i = 1; i <= this.qtyDropdown; i++) {
@@ -71,16 +73,22 @@ export class ProductDetailsComponent implements OnInit {
       sku: this.productSKU,
       quantity: Number(this.productQuantity),
     };
-    this.spinner.show();
-    //console.log('add to cart put body', putBody);
-    this.productService.addProductTocart(putBody).subscribe((data) => {
-      //console.log(data['res'].id);
-      this.spinner.hide();
-      if (data['res'].id > 0) {
-        this.toaster.success('Product has been added into cart');
-        window.location.reload();
-      }
-    });
+    if (Number(this.userId) > 0) {
+      this.spinner.show();
+      //console.log('add to cart put body', putBody);
+      this.productService.addProductTocart(putBody).subscribe((data) => {
+        console.log(data);
+        this.spinner.hide();
+        if (data['res'].id > 0) {
+          this.toaster.success('Product has been added into cart');
+          window.location.reload();
+        }
+      });
+    }
+    else {
+      if (confirm("Please login before purchase"))
+        this.router.navigate(['/login']);
+    }
   }
 
   changeQuantity(qty) {
