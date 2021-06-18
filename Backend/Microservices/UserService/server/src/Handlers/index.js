@@ -31,6 +31,9 @@ handlerObj.auth = (dataObject) => {
          case "token":
             promise = auth.token(dataObject);
             break;
+         case "phone":
+            promise = auth.phone(dataObject);
+            break;
          default:
             reject(responseGenerator.generateErrorResponse(constants.ERROR_MESSAGE, constants.ERROR_LEVEL_2));
       }

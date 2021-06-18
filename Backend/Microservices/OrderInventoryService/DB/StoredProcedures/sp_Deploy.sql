@@ -1,7 +1,6 @@
 drop procedure if exists sp_Deploy;
 create procedure sp_Deploy()
 begin
-    truncate tbl_CategoryMaster;
     truncate tbl_SkuMaster;
     truncate tbl_SkuPictures;
     truncate tbl_SkuRatingDetails;
