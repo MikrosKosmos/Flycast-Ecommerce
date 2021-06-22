@@ -44,7 +44,7 @@ export class CartProductComponent implements OnInit {
     this.productService.getCartDetails().subscribe(data => {
       this.spinner.show();
       this.cartDetails = data['res'];
-      console.log('cart details', this.cartDetails.length);
+      //console.log('cart details', this.cartDetails.length);
       if (this.cartDetails.length > 0) {
         this.paymentAmount = data['res'][0]['price'];
         localStorage.setItem('CartId', data['res'][0]['id']);
@@ -53,7 +53,7 @@ export class CartProductComponent implements OnInit {
       else
         this.isEmptyCart = true;
       this.spinner.hide();
-      console.log(this.cartDetails, this.paymentAmount, localStorage.getItem('CartId'));
+      console.log('cart details', this.cartDetails, this.paymentAmount, localStorage.getItem('CartId'));
       // if(this.cartDetails['total_products'])
     });
   }
@@ -84,13 +84,18 @@ export class CartProductComponent implements OnInit {
     this.spinner.show();
     this.productService.addProductTocart(putBody).subscribe(data => {
       this.spinner.hide();
+      if (data['res'].id == -1) {
+        this.toastr.error('Unable to remove product from cart')
+      }
+      else
+        this.toastr.success('Product has been deleted from cart');
       console.log(data);
-      this.toastr.success('Product has been deleted from cart');
-      window.location.reload();
+      //window.location.reload();
     });
   }
 
-  proceedToBuy() {
+  proceedToBuy(cartId) {
+    localStorage.setItem('CartId', cartId);
     if (this.addressId === null)
       this.router.navigate(['/checkouts/shipping-details']);
     else {

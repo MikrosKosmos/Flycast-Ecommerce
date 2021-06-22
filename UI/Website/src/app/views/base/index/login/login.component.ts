@@ -51,7 +51,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getScreenSize();
     this.loginForm = this.formBuilder.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
@@ -179,13 +178,14 @@ export class LoginComponent implements OnInit {
         );
         this.spinner.hide();
         //this.router.navigate(['/']);
-        const currentRoute = this.router.url; //get current route
+        this.router.navigate(['/']);
+        /*const currentRoute = this.router.url; //get current route
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           this.router.navigate(['/']); // navigate to same route
-        });
-        //window.location.reload();
+        });*/
       } else if (data.res.id == -1)
         this.tostrService.error('OTP validation failed');
+        this.spinner.hide();
     });
   }
 

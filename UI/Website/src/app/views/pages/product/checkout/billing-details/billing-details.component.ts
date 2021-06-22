@@ -62,7 +62,7 @@ export class BillingDetailsComponent implements OnInit {
       this.cartDetails[0]['total_amount'] = this.cartDetails[0]['price'] * Number(this.cartDetails[0]['quantity']);
       // this.paymentAmount = data['res'][0]['price'];
       this.spinner.hide();
-      //console.log(this.cartDetails, localStorage.getItem('CartId'), this.cartId);
+      console.log('cart details', this.cartDetails, localStorage.getItem('CartId'), this.cartId);
       // if(this.cartDetails['total_products'])
     });
   }
@@ -143,13 +143,15 @@ export class BillingDetailsComponent implements OnInit {
     this.spinner.show();
     this.billingService.createOrder(postData).subscribe(data => {
       console.log('after order', data.res.order_id);
-      this.spinner.hide();
       if (data.res.order_id > 0) {
+        this.spinner.hide();
         this.toastr.success("Order Placed Successfully");
         this.router.navigate(['/products/order-list']);
       }
-      else
+      else {
+        this.spinner.hide();
         this.toastr.error('Order Failed', 'Error');
+      }
       //if(data.res.)
     });
     //data['booking_id'] = this.bookingId;

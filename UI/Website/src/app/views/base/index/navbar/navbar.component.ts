@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { ProductService } from 'src/app/shared/Services/product.service';
+import { UserService } from 'src/app/shared/Services/user.service';
 import { LoginComponent } from '../login/login.component';
 
 @Component({
@@ -24,7 +25,8 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     public location: Location,
     private element: ElementRef,
-    private productService: ProductService
+    private productService: ProductService,
+    private userService: UserService
   ) {
   }
 
@@ -69,10 +71,10 @@ export class NavbarComponent implements OnInit {
     sessionStorage.clear();
     localStorage.clear();
     this.router.navigate(['/login']);
-    window.location.reload();
+    //window.location.reload();
   }
 
-  // getUserName() {
-  //   return !!(localStorage.getItem('FirstName'));
-  // }
+  gotoMyAccount(){
+    this.userService.loadAddressPage(false);
+  }
 }

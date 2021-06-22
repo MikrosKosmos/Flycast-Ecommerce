@@ -1,4 +1,8 @@
-<div class="container-fluid">
+<ngx-spinner size="large">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+
+<div class="container-fluid" style="min-height: 70vh;">
     <div class="pt-4 pb-4">
         <div class="row mx-auto">
             <div class="col-lg-3 col-md-3 col-sm-12 my-2">
@@ -117,15 +121,16 @@
                         </div>
                         <div class="card-body">
                             <div class="pl-3">
-                                <button type="button" class="btn btn-secondary" data-toggle="modal"
-                                    data-target="#exampleModal">Add Address</button>
+                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
+                                    data-target="#addressFormModal"><i class="fa fa-plus" aria-hidden="true"></i>
+                                    Add Address</button>
                             </div>
-                            <div class="text-center p-5" *ngIf="addressList.length === 0">
+                            <div class="text-center p-5" *ngIf="!isAddressAvailable">
                                 <h4 class="text-muted">No Addresss Found!</h4>
                             </div>
-                            <div *ngIf="addressList.length !== 0">
+                            <div *ngIf="isAddressAvailable" class="my-3">
                                 <div class="p-3" *ngFor='let addresses of addressList'>
-                                    <div class="card ">
+                                    <div class="card">
                                         <div class="card-header text-white bg-info ">
                                             <div class="row">
                                                 <div class="col-9">
@@ -137,7 +142,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card-body">
+                                        <div class="card-body border">
                                             <div>
                                                 <b>Phone Number: {{addresses.contact_phone_number}}</b>
                                             </div>
@@ -146,8 +151,8 @@
                                             {{addresses.state_name}}, {{addresses.city_name}}, {{addresses.pincode}}
                                         </div>
                                         <div class="card-footer">
-                                            <a class="pointer card-link">Remove</a>
-                                            <a class="pointer card-link" data-toggle="modal" data-target="#exampleModal"
+                                            <!-- <a class="pointer card-link">Remove</a> -->
+                                            <a class="pointer card-link" data-toggle="modal" data-target="#addressFormModal"
                                                 (click)="getAddressOnForm(addresses.address_id)">Edit</a>
                                         </div>
                                     </div>
@@ -156,7 +161,7 @@
 
 
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                            <div class="modal fade" #addressFormModal id="addressFormModal" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                     <div class="modal-content">
@@ -176,12 +181,20 @@
                                                                 placeholder="Full Name"
                                                                 formControlName="contactPersonName"
                                                                 [(ngModel)]="contactName">
+                                                            <span class="text-danger"
+                                                                *ngIf="(addNewAddressFormControl.contactPersonName.touched || newAddressSubmitted) && addNewAddressFormControl.contactPersonName.errors?.required">
+                                                                Full name is required
+                                                            </span>
                                                         </div>
                                                         <div class="col-md-6 col-lg-6 col-sm-12 my-2">
                                                             <input #FN type="number" class="form-control"
                                                                 placeholder="10 Digit Contact Number"
                                                                 formControlName="contactPersonPhNo"
                                                                 [(ngModel)]="contactNumber">
+                                                            <span class="text-danger"
+                                                                *ngIf="(addNewAddressFormControl.contactPersonPhNo.touched || newAddressSubmitted) && addNewAddressFormControl.contactPersonPhNo.errors?.required">
+                                                                Contact number is required
+                                                            </span>
                                                         </div>
                                                     </div>
                                                     <div class="row pt-3">
@@ -189,6 +202,10 @@
                                                             <input type="text" class="form-control"
                                                                 placeholder="Address line 1" formControlName="address1"
                                                                 [(ngModel)]="address1">
+                                                            <span class="text-danger"
+                                                                *ngIf="(addNewAddressFormControl.address1.touched || newAddressSubmitted) && addNewAddressFormControl.address1.errors?.required">
+                                                                Address 1 is required
+                                                            </span>
                                                         </div>
                                                     </div>
                                                     <div class="row pt-3">
@@ -196,6 +213,10 @@
                                                             <input type="text" class="form-control"
                                                                 placeholder="Address line 2/Landmark"
                                                                 formControlName="address2" [(ngModel)]="address2">
+                                                            <span class="text-danger"
+                                                                *ngIf="(addNewAddressFormControl.address2.touched || newAddressSubmitted) && addNewAddressFormControl.address2.errors?.required">
+                                                                Address 2 is required
+                                                            </span>
                                                         </div>
                                                     </div>
                                                     <div class="row pt-3 ">
@@ -205,32 +226,45 @@
                                                                     formControlName="state"
                                                                     (change)="selectCityOnStateId($event)"
                                                                     [(ngModel)]="stateName">
-                                                                    <option [ngValue]="null" disabled>--Select
-                                                                        State--</option>
+                                                                    <option [ngValue]="null" value='0'>
+                                                                        --Select State--
+                                                                    </option>
                                                                     <option *ngFor='let state of stateList;let i =index'
                                                                         value={{state.id}}>
                                                                         {{state.state_name}}
                                                                     </option>
                                                                 </select>
+                                                                <span class="text-danger"
+                                                                    *ngIf="(addNewAddressFormControl.state.touched || newAddressSubmitted) && addNewAddressFormControl.state.errors?.required">
+                                                                    State is required
+                                                                </span>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-12 col-lg-4 col-md-4">
                                                             <div class="form-group">
                                                                 <select id="city" class="form-control"
                                                                     formControlName="city" [(ngModel)]="cityName">
-                                                                    <option [ngValue]="null" disabled>--Select
+                                                                    <option [ngValue]="null" value='0'>--Select
                                                                         City--</option>
                                                                     <option *ngFor='let city of cityList;let i =index'
                                                                         value={{city.id}}>
                                                                         {{city.city_name}}
                                                                     </option>
                                                                 </select>
+                                                                <span class="text-danger"
+                                                                    *ngIf="(addNewAddressFormControl.city.touched || newAddressSubmitted) && addNewAddressFormControl.city.errors?.required">
+                                                                    City is required
+                                                                </span>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-12 col-lg-4 col-md-4">
                                                             <input type="number" class="form-control"
                                                                 placeholder="Pincode" formControlName="pinCode"
                                                                 [(ngModel)]="pincode">
+                                                            <span class="text-danger"
+                                                                *ngIf="(addNewAddressFormControl.pinCode.touched || newAddressSubmitted) && addNewAddressFormControl.pinCode.errors?.required">
+                                                                Pincode is required
+                                                            </span>
                                                         </div>
                                                     </div>
                                                     <div class="row pt-3 ">

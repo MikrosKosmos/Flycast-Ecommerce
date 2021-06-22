@@ -156,6 +156,7 @@ constants.SP_VALIDATE_LOGIN = "sp_ValidateLogin";
 constants.SP_INSERT_DOCUMENT_DETAILS = "sp_InsertDocumentDetails";
 constants.SP_GET_CITY = "sp_GetCities";
 constants.SP_GET_STATE = "sp_GetStates";
+constants.SP_VALIDATE_PHONE_NUMBER = "sp_ValidatePhoneNumber";
 /**
  * Column Names
  */

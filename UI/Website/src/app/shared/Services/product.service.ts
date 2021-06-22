@@ -19,7 +19,7 @@ export class ProductService {
     return this.httpClient.get(url.GetAllAssetsByCategory + Number(categoryId), { headers: header });
   }
 
-  getProductDetailsBySKU(sku: string) {
+  getProductDetailsBySKU(sku: string): Observable<any> {
     var header = new HttpHeaders({
       'key': apiKey.key
     });

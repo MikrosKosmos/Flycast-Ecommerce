@@ -148,6 +148,25 @@ class Authentication {
          }
       });
    }
+
+   /**
+    * Method to validate whether the phone number exists or not.
+    * @returns {Promise<Object>}
+    */
+   validatePhoneNumber() {
+      return new Promise((resolve, reject) => {
+         if (this._phone) {
+            database.runSp(constants.SP_VALIDATE_PHONE_NUMBER, [this._phone]).then(_resultSet => {
+               resolve([constants.RESPONSE_SUCESS_LEVEL_1, _resultSet[0][0]]);
+            }).catch(err => {
+               printer.printError(err);
+               reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
+            });
+         } else {
+            reject([constants.ERROR_LEVEL_1, constants.INSUFFICIENT_DATA_MESSAGE]);
+         }
+      });
+   }
 }
 
 /**

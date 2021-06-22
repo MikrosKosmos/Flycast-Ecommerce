@@ -1,14 +1,14 @@
 <ngx-spinner size="large">
     <p style="font-size: 20px; color: white">Loading...</p>
 </ngx-spinner>
-<div class="container">
+<div class="container my-3" style="min-height: 72vh">
     <div class="text-center">
         <div class="col-md-12 col-sm-12">
             <div class="card" *ngFor="let orders of orderLists">
                 <div class="card-header text-white bg-info">
                     <div class="text-left">{{orders.flycast_order_number}}</div>
                 </div>
-                <div class="card-block">
+                <div class="card-block p-3">
                     <div class="row">
                         <div class="col-md-3">
                             <img class="img-custom" src='{{orders.image_url}}'>

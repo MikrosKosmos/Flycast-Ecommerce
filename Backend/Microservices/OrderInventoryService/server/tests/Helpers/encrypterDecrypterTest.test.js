@@ -1,3 +1,5 @@
+import {test} from "@jest/globals";
+
 const encrypterDecrypter = require("./../../src/Helpers/encrypterDecrypter");
 test("Should Encrypt a String", () => {
    require("dotenv").config();

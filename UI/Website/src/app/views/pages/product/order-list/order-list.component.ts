@@ -41,7 +41,7 @@ export class OrderListComponent implements OnInit {
     this.billingService.getOrderList().subscribe(data => {
       this.orderLists = data.res;
       this.spinner.hide();
-      console.log(this.orderLists, this.addressDetails)
+      //console.log(this.orderLists, this.addressDetails)
       for (var i = 0; i < this.orderLists.length; i++) {
         for (var j = 0; j < this.addressDetails.length; j++) {
           if (+this.orderLists[i]['shipping_address_id'] == +this.addressDetails[j]['address_id']) {
@@ -49,7 +49,7 @@ export class OrderListComponent implements OnInit {
           }
         }
       }
-      console.log('after', this.orderLists);
+      console.log('order list', this.orderLists);
     });
   }
 }
