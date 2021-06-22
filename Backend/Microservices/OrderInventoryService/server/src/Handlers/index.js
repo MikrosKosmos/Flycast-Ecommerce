@@ -69,7 +69,7 @@ handlerObj.category = (dataObject) => {
    });
 };
 /**
- * Method to handle the SKU requests.
+ * Method to handle the `SKU` requests.
  * @param dataObject: The request object.
  * @returns {Promise<Array>}:
  */
