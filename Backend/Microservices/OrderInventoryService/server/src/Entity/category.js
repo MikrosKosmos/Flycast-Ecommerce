@@ -25,7 +25,7 @@ class Category {
          try {
             const userData = await utils.validateUserToken(jwToken);
             if (validators.validateUndefined(userData) &&
-               utils.checkWhetherRoleExists(userData[constants.ROLES], constants.ROLE_VENDOR_ID)) {
+               utils.checkWhetherRoleExists(userData[constants.ROLES], constants.ROLE_ADMIN_ID)) {
                database.runSp(constants.SP_CREATE_CATEGORY,
                   [JSON.stringify(categoryList), userData[constants.ID]]).then(_resultSet => {
                   const result = _resultSet[0][0];
