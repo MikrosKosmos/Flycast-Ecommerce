@@ -133,6 +133,21 @@ class SKU {
    }
 
    /**
+    * Method to get the SKU pictures.
+    * @returns {Promise<unknown>}
+    */
+   getSKUPictures() {
+      return new Promise((resolve, reject) => {
+         database.runSp(constants.SP_GET_SKU_PICTURES, [this._sku]).then(_resultSet => {
+            resolve([constants.RESPONSE_SUCESS_LEVEL_1, _resultSet[0]]);
+         }).catch(err => {
+            printer.printError(err);
+            reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
+         });
+      });
+   }
+
+   /**
     * Method to update the sku ratings by a customer.
     * @param rating: The rating of the customer.
     * @param jwToken: The jw token of the customer.

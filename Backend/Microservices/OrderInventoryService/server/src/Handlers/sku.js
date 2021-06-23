@@ -68,7 +68,20 @@ skuHandler.sku = (dataObject) => {
 skuHandler.pictures = (dataObject) => {
    return new Promise((resolve, reject) => {
       const method = dataObject.method;
-      if (method === constants.HTTP_POST) {
+      if (method === constants.HTTP_GET) {
+         const skuValue = validators.validateString(dataObject.queryString[constants.SKU]) ?
+            dataObject.queryString[constants.SKU] : false;
+         if (skuValue) {
+            const sku = new Sku(false, false, false, false, false, false, skuValue);
+            sku.getSKUPictures().then(response => {
+               resolve(responseGenerator.generateResponse(response[1], response[0]));
+            }).catch(err => {
+               reject(responseGenerator.generateErrorResponse(err[1], err[0]));
+            });
+         } else {
+            reject(responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1));
+         }
+      } else if (method === constants.HTTP_POST) {
          const imageData = validators.validateString(dataObject.postData[constants.SKU_IMAGE_DATA]) ?
             dataObject.postData[constants.SKU_IMAGE_DATA] : false;
          const fileExtension = validators.validateString(dataObject.postData[constants.FILE_EXTENSION]) ?
