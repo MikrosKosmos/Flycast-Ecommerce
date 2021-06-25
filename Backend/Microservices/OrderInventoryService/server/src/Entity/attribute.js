@@ -25,7 +25,7 @@ class Attribute {
          try {
             const userData = await utils.validateUserToken(jwToken);
             if (validators.validateUndefined(userData) &&
-               utils.checkWhetherRoleExists(userData[constants.ROLES], constants.ROLE_VENDOR_ID)) {
+               utils.checkWhetherRoleExists(userData[constants.ROLES], constants.ROLE_ADMIN_ID)) {
                const userId = userData[constants.ID];
                database.runSp(constants.SP_CREATE_ATTRIBUTE,
                   [JSON.stringify(attributeLists), userId]).then(_resultSet => {
@@ -142,7 +142,8 @@ class Attribute {
          try {
             const userData = await utils.validateUserToken(jwToken);
             if (validators.validateUndefined(userData) &&
-               userData[constants.ID] > 0 && utils.checkWhetherRoleExists(userData[constants.ROLES], constants.ROLE_VENDOR_ID)) {
+               userData[constants.ID] > 0 && utils.checkWhetherRoleExists(userData[constants.ROLES],
+                  constants.ROLE_ADMIN_ID)) {
                database.runSp(constants.SP_CREATE_ATTRIBUTE_POSSIBLE_VALUES, [this._attributeId,
                   JSON.stringify(valueList), userData[constants.ID]]).then(_resultSet => {
                   const result = _resultSet[0][0];

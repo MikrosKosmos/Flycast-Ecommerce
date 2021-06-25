@@ -12,20 +12,14 @@ categoryHandler.category = (dataObject) => {
    return new Promise((resolve, reject) => {
       const method = dataObject.method;
       if (method === constants.HTTP_GET) {
-         const jwToken = validators.validateString(dataObject[constants.JW_TOKEN]) ?
-            dataObject[constants.JW_TOKEN] : false;
          const categoryId = validators.validateNumber(dataObject.queryString[constants.CATEGORY_ID]) ?
             dataObject.queryString[constants.CATEGORY_ID] : false;
-         if (jwToken) {
-            const category = new Category(categoryId);
-            category.getCategory(jwToken).then(response => {
-               resolve(responseGenerator.generateResponse(response[1], response[0]));
-            }).catch(err => {
-               reject(responseGenerator.generateErrorResponse(err[1], err[0]));
-            });
-         } else {
-            reject(responseGenerator.generateErrorResponse(constants.INSUFFICIENT_DATA_MESSAGE, constants.ERROR_LEVEL_1));
-         }
+         const category = new Category(categoryId);
+         category.getCategory().then(response => {
+            resolve(responseGenerator.generateResponse(response[1], response[0]));
+         }).catch(err => {
+            reject(responseGenerator.generateErrorResponse(err[1], err[0]));
+         });
       } else if (method === constants.HTTP_POST) {
          const jwToken = validators.validateString(dataObject[constants.JW_TOKEN]) ?
             dataObject[constants.JW_TOKEN] : false;

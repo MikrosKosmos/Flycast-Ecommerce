@@ -50,10 +50,9 @@ class Category {
 
    /**
     * Method to get the categories, either by category id or all at once.
-    * @param jwToken: The user token.
     * @returns {Promise<Array>}
     */
-   getCategory(jwToken) {
+   getCategory() {
       return new Promise(async (resolve, reject) => {
          try {
             database.runSp(constants.SP_GET_CATEGORIES, [this._categoryId]).then(_resultSet => {
@@ -67,7 +66,6 @@ class Category {
                printer.printError(err);
                reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
             });
-
          } catch (e) {
             printer.printError(e);
             reject([constants.ERROR_LEVEL_3, constants.ERROR_MESSAGE]);
@@ -86,7 +84,7 @@ class Category {
          try {
             const userData = await utils.validateUserToken(jwToken);
             if (validators.validateUndefined(userData) && userData[constants.ID] > 0 &&
-               utils.checkWhetherRoleExists(userData[constants.ROLES], constants.ROLE_VENDOR_ID)) {
+               utils.checkWhetherRoleExists(userData[constants.ROLES], constants.ROLE_ADMIN_ID)) {
                database.runSp(constants.SP_CREATE_CATEGORY_ATTRIBUTES,
                   [this._categoryId, JSON.stringify(attributesList), userData[constants.ID]]).then(_resultSet => {
                   const result = _resultSet[0][0];
